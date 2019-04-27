@@ -1,0 +1,6 @@
+dist
+staging
+compiled
+node_modules
+yarn.lock
+.babelrc

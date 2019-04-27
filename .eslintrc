@@ -1,0 +1,10 @@
+{
+	"extends": "eslint-config-tecca",
+	"settings": {
+		"import/resolver": {
+			"webpack": {
+				"config": "webpack.config.js"
+			}
+		}
+	}
+}
