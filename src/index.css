@@ -7,17 +7,17 @@ html, body, #root {
 
 @font-face {
     font-family: 'Plantin';
-    src: url("../static/fonts/Plantin.ttf") format('truetype');
+    src: url("./static/fonts/Plantin.ttf") format('truetype');
 }
 
 @font-face {
     font-family: 'Beleren';
-    src: url("../static/fonts/Jace-Beleren-Bold.ttf") format('truetype');
+    src: url("./static/fonts/Jace-Beleren-Bold.ttf") format('truetype');
 }
 
 @font-face {
     font-family: 'Beleren-Caps';
-    src: url("../static/fonts/Beleren-Small-Caps.ttf") format('truetype');
+    src: url("./static/fonts/Beleren-Small-Caps.ttf") format('truetype');
 }
 
 button {

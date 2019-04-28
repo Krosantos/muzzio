@@ -18,9 +18,6 @@ function createWindow() {
 	// Check for content either from local (when developing), or from compoiled code.
 	if (process.env.FROM_LOCAL) {
 		mainWindow.loadURL('http://localhost:3000');
-		const installReduxTools = require('./installReduxTools'); /* eslint-disable-line global-require */
-
-		installReduxTools();
 	} else {
 		mainWindow.loadURL(url.format({
 			pathname: path.join(__dirname, './index.html'),

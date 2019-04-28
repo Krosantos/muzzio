@@ -85,10 +85,12 @@ module.exports = {
 	],
 	resolve: {
 		alias: {
-			'@components': path.resolve(__dirname, 'src', 'client', 'components'),
+			'@api': path.resolve(__dirname, 'src', 'api'),
+			'@components': path.resolve(__dirname, 'src', 'components'),
 			'@constants': path.resolve(__dirname, 'src', 'constants'),
+			'@contexts': path.resolve(__dirname, 'src', 'contexts'),
 			'@static': path.resolve(__dirname, 'src', 'static'),
-			'@theme': path.resolve(__dirname, 'src', 'client', 'theme'),
+			'@theme': path.resolve(__dirname, 'src', 'theme'),
 		},
 		extensions: ['*', '.js', '.jsx'],
 	},
