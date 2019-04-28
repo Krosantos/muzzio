@@ -13,6 +13,7 @@ const search = async (query, commander) => {
 	};
 	const result = await api.get('', config);
 
+	console.log(result);
 	return result;
 };
 

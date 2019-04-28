@@ -1,0 +1,19 @@
+@import '@theme/color.scss';
+
+.card {
+    background-color: $wine;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.manaSymbol {
+    display: block;
+    height: 1em;
+    width: 1em;
+    margin: 0 0.075em;
+}
+
+.manaCost {
+    display: flex;
+}
