@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react';
-import { CommanderContext } from '@contexts/CommanderContext';
+import { CommanderContext } from '@contexts/Commander';
 
 const Commander = () => {
 	const [currentCommander, setCommander] = useContext(CommanderContext);

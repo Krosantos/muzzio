@@ -1,19 +1,67 @@
 @import '@theme/color.scss';
 
 .card {
-    background-color: $wine;
+    background-color: $card-multi;
     display: flex;
+    border-radius: 1em;
+    position: relative;
+    border: 1px solid $smoke;
     align-items: center;
+    padding: 2px 5px;
     justify-content: space-between;
+}
+
+.image {
+    display: block;
+    height: 510px;
+    width: 366px;
+    z-index: 10;
+}
+
+.imageContainer {
+    display: flex;
+    overflow: hidden;
+    position: fixed;
 }
 
 .manaSymbol {
     display: block;
+    border: 1px solid $smoke;
+    border-radius: 0.5em;
     height: 1em;
     width: 1em;
     margin: 0 0.075em;
+    box-shadow: 1px 1px 1px $smoke;
 }
 
 .manaCost {
     display: flex;
+}
+
+.white {
+    background-color: $card-white;
+}
+
+.blue {
+    background-color: $card-blue;
+}
+
+.black {
+    background-color: $card-black;
+}
+
+.red {
+    background-color: $card-red;
+}
+
+.green {
+    background-color: $card-green;
+}
+
+.multi {
+    background-color: $card-multi;
+}
+
+.colorless {
+    background-color: $card-colorless;
 }

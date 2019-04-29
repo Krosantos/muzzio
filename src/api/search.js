@@ -5,7 +5,7 @@ const search = async (query, commander) => {
 
 	newQuery += ' order:cmc';
 	if (commander && commander.identity)
-		newQuery += ` identity:${commander.identity}`;
+		newQuery += ` f:commander identity:${commander.identity}`;
 	const config = {
 		params: {
 			q: newQuery,
