@@ -36,10 +36,10 @@ const getColorClass = (colors) => {
 
 const Card = ({
 	name = 'Footlight Fiend',
-	cmc = 1,
+	// cmc = 1,
 	cost = '{3}{B}{G}',
 	colors = [],
-	attributes = {},
+	// attributes = {},
 	imageUrl = 'https://img.scryfall.com/cards/png/front/8/c/8c604697-5c81-4329-9b16-f19bd90ba08c.png?1549415015',
 	reverseUrl,
 }) => {

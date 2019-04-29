@@ -4,7 +4,6 @@
     background-color: $card-multi;
     display: flex;
     border-radius: 1em;
-    position: relative;
     border: 1px solid $smoke;
     align-items: center;
     padding: 2px 5px;
@@ -19,9 +18,11 @@
 }
 
 .imageContainer {
+    pointer-events: none;
     display: flex;
     overflow: hidden;
     position: fixed;
+    visibility: hidden;
 }
 
 .manaSymbol {

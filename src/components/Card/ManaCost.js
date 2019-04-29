@@ -16,6 +16,8 @@ const Symbol = ({ costFragment }) => {
 };
 
 const ManaCost = ({ cost }) => {
+	if (!cost)
+		return null;
 	const fragments = splitMana(cost);
 
 	return (

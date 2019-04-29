@@ -3,9 +3,9 @@ import api from '.';
 const search = async (query, commander) => {
 	let newQuery = query;
 
-	newQuery += ' order:cmc';
+	newQuery += ' f:commander game:paper order:cmc';
 	if (commander && commander.identity)
-		newQuery += ` f:commander identity:${commander.identity}`;
+		newQuery += ` identity:${commander.identity}`;
 	const config = {
 		params: {
 			q: newQuery,
