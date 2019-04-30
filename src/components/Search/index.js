@@ -2,11 +2,12 @@ import React, { useState, useContext, useCallback } from 'react';
 import { CommanderContext } from '@contexts/Commander';
 import search from '@api/search';
 import Card from '../Card';
+import { searchResultContainer } from './styles.scss';
 
 const Search = () => {
 	const [value, setValue] = useState('');
 	const [results, setResults] = useState([]);
-	const [commander] = useContext(CommanderContext);
+	const { commander } = useContext(CommanderContext);
 	const updateValue = useCallback((event) => {
 		setValue(event.target.value);
 	});
@@ -21,9 +22,11 @@ const Search = () => {
 	return (
 		<>
 			<input onChange={updateValue} onKeyPress={onEnter} value={value} />
-			{results.map((result) => (
-				<Card key={result.name} {...result} />
-			))}
+			<div className={searchResultContainer}>
+				{results.map((result) => (
+					<Card key={result.name} {...result} />
+				))}
+			</div>
 		</>
 	);
 };

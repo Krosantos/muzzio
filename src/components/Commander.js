@@ -1,8 +1,11 @@
 import React, { useContext, useCallback } from 'react';
 import { CommanderContext } from '@contexts/Commander';
 
+const GISA_TEXT = 'Change to Gisa';
+const XANTCHA_TEXT = 'Change to Xantcha';
+
 const Commander = () => {
-	const [currentCommander, setCommander] = useContext(CommanderContext);
+	const { commander, setCommander } = useContext(CommanderContext);
 	const changeGisa = useCallback(() => {
 		setCommander({ identity: 'UB', name: 'Gisa' });
 	});
@@ -12,9 +15,9 @@ const Commander = () => {
 
 	return (
 		<div>
-			<pre>{JSON.stringify(currentCommander)}</pre>
-			<button onClick={changeGisa} type="button">Change to Gisa</button>
-			<button onClick={changeXantcha} type="button">Change to Xantcha</button>
+			<pre>{JSON.stringify(commander)}</pre>
+			<button onClick={changeGisa} type="button">{GISA_TEXT}</button>
+			<button onClick={changeXantcha} type="button">{XANTCHA_TEXT}</button>
 		</div>
 	);
 };

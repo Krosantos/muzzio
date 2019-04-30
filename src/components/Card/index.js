@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
+import { CardContext } from '@contexts/Card';
 import HoverArt from './HoverArt';
 import ManaCost from './ManaCost';
 import {
@@ -48,9 +49,22 @@ const Card = ({
 	const hideArt = useCallback(() => setShowArt(false));
 	const showArt = useCallback(() => setShowArt(true));
 
+	const { dispatch } = useContext(CardContext);
+	const addCard = useCallback(() => {
+		const type = 'add';
+		const payload = {
+			card: {
+				colors, cost, imageUrl, name, reverseUrl,
+			},
+			id: name,
+		};
+
+		dispatch({ payload, type });
+	});
+
 	return (
 		<>
-			<div className={className} onMouseEnter={showArt} onMouseLeave={hideArt}>
+			<div className={className} onClick={addCard} onMouseEnter={showArt} onMouseLeave={hideArt}>
 				{name}
 				<ManaCost cost={cost} />
 			</div>

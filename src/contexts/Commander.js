@@ -4,7 +4,7 @@ const CommanderContext = React.createContext();
 
 const CommanderProvider = ({ children }) => {
 	const [commander, setCommander] = useState({});
-	const value = useMemo(() => [commander, setCommander], [commander]);
+	const value = useMemo(() => ({ commander, setCommander }), [commander]);
 
 	return (
 		<CommanderContext.Provider value={value}>
