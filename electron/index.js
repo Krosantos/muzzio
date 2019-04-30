@@ -11,9 +11,13 @@ function createWindow() {
 		minHeight: 900,
 		minWidth: 1280,
 		webPreferences: {
-			webSecurity: false,
+			nodeIntegrations: true,
+			webSecurity: true,
 		},
 		width: 1280,
+	});
+	mainWindow.on('closed', () => {
+		mainWindow = null;
 	});
 	// Check for content either from local (when developing), or from compoiled code.
 	if (process.env.FROM_LOCAL) {
@@ -25,10 +29,8 @@ function createWindow() {
 			slashes: true,
 		}));
 	}
-	mainWindow.on('closed', () => {
-		mainWindow = null;
-	});
 }
+
 app.on('ready', createWindow);
 app.on('window-all-closed', () => {
 // Mac behaves wacky. Emulate that.
