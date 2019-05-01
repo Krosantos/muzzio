@@ -1,4 +1,6 @@
+/* eslint-disable no-case-declarations */
 import React, { useReducer, useMemo } from 'react';
+import merge from 'lodash/merge';
 import {
 	ADD_ACTION,
 	REMOVE_ACTION,
@@ -19,7 +21,10 @@ const cardReducer = (state, { type, payload }) => {
 		delete newState[id];
 		break;
 	case UPDATE_ACTION:
-		newState[id] = card;
+		const oldCard = newState[id];
+		const newCard = merge(oldCard, card);
+
+		newState[id] = newCard;
 		break;
 	default:
 		break;
