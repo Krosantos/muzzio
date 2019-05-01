@@ -1,6 +1,6 @@
 @import '@theme/color.scss';
 
-.card {
+.cardRow {
     background-color: $card-multi;
     display: flex;
     border-radius: 1em;
@@ -23,20 +23,6 @@
     overflow: hidden;
     position: fixed;
     visibility: hidden;
-}
-
-.manaSymbol {
-    display: block;
-    border: 1px solid $smoke;
-    border-radius: 0.5em;
-    height: 1em;
-    width: 1em;
-    margin: 0 0.075em;
-    box-shadow: 1px 1px 1px $smoke;
-}
-
-.manaCost {
-    display: flex;
 }
 
 .white {

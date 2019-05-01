@@ -1,9 +1,9 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { CardContext } from '@contexts/Card';
+import ManaCost from '@components/ManaCost';
 import HoverArt from './HoverArt';
-import ManaCost from './ManaCost';
 import {
-	card,
+	cardRow,
 	white,
 	blue,
 	black,
@@ -35,16 +35,12 @@ const getColorClass = (colors) => {
 	}
 };
 
-const Card = ({
-	name = 'Footlight Fiend',
-	// cmc = 1,
-	cost = '{3}{B}{G}',
-	colors = [],
-	// attributes = {},
-	imageUrl = 'https://img.scryfall.com/cards/png/front/8/c/8c604697-5c81-4329-9b16-f19bd90ba08c.png?1549415015',
-	reverseUrl,
-}) => {
-	const className = `${card} ${getColorClass(colors)}`;
+// eslint-disable-next-line max-statements
+const Card = (card) => {
+	const {
+		colors, name, cost, imageUrl, reverseUrl, id,
+	} = card;
+	const className = `${cardRow} ${getColorClass(colors)}`;
 	const [shouldShowArt, setShowArt] = useState(false);
 	const hideArt = useCallback(() => setShowArt(false));
 	const showArt = useCallback(() => setShowArt(true));
@@ -52,12 +48,7 @@ const Card = ({
 	const { dispatch } = useContext(CardContext);
 	const addCard = useCallback(() => {
 		const type = 'add';
-		const payload = {
-			card: {
-				colors, cost, imageUrl, name, reverseUrl,
-			},
-			id: name,
-		};
+		const payload = { card, id };
 
 		dispatch({ payload, type });
 	});

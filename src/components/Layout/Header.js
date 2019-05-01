@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { CardContext } from '@contexts/Card';
+import Commander from '@components/Commander';
 import { header } from './styles.scss';
 
 const Header = () => {
@@ -8,6 +9,7 @@ const Header = () => {
 
 	return (
 		<div className={header}>
+			<Commander />
 			{count}
 		</div>
 	);

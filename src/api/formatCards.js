@@ -2,7 +2,13 @@ import get from 'lodash/get';
 
 /* eslint-disable camelcase, max-statements */
 const formatCard = (card) => {
-	const { card_faces, image_uris, layout } = card;
+	const {
+		card_faces,
+		id,
+		color_identity,
+		image_uris,
+		layout,
+	} = card;
 
 	let imageUrl;
 
@@ -26,9 +32,12 @@ const formatCard = (card) => {
 	} = face;
 
 	return {
+		attributes: {},
 		cmc,
 		colors,
 		cost: mana_cost,
+		id,
+		identity: color_identity,
 		imageUrl,
 		name,
 		reverseUrl,
