@@ -4,7 +4,7 @@ import CardList from '../CardList';
 import Search from '../Search';
 import { modal, underlay } from './styles.scss';
 
-const LEGENDARY_CREATURE_QUERY = ' t:"legendary creature"';
+const LEGENDARY_CREATURE_QUERY = ' t:legendary t:creature';
 
 const Modal = ({
 	closeModal,
