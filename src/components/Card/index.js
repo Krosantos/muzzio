@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useState } from 'react';
-import { CardContext } from '@contexts/Card';
+/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
+import React, { useCallback, useState } from 'react';
 import ManaCost from '@components/ManaCost';
 import HoverArt from './HoverArt';
 import {
@@ -36,26 +36,19 @@ const getColorClass = (colors) => {
 };
 
 // eslint-disable-next-line max-statements
-const Card = (card) => {
+const Card = ({ callback = Function.prototype, card }) => {
 	const {
-		colors, name, cost, imageUrl, reverseUrl, id,
+		colors, name, cost, imageUrl, reverseUrl,
 	} = card;
 	const className = `${cardRow} ${getColorClass(colors)}`;
 	const [shouldShowArt, setShowArt] = useState(false);
 	const hideArt = useCallback(() => setShowArt(false));
 	const showArt = useCallback(() => setShowArt(true));
-
-	const { dispatch } = useContext(CardContext);
-	const addCard = useCallback(() => {
-		const type = 'add';
-		const payload = { card, id };
-
-		dispatch({ payload, type });
-	});
+	const fireCallback = useCallback(() => callback(card), [card]);
 
 	return (
 		<>
-			<div className={className} onClick={addCard} onMouseEnter={showArt} onMouseLeave={hideArt}>
+			<div className={className} onClick={fireCallback} onMouseEnter={showArt} onMouseLeave={hideArt}>
 				{name}
 				<ManaCost cost={cost} />
 			</div>

@@ -9,6 +9,20 @@
     justify-content: space-between;
 }
 
-.identity {
-    
+.underlay {
+    position: fixed;
+    background-color: rgba($color: $smoke, $alpha: 0.55);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+}
+
+.modal {
+    width: 50%;
+    height: 60%;
+    background-color: white;
 }
