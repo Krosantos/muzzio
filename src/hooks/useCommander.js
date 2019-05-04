@@ -2,6 +2,7 @@ import { useContext, useMemo, useCallback } from 'react';
 import get from 'lodash/get';
 import concat from 'lodash/concat';
 import uniq from 'lodash/uniq';
+import assign from 'lodash/assign';
 import { CommanderContext } from '@contexts/Commander';
 
 const convertIdentityToCost = (identity) => {
@@ -13,30 +14,37 @@ const convertIdentityToCost = (identity) => {
 const calculateIdentity = (commanderData) => {
 	const commanderIdentity = get(commanderData, 'commander.identity', []);
 	const partnerIdentity = get(commanderData, 'partner.identity', []);
-
 	const identities = uniq(concat(commanderIdentity, partnerIdentity));
 
 	return convertIdentityToCost(identities);
 };
 
+// eslint-disable-next-line max-statements
 const useCommander = () => {
-	const { commanderData, dispatch } = useContext(CommanderContext);
+	const { commanderData, setCommanderData } = useContext(CommanderContext);
 
 	const setCommander = useCallback((commander) => {
-		dispatch({ commander });
-	}, []);
-	const setPartner = useCallback((partner) => {
-		dispatch({ partner });
-	}, []);
-	const colorIdentity = useMemo(() => calculateIdentity(commanderData));
+		const toSet = assign({}, commanderData, { commander, partner: {} });
 
-	const commander = useMemo(() => get(commanderData, 'commander.name', ''));
-	const partner = useMemo(() => get(commanderData, 'partner.name', ''));
+		setCommanderData(toSet);
+	}, [commanderData]);
+
+	const setPartner = useCallback((partner) => {
+		const toSet = assign({}, commanderData, { partner });
+
+		setCommanderData(toSet);
+	});
+
+	const colorIdentity = useMemo(() => calculateIdentity(commanderData), [commanderData]);
+	const commander = useMemo(() => get(commanderData, 'commander.name', ''), [commanderData]);
+	const partner = useMemo(() => get(commanderData, 'partner.name', ''), [commanderData]);
+	const partnerQuery = useMemo(() => get(commanderData, 'commander.partnerQuery'), [commanderData]);
 
 	return {
 		colorIdentity,
 		commander,
 		partner,
+		partnerQuery,
 		setCommander,
 		setPartner,
 	};

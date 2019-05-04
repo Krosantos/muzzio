@@ -2,4 +2,10 @@
 
 .searchBox {
     background-color: $card-colorless;
+    border: none;
+    padding: 0;
+    display: block;
+    height: 1.5em;
+    outline: none;
+    font-family: "Plantin", sans-serif;
 }

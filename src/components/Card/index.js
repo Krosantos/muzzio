@@ -44,7 +44,7 @@ const Card = ({ callback = Function.prototype, card }) => {
 	const [shouldShowArt, setShowArt] = useState(false);
 	const hideArt = useCallback(() => setShowArt(false));
 	const showArt = useCallback(() => setShowArt(true));
-	const fireCallback = useCallback(() => callback(card), [card]);
+	const fireCallback = useCallback(() => callback(card));
 
 	return (
 		<>

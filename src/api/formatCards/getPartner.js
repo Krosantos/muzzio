@@ -25,7 +25,7 @@ const getPartner = (card) => {
 		return { query: ` !"${partner.name}"`, type: SPECIFIC_PARTNER };
 	}
 	if (oracleText.includes('Partner'))
-		return { query: ` -"${name}"`, type: ANY_PARTNER };
+		return { query: ` -"${name}" o:Partner -o:"Partner with"`, type: ANY_PARTNER };
 	return { type: NO_PARTNER };
 };
 

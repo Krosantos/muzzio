@@ -3,7 +3,12 @@ import { CommanderContext } from '@contexts/Commander';
 import search from '@api/search';
 import { searchBox } from './styles.scss';
 
-const Search = ({ additionalConstraint = '', setResults, ignoreCommander = false }) => {
+const Search = ({
+	additionalConstraint = '',
+	setResults,
+	ignoreCommander = false,
+	placeholder,
+}) => {
 	const [value, setValue] = useState('');
 	const { commander } = useContext(CommanderContext);
 	const updateValue = useCallback((event) => {
@@ -22,6 +27,7 @@ const Search = ({ additionalConstraint = '', setResults, ignoreCommander = false
 			className={searchBox}
 			onChange={updateValue}
 			onKeyPress={onEnter}
+			placeholder={placeholder}
 			value={value}
 		/>
 	);

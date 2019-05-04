@@ -49,6 +49,11 @@
 
 .modal {
     width: 50%;
-    height: 60%;
+    height: 75%;
     background-color: white;
+}
+
+.cardList {
+    overflow-y: auto;
+    max-height: 262.5px;
 }
