@@ -48,12 +48,26 @@
 }
 
 .modal {
-    width: 50%;
     height: 75%;
     background-color: white;
+    padding: 8px 0px 8px 8px;
 }
 
 .cardList {
+    margin-top: 4px;
     overflow-y: auto;
-    max-height: 262.5px;
+    height: calc(100% - 1.5em);
+}
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.searchSection {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    margin-right: 8px;
 }
