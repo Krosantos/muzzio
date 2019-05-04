@@ -13,6 +13,7 @@ const Modal = ({
 	const trapClick = useCallback((event) => event.stopPropagation());
 	const chooseCommander = useCallback((card) => {
 		setCommander(card);
+		console.log(card);
 		closeModal();
 	});
 	const [results, setResults] = useState([]);
