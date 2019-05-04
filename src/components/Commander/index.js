@@ -7,11 +7,18 @@ import useCards from '@hooks/useCards';
 import getAverageCmc from '@utils/getAverageCmc';
 import { IS_IN_DECK } from '@constants';
 import Modal from './Modal';
-import { container } from './styles.scss';
+import {
+	cardCount,
+	container,
+	commanderName,
+	manaCost,
+} from './styles.scss';
 
 const SELECT_COMMANDER_TEXT = 'Select Commander';
 const CMC = 'CMC: ';
 const OUT_OF_99 = '/99';
+
+const partnerName = '';
 
 const convertIdentityToCost = (identity) => {
 	if (!identity)
@@ -22,7 +29,7 @@ const convertIdentityToCost = (identity) => {
 	return `{${identity.join('}{')}}`;
 };
 
-// eslint-disable-next-line max-statements
+// eslint-disable-next-line max-statements, max-lines-per-function
 const Commander = () => {
 	const { commander, setCommander } = useContext(CommanderContext);
 	const [isModalOpen, setModalOpen] = useState(false);
@@ -37,18 +44,27 @@ const Commander = () => {
 
 	return (
 		<div className={container}>
-			<span onClick={openModal}>
-				{name || SELECT_COMMANDER_TEXT}
-			</span>
-			<span>
-				{count}
-				{OUT_OF_99}
-			</span>
-			<span>
-				{CMC}
-				{cmc}
-			</span>
-			<ManaCost cost={identityAsCost} />
+			<div className={commanderName} onClick={openModal}>
+				<span>
+					{name || SELECT_COMMANDER_TEXT}
+				</span>
+				<span>
+					{partnerName}
+				</span>
+			</div>
+			<div className={cardCount}>
+				<span>
+					{count}
+					{OUT_OF_99}
+				</span>
+				<span>
+					{CMC}
+					{cmc}
+				</span>
+			</div>
+			<div className={manaCost}>
+				<ManaCost className={manaCost} cost={identityAsCost} />
+			</div>
 			{isModalOpen
 			&& ReactDOM.createPortal(
 				<Modal

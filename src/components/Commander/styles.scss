@@ -4,9 +4,18 @@
     width: 40%;
     border-right: 1px solid white;
     display: flex;
-    padding-left: 0.5em;
     align-items: center;
     justify-content: space-between;
+}
+
+.commanderName {
+    display: flex;
+    flex-direction: column;
+    padding-left: 8px;
+    width: 250px;
+    > * {
+        height:50%;
+    }
 }
 
 .underlay {
@@ -19,6 +28,23 @@
     align-items: center;
     top: 0;
     left: 0;
+}
+
+.manaCost {
+    margin: 0 8px;
+    width: 102px;
+    display: flex;
+    justify-content: center;
+}
+
+.cardCount {
+    margin: 0 8px;
+    width: 75px;
+    display: flex;
+    flex-direction: column;
+    > * {
+        height:50%;
+    }
 }
 
 .modal {
