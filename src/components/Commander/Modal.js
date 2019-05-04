@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { useCallback, useState } from 'react';
+import useCommander from '@hooks/useCommander';
 import CardList from '../CardList';
 import Search from '../Search';
 import { modal, underlay } from './styles.scss';
@@ -8,14 +9,9 @@ const LEGENDARY_CREATURE_QUERY = ' t:legendary t:creature';
 
 const Modal = ({
 	closeModal,
-	setCommander,
 }) => {
 	const trapClick = useCallback((event) => event.stopPropagation());
-	const chooseCommander = useCallback((card) => {
-		setCommander(card);
-		console.log(card);
-		closeModal();
-	});
+	const { setCommander, setPartner } = useCommander();
 	const [results, setResults] = useState([]);
 
 	return (
@@ -26,7 +22,7 @@ const Modal = ({
 					ignoreCommander
 					setResults={setResults}
 				/>
-				<CardList callback={chooseCommander} cards={results} />
+				<CardList callback={setCommander} cards={results} />
 			</div>
 		</div>
 	);

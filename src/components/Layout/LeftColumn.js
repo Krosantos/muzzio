@@ -1,9 +1,5 @@
 import React from 'react';
-import { leftColumn } from './styles.scss';
 
-const LeftColumn = () => {
-	console.log('left');
-	return (<div />);
-};
+const LeftColumn = () => (<div />);
 
 export default LeftColumn;

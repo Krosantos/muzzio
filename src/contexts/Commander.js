@@ -1,10 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useReducer, useMemo } from 'react';
+import merge from 'lodash/merge';
 
 const CommanderContext = React.createContext();
 
+const reducer = (state, newState) => merge(state, newState);
+
 const CommanderProvider = ({ children }) => {
-	const [commander, setCommander] = useState({});
-	const value = useMemo(() => ({ commander, setCommander }), [commander]);
+	const [commanderData, dispatch] = useReducer(reducer, {});
+	const value = useMemo(() => ({ commanderData, dispatch }));
 
 	return (
 		<CommanderContext.Provider value={value}>
