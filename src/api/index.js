@@ -1,6 +1,4 @@
 import axios from 'axios';
-import get from 'lodash/get';
-import formatCards from './formatCards';
 
 const createConnection = () => {
 	const connection = axios.create({
@@ -13,14 +11,6 @@ const createConnection = () => {
 
 		return newConfig;
 	});
-
-	connection.interceptors.response.use(
-		(response) => {
-			const cards = get(response, 'data.data', []);
-
-			return formatCards(cards);
-		},
-	);
 
 	return connection;
 };

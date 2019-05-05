@@ -5,8 +5,8 @@ html, body, #root {
 }
 
 @font-face {
-    font-family: 'Plantin';
-    src: url("./static/fonts/Plantin.ttf") format('truetype');
+    font-family: 'Bitter';
+    src: url("./static/fonts/Bitter.ttf") format('truetype');
 }
 
 @font-face {

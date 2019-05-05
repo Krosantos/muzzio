@@ -1,3 +1,5 @@
+import get from 'lodash/get';
+import formatCards from './formatCards';
 import api from '.';
 
 const search = async (query) => {
@@ -9,9 +11,10 @@ const search = async (query) => {
 			q: newQuery,
 		},
 	};
-	const result = await api.get('', config);
+	const response = await api.get('', config);
+	const cards = get(response, 'data.data', []);
 
-	return result;
+	return formatCards(cards);
 };
 
 export default search;
