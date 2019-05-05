@@ -1,5 +1,7 @@
-html, body, #root {
+html, body {
     margin:0;
+    height: 100%;
+    width: 100%;
     background-color: #F6F6F6;
     font-family: "Beleren", sans-serif;
 }

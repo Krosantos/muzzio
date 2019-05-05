@@ -36,7 +36,7 @@
     "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
-    "electron": "^5.0.1",
+    "electron": "^4.0.1",
     "electron-packager": "^13.0.1",
     "eslint": "^5.16.0",
     "eslint-config-tecca": "^1.0.0",
