@@ -9,8 +9,8 @@ import {
 
 const CardContext = React.createContext();
 
-const cardReducer = (state, { type, payload }) => {
-	const { id, card } = payload;
+const cardReducer = (state, { type, card }) => {
+	const { id } = card;
 	const newState = { ...state };
 
 	switch (type) {

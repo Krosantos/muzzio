@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Search from '@components/Search';
 import CardList from '@components/CardList';
 import useCommander from '@hooks/useCommander';
+import useCards from '@hooks/useCards';
 import { cardList, searchSection } from './styles.scss';
 
 const convertIdentityToQuery = (identity) => {
@@ -13,6 +14,7 @@ const convertIdentityToQuery = (identity) => {
 const AddCards = () => {
 	const [results, setResults] = useState([]);
 	const { colorIdentity } = useCommander();
+	const { addCard } = useCards();
 	const identityQuery = useMemo(() => convertIdentityToQuery(colorIdentity));
 
 	return (
@@ -23,7 +25,7 @@ const AddCards = () => {
 				setResults={setResults}
 			/>
 			<div className={cardList}>
-				<CardList callback={Function.prototype} cards={results} />
+				<CardList callback={addCard} cards={results} />
 			</div>
 		</div>
 	);

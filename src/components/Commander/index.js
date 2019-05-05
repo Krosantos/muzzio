@@ -36,8 +36,8 @@ const Commander = () => {
 		partner,
 	} = useCommander();
 	const identityAsCost = useMemo(() => convertIdentityToCost(colorIdentity), [colorIdentity]);
-	const cards = useCards(IS_IN_DECK);
-	const count = Object.keys(cards).length;
+	const { cards, cardsByAttribute } = useCards();
+	const count = cardsByAttribute(IS_IN_DECK).length;
 	const cmc = getAverageCmc(cards).toPrecision(3);
 
 	return (
