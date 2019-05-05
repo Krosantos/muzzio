@@ -1,0 +1,55 @@
+@import '@theme/color.scss';
+
+.slider {
+    height: calc(100vh - 3em);
+    position: fixed;
+    padding: 8px;
+    top: 3em;
+    background-color: $card-colorless;
+    width: 300px;
+    transition: transform 250ms ease-in-out;
+}
+
+.sliderRight {
+    right: 0;
+}
+
+.retractedLeft {
+    transform: translateX(-100%);
+}
+
+.retractedRight {
+    transform: translateX(100%);
+}
+
+.tabOuter {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    height: 1.5em;
+}
+
+.tabLeft {
+    right: 0;
+    transform: translateX(calc(50% + 0.75em)) rotate(90deg);
+    > * {
+        border-radius: 10px 10px 0 0;
+    }
+}
+
+.tabRight {
+    left: 0;
+    transform: translateX(calc(-50% - 0.75em)) rotate(90deg);
+    > * {
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+.tabInner {
+    padding: 0 10px;
+    font-family: "Beleren", "sans-serif";
+    text-align: center;
+    background-color: $card-colorless;
+    width: fit-content;
+}

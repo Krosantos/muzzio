@@ -1,12 +1,13 @@
 import React from 'react';
+import Slider from '@components/Slider';
 import Header from './Header';
-import LeftColumn from './LeftColumn';
 import MainPanel from './MainPanel';
 
 const Layout = () => (
 	<>
 		<Header />
-		<LeftColumn />
+		<Slider label="Deck" left />
+		<Slider label="Search" />
 		<MainPanel />
 	</>
 );

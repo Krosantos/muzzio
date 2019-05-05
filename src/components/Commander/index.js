@@ -20,7 +20,7 @@ const OUT_OF_99 = '/99';
 
 // eslint-disable-next-line max-statements, max-lines-per-function
 const Commander = () => {
-	const [isModalOpen, setModalOpen] = useState(true);
+	const [isModalOpen, setModalOpen] = useState(false);
 	const closeModal = useCallback(() => setModalOpen(false), []);
 	const openModal = useCallback(() => setModalOpen(true), []);
 
