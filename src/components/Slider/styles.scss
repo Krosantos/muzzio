@@ -3,7 +3,6 @@
 .slider {
     height: calc(100vh - 3em);
     position: fixed;
-    padding: 8px;
     top: 3em;
     background-color: $taupe;
     width: 300px;
@@ -22,12 +21,19 @@
     transform: translateX(100%);
 }
 
+.zIndex {
+    position: relative;
+    height: 100%;
+    z-index: 5;
+}
+
 .tabOuter {
     position: absolute;
     top: 50%;
     display: flex;
     justify-content: center;
     height: 1.5em;
+    z-index: 0;
 }
 
 .tabLeft {

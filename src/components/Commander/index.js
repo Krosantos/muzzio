@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import useCommander from '@hooks/useCommander';
 import ManaCost from '@components/ManaCost';
@@ -18,6 +18,12 @@ const SELECT_COMMANDER_TEXT = 'Select Commander';
 const CMC = 'CMC: ';
 const OUT_OF_99 = '/99';
 
+const convertIdentityToCost = (identity) => {
+	if (identity.length === 0)
+		return '{C}';
+	return `{${identity.join('}{')}}`;
+};
+
 // eslint-disable-next-line max-statements, max-lines-per-function
 const Commander = () => {
 	const [isModalOpen, setModalOpen] = useState(false);
@@ -29,7 +35,7 @@ const Commander = () => {
 		commander,
 		partner,
 	} = useCommander();
-
+	const identityAsCost = useMemo(() => convertIdentityToCost(colorIdentity), [colorIdentity]);
 	const cards = useCards(IS_IN_DECK);
 	const count = Object.keys(cards).length;
 	const cmc = getAverageCmc(cards).toPrecision(3);
@@ -55,7 +61,7 @@ const Commander = () => {
 				</span>
 			</div>
 			<div className={manaCost}>
-				<ManaCost className={manaCost} cost={colorIdentity} />
+				<ManaCost className={manaCost} cost={identityAsCost} />
 			</div>
 			{isModalOpen
 			&& ReactDOM.createPortal(

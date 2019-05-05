@@ -1,0 +1,14 @@
+@import '@theme/color.scss';
+
+.cardList {
+    margin-top: 4px;
+    overflow-y: auto;
+    height: calc(100% - 36px);
+}
+
+.searchSection {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    height: 100%;
+}

@@ -5,18 +5,12 @@ import uniq from 'lodash/uniq';
 import assign from 'lodash/assign';
 import { CommanderContext } from '@contexts/Commander';
 
-const convertIdentityToCost = (identity) => {
-	if (identity.length === 0)
-		return '{C}';
-	return `{${identity.join('}{')}}`;
-};
-
 const calculateIdentity = (commanderData) => {
 	const commanderIdentity = get(commanderData, 'commander.identity', []);
 	const partnerIdentity = get(commanderData, 'partner.identity', []);
 	const identities = uniq(concat(commanderIdentity, partnerIdentity));
 
-	return convertIdentityToCost(identities);
+	return identities;
 };
 
 // eslint-disable-next-line max-statements

@@ -26,7 +26,6 @@ const PartnerSearch = ({ closeModal }) => {
 		<div className={searchSection}>
 			<Search
 				additionalConstraint={finalQuery}
-				ignoreCommander
 				placeholder="Search for partners"
 				setResults={setResults}
 			/>
