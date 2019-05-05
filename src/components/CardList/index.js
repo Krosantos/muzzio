@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import values from 'lodash/values';
 import Card from '../Card';
 
-const CardList = ({ cards = [], callback = Function.prototype }) => cards.map((card) => (
-	<Card
-		key={card.id}
-		callback={callback}
-		card={card}
-	/>
-));
+const CardList = ({ cards = [], callback = Function.prototype }) => {
+	const cardArray = useMemo(() => {
+		if (!Array.isArray(cards))
+			return values(cards);
+		return cards;
+	}, [cards]);
+
+	return (
+		<>
+			{
+				cardArray.map((card) => (
+					<Card
+						key={card.id}
+						callback={callback}
+						card={card}
+					/>
+				))
+			}
+		</>
+	);
+};
 
 export default CardList;

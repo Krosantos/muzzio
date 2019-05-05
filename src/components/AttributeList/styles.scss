@@ -1,0 +1,61 @@
+@import '@theme/color.scss';
+
+.attributeList {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.addButton {
+    width: 250px;
+}
+
+.removeButton {
+    background: none;
+    border: none;
+}
+
+.attributeTitle {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    span {
+        display: block;
+    }
+}
+
+.attributeContainer {
+    border: 1px solid $smoke;
+    border-radius: 4px;
+    width: 250px;
+    background-color: $pale;
+    padding: 4px;
+    max-height: calc(100% - 10px);
+    margin-bottom: 4px;
+    margin-right: 4px;
+}
+
+.attribute {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 100%;
+    height: auto;
+}
+
+.inputBox {
+    background-color: $white;
+    border: none;
+    padding: 0 4px;
+    display: block;
+    height: 1.5em;
+    outline: none;
+    font-family: "Bitter", sans-serif;
+    width: 95%;
+}

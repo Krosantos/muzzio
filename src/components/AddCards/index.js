@@ -8,6 +8,8 @@ import { cardList, searchSection } from './styles.scss';
 const convertIdentityToQuery = (identity) => {
 	if (!identity)
 		return '';
+	if (!identity.length)
+		return ' identity:c';
 	return ` identity:${identity.join('')}`;
 };
 

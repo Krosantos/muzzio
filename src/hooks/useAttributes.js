@@ -1,7 +1,7 @@
 import { useContext, useCallback } from 'react';
 import { AttributesContext } from '@contexts/Attributes';
 
-const useCards = () => {
+const useAttributes = () => {
 	const { attributes, setAttributes } = useContext(AttributesContext);
 
 	const addAttribute = useCallback(((attribute) => {
@@ -24,4 +24,4 @@ const useCards = () => {
 	};
 };
 
-export default useCards;
+export default useAttributes;
