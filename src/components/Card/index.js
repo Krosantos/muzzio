@@ -48,7 +48,15 @@ const Card = ({ callback = Function.prototype, card }) => {
 
 	return (
 		<>
-			<div className={className} onClick={fireCallback} onMouseEnter={showArt} onMouseLeave={hideArt}>
+			<div
+				className={className}
+				onClick={fireCallback}
+				onContextMenu={(event) => {
+					console.log(event.clientX);
+				}}
+				onMouseEnter={showArt}
+				onMouseLeave={hideArt}
+			>
 				{name}
 				<ManaCost cost={cost} />
 			</div>
