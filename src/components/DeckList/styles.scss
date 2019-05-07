@@ -1,0 +1,8 @@
+@import '@theme/color.scss';
+
+.deckList {
+    padding: 0 4px;
+    margin: 4px 0;
+    overflow-y: auto;
+    height: calc(100% - 8px);
+}

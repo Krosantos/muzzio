@@ -2,15 +2,22 @@ import React, { useCallback, useMemo } from 'react';
 import get from 'lodash/get';
 import useCards from '@hooks/useCards';
 import useAttributes from '@hooks/useAttributes';
+import { ALL_CARDS } from '@constants';
 import { menuRow, divider } from './styles.scss';
 
 const AttributeRows = ({ card }) => {
 	const { attributes } = useAttributes();
 
+	if (attributes.length < 2)
+		return null;
 	return (
 		<>
 			<div className={divider} />
-			{attributes.map((attribute) => <AttributeRow key={attribute} attribute={attribute} card={card} />)}
+			{attributes.map((attribute) => (
+				<>
+					{ attribute !== ALL_CARDS && <AttributeRow key={attribute} attribute={attribute} card={card} /> }
+				</>
+			))}
 		</>
 	);
 };

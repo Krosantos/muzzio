@@ -38,9 +38,9 @@ const useCards = () => {
 	return {
 		addAttribute,
 		addCard,
+		cardExists,
 		cards,
 		cardsByAttribute,
-		cardExists,
 		removeAttribute,
 		removeCard,
 	};
