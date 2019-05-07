@@ -4,12 +4,12 @@ import { attributeContainer, inputBox } from './styles.scss';
 
 const AddButton = () => {
 	const { attributes, addAttribute } = useAttributes();
-	const [toAdd, setToAdd] = useState();
+	const [toAdd, setToAdd] = useState('');
 	const updateValue = useCallback((event) => {
 		setToAdd(event.target.value);
 	}, []);
 	const onEnter = useCallback(async ({ key }) => {
-		if (key !== 'Enter' || attributes.includes(toAdd))
+		if (key !== 'Enter' || attributes.includes(toAdd) || !toAdd)
 			return;
 		addAttribute(toAdd);
 		setToAdd('');

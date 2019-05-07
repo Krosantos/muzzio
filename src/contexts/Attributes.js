@@ -1,10 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { ALL_CARDS } from '@constants';
 
 const AttributesContext = React.createContext();
 
 const AttributesProvider = ({ children }) => {
-	const [attributes, setAttributes] = useState([ALL_CARDS]);
+	const [attributes, setAttributes] = useState([]);
 
 	const value = useMemo(() => ({ attributes, setAttributes }), [attributes]);
 

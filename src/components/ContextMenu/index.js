@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
 import useCardMenu from '@hooks/useCardMenu';
 import DeckRow from './DeckRow';
-import { contextMenu, divider } from './styles.scss';
+import AttributeRows from './AttributeRows';
+import RemoveRow from './RemoveRow';
+import { contextMenu } from './styles.scss';
 
 const MENU_WIDTH = 250;
 
@@ -29,7 +31,8 @@ const ContextMenu = () => {
 			style={position}
 		>
 			<DeckRow card={card} />
-			<div className={divider} />
+			<AttributeRows card={card} />
+			<RemoveRow card={card} />
 		</div>
 	);
 };
