@@ -4,7 +4,6 @@ import AddCards from '@components/AddCards';
 import ContextMenu from '@components/ContextMenu';
 import Header from './Header';
 import MainPanel from './MainPanel';
-import Debug from './debug';
 
 const Layout = () => (
 	<>
@@ -14,7 +13,6 @@ const Layout = () => (
 			<AddCards />
 		</Slider>
 		<MainPanel />
-		<Debug />
 		<ContextMenu />
 	</>
 );
