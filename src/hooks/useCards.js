@@ -1,5 +1,6 @@
 import { useContext, useCallback } from 'react';
 import filter from 'lodash/filter';
+import get from 'lodash/get';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
 import { CardContext } from '@contexts/Card';
@@ -11,7 +12,7 @@ import {
 
 const useCards = () => {
 	const { cards, dispatch } = useContext(CardContext);
-	const cardsByAttribute = useCallback((attribute) => filter(cards, (card) => card.attributes[attribute]), [cards]);
+	const cardsByAttribute = useCallback((attribute) => filter(cards, (card) => get(card, ['attributes', attribute], false)), [cards]);
 	const addCard = useCallback((card) => dispatch({ card, type: ADD_ACTION }), []);
 	const removeCard = useCallback((card) => dispatch({ card, type: REMOVE_ACTION }), []);
 	const addAttribute = useCallback((card, attribute) => {
