@@ -71,10 +71,6 @@ module.exports = {
 		},
 		],
 	},
-
-	node: {
-		fs: 'empty',
-	},
 	output: {
 		filename: 'bundle.js',
 		publicPath: '/',
@@ -96,4 +92,5 @@ module.exports = {
 		},
 		extensions: ['*', '.js', '.jsx'],
 	},
+	target: 'electron-renderer',
 };
