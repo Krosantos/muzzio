@@ -1,33 +1,29 @@
 import fs from 'fs';
-import { remote } from 'electron';
-import { useEffect, useContext, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 import { CommanderContext } from '@contexts/Commander';
 import { CardContext } from '@contexts/Card';
 import { AttributesContext } from '@contexts/Attributes';
 
-const { app } = remote;
-
 const useAllContexts = () => {
 	const { attributes } = useContext(AttributesContext);
 	const { cards } = useContext(CardContext);
-	const { commander } = useContext(CommanderContext);
+	const { commanderData } = useContext(CommanderContext);
 
 	return {
 		attributes,
 		cards,
-		commander,
+		commanderData,
 	};
 };
 
-const useSaveFiles = () => {
-	const pathOut = app.getPath('userData');
+const useSave = (filePath) => {
 	const allData = useAllContexts();
 
 	const save = useCallback(() => {
-		fs.writeFileSync(`${pathOut}/hype.json`, JSON.stringify(allData, null, 2));
-	}, [allData]);
+		fs.writeFileSync(filePath, JSON.stringify(allData, null, 2));
+	}, [allData, filePath]);
 
 	return save;
 };
 
-export default useSaveFiles;
+export default useSave;
