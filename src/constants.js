@@ -9,6 +9,8 @@ const ANY_PARTNER = 'partner';
 const SPECIFIC_PARTNER = 'specific';
 const NO_PARTNER = 'none';
 
+const AUTOSAVE = 'autosave';
+
 export {
 	ADD_ACTION,
 	REMOVE_ACTION,
@@ -18,4 +20,5 @@ export {
 	ANY_PARTNER,
 	SPECIFIC_PARTNER,
 	NO_PARTNER,
+	AUTOSAVE,
 };

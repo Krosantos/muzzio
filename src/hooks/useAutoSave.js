@@ -1,14 +1,14 @@
 import path from 'path';
 import { useEffect } from 'react';
 import { remote } from 'electron';
+import { AUTOSAVE } from '@constants';
 import useSave from './useSave';
 
 const { app } = remote;
-const FILE_NAME = 'autosave';
 
 const useAutoSave = () => {
 	const basePath = app.getPath('userData');
-	const writePath = path.join(basePath, FILE_NAME);
+	const writePath = path.join(basePath, AUTOSAVE);
 	const save = useSave(writePath);
 
 	useEffect(() => {

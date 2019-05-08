@@ -3,8 +3,8 @@ import { ALL_CARDS } from '@constants';
 
 const AttributesContext = React.createContext();
 
-const AttributesProvider = ({ children }) => {
-	const [attributes, setAttributes] = useState([ALL_CARDS]);
+const AttributesProvider = ({ children, initialValue }) => {
+	const [attributes, setAttributes] = useState(initialValue || [ALL_CARDS]);
 
 	const value = useMemo(() => ({ attributes, setAttributes }), [attributes]);
 

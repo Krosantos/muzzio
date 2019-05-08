@@ -7,7 +7,7 @@ const SAVE = 'Save';
 const SaveButton = () => {
 	const save = useSave('neat.json');
 
-	useAutoSave();
+	// useAutoSave();
 	return (
 		<button onClick={save} type="button">{SAVE}</button>
 	);

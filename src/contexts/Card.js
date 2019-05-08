@@ -32,8 +32,8 @@ const cardReducer = (state, { type, card }) => {
 	return newState;
 };
 
-const CardProvider = ({ children }) => {
-	const [cards, dispatch] = useReducer(cardReducer, {});
+const CardProvider = ({ children, initialValue = {} }) => {
+	const [cards, dispatch] = useReducer(cardReducer, initialValue);
 	const value = useMemo(() => ({ cards, dispatch }), [cards]);
 
 	return (
