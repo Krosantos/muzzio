@@ -2,6 +2,7 @@ import getPartner from './getPartner';
 import processCardFaces from './processCardFaces';
 
 const formatCard = (card) => {
+	console.log(card);
 	const {
 		id,
 		color_identity: identity,
@@ -12,6 +13,7 @@ const formatCard = (card) => {
 		cmc,
 		name,
 		mana_cost: cost,
+		type_line: type,
 	} = face;
 	const partnerQuery = getPartner(card);
 
@@ -26,6 +28,7 @@ const formatCard = (card) => {
 		name,
 		partnerQuery,
 		reverseUrl,
+		type,
 	};
 };
 

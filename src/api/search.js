@@ -11,7 +11,7 @@ const search = async (query) => {
 			q: newQuery,
 		},
 	};
-	const response = await api.get('', config);
+	const response = await api.get('search', config);
 	const cards = get(response, 'data.data', []);
 
 	return formatCards(cards);

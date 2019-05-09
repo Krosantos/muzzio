@@ -4,7 +4,8 @@
     height: calc(100vh - 3em);
     position: fixed;
     top: 3em;
-    background-color: $taupe;
+    border-top: 1px solid $white;
+    background-color: $smoke;
     width: 300px;
     transition: transform 250ms ease-in-out;
 }
@@ -56,6 +57,7 @@
     padding: 0 10px;
     font-family: "Beleren", "sans-serif";
     text-align: center;
-    background-color: $taupe;
+    color: $white;
+    background-color: $smoke;
     width: fit-content;
 }
