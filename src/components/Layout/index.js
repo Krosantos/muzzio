@@ -8,7 +8,7 @@ import Header from './Header';
 import MainPanel from './MainPanel';
 
 const Layout = () => {
-	// useAutoSave();
+	useAutoSave();
 	return (
 		<>
 			<Header />

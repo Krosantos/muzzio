@@ -2,15 +2,14 @@ import getPartner from './getPartner';
 import processCardFaces from './processCardFaces';
 
 const formatCard = (card) => {
-	console.log(card);
 	const {
 		id,
+		cmc,
 		color_identity: identity,
 	} = card;
 	const { imageUrl, reverseUrl, face } = processCardFaces(card);
 	const {
 		colors,
-		cmc,
 		name,
 		mana_cost: cost,
 		type_line: type,
