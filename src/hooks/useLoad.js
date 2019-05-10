@@ -3,9 +3,13 @@ import { useCallback } from 'react';
 
 const useLoad = (filePath) => {
 	const load = useCallback(() => {
-		const data = fs.readFileSync(filePath, 'utf8');
+		try {
+			const data = fs.readFileSync(filePath, 'utf8');
 
-		return JSON.parse(data);
+			return JSON.parse(data);
+		} catch (e) {
+			return {};
+		}
 	}, [filePath]);
 
 	return load;
