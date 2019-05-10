@@ -68,4 +68,4 @@ const Card = ({ callback = Function.prototype, card }) => {
 	);
 };
 
-export default Card;
+export default React.memo(Card);

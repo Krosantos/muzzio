@@ -3,6 +3,14 @@ import React from 'react';
 import symbolMap from './symbolMap';
 import { manaCost, manaSymbol } from './styles.scss';
 
+const SLASHES = '//';
+
+const splitCosts = (cost) => {
+	const costs = cost.split(/ \/\/ /);
+
+	return costs;
+};
+
 const splitMana = (cost) => {
 	const fragments = cost.split(/}{/);
 
@@ -16,15 +24,32 @@ const Symbol = ({ costFragment }) => {
 };
 
 const ManaCost = ({ cost }) => {
+	const [frontCost, backCost] = splitCosts(cost);
+
+	return (
+		<div className={manaCost}>
+			<Cost cost={frontCost} />
+			{backCost
+			&& (
+			<>
+				<span>{SLASHES}</span>
+				<Cost cost={backCost} />
+			</>
+			)
+			}
+		</div>
+	);
+};
+const Cost = ({ cost }) => {
 	if (!cost)
 		return null;
 	const fragments = splitMana(cost);
 
 	return (
-		<div className={manaCost}>
+		<>
 			{fragments.map((fragment, index) => <Symbol key={index} costFragment={fragment} />)}
-		</div>
+		</>
 	);
 };
 
-export default ManaCost;
+export default React.memo(ManaCost);
