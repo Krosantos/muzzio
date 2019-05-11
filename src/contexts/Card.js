@@ -5,10 +5,12 @@ import {
 	ADD_ACTION,
 	REMOVE_ACTION,
 	UPDATE_ACTION,
+	OVERWRITE,
 } from '@constants';
 
 const CardContext = React.createContext();
 
+// eslint-disable-next-line complexity
 const cardReducer = (state, { type, card }) => {
 	const { id } = card;
 	const newState = { ...state };
@@ -26,6 +28,9 @@ const cardReducer = (state, { type, card }) => {
 
 		newState[id] = newCard;
 		break;
+	case OVERWRITE:
+		// TODO: this is gross and you know it
+		return card;
 	default:
 		break;
 	}

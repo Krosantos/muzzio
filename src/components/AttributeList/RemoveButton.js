@@ -10,7 +10,7 @@ const RemoveButton = ({ attribute }) => {
 		event.stopPropagation();
 		event.preventDefault();
 		removeAttribute(attribute);
-	}, [attribute]);
+	}, [attribute, removeAttribute]);
 
 	return (
 		<button

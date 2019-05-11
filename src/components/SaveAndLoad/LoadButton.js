@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { remote } from 'electron';
 import useLoad from '@hooks/useLoad';
+import useOverwrite from '@hooks/useOverwrite';
 import { saveLoadButton } from './styles.scss';
 
 const LOAD = 'Load';
@@ -8,8 +9,9 @@ const { app, dialog } = remote;
 
 const LoadButton = () => {
 	const load = useLoad();
+	const overwrite = useOverwrite();
 	const loadDeck = useCallback((event) => {
-		const path = dialog.showOpenDialog({
+		const [path] = dialog.showOpenDialog({
 			defaultPath: app.getPath('documents'),
 			filters: [
 				{ extensions: ['muz'], name: 'Deck Files' },
@@ -18,7 +20,9 @@ const LoadButton = () => {
 		});
 
 		event.preventDefault();
-		load(path);
+		const saveData = load(path);
+
+		overwrite(saveData);
 	}, [load]);
 
 	return (

@@ -1,6 +1,7 @@
 const UPDATE_ACTION = 'update';
 const ADD_ACTION = 'add';
 const REMOVE_ACTION = 'remove';
+const OVERWRITE = 'overwrite';
 
 const ALL_CARDS = 'All Cards';
 const IS_IN_DECK = 'indeck';
@@ -15,6 +16,7 @@ export {
 	ADD_ACTION,
 	REMOVE_ACTION,
 	UPDATE_ACTION,
+	OVERWRITE,
 	ALL_CARDS,
 	IS_IN_DECK,
 	ANY_PARTNER,
