@@ -40,6 +40,7 @@ const ManaCost = ({ cost }) => {
 		</div>
 	);
 };
+
 const Cost = ({ cost }) => {
 	if (!cost)
 		return null;

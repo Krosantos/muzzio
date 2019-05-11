@@ -4,9 +4,11 @@ import ReactDOM from 'react-dom';
 import useCommander from '@hooks/useCommander';
 import ManaCost from '@components/ManaCost';
 import useCards from '@hooks/useCards';
+import useBasicLands from '@hooks/useBasicLands';
 import getAverageCmc from '@utils/getAverageCmc';
 import { IS_IN_DECK } from '@constants';
-import Modal from './Modal';
+import BasicLandModal from './BasicLandModal';
+import CommanderModal from './CommanderModal';
 import {
 	cardCount,
 	container,
@@ -26,10 +28,12 @@ const convertIdentityToCost = (identity) => {
 
 // eslint-disable-next-line max-statements, max-lines-per-function
 const Commander = () => {
-	const [isModalOpen, setModalOpen] = useState(false);
-	const closeModal = useCallback(() => setModalOpen(false), []);
-	const openModal = useCallback(() => setModalOpen(true), []);
-
+	const [isCommanderModalOpen, setCommanderModalOpen] = useState(false);
+	const closeCommanderModal = useCallback(() => setCommanderModalOpen(false), []);
+	const openCommanderModal = useCallback(() => setCommanderModalOpen(true), []);
+	const [isLandModalOpen, setLandModalOpen] = useState(false);
+	const closeLandModal = useCallback(() => setLandModalOpen(false), []);
+	const openLandModal = useCallback(() => setLandModalOpen(true), []);
 	const {
 		colorIdentity,
 		commander,
@@ -37,13 +41,14 @@ const Commander = () => {
 	} = useCommander();
 	const identityAsCost = useMemo(() => convertIdentityToCost(colorIdentity), [colorIdentity]);
 	const { cardsByAttribute } = useCards();
+	const { totalCount: basicCount } = useBasicLands('');
 	const cardsInDeck = cardsByAttribute(IS_IN_DECK);
-	const count = cardsInDeck.length;
+	const count = cardsInDeck.length + basicCount;
 	const cmc = getAverageCmc(cardsInDeck).toPrecision(3);
 
 	return (
 		<div className={container}>
-			<div className={commanderName} onClick={openModal}>
+			<div className={commanderName} onClick={openCommanderModal}>
 				<span>
 					{commander || SELECT_COMMANDER_TEXT}
 				</span>
@@ -61,13 +66,21 @@ const Commander = () => {
 					{cmc}
 				</span>
 			</div>
-			<div className={manaCost}>
+			<div className={manaCost} onClick={openLandModal}>
 				<ManaCost className={manaCost} cost={identityAsCost} />
 			</div>
-			{isModalOpen
+			{isCommanderModalOpen
 			&& ReactDOM.createPortal(
-				<Modal
-					closeModal={closeModal}
+				<CommanderModal
+					closeModal={closeCommanderModal}
+				/>,
+				document.querySelector('body'),
+			)}
+			{isLandModalOpen
+			&& ReactDOM.createPortal(
+				<BasicLandModal
+					closeModal={closeLandModal}
+					identities={colorIdentity}
 				/>,
 				document.querySelector('body'),
 			)}

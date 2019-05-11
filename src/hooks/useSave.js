@@ -3,14 +3,17 @@ import { useContext, useCallback } from 'react';
 import { CommanderContext } from '@contexts/Commander';
 import { CardContext } from '@contexts/Card';
 import { AttributesContext } from '@contexts/Attributes';
+import { BasicLandContext } from '@contexts/BasicLand';
 
 const useAllContexts = () => {
 	const { attributes } = useContext(AttributesContext);
 	const { cards } = useContext(CardContext);
 	const { commanderData } = useContext(CommanderContext);
+	const { basicLand } = useContext(BasicLandContext);
 
 	return {
 		attributes,
+		basicLand,
 		cards,
 		commanderData,
 	};

@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalContainer from './ModalContainer';
+import ModalContainer from '../ModalContainer';
 import CommanderSearch from './CommanderSearch';
 import PartnerSearch from './PartnerSearch';
 import { searchContainer } from '../styles.scss';

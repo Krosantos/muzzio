@@ -10,6 +10,8 @@ const calculateIdentity = (commanderData) => {
 	const partnerIdentity = get(commanderData, 'partner.identity', []);
 	const identities = uniq(concat(commanderIdentity, partnerIdentity));
 
+	if (identities.length < 1)
+		identities.push('C');
 	return identities;
 };
 

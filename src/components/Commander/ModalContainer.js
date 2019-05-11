@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { underlay, modal } from '../styles.scss';
+import { underlay, modal } from './styles.scss';
 
 /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 const ModalContainer = ({ closeModal, children }) => {
@@ -15,5 +15,5 @@ const ModalContainer = ({ closeModal, children }) => {
 };
 /* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 
-export default ModalContainer;
+export default React.memo(ModalContainer);
 
