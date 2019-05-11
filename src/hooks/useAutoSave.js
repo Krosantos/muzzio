@@ -9,10 +9,10 @@ const { app } = remote;
 const useAutoSave = () => {
 	const basePath = app.getPath('userData');
 	const writePath = path.join(basePath, AUTOSAVE);
-	const save = useSave(writePath);
+	const save = useSave();
 
 	useEffect(() => {
-		const autoSave = setInterval(save, 10000);
+		const autoSave = setInterval(() => save(writePath), 10000);
 
 		return () => clearInterval(autoSave);
 	});

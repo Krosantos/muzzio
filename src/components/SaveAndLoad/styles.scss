@@ -1,0 +1,20 @@
+@import '@theme/color.scss';
+
+.saveLoadButton {
+    color: $white;
+    cursor: pointer;
+    width: 55px;
+    margin-right: 8px;
+    font-size: 1em;
+    font-family: 'Beleren', sans-serif;
+    background-color: $smoke;
+    border: 1px solid $white;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+        color: $smoke;
+        background-color: white;
+    }
+}

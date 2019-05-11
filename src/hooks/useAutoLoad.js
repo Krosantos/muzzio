@@ -9,9 +9,9 @@ const useAutoLoad = () => {
 	const basePath = app.getPath('userData');
 	const readPath = path.join(basePath, AUTOSAVE);
 
-	const load = useLoad(readPath);
+	const load = useLoad();
 
-	return load();
+	return load(readPath);
 };
 
 export default useAutoLoad;

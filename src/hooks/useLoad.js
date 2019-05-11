@@ -1,8 +1,8 @@
 import fs from 'fs';
 import { useCallback } from 'react';
 
-const useLoad = (filePath) => {
-	const load = useCallback(() => {
+const useLoad = () => {
+	const load = useCallback((filePath) => {
 		try {
 			const data = fs.readFileSync(filePath, 'utf8');
 
@@ -10,7 +10,7 @@ const useLoad = (filePath) => {
 		} catch (e) {
 			return {};
 		}
-	}, [filePath]);
+	}, []);
 
 	return load;
 };

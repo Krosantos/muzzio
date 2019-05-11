@@ -19,12 +19,12 @@ const useAllContexts = () => {
 	};
 };
 
-const useSave = (filePath) => {
+const useSave = () => {
 	const allData = useAllContexts();
 
-	const save = useCallback(() => {
+	const save = useCallback((filePath) => {
 		fs.writeFileSync(filePath, JSON.stringify(allData, null, 2));
-	}, [allData, filePath]);
+	}, [allData]);
 
 	return save;
 };
