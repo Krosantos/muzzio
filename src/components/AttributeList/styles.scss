@@ -17,13 +17,16 @@
 .removeButton {
     background: none;
     border: none;
+    cursor: pointer;
 }
 
 .attributeTitle {
     display: flex;
     flex-shrink: 0;
+    margin-right: 4px;
+    font-size: 1.05em;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     span {
         display: block;
     }
@@ -33,7 +36,7 @@
     border: 1px solid $smoke;
     border-radius: 4px;
     width: 250px;
-    background-color: $pale;
+    background-color: $taupe;
     padding: 4px 0px 4px 4px;
     max-height: calc(100% - 10px);
     margin-bottom: 4px;
