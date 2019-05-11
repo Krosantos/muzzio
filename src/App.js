@@ -6,7 +6,7 @@ import { CommanderProvider } from '@contexts/Commander';
 import { AttributesProvider } from '@contexts/Attributes';
 import { BasicLandProvider } from '@contexts/BasicLand';
 import useAutoLoad from '@hooks/useAutoLoad';
-import './index.css';
+import './index.scss';
 
 /* eslint-disable react/jsx-max-depth */
 const App = () => {

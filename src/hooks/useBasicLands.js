@@ -3,22 +3,22 @@ import get from 'lodash/get';
 import { BasicLandContext } from '@contexts/BasicLand';
 
 const useBasicLand = (identity) => {
-	const { BasicLand, setBasicLand } = useContext(BasicLandContext);
+	const { basicLand, setBasicLand } = useContext(BasicLandContext);
 
-	const count = useMemo(() => get(BasicLand, identity, 0), [BasicLand]);
+	const count = useMemo(() => get(basicLand, identity, 0), [basicLand]);
 	const setCount = useCallback((event) => {
 		const newCount = get(event, 'target.value', 0);
-		const toSet = { ...BasicLand };
+		const toSet = { ...basicLand };
 
 		toSet[identity] = newCount;
 
 		setBasicLand(toSet);
-	}, [BasicLand]);
+	}, [basicLand]);
 	const totalCount = useMemo(() => {
 		let result = 0;
 
-		Object.keys(BasicLand).forEach((key) => {
-			const raw = get(BasicLand, key, 0);
+		Object.keys(basicLand).forEach((key) => {
+			const raw = get(basicLand, key, 0);
 
 			if (!raw)
 				return;
@@ -27,7 +27,7 @@ const useBasicLand = (identity) => {
 			result += toAdd;
 		});
 		return result;
-	}, [BasicLand]);
+	}, [basicLand]);
 
 	return {
 		count,

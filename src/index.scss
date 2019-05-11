@@ -1,9 +1,25 @@
+@import '@theme/color.scss';
+
 html, body {
     margin:0;
     height: 100%;
     width: 100%;
-    background-color: #F6F6F6;
+    background-color: $white;
     font-family: "Beleren", sans-serif;
+    
+    & ::-webkit-scrollbar {
+        height: 12px;
+    }
+    
+    & ::-webkit-scrollbar-button {
+        display: none;
+    }
+    
+    & ::-webkit-scrollbar-thumb {
+        background: $smoke;
+        border-radius: 4px;
+        border: 1px solid $smoke;
+    }
 }
 
 @font-face {
@@ -26,19 +42,3 @@ button {
     border-style: solid;
     outline: none;
 }
-
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-    margin: 4px 0;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-  }

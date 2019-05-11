@@ -8,6 +8,21 @@
     background-color: $smoke;
     width: 300px;
     transition: transform 250ms ease-in-out;
+
+    & ::-webkit-scrollbar {
+        height: 16px;
+        width: 10px;
+    }
+    
+    & ::-webkit-scrollbar-button {
+        display: none;
+    }
+    
+    & ::-webkit-scrollbar-thumb {
+        background: $white;
+        border-radius: 4px;
+        border: 1px solid $white;
+    }
 }
 
 .sliderRight {

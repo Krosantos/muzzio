@@ -2,7 +2,6 @@ import getPartner from './getPartner';
 import processCardFaces from './processCardFaces';
 
 const formatCard = (card) => {
-	console.log(card);
 	const {
 		id,
 		cmc,
