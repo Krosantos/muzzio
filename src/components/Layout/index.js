@@ -1,7 +1,6 @@
 import React from 'react';
 import Slider from '@components/Slider';
 import AddCards from '@components/AddCards';
-import ContextMenu from '@components/ContextMenu';
 import DeckList from '@components/DeckList';
 import useAutoSave from '@hooks/useAutoSave';
 import Header from './Header';
@@ -19,7 +18,6 @@ const Layout = () => {
 				<AddCards />
 			</Slider>
 			<MainPanel />
-			<ContextMenu />
 		</>
 	);
 };

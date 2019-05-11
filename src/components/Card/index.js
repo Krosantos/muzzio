@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { useCallback, useMemo, useState } from 'react';
 import ManaCost from '@components/ManaCost';
-import useCardMenu from '@hooks/useCardMenu';
+import useRightClickMenu from './useRightClickMenu';
 import HoverArt from './HoverArt';
 import {
 	cardRow,
@@ -41,22 +41,19 @@ const Card = ({ callback = Function.prototype, card }) => {
 	const {
 		colors, name, cost, imageUrl, reverseUrl,
 	} = card;
-	const { openMenu } = useCardMenu();
 	const [shouldShowArt, setShowArt] = useState(false);
 	const hideArt = useCallback(() => setShowArt(false));
 	const showArt = useCallback(() => setShowArt(true));
 	const fireCallback = useCallback(() => callback(card));
-	const handleRightClick = useCallback((event) => {
-		openMenu(event, card);
-	});
 	const className = useMemo(() => `${cardRow} ${getColorClass(colors)}`, [colors]);
+	const handleContextClick = useRightClickMenu(card);
 
 	return (
 		<>
 			<div
 				className={className}
 				onClick={fireCallback}
-				onContextMenu={handleRightClick}
+				onContextMenu={handleContextClick}
 				onMouseEnter={showArt}
 				onMouseLeave={hideArt}
 			>
