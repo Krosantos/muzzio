@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { useCallback, useMemo } from 'react';
 import ManaCost from '@components/ManaCost';
+import { IS_IN_DECK } from '@constants';
 import useHoverArt from './useHoverArt';
 import useRightClickMenu from './useRightClickMenu';
 import useCard from './useCard';
@@ -8,18 +9,22 @@ import HoverArt from './HoverArt';
 import getColorClass from './getColorClass';
 import { cardRow } from './styles.scss';
 
-// eslint-disable-next-line max-statements
-const Card = ({ callback = Function.prototype, rawCard, cardId }) => {
+const Card = ({
+	callback = Function.prototype,
+	rawCard,
+	cardId,
+	alwaysColorful,
+}) => {
 	const card = useCard(cardId, rawCard);
 	const {
-		colors,
+		attributes,
 		cost,
 		name,
 		imageUrl,
 		reverseUrl,
 	} = card;
-	const fireCallback = useCallback(() => callback(card));
-	const className = useMemo(() => `${cardRow} ${getColorClass(card)}`, [colors]);
+	const fireCallback = useCallback(() => callback(card), [card, callback]);
+	const className = useMemo(() => `${cardRow} ${getColorClass(card, alwaysColorful)}`, [attributes[IS_IN_DECK]]);
 	const handleContextClick = useRightClickMenu(card);
 	const { shouldShowArt, showArt, hideArt } = useHoverArt();
 

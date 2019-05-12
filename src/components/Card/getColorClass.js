@@ -20,8 +20,8 @@ const colorMap = {
 };
 
 // eslint-disable-next-line complexity
-const getColorClass = ({ attributes, colors = [], overrideColor }) => {
-	const notInDeck = (!get(attributes, IS_IN_DECK, false) && !overrideColor);
+const getColorClass = ({ attributes, colors = [] }, alwaysColorful) => {
+	const notInDeck = (!get(attributes, IS_IN_DECK, false) && !alwaysColorful);
 
 	if (notInDeck)
 		return outOfDeck;

@@ -27,7 +27,7 @@ const AddCards = () => {
 				setResults={setResults}
 			/>
 			<div className={cardList}>
-				<CardList callback={addCard} cards={results} />
+				<CardList alwaysColorful callback={addCard} cards={results} />
 			</div>
 		</div>
 	);

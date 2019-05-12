@@ -37,7 +37,7 @@ const DeckList = () => {
 	return (
 		<>
 			<div className={deckList}>
-				<CardList cards={sortedCards} />
+				<CardList alwaysColorful cards={sortedCards} />
 			</div>
 			<div className={buttonContainer}>
 				<button className={importButton} onClick={importFile} type="button">{IMPORT}</button>

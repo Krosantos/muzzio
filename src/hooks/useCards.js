@@ -21,6 +21,7 @@ const useCards = () => {
 		const maybeCard = get(cards, card.id, {});
 		const toAdd = merge({}, maybeCard, card);
 
+		console.log('toAdd', toAdd);
 		dispatch({ card: toAdd, type: ADD_ACTION });
 	}, [cards]);
 	const removeCard = useCallback((card) => dispatch({ card, type: REMOVE_ACTION }), []);

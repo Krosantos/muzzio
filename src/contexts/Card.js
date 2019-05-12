@@ -43,6 +43,7 @@ const CardProvider = ({ children, initialValue = {} }) => {
 
 	return (
 		<CardContext.Provider value={value}>
+			{console.log(value)}
 			{children}
 		</CardContext.Provider>
 	);

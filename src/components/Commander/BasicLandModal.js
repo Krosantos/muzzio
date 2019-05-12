@@ -13,6 +13,7 @@ const BasicRow = ({ identity }) => {
 		<div className={basicLandRow}>
 			<input
 				onChange={setCount}
+				type="number"
 				value={count}
 			/>
 			<div>
