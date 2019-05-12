@@ -27,7 +27,7 @@ const CommanderSearch = ({ closeModal }) => {
 				setResults={setResults}
 			/>
 			<div className={cardList}>
-				<CardList callback={wrappedSetCommander} cards={results} />
+				<CardList alwaysColorful callback={wrappedSetCommander} cards={results} />
 			</div>
 		</div>
 	);

@@ -30,7 +30,7 @@ const PartnerSearch = ({ closeModal }) => {
 				setResults={setResults}
 			/>
 			<div className={cardList}>
-				<CardList callback={wrappedSetPartner} cards={results} />
+				<CardList alwaysColorful callback={wrappedSetPartner} cards={results} />
 			</div>
 		</div>
 	);
