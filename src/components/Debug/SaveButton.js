@@ -1,6 +1,5 @@
 import React from 'react';
 import useSave from '@hooks/useSave';
-import useAutoSave from '@hooks/useAutoSave';
 
 const SAVE = 'Save';
 
