@@ -12,8 +12,9 @@ const CommanderSearch = ({ closeModal }) => {
 	const {	setCommander } = useCommander();
 	const wrappedSetCommander = useCallback((card) => {
 		const partnerType = get(card, 'partnerQuery.type', NO_PARTNER);
+		const toSet = { ...card, attributes: {}, disableMenu: true };
 
-		setCommander(card);
+		setCommander(toSet);
 		if (partnerType === NO_PARTNER)
 			closeModal();
 	}, []);

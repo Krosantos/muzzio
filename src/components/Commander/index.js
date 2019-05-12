@@ -36,9 +36,10 @@ const Commander = () => {
 	const openLandModal = useCallback(() => setLandModalOpen(true), []);
 	const {
 		colorIdentity,
-		commander,
-		partner,
+		commander = {},
+		partner = {},
 	} = useCommander();
+
 	const identityAsCost = useMemo(() => convertIdentityToCost(colorIdentity), [colorIdentity]);
 	const { cardsByAttribute } = useCards();
 	const { totalCount: basicCount } = useBasicLands('');
@@ -50,10 +51,10 @@ const Commander = () => {
 		<div className={container}>
 			<div className={commanderName} onClick={openCommanderModal}>
 				<span>
-					{commander || SELECT_COMMANDER_TEXT}
+					{commander.name || SELECT_COMMANDER_TEXT}
 				</span>
 				<span>
-					{partner}
+					{partner.name}
 				</span>
 			</div>
 			<div className={cardCount}>

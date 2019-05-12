@@ -23,7 +23,7 @@ const Symbol = ({ costFragment }) => {
 	return (<img alt="" className={manaSymbol} src={src} />);
 };
 
-const ManaCost = ({ cost }) => {
+const ManaCost = ({ cost = '' }) => {
 	const [frontCost, backCost] = splitCosts(cost);
 
 	return (
