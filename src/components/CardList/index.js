@@ -16,7 +16,8 @@ const CardList = ({ cards = [], callback = Function.prototype }) => {
 					<Card
 						key={card.id}
 						callback={callback}
-						card={card}
+						cardId={card.id}
+						rawCard={card}
 					/>
 				))
 			}

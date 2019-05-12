@@ -53,6 +53,8 @@ const useCards = () => {
 		});
 	}, [cardsByAttribute]);
 
+	const getCard = useCallback((id) => get(cards, id), [cards]);
+
 	return {
 		addAttribute,
 		addCard,
@@ -60,6 +62,7 @@ const useCards = () => {
 		cards,
 		cardsByAttribute,
 		clearDeck,
+		getCard,
 		removeAttribute,
 		removeCard,
 	};
