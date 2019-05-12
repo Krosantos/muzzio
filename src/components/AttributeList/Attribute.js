@@ -5,6 +5,7 @@ import values from 'lodash/values';
 import CardList from '@components/CardList';
 import useCards from '@hooks/useCards';
 import { ALL_CARDS, IS_IN_DECK } from '@constants';
+import useSorting from './useSorting';
 import RemoveButton from './RemoveButton';
 import { attribute as attributeStyle, attributeContainer, attributeTitle } from './styles.scss';
 
@@ -24,18 +25,19 @@ const Attribute = ({ attribute }) => {
 	const callback = useCallback((card) => {
 		addAttribute(card, attribute);
 	}, [attribute]);
+	const { openMenu, sortedCards } = useSorting(cardsToShow);
 
 	return (
 		<div className={attributeContainer}>
 			<div className={attributeTitle}>
-				<span>
+				<span onContextMenu={openMenu}>
 					{attribute}
 					{inDeckString}
 				</span>
 				{attribute !== ALL_CARDS && <RemoveButton attribute={attribute} />}
 			</div>
 			<div className={attributeStyle}>
-				<CardList callback={callback} cards={cardsToShow} />
+				<CardList callback={callback} cards={sortedCards} />
 			</div>
 		</div>
 	);
