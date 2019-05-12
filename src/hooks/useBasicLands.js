@@ -5,16 +5,16 @@ import { identityMap, IS_IN_DECK } from '@constants';
 import { BasicLandContext } from '@contexts/BasicLand';
 
 // eslint-disable-next-line max-lines-per-function
-const useBasicLand = (identity) => {
+const useBasicLand = () => {
 	const { basicLand, setBasicLand } = useContext(BasicLandContext);
 
-	const count = useMemo(() => get(basicLand, identity, 0), [basicLand]);
+	const getCount = useCallback((identity) => get(basicLand, identity, 0), [basicLand]);
 
-	const setCount = useCallback((event) => {
+	const setCount = useCallback((event, identity) => {
 		const newCount = get(event, 'target.value', 0);
 		const toSet = { ...basicLand };
 
-		toSet[identity] = newCount;
+		toSet[identity] = newCount || 0;
 
 		setBasicLand(toSet);
 	}, [basicLand]);
@@ -54,7 +54,7 @@ const useBasicLand = (identity) => {
 
 	return {
 		asCards,
-		count,
+		getCount,
 		setCount,
 		totalCount,
 	};
