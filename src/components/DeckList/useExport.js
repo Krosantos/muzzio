@@ -12,7 +12,7 @@ const formatCards = (cards) => {
 		return name;
 	});
 
-	return names.join('\n');
+	return names.join('\r\n');
 };
 
 const useExport = (cards = []) => {
