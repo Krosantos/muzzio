@@ -6,17 +6,18 @@ import { IS_IN_DECK } from '@constants';
 
 const { Menu, MenuItem } = remote;
 
-const sortTypes = {
-	ALPHA: { name: 'Alphabetically', sort: (card) => card.name },
-	CMC: { name: 'CMC', sort: (card) => card.cmc },
-	DECK: {
-		name: 'In/Out of Deck',
-		sort: (card) => {
-			const inDeck = card.attributes[IS_IN_DECK];
+const alphaSort = (card) => card.name;
+const cmcSort = (card) => card.cmc;
+const deckSort = (card) => {
+	const inDeck = card.attributes[IS_IN_DECK];
 
-			return inDeck ? 1 : 0;
-		},
-	},
+	return inDeck ? 1 : 0;
+};
+
+const sortTypes = {
+	ALPHA: { name: 'Alphabetically', sort: alphaSort },
+	CMC: { name: 'CMC', sort: cmcSort },
+	DECK: { name: 'In/Out of Deck', sort: deckSort },
 };
 
 const useSorting = (cards = []) => {
@@ -31,7 +32,12 @@ const useSorting = (cards = []) => {
 		});
 		menu.popup();
 	}, []);
-	const sortedCards = useMemo(() => sortBy(cards, sortType.sort), [cards, sortType.sort]);
+	const sortedCards = useMemo(() => {
+		const alpha = sortBy(cards, alphaSort);
+		const cmc = sortBy(alpha, cmcSort);
+
+		return sortBy(cmc, sortType.sort);
+	}, [cards, sortType.sort]);
 
 	return { openMenu, sortedCards };
 };
