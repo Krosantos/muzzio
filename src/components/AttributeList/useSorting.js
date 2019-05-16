@@ -9,7 +9,14 @@ const { Menu, MenuItem } = remote;
 const sortTypes = {
 	ALPHA: { name: 'Alphabetically', sort: (card) => card.name },
 	CMC: { name: 'CMC', sort: (card) => card.cmc },
-	DECK: { name: 'In/Out of Deck', sort: (card) => card.attributes[IS_IN_DECK] },
+	DECK: {
+		name: 'In/Out of Deck',
+		sort: (card) => {
+			const inDeck = card.attributes[IS_IN_DECK];
+
+			return inDeck ? 1 : 0;
+		},
+	},
 };
 
 const useSorting = (cards = []) => {
