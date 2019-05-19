@@ -27,7 +27,7 @@ const lookUpCards = async (rawData) => {
 
 	const cards = await getList(postBody);
 
-	return cards;
+	return cards.filter((card) => !card.type.includes('Basic Land'));
 };
 
 export default lookUpCards;

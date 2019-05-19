@@ -1,6 +1,6 @@
 import React from 'react';
 import CardList from '@components/CardList';
-import useImport from '@hooks/useImport';
+import useImport from './useImport';
 import useSortedCards from './useSortedCards';
 import useExport from './useExport';
 import { deckList, buttonContainer, importButton } from './styles.scss';
