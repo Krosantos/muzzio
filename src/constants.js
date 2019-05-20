@@ -109,6 +109,18 @@ const identityMap = {
 	},
 };
 
+const MODERN = 'modern';
+const COMMANDER = 'commander';
+const OATHBREAKER = 'oathbreaker';
+const STANDARD = 'standard';
+
+const formats = [
+	MODERN,
+	COMMANDER,
+	OATHBREAKER,
+	STANDARD,
+];
+
 export {
 	ADD_ACTION,
 	REMOVE_ACTION,
@@ -121,4 +133,9 @@ export {
 	NO_PARTNER,
 	AUTOSAVE,
 	identityMap,
+	MODERN,
+	COMMANDER,
+	OATHBREAKER,
+	STANDARD,
+	formats,
 };
