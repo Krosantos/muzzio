@@ -4,18 +4,21 @@ import { CommanderContext } from '@contexts/Commander';
 import { CardContext } from '@contexts/Card';
 import { AttributesContext } from '@contexts/Attributes';
 import { BasicLandContext } from '@contexts/BasicLand';
+import { FormatContext } from '@contexts/Format';
 
 const useAllContexts = () => {
 	const { attributes } = useContext(AttributesContext);
 	const { cards } = useContext(CardContext);
 	const { commanderData } = useContext(CommanderContext);
 	const { basicLand } = useContext(BasicLandContext);
+	const { format } = useContext(FormatContext);
 
 	return {
 		attributes,
 		basicLand,
 		cards,
 		commanderData,
+		format,
 	};
 };
 

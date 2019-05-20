@@ -1,12 +1,12 @@
 import React from 'react';
-import Commander from '@components/Commander';
+import FormatHeader from '@components/FormatHeader';
 import SaveAndLoad from '@components/SaveAndLoad';
 import LandCount from '@components/LandCount';
 import { header } from './styles.scss';
 
 const Header = () => (
 	<div className={header}>
-		<Commander />
+		<FormatHeader />
 		<LandCount />
 		<SaveAndLoad />
 	</div>
