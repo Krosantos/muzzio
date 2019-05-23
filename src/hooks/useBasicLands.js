@@ -10,11 +10,10 @@ const useBasicLand = () => {
 
 	const getCount = useCallback((identity) => get(basicLand, identity, 0), [basicLand]);
 
-	const setCount = useCallback((event, identity) => {
-		const newCount = get(event, 'target.value', 0);
+	const setCount = useCallback((count, identity) => {
 		const toSet = { ...basicLand };
 
-		toSet[identity] = newCount || 0;
+		toSet[identity] = count || 0;
 
 		setBasicLand(toSet);
 	}, [basicLand]);
