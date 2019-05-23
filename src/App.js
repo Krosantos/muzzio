@@ -3,6 +3,7 @@ import Layout from '@components/Layout';
 import { CardProvider } from '@contexts/Card';
 import { CardMenuProvider } from '@contexts/CardMenu';
 import { CommanderProvider } from '@contexts/Commander';
+import { OathbreakerProvider } from '@contexts/Oathbreaker';
 import { AttributesProvider } from '@contexts/Attributes';
 import { BasicLandProvider } from '@contexts/BasicLand';
 import { FormatProvider } from '@contexts/Format';
@@ -17,19 +18,22 @@ const App = () => {
 		format,
 		cards,
 		commanderData,
+		oathbreakerData,
 	} = useAutoLoad();
 
 	return (
 		<FormatProvider initialValue={format}>
 			<CardProvider initialValue={cards}>
 				<CommanderProvider initialValue={commanderData}>
-					<AttributesProvider initialValue={attributes}>
-						<BasicLandProvider initialValue={basicLand}>
-							<CardMenuProvider>
-								<Layout />
-							</CardMenuProvider>
-						</BasicLandProvider>
-					</AttributesProvider>
+					<OathbreakerProvider initialValue={oathbreakerData}>
+						<AttributesProvider initialValue={attributes}>
+							<BasicLandProvider initialValue={basicLand}>
+								<CardMenuProvider>
+									<Layout />
+								</CardMenuProvider>
+							</BasicLandProvider>
+						</AttributesProvider>
+					</OathbreakerProvider>
 				</CommanderProvider>
 			</CardProvider>
 		</FormatProvider>
