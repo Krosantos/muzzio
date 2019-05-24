@@ -4,7 +4,7 @@ import assign from 'lodash/assign';
 import { OathbreakerContext } from '@contexts/Oathbreaker';
 
 const calculateIdentity = (oathbreakerData) => {
-	const identity = get(oathbreakerData, 'identity', []);
+	const identity = get(oathbreakerData, 'oathbreaker.identity', []);
 
 	if (identity.length < 1)
 		identity.push('C');

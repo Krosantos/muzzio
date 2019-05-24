@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import get from 'lodash/get';
 import Search from '@components/Search';
 import useCommander from '@hooks/useCommander';
@@ -7,9 +7,11 @@ import { NO_PARTNER } from '@constants';
 import { cardList, searchSection } from '../styles.scss';
 
 const LEGENDARY_CREATURE_QUERY = ' t:legendary t:creature';
+const DEFAULT_PLACEHOLDER = 'Search for Commander';
+
 const CommanderSearch = ({ closeModal }) => {
 	const [results, setResults] = useState([]);
-	const {	setCommander } = useCommander();
+	const {	commander, setCommander } = useCommander();
 	const wrappedSetCommander = useCallback((card) => {
 		const partnerType = get(card, 'partnerQuery.type', NO_PARTNER);
 		const toSet = { ...card, attributes: {}, disableMenu: true };
@@ -18,12 +20,13 @@ const CommanderSearch = ({ closeModal }) => {
 		if (partnerType === NO_PARTNER)
 			closeModal();
 	}, []);
+	const placeholder = useMemo(() => get(commander, 'name', DEFAULT_PLACEHOLDER), [commander]);
 
 	return (
 		<div className={searchSection}>
 			<Search
 				additionalConstraint={LEGENDARY_CREATURE_QUERY}
-				placeholder="Search for commanders"
+				placeholder={placeholder}
 				setResults={setResults}
 			/>
 			<div className={cardList}>

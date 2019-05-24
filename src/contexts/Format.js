@@ -4,6 +4,7 @@ import { COMMANDER } from '@constants';
 const FormatContext = React.createContext();
 
 const FormatProvider = ({ children, initialValue }) => {
+	console.log('InitialValue:', initialValue);
 	const [format, setFormat] = useState(initialValue || COMMANDER);
 
 	const value = useMemo(() => ({ format, setFormat }), [format]);

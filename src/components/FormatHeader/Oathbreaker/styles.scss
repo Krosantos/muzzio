@@ -1,0 +1,48 @@
+@import '@theme/color.scss';
+
+.container {
+    width: 40%;
+    border-right: 1px solid $white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.oathbreakerName {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    padding-left: 8px;
+    width: 250px;
+    > * {
+        height:50%;
+    }
+}
+
+.manaCost {
+    cursor: pointer;
+    margin: 0 8px;
+    width: 102px;
+    display: flex;
+    justify-content: center;
+}
+
+.cardList {
+    margin-top: 4px;
+    overflow-y: auto;
+    height: calc(100% - 1.5em);
+}
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    height: 75vh;
+    padding: 8px 0px 8px 8px;
+}
+
+.searchSection {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    margin-right: 8px;
+}

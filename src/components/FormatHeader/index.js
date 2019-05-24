@@ -1,20 +1,23 @@
 import React from 'react';
 import useFormat from '@hooks/useFormat';
 import Commander from './Commander';
+import Oathbreaker from './Oathbreaker';
 import {
 	// MODERN,
 	COMMANDER,
-	// OATHBREAKER,
+	OATHBREAKER,
 	// STANDARD,
 } from '@constants';
 
 const componentMap = {
 	[COMMANDER]: Commander,
+	[OATHBREAKER]: Oathbreaker,
 };
 
 const FormatHeader = () => {
 	const { format } = useFormat();
 
+	console.log('In header:', format);
 	const Component = componentMap[format];
 
 	return <Component />;
