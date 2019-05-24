@@ -113,12 +113,14 @@ const MODERN = 'modern';
 const COMMANDER = 'commander';
 const OATHBREAKER = 'oathbreaker';
 const STANDARD = 'standard';
+const VINTAGE = 'vintage';
 
 const formats = [
 	MODERN,
 	COMMANDER,
 	OATHBREAKER,
 	STANDARD,
+	VINTAGE,
 ];
 
 const oathbreakerBanlist = [

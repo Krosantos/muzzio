@@ -5,6 +5,7 @@ import useOathbreaker from '@hooks/useOathbreaker';
 import {
 	OATHBREAKER,
 	COMMANDER,
+	VINTAGE,
 	oathbreakerBanlist,
 } from '@constants';
 
@@ -21,7 +22,7 @@ const getFormatQuery = (format) => {
 		return `format:${format}`;
 	const bannedSection = oathbreakerBanlist.join('" -"');
 
-	return `format:${COMMANDER} -"${bannedSection}"`;
+	return `format:${VINTAGE} -"${bannedSection}"`;
 };
 
 const getIdentityQuery = (format, commanderIdentity, oathbreakerIdentity) => {
