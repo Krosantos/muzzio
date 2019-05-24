@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalContainer from '../../ModalContainer';
+import ModalContainer from '@components/ModalContainer';
 import OathbreakerSearch from './OathbreakerSearch';
 import SignatureSearch from './SignatureSearch';
 import { searchContainer } from '../styles.scss';

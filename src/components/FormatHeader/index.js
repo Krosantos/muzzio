@@ -16,8 +16,6 @@ const componentMap = {
 
 const FormatHeader = () => {
 	const { format } = useFormat();
-
-	console.log('In header:', format);
 	const Component = componentMap[format];
 
 	return <Component />;

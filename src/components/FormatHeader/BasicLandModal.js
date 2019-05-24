@@ -4,7 +4,7 @@ import set from 'lodash/set';
 import useBasicLands from '@hooks/useBasicLands';
 import ManaCost from '@components/ManaCost';
 import { identityMap } from '@constants';
-import ModalContainer from './ModalContainer';
+import ModalContainer from '@components/ModalContainer';
 import { basicLandRow, manaModal } from './styles.scss';
 
 const BasicRow = ({ identity }) => {
