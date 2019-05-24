@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 const UPDATE_ACTION = 'update';
 const ADD_ACTION = 'add';
 const REMOVE_ACTION = 'remove';

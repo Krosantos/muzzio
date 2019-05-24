@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import isEmpty from 'lodash/isEmpty';
 import useFormat from '@hooks/useFormat';
 import useCommander from '@hooks/useCommander';
 import useOathbreaker from '@hooks/useOathbreaker';
@@ -33,12 +34,23 @@ const getIdentityQuery = (format, commanderIdentity, oathbreakerIdentity) => {
 	return '';
 };
 
+const hasIdentity = (format, commander, oathbreaker) => {
+	if (format === COMMANDER)
+		return !isEmpty(commander);
+	if (format === OATHBREAKER)
+		return !isEmpty(oathbreaker);
+	return false;
+};
+
 const useQueryConstraints = () => {
 	const { format } = useFormat();
-	const { colorIdentity: commanderIdentity } = useCommander();
-	const { colorIdentity: oathbreakerIdentity } = useOathbreaker();
+	const { commander, colorIdentity: commanderIdentity } = useCommander();
+	const { oathbreaker, colorIdentity: oathbreakerIdentity } = useOathbreaker();
 	const query = useMemo(() => {
 		const formatQuery = getFormatQuery(format);
+
+		if (!hasIdentity(format, commander, oathbreaker))
+			return formatQuery;
 		const identityQuery = getIdentityQuery(format, commanderIdentity, oathbreakerIdentity);
 
 		return `${formatQuery} ${identityQuery}`;
