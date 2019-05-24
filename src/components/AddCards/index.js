@@ -1,28 +1,19 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import Search from '@components/Search';
 import CardList from '@components/CardList';
-import useCommander from '@hooks/useCommander';
 import useCards from '@hooks/useCards';
+import useQueryConstraints from './useQueryConstraints';
 import { cardList, searchSection } from './styles.scss';
-
-const convertIdentityToQuery = (identity) => {
-	if (!identity)
-		return '';
-	if (!identity.length)
-		return ' identity:c';
-	return ` identity:${identity.join('')}`;
-};
 
 const AddCards = () => {
 	const [results, setResults] = useState([]);
-	const { colorIdentity } = useCommander();
 	const { addCard } = useCards();
-	const identityQuery = useMemo(() => convertIdentityToQuery(colorIdentity));
+	const query = useQueryConstraints();
 
 	return (
 		<div className={searchSection}>
 			<Search
-				additionalConstraint={identityQuery}
+				additionalConstraint={query}
 				placeholder="Search for cards"
 				setResults={setResults}
 			/>

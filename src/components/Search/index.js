@@ -14,7 +14,7 @@ const Search = ({
 	const onEnter = useCallback(async ({ key }) => {
 		if (key !== 'Enter')
 			return;
-		const searchResults = await search(value + additionalConstraint);
+		const searchResults = await search(`${value} ${additionalConstraint}`);
 
 		setResults(searchResults);
 	});
