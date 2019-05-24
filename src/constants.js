@@ -186,6 +186,7 @@ export {
 	COMMANDER,
 	OATHBREAKER,
 	STANDARD,
+	VINTAGE,
 	formats,
 	oathbreakerBanlist,
 };
