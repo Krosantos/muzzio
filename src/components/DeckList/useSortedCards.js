@@ -20,23 +20,24 @@ const sortCards = (cards, basicLands) => {
 
 // eslint-disable-next-line max-params, complexity, max-statements
 const appendCards = (sortedCards, format, commanderData, oathbreakerData) => {
+	const cards = [...sortedCards];
 	const { commander, partner } = commanderData;
 	const { oathbreaker, signatureSpell } = oathbreakerData;
 
 	if (format === COMMANDER) {
 		if (!isEmpty(commander))
-			sortedCards.push(commander);
+			cards.push(commander);
 		if (!isEmpty(partner))
-			sortedCards.push(partner);
+			cards.push(partner);
 	}
 	if (format === OATHBREAKER) {
 		if (!isEmpty(oathbreaker))
-			sortedCards.push(oathbreaker);
+			cards.push(oathbreaker);
 		if (!isEmpty(signatureSpell))
-			sortedCards.push(signatureSpell);
+			cards.push(signatureSpell);
 	}
 
-	return sortedCards;
+	return cards;
 };
 
 // eslint-disable-next-line max-statements
