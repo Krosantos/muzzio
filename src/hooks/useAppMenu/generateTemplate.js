@@ -1,4 +1,8 @@
 import { remote } from 'electron';
+import {
+	COMMANDER,
+	OATHBREAKER,
+} from '@constants';
 
 const { app } = remote;
 const isMac = process.platform === 'darwin';
@@ -32,6 +36,7 @@ const viewMenu = {
 };
 
 const getFileMenu = ({
+	changeFormat,
 	newDeck,
 	loadDeck,
 	saveDeck,
@@ -45,8 +50,8 @@ const getFileMenu = ({
 		{
 			label: 'Change Format',
 			submenu: [
-				{ label: 'Commander' },
-				{ label: 'Oathbreaker' },
+				{ click: changeFormat(COMMANDER), label: 'Commander' },
+				{ click: changeFormat(OATHBREAKER), label: 'Oathbreaker' },
 			],
 		},
 		{ type: 'separator' },

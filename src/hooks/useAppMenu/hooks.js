@@ -1,3 +1,4 @@
+import path from 'path';
 import { useCallback } from 'react';
 import { remote } from 'electron';
 import useSave from '@hooks/useSave';
@@ -7,10 +8,19 @@ import useOverwrite from '@hooks/useOverwrite';
 
 const { app, dialog } = remote;
 
+const setWindowTitle = (filepath) => {
+	if (!filepath)
+		document.title = 'Muzzio';
+
+	const name = path.basename(filepath, '.muz');
+
+	document.title = `Muzzio - ${name}`;
+};
+
 const useSaveDeck = (saveAs = false) => {
 	const save = useSave();
 	const saveDeck = useCallback(() => {
-		const path = saveAs ? dialog.showSaveDialog({
+		const filepath = saveAs ? dialog.showSaveDialog({
 			defaultPath: app.getPath('documents'),
 			filters: [
 				{ extensions: ['muz'], name: 'Deck Files' },
@@ -18,7 +28,8 @@ const useSaveDeck = (saveAs = false) => {
 			],
 		}) : 'CURRENTFILE FROM SETTINGS';
 
-		save(path);
+		save(filepath);
+		setWindowTitle(filepath);
 	}, [save]);
 
 	return saveDeck;
@@ -28,7 +39,7 @@ const useLoadDeck = () => {
 	const load = useLoad();
 	const overwrite = useOverwrite();
 	const loadDeck = useCallback(() => {
-		const [path] = dialog.showOpenDialog({
+		const [filepath] = dialog.showOpenDialog({
 			defaultPath: app.getPath('documents'),
 			filters: [
 				{ extensions: ['muz'], name: 'Deck Files' },
@@ -36,8 +47,9 @@ const useLoadDeck = () => {
 			],
 		});
 
-		const saveData = load(path);
+		const saveData = load(filepath);
 
+		setWindowTitle(filepath);
 		overwrite(saveData);
 	}, [load]);
 
@@ -49,13 +61,24 @@ const useNewDeck = () => {
 	const { format } = useFormat();
 	const newDeck = useCallback(() => {
 		overwrite({ format });
+		setWindowTitle();
 	}, [format]);
 
 	return newDeck;
+};
+
+const useChangeFormat = () => {
+	const { setFormat } = useFormat();
+	const changeFormat = useCallback((format) => () => {
+		setFormat(format);
+	}, [setFormat]);
+
+	return changeFormat;
 };
 
 export {
 	useSaveDeck,
 	useLoadDeck,
 	useNewDeck,
+	useChangeFormat,
 };

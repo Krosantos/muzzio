@@ -1,12 +1,18 @@
 import { useEffect } from 'react';
 import { remote } from 'electron';
 import generateTemplate from './generateTemplate';
-import { useNewDeck, useSaveDeck, useLoadDeck } from './hooks';
+import {
+	useNewDeck,
+	useSaveDeck,
+	useLoadDeck,
+	useChangeFormat,
+} from './hooks';
 
 const { Menu } = remote;
 
 const useAppMenu = () => {
 	const callbacks = {
+		changeFormat: useChangeFormat(),
 		loadDeck: useLoadDeck(),
 		newDeck: useNewDeck(),
 		saveDeck: useSaveDeck(),
