@@ -6,7 +6,7 @@ import CardList from '@components/CardList';
 import { NO_PARTNER } from '@constants';
 import { cardList, searchSection } from '../styles.scss';
 
-const LEGENDARY_CREATURE_QUERY = ' t:legendary t:creature';
+const LEGENDARY_CREATURE_QUERY = 'is:commander';
 const DEFAULT_PLACEHOLDER = 'Search for Commander';
 
 const CommanderSearch = ({ closeModal }) => {
