@@ -24,7 +24,7 @@ function createWindow() {
 		mainWindow.loadURL('http://localhost:3000');
 	} else {
 		mainWindow.loadURL(url.format({
-			pathname: path.join(__dirname, './index.html'),
+			pathname: path.join(__dirname, './pack/index.html'),
 			protocol: 'file:',
 			slashes: true,
 		}));
