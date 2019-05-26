@@ -6,5 +6,8 @@
 				"config": "webpack.config.js"
 			}
 		}
+	},
+	"rules": {
+		"multiline-ternary":"off"
 	}
 }

@@ -20,7 +20,9 @@ const viewMenu = {
 	label: 'View',
 	submenu: [
 		{ role: 'reload' },
-		{ type: 'separator' },
+		process.env.FROM_LOCAL
+			? { role: 'toggledevtools' }
+			: { type: 'separator' },
 		{ role: 'resetzoom' },
 		{ accelerator: 'CommandOrControl+=', role: 'zoomin' },
 		{ role: 'zoomout' },
@@ -29,11 +31,16 @@ const viewMenu = {
 	],
 };
 
-const fileMenu = {
+const getFileMenu = ({
+	newDeck,
+	loadDeck,
+	saveDeck,
+	saveDeckAs,
+}) => ({
 	label: 'File',
 	submenu: [
-		{ accelerator: 'CommandOrControl+N', label: 'New Deck' },
-		{ accelerator: 'CommandOrControl+O', label: 'Open Deck' },
+		{ accelerator: 'CommandOrControl+N', click: newDeck, label: 'New Deck' },
+		{ accelerator: 'CommandOrControl+O', click: loadDeck, label: 'Open Deck' },
 		{ type: 'separator' },
 		{
 			label: 'Change Format',
@@ -43,12 +50,12 @@ const fileMenu = {
 			],
 		},
 		{ type: 'separator' },
-		{ accelerator: 'CommandOrControl+S', label: 'Save Deck' },
-		{ accelerator: 'CommandOrControl+Shift+S', label: 'Save As' },
+		{ accelerator: 'CommandOrControl+S', click: saveDeck, label: 'Save Deck' },
+		{ accelerator: 'CommandOrControl+Shift+S', click: saveDeckAs, label: 'Save As' },
 		{ type: 'separator' },
 		isMac ? { role: 'close' } : { role: 'quit' },
 	],
-};
+});
 
 const windowMenu = {
 	label: 'Window',
@@ -65,12 +72,12 @@ const windowMenu = {
 	],
 };
 
-const generateTemplate = () => {
+const generateTemplate = (callbacks) => {
 	const template = [];
 
 	if (isMac)
 		template.unshift(macMenu);
-	template.push(fileMenu);
+	template.push(getFileMenu(callbacks));
 	template.push(viewMenu);
 	template.push(windowMenu);
 	return template;
