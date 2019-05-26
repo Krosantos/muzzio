@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { IS_IN_DECK } from '@constants';
 import useCards from '@hooks/useCards';
 import useBasicLands from '@hooks/useBasicLands';
+import { countContainer } from './styles.scss';
 
 const LANDS = 'Lands: ';
 
@@ -18,7 +19,7 @@ const LandCount = () => {
 	const landCount = useMemo(() => getLandCount(cardsByAttribute, totalCount), [cardsByAttribute, totalCount]);
 
 	return (
-		<div>
+		<div className={countContainer}>
 			{LANDS}
 			{landCount}
 		</div>
