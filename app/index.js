@@ -11,7 +11,7 @@ function createWindow() {
 		minHeight: 900,
 		minWidth: 1280,
 		webPreferences: {
-			nodeIntegrations: true,
+			nodeIntegration: true,
 			webSecurity: true,
 		},
 		width: 1280,
@@ -24,7 +24,7 @@ function createWindow() {
 		mainWindow.loadURL('http://localhost:3000');
 	} else {
 		mainWindow.loadURL(url.format({
-			pathname: path.join(__dirname, './index.html'),
+			pathname: path.join(__dirname, './pack/index.html'),
 			protocol: 'file:',
 			slashes: true,
 		}));

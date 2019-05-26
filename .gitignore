@@ -61,6 +61,5 @@ typings/
 .next
 
 # electron and build folders
+app/pack
 compiled/
-dist/
-staging/

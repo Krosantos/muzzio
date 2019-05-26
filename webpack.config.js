@@ -54,8 +54,14 @@ module.exports = {
 		},
 		{
 			test: /\.(png|svg|jpg|gif)$/,
-			use: [
-				'file-loader',
+			use: [{
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					outputPath: 'mana/',
+					publicPath: 'mana/',
+				},
+			},
 			],
 		},
 		{
@@ -73,6 +79,7 @@ module.exports = {
 	},
 	output: {
 		filename: 'bundle.js',
+		path: path.join(__dirname, 'app', 'pack'),
 		publicPath: '/',
 	},
 	plugins: [
