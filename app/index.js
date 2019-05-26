@@ -10,6 +10,7 @@ function createWindow() {
 		height: 900,
 		minHeight: 900,
 		minWidth: 1280,
+		title: 'Muzzio',
 		webPreferences: {
 			nodeIntegration: true,
 			webSecurity: true,

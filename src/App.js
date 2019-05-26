@@ -8,6 +8,7 @@ import { AttributesProvider } from '@contexts/Attributes';
 import { BasicLandProvider } from '@contexts/BasicLand';
 import { FormatProvider } from '@contexts/Format';
 import useAutoLoad from '@hooks/useAutoLoad';
+import useAppMenu from '@hooks/useAppMenu';
 import './index.scss';
 
 /* eslint-disable react/jsx-max-depth */
@@ -20,6 +21,8 @@ const App = () => {
 		commanderData,
 		oathbreakerData,
 	} = useAutoLoad();
+
+	useAppMenu();
 
 	return (
 		<FormatProvider initialValue={format}>
