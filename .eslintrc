@@ -8,6 +8,6 @@
 		}
 	},
 	"rules": {
-		"multiline-ternary":"off"
+		"multiline-ternary":"off",
 	}
 }

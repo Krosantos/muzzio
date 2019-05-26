@@ -12,6 +12,7 @@ const SPECIFIC_PARTNER = 'specific';
 const NO_PARTNER = 'none';
 
 const AUTOSAVE = 'autosave';
+const CURRENT_FILE_SETTING = 'currentFilePath';
 
 const identityMap = {
 	B: {
@@ -182,6 +183,7 @@ export {
 	SPECIFIC_PARTNER,
 	NO_PARTNER,
 	AUTOSAVE,
+	CURRENT_FILE_SETTING,
 	identityMap,
 	MODERN,
 	COMMANDER,

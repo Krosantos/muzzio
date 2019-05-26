@@ -1,35 +1,30 @@
-import path from 'path';
 import { useCallback } from 'react';
 import { remote } from 'electron';
+import settings from 'electron-settings';
 import useSave from '@hooks/useSave';
 import useLoad from '@hooks/useLoad';
 import useFormat from '@hooks/useFormat';
 import useOverwrite from '@hooks/useOverwrite';
+import setWindowTitle from '@utils/setWindowTitle';
+import { CURRENT_FILE_SETTING } from '@constants';
 
 const { app, dialog } = remote;
-
-const setWindowTitle = (filepath) => {
-	if (!filepath)
-		document.title = 'Muzzio';
-
-	const name = path.basename(filepath, '.muz');
-
-	document.title = `Muzzio - ${name}`;
-};
 
 const useSaveDeck = (saveAs = false) => {
 	const save = useSave();
 	const saveDeck = useCallback(() => {
-		const filepath = saveAs ? dialog.showSaveDialog({
+		const needsChoosing = saveAs && !settings.has(CURRENT_FILE_SETTING);
+		const filepath = needsChoosing ? dialog.showSaveDialog({
 			defaultPath: app.getPath('documents'),
 			filters: [
 				{ extensions: ['muz'], name: 'Deck Files' },
 				{ extensions: ['*'], name: 'All Files' },
 			],
-		}) : 'CURRENTFILE FROM SETTINGS';
+		}) : settings.get(CURRENT_FILE_SETTING);
 
 		save(filepath);
 		setWindowTitle(filepath);
+		settings.set(CURRENT_FILE_SETTING, filepath);
 	}, [save]);
 
 	return saveDeck;
@@ -49,8 +44,9 @@ const useLoadDeck = () => {
 
 		const saveData = load(filepath);
 
-		setWindowTitle(filepath);
 		overwrite(saveData);
+		setWindowTitle(filepath);
+		settings.set(CURRENT_FILE_SETTING, filepath);
 	}, [load]);
 
 	return loadDeck;
@@ -62,6 +58,7 @@ const useNewDeck = () => {
 	const newDeck = useCallback(() => {
 		overwrite({ format });
 		setWindowTitle();
+		settings.delete(CURRENT_FILE_SETTING);
 	}, [format]);
 
 	return newDeck;
