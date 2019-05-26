@@ -24,9 +24,10 @@
     display: flex;
     flex-shrink: 0;
     margin-right: 4px;
+    margin-bottom: 4px;
     font-size: 1.05em;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     span {
         display: block;
     }
