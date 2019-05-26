@@ -2,20 +2,28 @@
   "name": "muzzio",
   "version": "1.0.0",
   "description": "A nerdy tool to help build EDH decks",
-  "main": "electron/index.js",
+  "main": "app/index.js",
   "repository": "https://github.com/Krosantos/muzzio.git",
   "author": "Krosantos <tymko.tecca@gmail.com>",
   "license": "MIT",
+  "build": {
+    "appId": "tymko.muzzio",
+    "files": [
+      "app/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "productName":"Muzzio"
+  },
   "scripts": {
-    "build": "npx webpack",
+    "build": "webpack",
     "clean": "node electron/runClean",
-    "compile-mac": "yarn build && node electron/prebuild && electron-packager ./staging \"Muzzio\" --asar --icon=./icon --packageManager=yarn --appCategoryType=public.app-category.utilities --out=compiled/ --platform=darwin --no-tmpdir --overwrite",
-    "compile-windows": "yarn build && node electron/prebuild && electron-packager ./staging \"Muzzio\" --asar --icon=./icon --packageManager=yarn --out=compiled/ --platform=win32 --no-tmpdir --overwrite",
     "dev": "webpack-dev-server --mode development",
     "lint": "eslint .",
     "serve": "nodemon server/index.js --exec \"node -r dotenv/config -r @babel/register\"",
     "start": "concurrently --kill-others \"yarn dev\" \"yarn window\"",
-    "window": "cross-env FROM_LOCAL=true electron ."
+    "window": "cross-env FROM_LOCAL=true electron .",
+    "bald":"electron-builder"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -37,6 +45,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "electron": "^4.0.1",
+    "electron-builder": "^20.41.0",
     "electron-packager": "^13.0.1",
     "eslint": "^5.16.0",
     "eslint-config-tecca": "^1.0.0",
