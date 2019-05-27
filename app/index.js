@@ -5,7 +5,7 @@ const path = require('path');
 
 // Keep a global reference of the window object, to spare it from garbage collection.
 let mainWindow;
-const isMac = process.platform === 'darwin';
+const isWindows = process.platform !== 'darwin';
 
 function createWindow() {
 	mainWindow = new BrowserWindow({
@@ -35,20 +35,20 @@ function createWindow() {
 }
 
 // Ensure that opening a .muz file loads it.
-if (!isMac) {
-	if (process.argv.length > 1) 
-		settings.set('currentFilePath', process.argv[1])
-	
+if (isWindows) {
+	// eslint-disable-next-line max-depth
+	if (process.argv.length > 1)
+		settings.set('currentFilePath', process.argv[1]);
 } else {
-	app.on('open-file', (event, path) => {
-		settings.set('currentFilePath', path);
+	app.on('open-file', (_, filePath) => {
+		settings.set('currentFilePath', filePath);
 	});
 }
 
 app.on('ready', createWindow);
 app.on('window-all-closed', () => {
 // Mac behaves wacky. Emulate that.
-	if (!isMac)
+	if (isWindows)
 		app.quit();
 });
 app.on('activate', () => {
