@@ -4,7 +4,8 @@ import { useCallback } from 'react';
 const useLoad = () => {
 	const load = useCallback((filePath) => {
 		try {
-			const data = fs.readFileSync(filePath, 'utf8');
+			const raw = fs.readFileSync(filePath).toString('utf8');
+			const data = Buffer.from(raw, 'base64').toString('utf8');
 
 			return JSON.parse(data);
 		} catch (e) {
