@@ -14,7 +14,7 @@ const { app, dialog } = remote;
 const useSaveDeck = (saveAs = false) => {
 	const save = useSave();
 	const saveDeck = useCallback(() => {
-		const needsChoosing = saveAs && !settings.has(CURRENT_FILE_SETTING);
+		const needsChoosing = saveAs || !settings.has(CURRENT_FILE_SETTING);
 		const filepath = needsChoosing ? dialog.showSaveDialog({
 			defaultPath: app.getPath('documents'),
 			filters: [
