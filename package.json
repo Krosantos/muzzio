@@ -12,6 +12,7 @@
       "output": "compiled"
     },
     "fileAssociations":[{
+      "description":"Muzzio Deck File",
       "ext":"muz",
       "name": "Deck"
     }],
