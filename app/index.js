@@ -1,9 +1,11 @@
 const url = require('url');
 const { app, BrowserWindow } = require('electron');
+const settings = require('electron-settings');
 const path = require('path');
 
 // Keep a global reference of the window object, to spare it from garbage collection.
 let mainWindow;
+const isMac = process.platform === 'darwin';
 
 function createWindow() {
 	mainWindow = new BrowserWindow({
@@ -32,10 +34,21 @@ function createWindow() {
 	}
 }
 
+// Ensure that opening a .muz file loads it.
+if (!isMac) {
+	if (process.argv.length > 1) 
+		settings.set('currentFilePath', process.argv[1])
+	
+} else {
+	app.on('open-file', (event, path) => {
+		settings.set('currentFilePath', path);
+	});
+}
+
 app.on('ready', createWindow);
 app.on('window-all-closed', () => {
 // Mac behaves wacky. Emulate that.
-	if (process.platform !== 'darwin')
+	if (!isMac)
 		app.quit();
 });
 app.on('activate', () => {

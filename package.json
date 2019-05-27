@@ -11,6 +11,10 @@
     "directories": {
       "output": "compiled"
     },
+    "fileAssociations":[{
+      "ext":"muz",
+      "name": "Deck"
+    }],
     "files": [
       "app/**/*",
       "node_modules/**/*",

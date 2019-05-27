@@ -16,6 +16,7 @@ module.exports = {
 		port: 3000,
 	},
 	entry: './src/index.js',
+	mode: process.env.FROM_LOCAL ? 'development' : 'production',
 	module: {
 		rules: [{
 			exclude: /(node_modules)/,
