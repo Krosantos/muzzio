@@ -13,6 +13,7 @@ const NO_PARTNER = 'none';
 
 const AUTOSAVE = 'autosave';
 const CURRENT_FILE_SETTING = 'currentFilePath';
+const OPEN_FOLDER_SETTING = 'openFilePath';
 
 const identityMap = {
 	B: {
@@ -184,6 +185,7 @@ export {
 	NO_PARTNER,
 	AUTOSAVE,
 	CURRENT_FILE_SETTING,
+	OPEN_FOLDER_SETTING,
 	identityMap,
 	MODERN,
 	COMMANDER,

@@ -1,3 +1,4 @@
+import path from 'path';
 import { useCallback } from 'react';
 import { remote } from 'electron';
 import settings from 'electron-settings';
@@ -6,7 +7,7 @@ import useLoad from '@hooks/useLoad';
 import useFormat from '@hooks/useFormat';
 import useOverwrite from '@hooks/useOverwrite';
 import setWindowTitle from '@utils/setWindowTitle';
-import { CURRENT_FILE_SETTING } from '@constants';
+import { CURRENT_FILE_SETTING, OPEN_FOLDER_SETTING } from '@constants';
 
 const { app, dialog } = remote;
 
@@ -34,19 +35,20 @@ const useLoadDeck = () => {
 	const load = useLoad();
 	const overwrite = useOverwrite();
 	const loadDeck = useCallback(() => {
+		const openPath = settings.get(OPEN_FOLDER_SETTING) || app.getPath('documents');
 		const [filepath] = dialog.showOpenDialog({
-			defaultPath: app.getPath('documents'),
+			defaultPath: openPath,
 			filters: [
 				{ extensions: ['muz'], name: 'Deck Files' },
 				{ extensions: ['*'], name: 'All Files' },
 			],
 		});
-
 		const saveData = load(filepath);
 
 		overwrite(saveData);
 		setWindowTitle(filepath);
 		settings.set(CURRENT_FILE_SETTING, filepath);
+		settings.set(OPEN_FOLDER_SETTING, path.dirname(filepath));
 	}, [load]);
 
 	return loadDeck;
