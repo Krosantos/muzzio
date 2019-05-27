@@ -5,8 +5,8 @@ import useSortedCards from './useSortedCards';
 import useExport from './useExport';
 import { deckList, buttonContainer, importButton } from './styles.scss';
 
-const IMPORT = 'Import Deck';
-const EXPORT = 'Export Deck';
+const IMPORT = 'Import Clipboard';
+const EXPORT = 'Export to Clipboard';
 
 const DeckList = () => {
 	const importFile = useImport();
