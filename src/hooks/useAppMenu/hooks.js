@@ -56,9 +56,9 @@ const useNewDeck = () => {
 	const overwrite = useOverwrite();
 	const { format } = useFormat();
 	const newDeck = useCallback(() => {
-		overwrite({ format });
 		setWindowTitle();
 		settings.delete(CURRENT_FILE_SETTING);
+		overwrite({ format });
 	}, [format]);
 
 	return newDeck;
