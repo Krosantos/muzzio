@@ -19,6 +19,7 @@
     "files": [
       "app/**/*",
       "node_modules/**/*",
+      "build/muz.*",
       "package.json"
     ],
     "mac": {
