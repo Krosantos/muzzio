@@ -14,7 +14,7 @@
     "fileAssociations":[{
       "description":"Muzzio Deck File",
       "ext":"muz",
-      "name": "Deck"
+      "name": "Muzzio Deck File"
     }],
     "files": [
       "app/**/*",
