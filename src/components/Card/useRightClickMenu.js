@@ -2,7 +2,7 @@
 import { remote } from 'electron';
 import get from 'lodash/get';
 import { useCallback } from 'react';
-import { IS_IN_DECK } from '@constants';
+import { ALL_CARDS, IS_IN_DECK } from '@constants';
 import useAttributes from '@hooks/useAttributes';
 import useCards from '@hooks/useCards';
 
@@ -23,17 +23,21 @@ const getDeckLine = (card, menu, addAttribute, removeAttribute) => {
 };
 
 const getAttributeLine = (card, menu, attribute, addAttribute, removeAttribute) => {
+	if (attribute === ALL_CARDS)
+		return;
 	const hasAttribute = get(card, ['attributes', attribute], false);
+	const click = hasAttribute
+		? () => removeAttribute(card, attribute)
+		: () => addAttribute(card, attribute);
 
-	if (hasAttribute) {
-		menu.append(
-			new MenuItem({ click() { removeAttribute(card, attribute); }, label: `Remove from ${attribute}` }),
-		);
-	} else {
-		menu.append(
-			new MenuItem({ click() { addAttribute(card, attribute); }, label: `Add to ${attribute}` }),
-		);
-	}
+	menu.append(
+		new MenuItem({
+			checked: hasAttribute,
+			click,
+			label: attribute,
+			type: 'checkbox',
+		}),
+	);
 };
 
 const getAttributesSection = (card, menu, attributes, addAttribute, removeAttribute) => {
