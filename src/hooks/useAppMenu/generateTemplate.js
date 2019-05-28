@@ -50,8 +50,8 @@ const getFileMenu = ({
 		{
 			label: 'Change Format',
 			submenu: [
-				{ click: changeFormat(COMMANDER), label: 'Commander' },
-				{ click: changeFormat(OATHBREAKER), label: 'Oathbreaker' },
+				{ accelerator: 'Shift+Alt+C', click: changeFormat(COMMANDER), label: 'Commander' },
+				{ accelerator: 'Shift+Alt+O', click: changeFormat(OATHBREAKER), label: 'Oathbreaker' },
 			],
 		},
 		{ type: 'separator' },
