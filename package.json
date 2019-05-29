@@ -6,29 +6,8 @@
   "repository": "https://github.com/Krosantos/muzzio.git",
   "author": "Krosantos <tymko.tecca@gmail.com>",
   "license": "MIT",
-  "build": {
-    "appId": "tymko.muzzio",
-    "directories": {
-      "output": "compiled"
-    },
-    "fileAssociations":[{
-      "description":"Muzzio Deck File",
-      "ext":"muz",
-      "name": "Muzzio Deck File"
-    }],
-    "files": [
-      "app/**/*",
-      "node_modules/**/*",
-      "build/muz.*",
-      "package.json"
-    ],
-    "mac": {
-      "category": "public.app-category.utilities"
-    },
-    "productName": "Muzzio"
-  },
   "scripts": {
-    "compile": "webpack && electron-builder",
+    "compile": "webpack && electron-builder --config build-config.json",
     "lint": "eslint .",
     "start": "concurrently --kill-others \"webpack-dev-server --mode development\" \"cross-env FROM_LOCAL=true electron .\""
   },

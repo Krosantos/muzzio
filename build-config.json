@@ -1,0 +1,23 @@
+{
+    "appId": "tymko.muzzio",
+    "directories": {
+        "output": "compiled"
+    },
+    "fileAssociations": [
+        {
+            "description": "Muzzio Deck File",
+            "ext": "muz",
+            "name": "Muzzio Deck File"
+        }
+    ],
+    "files": [
+        "app/**/*",
+        "node_modules/**/*",
+        "build/muz.*",
+        "package.json"
+    ],
+    "mac": {
+        "category": "public.app-category.utilities"
+    },
+    "productName": "Muzzio"
+}
