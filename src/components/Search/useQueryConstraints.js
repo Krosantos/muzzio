@@ -18,12 +18,13 @@ const convertIdentityToQuery = (identity) => {
 	return ` identity:${identity.join('')}`;
 };
 
+// TODO: Remove MH1 hack once it releases.
 const getFormatQuery = (format) => {
 	if (format !== OATHBREAKER)
-		return `format:${format}`;
+		return `(format:${format} OR e:MH1)`;
 	const bannedSection = oathbreakerBanlist.join('" -"');
 
-	return `format:${VINTAGE} -"${bannedSection}"`;
+	return `(format:${VINTAGE} OR e:MH1) -"${bannedSection}"`;
 };
 
 const getIdentityQuery = (format, commanderIdentity, oathbreakerIdentity) => {
