@@ -7,7 +7,7 @@
   "author": "Krosantos <tymko.tecca@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "compile": "webpack && electron-builder --config build-config.json",
+    "compile": "webpack && electron-builder --config build/config.json",
     "lint": "eslint .",
     "start": "concurrently --kill-others \"webpack-dev-server --mode development\" \"cross-env FROM_LOCAL=true electron .\""
   },
