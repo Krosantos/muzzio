@@ -16,28 +16,42 @@ import {
 // eslint-disable-next-line max-statements, max-lines-per-function
 const useCards = () => {
 	const { cards, dispatch } = useContext(CardContext);
+
 	const cardsByAttribute = useCallback((attribute) => filter(cards, (card) => get(card, ['attributes', attribute], false)), [cards]);
+
 	const addCard = useCallback((card) => {
 		const maybeCard = get(cards, card.id, {});
 		const toAdd = merge({}, maybeCard, card);
 
 		dispatch({ card: toAdd, type: ADD_ACTION });
 	}, [cards]);
+
 	const removeCard = useCallback((card) => dispatch({ card, type: REMOVE_ACTION }), []);
+
 	const cardExists = useCallback((card) => {
 		const id = get(card, 'id');
 
 		return id && has(cards, id);
 	}, [cards]);
+
 	const addAttribute = useCallback((card, attribute) => {
 		const toAdd = set(card, ['attributes', attribute], true);
 
 		dispatch({ card: toAdd, type: UPDATE_ACTION });
 	}, []);
+
 	const removeAttribute = useCallback((card, attribute) => {
 		const toDispatch = { ...card };
 
 		unset(toDispatch, ['attributes', attribute]);
+
+		dispatch({ card: toDispatch, type: UPDATE_ACTION });
+	}, []);
+
+	const setCount = useCallback((card, count) => {
+		const toDispatch = { ...card, count };
+
+		set(toDispatch, ['attributes', IS_IN_DECK], !!count);
 
 		dispatch({ card: toDispatch, type: UPDATE_ACTION });
 	}, []);
@@ -65,6 +79,7 @@ const useCards = () => {
 		getCard,
 		removeAttribute,
 		removeCard,
+		setCount,
 	};
 };
 

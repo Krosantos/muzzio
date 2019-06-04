@@ -21,6 +21,7 @@ const formatCard = (card) => {
 		cmc,
 		colors,
 		cost,
+		count: 0,
 		id,
 		identity,
 		imageUrl,
