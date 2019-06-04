@@ -2,7 +2,7 @@ import set from 'lodash/set';
 import { useCallback } from 'react';
 import { remote } from 'electron';
 import useCards from '@hooks/useCards';
-import { IS_IN_DECK } from '@constants';
+import { IS_IN_DECK, IS_IN_SIDEBOARD } from '@constants';
 import lookUpCards from './lookUpCards';
 
 const { clipboard } = remote;
@@ -16,9 +16,13 @@ const useImport = () => {
 		const newDeck = await lookUpCards(raw);
 
 		newDeck.forEach((card) => {
+			const { count, sideboardCount } = card;
 			const toSet = { ...card };
 
-			set(toSet, ['attributes', IS_IN_DECK], true);
+			if (count > 0)
+				set(toSet, ['attributes', IS_IN_DECK], true);
+			if (sideboardCount > 0)
+				set(toSet, ['attributes', IS_IN_SIDEBOARD], true);
 			addCard(toSet);
 		});
 	});
