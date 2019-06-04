@@ -1,4 +1,5 @@
 import getPartner from './getPartner';
+import getIsUnlimited from './getIsUnlimited';
 import processCardFaces from './processCardFaces';
 
 const formatCard = (card) => {
@@ -15,6 +16,7 @@ const formatCard = (card) => {
 		type_line: type,
 	} = face;
 	const partnerQuery = getPartner(card);
+	const isUnlimited = getIsUnlimited(card);
 
 	return {
 		attributes: {},
@@ -25,6 +27,7 @@ const formatCard = (card) => {
 		id,
 		identity,
 		imageUrl,
+		isUnlimited,
 		name,
 		partnerQuery,
 		reverseUrl,
