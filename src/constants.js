@@ -4,6 +4,9 @@ const ADD_ACTION = 'add';
 const REMOVE_ACTION = 'remove';
 const OVERWRITE = 'overwrite';
 
+const UNLIMITED_MAX = 99;
+const CARD_MAX = 4;
+
 const ALL_CARDS = 'All Cards';
 const IS_IN_DECK = 'indeck';
 
@@ -118,6 +121,11 @@ const OATHBREAKER = 'oathbreaker';
 const STANDARD = 'standard';
 const VINTAGE = 'vintage';
 
+const singletonFormats = [
+	COMMANDER,
+	OATHBREAKER,
+];
+
 const formats = [
 	MODERN,
 	COMMANDER,
@@ -178,6 +186,8 @@ export {
 	REMOVE_ACTION,
 	UPDATE_ACTION,
 	OVERWRITE,
+	UNLIMITED_MAX,
+	CARD_MAX,
 	ALL_CARDS,
 	IS_IN_DECK,
 	ANY_PARTNER,
@@ -193,5 +203,6 @@ export {
 	STANDARD,
 	VINTAGE,
 	formats,
+	singletonFormats,
 	oathbreakerBanlist,
 };
