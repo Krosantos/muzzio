@@ -55,7 +55,7 @@ const calculateCardCount = (cardsInDeck = [], commandZoneCount = 0) => {
 };
 
 // eslint-disable-next-line max-statements
-const CardCount = () => {
+const SingletonCount = () => {
 	const { cardsByAttribute } = useCards();
 	const { format } = useFormat();
 	const commandZoneCount = useCommandZoneCards(format);
@@ -78,4 +78,4 @@ const CardCount = () => {
 	);
 };
 
-export default CardCount;
+export default SingletonCount;

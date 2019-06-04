@@ -4,7 +4,7 @@ import useFormat from '@hooks/useFormat';
 import useCards from '@hooks/useCards';
 import ManaCost from '@components/ManaCost';
 import { IS_IN_DECK } from '@constants';
-import CardCount from '../CardCount';
+import CardCount from './CardCount';
 import {
 	container,
 	formatName,

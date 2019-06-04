@@ -30,3 +30,12 @@
     overflow-y: auto;
     height: calc(100% - 1.5em);
 }
+
+.cardCount {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    & span{
+        display:block;
+    }
+}

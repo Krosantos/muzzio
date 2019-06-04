@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import useOathbreaker from '@hooks/useOathbreaker';
 import ManaCost from '@components/ManaCost';
-import CardCount from '../CardCount';
+import SingletonCount from '../SingletonCount';
 import OathbreakerModal from './OathbreakerModal';
 import {
 	container,
@@ -42,7 +42,7 @@ const Oathbreaker = () => {
 					{signatureSpell.name || SELECT_SIGNATURE_TEXT}
 				</span>
 			</div>
-			<CardCount />
+			<SingletonCount />
 			<div className={manaCost}>
 				<ManaCost className={manaCost} cost={identityAsCost} />
 			</div>

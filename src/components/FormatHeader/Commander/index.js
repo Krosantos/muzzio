@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import useCommander from '@hooks/useCommander';
 import ManaCost from '@components/ManaCost';
-import CardCount from '../CardCount';
+import SingletonCount from '../SingletonCount';
 import CommanderModal from './CommanderModal';
 import {
 	container,
@@ -42,7 +42,7 @@ const Commander = () => {
 					{partner.name}
 				</span>
 			</div>
-			<CardCount />
+			<SingletonCount />
 			<div className={manaCost}>
 				<ManaCost className={manaCost} cost={identityAsCost} />
 			</div>
