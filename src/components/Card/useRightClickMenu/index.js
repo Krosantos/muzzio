@@ -1,6 +1,7 @@
 /* eslint-disable max-params */
 import { remote } from 'electron';
 import { useCallback } from 'react';
+import useFormat from '@hooks/useFormat';
 import useAttributes from '@hooks/useAttributes';
 import useCards from '@hooks/useCards';
 import getAttributesSection from './getAttributesSection';
@@ -31,7 +32,7 @@ const generateMenu = (
 	menu.popup();
 };
 
-const useRightClickMenu = (card, format) => {
+const useRightClickMenu = (card) => {
 	const { attributes } = useAttributes();
 	const {
 		addAttribute,
@@ -41,6 +42,7 @@ const useRightClickMenu = (card, format) => {
 		removeCard,
 		setCount,
 	} = useCards();
+	const { format } = useFormat();
 	const openMenu = useCallback(() => generateMenu(
 		format,
 		card,
@@ -51,7 +53,7 @@ const useRightClickMenu = (card, format) => {
 		removeCard,
 		setCount,
 	),
-	[card, attributes]);
+	[card, attributes, format]);
 
 	return openMenu;
 };

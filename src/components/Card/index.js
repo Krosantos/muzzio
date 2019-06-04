@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { useCallback, useMemo } from 'react';
 import ManaCost from '@components/ManaCost';
-import useFormat from '@hooks/useFormat';
 import { IS_IN_DECK } from '@constants';
 import useHoverArt from './useHoverArt';
 import useRightClickMenu from './useRightClickMenu';
@@ -31,10 +30,9 @@ const Card = ({
 			return name;
 		return `${count} ${name}`;
 	}, [count, name, attributes[IS_IN_DECK]]);
-	const { format } = useFormat();
 	const fireCallback = useCallback(() => callback(card), [card, callback]);
 	const className = useMemo(() => `${cardRow} ${getColorClass(card, alwaysColorful)}`, [attributes[IS_IN_DECK]]);
-	const handleContextClick = useRightClickMenu(card, format);
+	const handleContextClick = useRightClickMenu(card);
 	const { shouldShowArt, showArt, hideArt } = useHoverArt();
 
 	return (
