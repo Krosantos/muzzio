@@ -5,6 +5,7 @@ import { searchBox } from './styles.scss';
 
 const Search = ({
 	additionalConstraint = '',
+	bypassIdentity,
 	setResults,
 	placeholder,
 }) => {
@@ -12,7 +13,7 @@ const Search = ({
 	const updateValue = useCallback((event) => {
 		setValue(event.target.value);
 	});
-	const constraint = useQueryConstraints();
+	const constraint = useQueryConstraints(bypassIdentity);
 	const onEnter = useCallback(async ({ key }) => {
 		if (key !== 'Enter')
 			return;

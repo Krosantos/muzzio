@@ -22,6 +22,7 @@ const OathbreakerSearch = () => {
 		<div className={searchSection}>
 			<Search
 				additionalConstraint={OATHBREAKER_QUERY}
+				bypassIdentity
 				placeholder={placeholder}
 				setResults={setResults}
 			/>

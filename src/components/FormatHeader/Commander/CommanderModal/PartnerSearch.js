@@ -34,6 +34,7 @@ const PartnerSearch = ({ closeModal }) => {
 		<div className={searchSection}>
 			<Search
 				additionalConstraint={finalQuery}
+				bypassIdentity
 				placeholder={placeholder}
 				setResults={setResults}
 			/>

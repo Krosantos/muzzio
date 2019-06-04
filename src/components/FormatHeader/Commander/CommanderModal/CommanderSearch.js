@@ -26,6 +26,7 @@ const CommanderSearch = ({ closeModal }) => {
 		<div className={searchSection}>
 			<Search
 				additionalConstraint={LEGENDARY_CREATURE_QUERY}
+				bypassIdentity
 				placeholder={placeholder}
 				setResults={setResults}
 			/>
