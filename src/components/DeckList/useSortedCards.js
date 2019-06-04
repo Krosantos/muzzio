@@ -4,18 +4,17 @@ import isEmpty from 'lodash/isEmpty';
 import sortBy from 'lodash/sortBy';
 import { IS_IN_DECK, OATHBREAKER, COMMANDER } from '@constants';
 import useCards from '@hooks/useCards';
-import useBasicLands from '@hooks/useBasicLands';
 import useCommander from '@hooks/useCommander';
 import useFormat from '@hooks/useFormat';
 import useOathbreaker from '@hooks/useOathbreaker';
 
-const sortCards = (cards, basicLands) => {
+const sortCards = (cards) => {
 	const byAlpha = sortBy(cards, ({ name }) => name);
 	const byCmc = sortBy(byAlpha, ({ cmc }) => cmc);
 	const byNotLand = sortBy(byCmc, ({ type }) => type.includes('Land'));
-	const withBasics = byNotLand.concat(basicLands);
+	const byNotBasicLand = sortBy(byNotLand, ({ type }) => type.includes('Basic'));
 
-	return withBasics;
+	return byNotBasicLand;
 };
 
 // eslint-disable-next-line max-params, complexity, max-statements
@@ -47,8 +46,7 @@ const useSortedCards = () => {
 	const commanderData = useCommander();
 	const oathbreakerData = useOathbreaker();
 	const { format } = useFormat();
-	const { asCards: basicLands } = useBasicLands();
-	const sortedCards = useMemo(() => sortCards(cardsInDeck, basicLands), [cardsInDeck, basicLands]);
+	const sortedCards = useMemo(() => sortCards(cardsInDeck), [cardsInDeck]);
 
 	return appendCards(sortedCards, format, commanderData, oathbreakerData);
 };

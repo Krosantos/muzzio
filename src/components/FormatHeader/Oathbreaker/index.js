@@ -3,7 +3,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import useOathbreaker from '@hooks/useOathbreaker';
 import ManaCost from '@components/ManaCost';
-import BasicLandModal from '../BasicLandModal';
 import CardCount from '../CardCount';
 import OathbreakerModal from './OathbreakerModal';
 import {
@@ -25,9 +24,6 @@ const Oathbreaker = () => {
 	const [isOathbreakerModalOpen, setOathbreakerModalOpen] = useState(false);
 	const closeOathbreakerModal = useCallback(() => setOathbreakerModalOpen(false), []);
 	const openOathbreakerModal = useCallback(() => setOathbreakerModalOpen(true), []);
-	const [isLandModalOpen, setLandModalOpen] = useState(false);
-	const closeLandModal = useCallback(() => setLandModalOpen(false), []);
-	const openLandModal = useCallback(() => setLandModalOpen(true), []);
 	const {
 		colorIdentity,
 		oathbreaker = {},
@@ -47,21 +43,13 @@ const Oathbreaker = () => {
 				</span>
 			</div>
 			<CardCount />
-			<div className={manaCost} onClick={openLandModal}>
+			<div className={manaCost}>
 				<ManaCost className={manaCost} cost={identityAsCost} />
 			</div>
 			{isOathbreakerModalOpen
 			&& ReactDOM.createPortal(
 				<OathbreakerModal
 					closeModal={closeOathbreakerModal}
-				/>,
-				document.querySelector('body'),
-			)}
-			{isLandModalOpen
-			&& ReactDOM.createPortal(
-				<BasicLandModal
-					closeModal={closeLandModal}
-					identities={colorIdentity}
 				/>,
 				document.querySelector('body'),
 			)}

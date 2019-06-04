@@ -67,10 +67,12 @@ const useNewDeck = () => {
 };
 
 const useChangeFormat = () => {
-	const { setFormat } = useFormat();
+	const overwrite = useOverwrite();
 	const changeFormat = useCallback((format) => () => {
-		setFormat(format);
-	}, [setFormat]);
+		setWindowTitle();
+		settings.delete(CURRENT_FILE_SETTING);
+		overwrite({ format });
+	}, []);
 
 	return changeFormat;
 };

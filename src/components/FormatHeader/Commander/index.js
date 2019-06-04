@@ -3,7 +3,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import useCommander from '@hooks/useCommander';
 import ManaCost from '@components/ManaCost';
-import BasicLandModal from '../BasicLandModal';
 import CardCount from '../CardCount';
 import CommanderModal from './CommanderModal';
 import {
@@ -25,9 +24,6 @@ const Commander = () => {
 	const [isCommanderModalOpen, setCommanderModalOpen] = useState(false);
 	const closeCommanderModal = useCallback(() => setCommanderModalOpen(false), []);
 	const openCommanderModal = useCallback(() => setCommanderModalOpen(true), []);
-	const [isLandModalOpen, setLandModalOpen] = useState(false);
-	const closeLandModal = useCallback(() => setLandModalOpen(false), []);
-	const openLandModal = useCallback(() => setLandModalOpen(true), []);
 	const {
 		colorIdentity,
 		commander = {},
@@ -47,21 +43,13 @@ const Commander = () => {
 				</span>
 			</div>
 			<CardCount />
-			<div className={manaCost} onClick={openLandModal}>
+			<div className={manaCost}>
 				<ManaCost className={manaCost} cost={identityAsCost} />
 			</div>
 			{isCommanderModalOpen
 			&& ReactDOM.createPortal(
 				<CommanderModal
 					closeModal={closeCommanderModal}
-				/>,
-				document.querySelector('body'),
-			)}
-			{isLandModalOpen
-			&& ReactDOM.createPortal(
-				<BasicLandModal
-					closeModal={closeLandModal}
-					identities={colorIdentity}
 				/>,
 				document.querySelector('body'),
 			)}

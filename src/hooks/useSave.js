@@ -4,7 +4,6 @@ import { CommanderContext } from '@contexts/Commander';
 import { OathbreakerContext } from '@contexts/Oathbreaker';
 import { CardContext } from '@contexts/Card';
 import { AttributesContext } from '@contexts/Attributes';
-import { BasicLandContext } from '@contexts/BasicLand';
 import { FormatContext } from '@contexts/Format';
 
 const useAllContexts = () => {
@@ -12,12 +11,10 @@ const useAllContexts = () => {
 	const { cards } = useContext(CardContext);
 	const { commanderData } = useContext(CommanderContext);
 	const { oathbreakerData } = useContext(OathbreakerContext);
-	const { basicLand } = useContext(BasicLandContext);
 	const { format } = useContext(FormatContext);
 
 	return {
 		attributes,
-		basicLand,
 		cards,
 		commanderData,
 		format,

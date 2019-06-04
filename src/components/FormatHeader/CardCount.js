@@ -2,26 +2,21 @@
 import React, { useMemo } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import useCards from '@hooks/useCards';
-import useBasicLands from '@hooks/useBasicLands';
 import useFormat from '@hooks/useFormat';
 import useCommander from '@hooks/useCommander';
 import useOathbreaker from '@hooks/useOathbreaker';
 import getAverageCmc from '@utils/getAverageCmc';
 import {
 	IS_IN_DECK,
-	MODERN,
 	COMMANDER,
 	OATHBREAKER,
-	STANDARD,
 } from '@constants';
 import { cardCount } from './styles.scss';
 
 const formatCounts = {
 	[COMMANDER]: 100,
-	[MODERN]: 60,
-	[OATHBREAKER]: 60,
-	[STANDARD]: 60,
 };
+const DEFAULT_COUNT = 60;
 const CMC = 'CMC: ';
 
 const useCommandZoneCards = (format) => {
@@ -50,15 +45,23 @@ const useCommandZoneCards = (format) => {
 	return commandZoneCount;
 };
 
+const calculateCardCount = (cardsInDeck = [], commandZoneCount = 0) => {
+	let result = commandZoneCount;
+
+	cardsInDeck.forEach((card) => {
+		result += (card.count || 1);
+	});
+	return result;
+};
+
 // eslint-disable-next-line max-statements
 const CardCount = () => {
 	const { cardsByAttribute } = useCards();
-	const { totalCount: basicCount } = useBasicLands('');
 	const { format } = useFormat();
 	const commandZoneCount = useCommandZoneCards(format);
-	const OUT_OF_X = useMemo(() => `/${formatCounts[format]}`, [format]);
-	const count = useMemo(() => cardsByAttribute(IS_IN_DECK).length + basicCount + commandZoneCount,
-		[cardsByAttribute, basicCount, commandZoneCount]);
+	const OUT_OF_X = useMemo(() => `/${formatCounts[format] || DEFAULT_COUNT}`, [format]);
+	const count = useMemo(() => calculateCardCount(cardsByAttribute(IS_IN_DECK), commandZoneCount),
+		[cardsByAttribute, commandZoneCount]);
 	const cmc = getAverageCmc(cardsByAttribute(IS_IN_DECK)).toPrecision(3);
 
 	return (
