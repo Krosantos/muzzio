@@ -8,19 +8,15 @@ import useOathbreaker from '@hooks/useOathbreaker';
 import getAverageCmc from '@utils/getAverageCmc';
 import {
 	IS_IN_DECK,
-	MODERN,
 	COMMANDER,
 	OATHBREAKER,
-	STANDARD,
 } from '@constants';
 import { cardCount } from './styles.scss';
 
 const formatCounts = {
 	[COMMANDER]: 100,
-	[MODERN]: 60,
-	[OATHBREAKER]: 60,
-	[STANDARD]: 60,
 };
+const DEFAULT_COUNT = 60;
 const CMC = 'CMC: ';
 
 const useCommandZoneCards = (format) => {
@@ -63,7 +59,7 @@ const CardCount = () => {
 	const { cardsByAttribute } = useCards();
 	const { format } = useFormat();
 	const commandZoneCount = useCommandZoneCards(format);
-	const OUT_OF_X = useMemo(() => `/${formatCounts[format]}`, [format]);
+	const OUT_OF_X = useMemo(() => `/${formatCounts[format] || DEFAULT_COUNT}`, [format]);
 	const count = useMemo(() => calculateCardCount(cardsByAttribute(IS_IN_DECK), commandZoneCount),
 		[cardsByAttribute, commandZoneCount]);
 	const cmc = getAverageCmc(cardsByAttribute(IS_IN_DECK)).toPrecision(3);

@@ -22,6 +22,8 @@ const COMMANDER = 'commander';
 const OATHBREAKER = 'oathbreaker';
 const STANDARD = 'standard';
 const VINTAGE = 'vintage';
+const LEGACY = 'legacy';
+const PAUPER = 'pauper';
 
 const singletonFormats = [
 	COMMANDER,
@@ -34,6 +36,8 @@ const formats = [
 	OATHBREAKER,
 	STANDARD,
 	VINTAGE,
+	LEGACY,
+	PAUPER,
 ];
 
 const oathbreakerBanlist = [
@@ -102,6 +106,8 @@ export {
 	OATHBREAKER,
 	STANDARD,
 	VINTAGE,
+	LEGACY,
+	PAUPER,
 	formats,
 	singletonFormats,
 	oathbreakerBanlist,
