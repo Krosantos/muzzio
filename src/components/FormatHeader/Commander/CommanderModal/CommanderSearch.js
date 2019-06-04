@@ -27,6 +27,7 @@ const CommanderSearch = ({ closeModal }) => {
 			<Search
 				additionalConstraint={LEGENDARY_CREATURE_QUERY}
 				bypassIdentity
+				autoFocus
 				placeholder={placeholder}
 				setResults={setResults}
 			/>

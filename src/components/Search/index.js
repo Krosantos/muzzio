@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import React, { useState, useCallback } from 'react';
 import search from '@api/search';
 import useQueryConstraints from './useQueryConstraints';
@@ -5,6 +6,7 @@ import { searchBox } from './styles.scss';
 
 const Search = ({
 	additionalConstraint = '',
+	autoFocus = false,
 	bypassIdentity,
 	setResults,
 	placeholder,
@@ -24,6 +26,7 @@ const Search = ({
 
 	return (
 		<input
+			autoFocus={autoFocus}
 			className={searchBox}
 			onChange={updateValue}
 			onKeyPress={onEnter}

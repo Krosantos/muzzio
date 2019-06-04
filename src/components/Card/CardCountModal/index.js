@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import React, { useState, useCallback } from 'react';
 import useCards from '@hooks/useCards';
 import ModalContainer from '@components/ModalContainer';
@@ -5,8 +6,9 @@ import { cardCountModal } from './styles.scss';
 
 const CardCountModal = ({ card, closeModal }) => {
 	const { setCount } = useCards();
-	const [internalCount, setInternalCount] = useState(card.count || 1);
+	const [internalCount, setInternalCount] = useState('');
 	const updateInternalCount = useCallback((event) => {
+		event.preventDefault();
 		const count = event.target.value;
 
 		setInternalCount(count);
@@ -23,6 +25,7 @@ const CardCountModal = ({ card, closeModal }) => {
 		<ModalContainer closeModal={closeModal}>
 			<form className={cardCountModal} onSubmit={wrappedKeyDown}>
 				<input
+					autoFocus
 					onChange={updateInternalCount}
 					type="number"
 					value={internalCount}
