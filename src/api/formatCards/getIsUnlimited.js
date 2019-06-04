@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import extractOracleText from './extractOracleText';
 
 const ANY_NUMBER_RULE = 'A deck can have any number of cards named';
-const BASIC_LAND = 'Basic Land';
+const BASIC_LAND = 'Basic';
 
 const getMaxCount = (card) => {
 	const type = get(card, 'type_line');
