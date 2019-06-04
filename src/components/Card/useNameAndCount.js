@@ -29,8 +29,8 @@ const useNameAndCount = (card, useMaindeckCount, useSideboardCount) => {
 		if (useSideboardCount)
 			return getSideboardCount(sideboardCount, name);
 
-		const inDeck = get(attributes, IS_IN_DECK, false);
-		const inSideboard = get(attributes, IS_IN_SIDEBOARD, false);
+		const inDeck = get(attributes, IS_IN_DECK, false) && count;
+		const inSideboard = get(attributes, IS_IN_SIDEBOARD, false) && sideboardCount;
 
 		if (inDeck && inSideboard)
 			return `${count} - (${sideboardCount}) ${name}`;
