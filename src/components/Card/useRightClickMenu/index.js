@@ -42,9 +42,9 @@ const useRightClickMenu = (card) => {
 		removeCard,
 		setCount,
 	} = useCards();
-	const { format } = useFormat();
+	const { isSingleton } = useFormat();
 	const openMenu = useCallback(() => generateMenu(
-		format,
+		isSingleton,
 		card,
 		attributes, addAttribute,
 		addCard,
@@ -53,7 +53,7 @@ const useRightClickMenu = (card) => {
 		removeCard,
 		setCount,
 	),
-	[card, attributes, format]);
+	[card, attributes, isSingleton]);
 
 	return openMenu;
 };

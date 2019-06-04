@@ -1,4 +1,4 @@
-import { CARD_MAX, singletonFormats } from '@constants';
+import { CARD_MAX } from '@constants';
 import { remote } from 'electron';
 
 const { MenuItem } = remote;
@@ -21,9 +21,8 @@ const generateSubmenu = (card, setCount) => {
 };
 
 // eslint-disable-next-line max-params
-const getCountLine = (format, card, menu, setCount, openCountModal) => {
+const getCountLine = (isSingleton, card, menu, setCount, openCountModal) => {
 	const { isUnlimited = false } = card;
-	const isSingleton = singletonFormats.includes(format);
 
 	if (isSingleton && !isUnlimited)
 		return;
