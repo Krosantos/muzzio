@@ -12,7 +12,7 @@
     "start": "concurrently --kill-others \"webpack-dev-server --mode development\" \"cross-env FROM_LOCAL=true electron .\""
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "electron-settings": "^3.2.0",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
