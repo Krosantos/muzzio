@@ -13,7 +13,14 @@ import { attribute as attributeStyle, attributeContainer, attributeTitle } from 
 const getInDeckString = (cardsToShow, isSingleton) => {
 	const cardsInDeck = filter(cardsToShow, (card) => get(card, ['attributes', IS_IN_DECK], false));
 
-	return ` - ${cardsInDeck.length} of ${cardsToShow.length}`;
+	if (isSingleton)
+		return ` - ${cardsInDeck.length} of ${cardsToShow.length}`;
+	let count = 0;
+
+	cardsInDeck.forEach((card) => {
+		count += (card.count || 1);
+	});
+	return ` - ${count}`;
 };
 
 const Attribute = ({ attribute }) => {
@@ -23,7 +30,7 @@ const Attribute = ({ attribute }) => {
 		() => (attribute === ALL_CARDS ? values(cards) : cardsByAttribute(attribute)),
 		[cards, attribute],
 	);
-	const inDeckString = useMemo(() => getInDeckString(cardsToShow, isSingleton), [cardsToShow]);
+	const inDeckString = useMemo(() => getInDeckString(cardsToShow, isSingleton), [cardsToShow, isSingleton]);
 	const callback = useCallback((card) => {
 		addAttribute(card, attribute);
 	}, [attribute]);
