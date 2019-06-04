@@ -5,7 +5,7 @@ import useOathbreaker from '@hooks/useOathbreaker';
 import CardList from '@components/CardList';
 import { cardList, searchSection } from '../styles.scss';
 
-const OATHBREAKER_QUERY = '-t:creature t:planeswalker -"Saheeli, the Gifted"';
+const OATHBREAKER_QUERY = '-t:creature t:planeswalker';
 const DEFAULT_PLACEHOLDER = 'Search for Oathbreaker';
 
 const OathbreakerSearch = () => {
