@@ -22,6 +22,14 @@ const sortCards = (cards) => {
 	return byNotBasicLand;
 };
 
+const useMaindeckCount = (cards) => cards.map((card) => ({ ...card, sideboardCount: 0 }));
+
+const useSideboardCount = (cards) => cards.map((card) => {
+	const { sideboardCount = 0 } = card;
+
+	return { ...card, count: sideboardCount, sideboardCount: 0 };
+});
+
 // eslint-disable-next-line max-params, complexity, max-statements
 const appendCards = (sortedCards, format, commanderData, oathbreakerData) => {
 	const cards = [...sortedCards];
@@ -52,16 +60,21 @@ const useMaindeck = () => {
 	const oathbreakerData = useOathbreaker();
 	const { format } = useFormat();
 	const sortedCards = useMemo(() => sortCards(cardsInDeck), [cardsInDeck]);
+	const mainCounted = useMaindeckCount(sortedCards);
 
-	return appendCards(sortedCards, format, commanderData, oathbreakerData);
+	return appendCards(mainCounted, format, commanderData, oathbreakerData);
 };
 
 const useSideboard = () => {
 	const { cardsByAttribute } = useCards();
-	const cardsInSideboard = useMemo(() => cardsByAttribute(IS_IN_SIDEBOARD), [cardsByAttribute]);
-	const sortedCards = useMemo(() => sortCards(cardsInSideboard), [cardsInSideboard]);
+	const cardsInSideboard = useMemo(() => {
+		const sideboardCards = cardsByAttribute(IS_IN_SIDEBOARD);
+		const sorted = sortCards(sideboardCards);
 
-	return sortedCards;
+		return useSideboardCount(sorted);
+	}, [cardsByAttribute]);
+
+	return cardsInSideboard;
 };
 
 const useDecklist = () => {

@@ -20,9 +20,9 @@ const DeckList = () => {
 		<>
 			<div className={deckList}>
 				<Divider label={MAINBOARD} />
-				<CardList alwaysColorful cards={maindeck} />
+				<CardList alwaysColorful cards={maindeck} useMaindeckCount />
 				<Divider label={SIDEBOARD} />
-				<CardList alwaysColorful cards={sideboard} />
+				<CardList alwaysColorful cards={sideboard} useSideboardCount />
 			</div>
 			<div className={buttonContainer}>
 				<button className={importButton} onClick={importFile} type="button">{IMPORT}</button>

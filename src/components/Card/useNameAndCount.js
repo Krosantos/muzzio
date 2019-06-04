@@ -2,7 +2,19 @@ import { useMemo } from 'react';
 import get from 'lodash/get';
 import { IS_IN_DECK, IS_IN_SIDEBOARD } from '@constants';
 
-const useNameAndCount = (card) => {
+const getMaindeckCount = (count, name) => {
+	if (count > 0)
+		return `${count} ${name}`;
+	return name;
+};
+
+const getSideboardCount = (sideboardCount, name) => {
+	if (sideboardCount > 0)
+		return `${sideboardCount} ${name}`;
+	return name;
+};
+
+const useNameAndCount = (card, useMaindeckCount, useSideboardCount) => {
 	const {
 		attributes,
 		count,
@@ -10,8 +22,13 @@ const useNameAndCount = (card) => {
 		sideboardCount,
 	} = card;
 
-	// eslint-disable-next-line complexity
+	// eslint-disable-next-line complexity, max-statements
 	const nameAndCount = useMemo(() => {
+		if (useMaindeckCount)
+			return getMaindeckCount(count, name);
+		if (useSideboardCount)
+			return getSideboardCount(sideboardCount, name);
+
 		const inDeck = get(attributes, IS_IN_DECK, false);
 		const inSideboard = get(attributes, IS_IN_SIDEBOARD, false);
 

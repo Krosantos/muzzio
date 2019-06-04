@@ -19,6 +19,8 @@ const Card = ({
 	rawCard,
 	cardId,
 	alwaysColorful,
+	useMaindeckCount,
+	useSideboardCount,
 }) => {
 	const card = useCard(cardId, rawCard);
 	const {
@@ -28,7 +30,7 @@ const Card = ({
 		reverseUrl,
 	} = card;
 
-	const nameAndCount = useNameAndCount(card);
+	const nameAndCount = useNameAndCount(card, useMaindeckCount, useSideboardCount);
 	const { setCount, setSideboardCount } = useCards();
 
 	const [isCardCountModalOpen, setCardCountModalOpen] = useState(false);
