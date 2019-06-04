@@ -31,6 +31,7 @@ const formatCard = (card) => {
 		name,
 		partnerQuery,
 		reverseUrl,
+		sideboardCount: 0,
 		type,
 	};
 };

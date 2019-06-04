@@ -5,7 +5,9 @@ import { remote } from 'electron';
 const { MenuItem } = remote;
 
 // eslint-disable-next-line max-params
-const getDeckLine = (card, menu, addAttribute, removeAttribute) => {
+const getDeckLine = (isSingleton, card, menu, addAttribute, removeAttribute) => {
+	if (!isSingleton)
+		return;
 	const isInDeck = get(card, ['attributes', IS_IN_DECK], false);
 
 	if (isInDeck) {

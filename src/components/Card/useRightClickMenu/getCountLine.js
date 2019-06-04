@@ -3,7 +3,7 @@ import { remote } from 'electron';
 
 const { MenuItem } = remote;
 
-const generateUnlimitedMenu = (card, openCountModal) => new MenuItem({
+const generateUnlimitedMenu = (openCountModal) => new MenuItem({
 	click: openCountModal,
 	label: 'Set Count',
 });
@@ -11,7 +11,7 @@ const generateUnlimitedMenu = (card, openCountModal) => new MenuItem({
 const generateSubmenu = (card, setCount) => {
 	const submenu = [];
 
-	for (let x = 1; x <= CARD_MAX; x += 1) {
+	for (let x = 0; x <= CARD_MAX; x += 1) {
 		submenu.push({
 			click: () => setCount(card, x),
 			label: `Set count to ${x}`,
@@ -28,7 +28,7 @@ const getCountLine = (isSingleton, card, menu, setCount, openCountModal) => {
 		return;
 
 	if (isUnlimited) {
-		menu.append(generateUnlimitedMenu(card, openCountModal));
+		menu.append(generateUnlimitedMenu(openCountModal));
 	} else {
 		menu.append(
 			new MenuItem({

@@ -5,10 +5,12 @@ import get from 'lodash/get';
 import has from 'lodash/has';
 import set from 'lodash/set';
 import unset from 'lodash/unset';
+import clamp from 'lodash/clamp';
 import { CardContext } from '@contexts/Card';
 import {
 	IS_IN_DECK,
 	IS_IN_SIDEBOARD,
+	CARD_MAX,
 	ADD_ACTION,
 	REMOVE_ACTION,
 	UPDATE_ACTION,
@@ -50,10 +52,35 @@ const useCards = () => {
 	}, []);
 
 	const setCount = useCallback((card, count) => {
-		const toDispatch = { ...card, count };
+		const {
+			sideboardCount = 0,
+			isUnlimited = false,
+		} = card;
 
-		set(toDispatch, ['attributes', IS_IN_DECK], !!count);
-		set(toDispatch, ['attributes', IS_IN_SIDEBOARD], !!count);
+		const clampedSideboardCount = isUnlimited
+			? sideboardCount
+			: clamp(sideboardCount, 0, CARD_MAX - sideboardCount);
+
+		const toDispatch = { ...card, count, sideboardCount: clampedSideboardCount };
+
+		set(toDispatch, ['attributes', IS_IN_DECK], count > 0);
+		set(toDispatch, ['attributes', IS_IN_SIDEBOARD], clampedSideboardCount > 0);
+
+		dispatch({ card: toDispatch, type: UPDATE_ACTION });
+	}, []);
+
+	const setSideboardCount = useCallback((card, sideboardCount) => {
+		const {
+			count = 0,
+			isUnlimited = false,
+		} = card;
+
+		const clampedCount = isUnlimited ? count : clamp(count, 0, CARD_MAX - sideboardCount);
+
+		const toDispatch = { ...card, count: clampedCount, sideboardCount };
+
+		set(toDispatch, ['attributes', IS_IN_DECK], clampedCount > 0);
+		set(toDispatch, ['attributes', IS_IN_SIDEBOARD], sideboardCount > 0);
 
 		dispatch({ card: toDispatch, type: UPDATE_ACTION });
 	}, []);
@@ -90,6 +117,7 @@ const useCards = () => {
 		removeAttribute,
 		removeCard,
 		setCount,
+		setSideboardCount,
 	};
 };
 

@@ -2,6 +2,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ManaCost from '@components/ManaCost';
+import useCards from '@hooks/useCards';
 import { IS_IN_DECK } from '@constants';
 import useHoverArt from './useHoverArt';
 import CardCountModal from './CardCountModal';
@@ -33,14 +34,19 @@ const Card = ({
 			return name;
 		return `${count} ${name}`;
 	}, [count, name, attributes[IS_IN_DECK]]);
+	const { setCount, setSideboardCount } = useCards();
 
 	const [isCardCountModalOpen, setCardCountModalOpen] = useState(false);
 	const closeCardCountModal = useCallback(() => setCardCountModalOpen(false), []);
 	const openCardCountModal = useCallback(() => setCardCountModalOpen(true), []);
 
+	const [isSideboardCountModalOpen, setSideboardCountModalOpen] = useState(false);
+	const closeSideboardCountModal = useCallback(() => setSideboardCountModalOpen(false), []);
+	const openSideboardCountModal = useCallback(() => setSideboardCountModalOpen(true), []);
+
 	const fireCallback = useCallback(() => callback(card), [card, callback]);
 	const className = useMemo(() => `${cardRow} ${getColorClass(card, alwaysColorful)}`, [attributes[IS_IN_DECK]]);
-	const handleContextClick = useRightClickMenu(card, openCardCountModal);
+	const handleContextClick = useRightClickMenu(card, openCardCountModal, openSideboardCountModal);
 	const { shouldShowArt, showArt, hideArt } = useHoverArt();
 
 	return (
@@ -61,6 +67,16 @@ const Card = ({
 				<CardCountModal
 					card={card}
 					closeModal={closeCardCountModal}
+					setCountCallback={setCount}
+				/>,
+				document.querySelector('body'),
+			)}
+			{isSideboardCountModalOpen
+			&& ReactDOM.createPortal(
+				<CardCountModal
+					card={card}
+					closeModal={closeSideboardCountModal}
+					setCountCallback={setSideboardCount}
 				/>,
 				document.querySelector('body'),
 			)}

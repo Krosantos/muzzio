@@ -7,6 +7,7 @@ import useCards from '@hooks/useCards';
 import getAttributesSection from './getAttributesSection';
 import getDeckLine from './getDeckLine';
 import getCountLine from './getCountLine';
+import getSideboardLine from './getSideboardLine';
 import getRemoveLine from './getRemoveLine';
 
 const { Menu } = remote;
@@ -18,21 +19,24 @@ const generateMenu = ({
 	cardExists,
 	isSingleton,
 	openCardCountModal,
+	openSideboardCountModal,
 	removeAttribute,
 	removeCard,
 	setCount,
+	setSideboardCount,
 }) => {
 	const menu = new Menu();
 
-	getDeckLine(card, menu, addAttribute, removeAttribute);
+	getDeckLine(isSingleton, card, menu, addAttribute, removeAttribute);
 	getCountLine(isSingleton, card, menu, setCount, openCardCountModal);
+	getSideboardLine(isSingleton, card, menu, setSideboardCount, openSideboardCountModal);
 	getAttributesSection(card, menu, attributes, addAttribute, removeAttribute);
 	if (cardExists(card))
 		getRemoveLine(card, menu, removeCard);
 	menu.popup();
 };
 
-const useRightClickMenu = (card, openCardCountModal) => {
+const useRightClickMenu = (card, openCardCountModal, openSideboardCountModal) => {
 	const { attributes } = useAttributes();
 	const {
 		addAttribute,
@@ -40,6 +44,7 @@ const useRightClickMenu = (card, openCardCountModal) => {
 		removeAttribute,
 		removeCard,
 		setCount,
+		setSideboardCount,
 	} = useCards();
 	const { isSingleton } = useFormat();
 	const openMenu = useCallback(() => generateMenu({
@@ -49,9 +54,11 @@ const useRightClickMenu = (card, openCardCountModal) => {
 		cardExists,
 		isSingleton,
 		openCardCountModal,
+		openSideboardCountModal,
 		removeAttribute,
 		removeCard,
 		setCount,
+		setSideboardCount,
 	}),
 	[card, attributes, isSingleton]);
 
