@@ -8,6 +8,7 @@ import unset from 'lodash/unset';
 import { CardContext } from '@contexts/Card';
 import {
 	IS_IN_DECK,
+	IS_IN_SIDEBOARD,
 	ADD_ACTION,
 	REMOVE_ACTION,
 	UPDATE_ACTION,
@@ -52,6 +53,7 @@ const useCards = () => {
 		const toDispatch = { ...card, count };
 
 		set(toDispatch, ['attributes', IS_IN_DECK], !!count);
+		set(toDispatch, ['attributes', IS_IN_SIDEBOARD], !!count);
 
 		dispatch({ card: toDispatch, type: UPDATE_ACTION });
 	}, []);
@@ -63,6 +65,14 @@ const useCards = () => {
 			const toSet = { ...card };
 
 			set(toSet, ['attributes', IS_IN_DECK], false);
+			dispatch({ card: toSet, type: UPDATE_ACTION });
+		});
+		const inBoard = cardsByAttribute(IS_IN_SIDEBOARD);
+
+		inBoard.forEach((card) => {
+			const toSet = { ...card };
+
+			set(toSet, ['attributes', IS_IN_SIDEBOARD], false);
 			dispatch({ card: toSet, type: UPDATE_ACTION });
 		});
 	}, [cardsByAttribute]);

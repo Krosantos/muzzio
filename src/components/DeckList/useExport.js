@@ -9,8 +9,16 @@ const formatCards = (cards) => {
 	return names.join('\r\n');
 };
 
-const useExport = (cards = []) => {
-	const toWrite = useMemo(() => formatCards(cards), [cards]);
+const useExport = (maindeck = [], sideboard = []) => {
+	const toWrite = useMemo(() => {
+		const formattedMain = formatCards(maindeck);
+
+		if (!sideboard.length)
+			return formattedMain;
+		const formattedSide = formatCards(sideboard);
+
+		return `${formattedMain}\r\n\r\n${formattedSide}`;
+	}, [maindeck, sideboard]);
 	const exportList = useCallback(async () => {
 		clipboard.writeText(toWrite);
 	});

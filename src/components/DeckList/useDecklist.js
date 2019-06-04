@@ -2,7 +2,12 @@
 import { useMemo } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import sortBy from 'lodash/sortBy';
-import { IS_IN_DECK, OATHBREAKER, COMMANDER } from '@constants';
+import {
+	IS_IN_DECK,
+	IS_IN_SIDEBOARD,
+	OATHBREAKER,
+	COMMANDER,
+} from '@constants';
 import useCards from '@hooks/useCards';
 import useCommander from '@hooks/useCommander';
 import useFormat from '@hooks/useFormat';
@@ -40,7 +45,7 @@ const appendCards = (sortedCards, format, commanderData, oathbreakerData) => {
 };
 
 // eslint-disable-next-line max-statements
-const useSortedCards = () => {
+const useMaindeck = () => {
 	const { cardsByAttribute } = useCards();
 	const cardsInDeck = useMemo(() => cardsByAttribute(IS_IN_DECK), [cardsByAttribute]);
 	const commanderData = useCommander();
@@ -51,4 +56,22 @@ const useSortedCards = () => {
 	return appendCards(sortedCards, format, commanderData, oathbreakerData);
 };
 
-export default useSortedCards;
+const useSideboard = () => {
+	const { cardsByAttribute } = useCards();
+	const cardsInSideboard = useMemo(() => cardsByAttribute(IS_IN_SIDEBOARD), [cardsByAttribute]);
+	const sortedCards = useMemo(() => sortCards(cardsInSideboard), [cardsInSideboard]);
+
+	return sortedCards;
+};
+
+const useDecklist = () => {
+	const maindeck = useMaindeck();
+	const sideboard = useSideboard();
+
+	return {
+		maindeck,
+		sideboard,
+	};
+};
+
+export default useDecklist;

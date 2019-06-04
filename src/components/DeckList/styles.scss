@@ -13,6 +13,17 @@
     justify-content: space-evenly;
 }
 
+.divider {
+    background-color: $smoke;
+    font-family: "Beleren-Caps";
+    display: flex;
+    color: $white;
+    flex-shrink: 0;
+    align-items: center;
+    padding: 2px 5px;
+    justify-content: center;
+}
+
 .importButton {
     cursor: pointer;
     color: $white;

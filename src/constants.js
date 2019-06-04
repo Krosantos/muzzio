@@ -8,6 +8,7 @@ const CARD_MAX = 4;
 
 const ALL_CARDS = 'All Cards';
 const IS_IN_DECK = 'indeck';
+const IS_IN_SIDEBOARD = 'insideboard';
 
 const ANY_PARTNER = 'partner';
 const SPECIFIC_PARTNER = 'specific';
@@ -95,6 +96,7 @@ export {
 	CARD_MAX,
 	ALL_CARDS,
 	IS_IN_DECK,
+	IS_IN_SIDEBOARD,
 	ANY_PARTNER,
 	SPECIFIC_PARTNER,
 	NO_PARTNER,
