@@ -11,6 +11,7 @@ import useCard from './useCard';
 import HoverArt from './HoverArt';
 import getColorClass from './getColorClass';
 import { cardRow } from './styles.scss';
+import useNameAndCount from './useNameAndCount';
 
 // eslint-disable-next-line max-statements, max-lines-per-function
 const Card = ({
@@ -23,17 +24,11 @@ const Card = ({
 	const {
 		attributes,
 		cost,
-		count,
-		name,
 		imageUrl,
 		reverseUrl,
 	} = card;
 
-	const nameAndCount = useMemo(() => {
-		if (!count || count <= 1 || !attributes[IS_IN_DECK])
-			return name;
-		return `${count} ${name}`;
-	}, [count, name, attributes[IS_IN_DECK]]);
+	const nameAndCount = useNameAndCount(card);
 	const { setCount, setSideboardCount } = useCards();
 
 	const [isCardCountModalOpen, setCardCountModalOpen] = useState(false);

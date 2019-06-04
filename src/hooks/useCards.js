@@ -59,7 +59,7 @@ const useCards = () => {
 
 		const clampedSideboardCount = isUnlimited
 			? sideboardCount
-			: clamp(sideboardCount, 0, CARD_MAX - sideboardCount);
+			: clamp(sideboardCount, 0, CARD_MAX - count);
 
 		const toDispatch = { ...card, count, sideboardCount: clampedSideboardCount };
 

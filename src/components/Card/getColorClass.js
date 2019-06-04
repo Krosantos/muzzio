@@ -1,5 +1,5 @@
 import get from 'lodash/get';
-import { IS_IN_DECK } from '@constants';
+import { IS_IN_DECK, IS_IN_SIDEBOARD } from '@constants';
 import {
 	white,
 	blue,
@@ -21,7 +21,9 @@ const colorMap = {
 
 // eslint-disable-next-line complexity
 const getColorClass = ({ attributes, colors = [] }, alwaysColorful) => {
-	const notInDeck = (!get(attributes, IS_IN_DECK, false) && !alwaysColorful);
+	const inDeck = get(attributes, IS_IN_DECK, false);
+	const inSideboard = get(attributes, IS_IN_SIDEBOARD, false);
+	const notInDeck = (!inDeck && !inSideboard && !alwaysColorful);
 
 	if (notInDeck)
 		return outOfDeck;
