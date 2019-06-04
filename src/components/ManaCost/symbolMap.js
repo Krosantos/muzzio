@@ -85,11 +85,11 @@ const symbolMap = {
 	'R/G': ManaRG,
 	'G/W': ManaGW,
 	'G/U': ManaGU,
-	'2W': Mana2W,
-	'2U': Mana2U,
-	'2B': Mana2B,
-	'2R': Mana2R,
-	'2G': Mana2G,
+	'2/W': Mana2W,
+	'2/U': Mana2U,
+	'2/B': Mana2B,
+	'2/R': Mana2R,
+	'2/G': Mana2G,
 };
 
 export default symbolMap;
