@@ -3,7 +3,10 @@ import { remote } from 'electron';
 
 const { MenuItem } = remote;
 
-const generateUnlimitedMenu = () => {};
+const generateUnlimitedMenu = (card, openCountModal) => new MenuItem({
+	click: openCountModal,
+	label: 'Set Count',
+});
 
 const generateSubmenu = (card, setCount) => {
 	const submenu = [];
@@ -18,7 +21,7 @@ const generateSubmenu = (card, setCount) => {
 };
 
 // eslint-disable-next-line max-params
-const getCountLine = (format, card, menu, setCount) => {
+const getCountLine = (format, card, menu, setCount, openCountModal) => {
 	const { isUnlimited = false } = card;
 	const isSingleton = singletonFormats.includes(format);
 
@@ -26,7 +29,7 @@ const getCountLine = (format, card, menu, setCount) => {
 		return;
 
 	if (isUnlimited) {
-		menu.append(generateUnlimitedMenu());
+		menu.append(generateUnlimitedMenu(card, openCountModal));
 	} else {
 		menu.append(
 			new MenuItem({

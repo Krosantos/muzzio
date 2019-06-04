@@ -3,7 +3,7 @@ import useFormat from '@hooks/useFormat';
 import Commander from './Commander';
 import Oathbreaker from './Oathbreaker';
 import {
-	// MODERN,
+	MODERN,
 	COMMANDER,
 	OATHBREAKER,
 	// STANDARD,
@@ -11,6 +11,7 @@ import {
 
 const componentMap = {
 	[COMMANDER]: Commander,
+	[MODERN]: Commander,
 	[OATHBREAKER]: Oathbreaker,
 };
 

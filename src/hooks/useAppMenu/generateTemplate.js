@@ -2,6 +2,7 @@ import { remote } from 'electron';
 import {
 	COMMANDER,
 	OATHBREAKER,
+	MODERN,
 } from '@constants';
 
 const { app } = remote;
@@ -52,6 +53,7 @@ const getFileMenu = ({
 			submenu: [
 				{ accelerator: 'Shift+Alt+C', click: changeFormat(COMMANDER), label: 'Commander' },
 				{ accelerator: 'Shift+Alt+O', click: changeFormat(OATHBREAKER), label: 'Oathbreaker' },
+				{ accelerator: 'Shift+Alt+M', click: changeFormat(MODERN), label: 'Modern' },
 			],
 		},
 		{ type: 'separator' },
