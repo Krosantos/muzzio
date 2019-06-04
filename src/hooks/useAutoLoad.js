@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import { remote } from 'electron';
 import settings from 'electron-settings';
 import { AUTOSAVE, CURRENT_FILE_SETTING } from '@constants';
@@ -10,9 +11,9 @@ const { app } = remote;
 // eslint-disable-next-line max-statements
 const useAutoLoad = () => {
 	let readPath = '';
-	const hasCurrentFile = settings.has(CURRENT_FILE_SETTING);
+	const currentFileExists = fs.existsSync(settings.get(CURRENT_FILE_SETTING));
 
-	if (hasCurrentFile) {
+	if (currentFileExists) {
 		readPath = settings.get(CURRENT_FILE_SETTING);
 		setWindowTitle(readPath);
 	} else {
