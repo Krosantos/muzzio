@@ -11,48 +11,48 @@ import getRemoveLine from './getRemoveLine';
 
 const { Menu } = remote;
 
-const generateMenu = (
-	format,
-	card,
-	attributes,
+const generateMenu = ({
 	addAttribute,
-	addCard,
+	attributes,
+	card,
 	cardExists,
+	isSingleton,
+	openCardCountModal,
 	removeAttribute,
 	removeCard,
 	setCount,
-) => {
+}) => {
 	const menu = new Menu();
 
 	getDeckLine(card, menu, addAttribute, removeAttribute);
-	getCountLine(format, card, menu, setCount);
+	getCountLine(isSingleton, card, menu, setCount, openCardCountModal);
 	getAttributesSection(card, menu, attributes, addAttribute, removeAttribute);
 	if (cardExists(card))
 		getRemoveLine(card, menu, removeCard);
 	menu.popup();
 };
 
-const useRightClickMenu = (card) => {
+const useRightClickMenu = (card, openCardCountModal) => {
 	const { attributes } = useAttributes();
 	const {
 		addAttribute,
-		addCard,
 		cardExists,
 		removeAttribute,
 		removeCard,
 		setCount,
 	} = useCards();
 	const { isSingleton } = useFormat();
-	const openMenu = useCallback(() => generateMenu(
-		isSingleton,
+	const openMenu = useCallback(() => generateMenu({
+		addAttribute,
+		attributes,
 		card,
-		attributes, addAttribute,
-		addCard,
 		cardExists,
+		isSingleton,
+		openCardCountModal,
 		removeAttribute,
 		removeCard,
 		setCount,
-	),
+	}),
 	[card, attributes, isSingleton]);
 
 	return openMenu;
