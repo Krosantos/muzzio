@@ -5,7 +5,6 @@ import { CardMenuProvider } from '@contexts/CardMenu';
 import { CommanderProvider } from '@contexts/Commander';
 import { OathbreakerProvider } from '@contexts/Oathbreaker';
 import { AttributesProvider } from '@contexts/Attributes';
-import { BasicLandProvider } from '@contexts/BasicLand';
 import { FormatProvider } from '@contexts/Format';
 import useAutoLoad from '@hooks/useAutoLoad';
 import './index.scss';
@@ -14,7 +13,6 @@ import './index.scss';
 const App = () => {
 	const {
 		attributes,
-		basicLand,
 		format,
 		cards,
 		commanderData,
@@ -27,11 +25,9 @@ const App = () => {
 				<CommanderProvider initialValue={commanderData}>
 					<OathbreakerProvider initialValue={oathbreakerData}>
 						<AttributesProvider initialValue={attributes}>
-							<BasicLandProvider initialValue={basicLand}>
-								<CardMenuProvider>
-									<Layout />
-								</CardMenuProvider>
-							</BasicLandProvider>
+							<CardMenuProvider>
+								<Layout />
+							</CardMenuProvider>
 						</AttributesProvider>
 					</OathbreakerProvider>
 				</CommanderProvider>
