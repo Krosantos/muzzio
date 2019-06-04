@@ -49,13 +49,22 @@ const useCommandZoneCards = (format) => {
 	return commandZoneCount;
 };
 
+const calculateCardCount = (cardsInDeck = [], commandZoneCount = 0) => {
+	let result = commandZoneCount;
+
+	cardsInDeck.forEach((card) => {
+		result += (card.count || 1);
+	});
+	return result;
+};
+
 // eslint-disable-next-line max-statements
 const CardCount = () => {
 	const { cardsByAttribute } = useCards();
 	const { format } = useFormat();
 	const commandZoneCount = useCommandZoneCards(format);
 	const OUT_OF_X = useMemo(() => `/${formatCounts[format]}`, [format]);
-	const count = useMemo(() => cardsByAttribute(IS_IN_DECK).length + commandZoneCount,
+	const count = useMemo(() => calculateCardCount(cardsByAttribute(IS_IN_DECK), commandZoneCount),
 		[cardsByAttribute, commandZoneCount]);
 	const cmc = getAverageCmc(cardsByAttribute(IS_IN_DECK)).toPrecision(3);
 

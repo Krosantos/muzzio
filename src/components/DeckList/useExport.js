@@ -2,14 +2,9 @@ import { useCallback, useMemo } from 'react';
 import { remote } from 'electron';
 
 const { clipboard } = remote;
-const STARTS_WITH_NUMBER = /^\d/;
 
 const formatCards = (cards) => {
-	const names = cards.map(({ name }) => {
-		if (!name.match(STARTS_WITH_NUMBER))
-			return `1 ${name}`;
-		return name;
-	});
+	const names = cards.map(({ name, count = 1 }) => `${count} ${name}`);
 
 	return names.join('\r\n');
 };

@@ -9,7 +9,12 @@ const getLandCount = (cardsByAttribute) => {
 	const cardsInDeck = cardsByAttribute(IS_IN_DECK);
 	const landsInDeck = cardsInDeck.filter(({ type }) => type.includes('Land'));
 
-	return landsInDeck.length;
+	let count = 0;
+
+	landsInDeck.forEach((card) => {
+		count += (card.count || 1);
+	});
+	return count;
 };
 
 const LandCount = () => {

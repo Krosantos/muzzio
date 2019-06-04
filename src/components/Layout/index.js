@@ -16,10 +16,10 @@ const Layout = () => {
 			<Slider label="Deck" left>
 				<DeckList />
 			</Slider>
+			<MainPanel />
 			<Slider label="Search">
 				<AddCards />
 			</Slider>
-			<MainPanel />
 		</>
 	);
 };
