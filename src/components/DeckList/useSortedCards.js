@@ -12,8 +12,9 @@ const sortCards = (cards) => {
 	const byAlpha = sortBy(cards, ({ name }) => name);
 	const byCmc = sortBy(byAlpha, ({ cmc }) => cmc);
 	const byNotLand = sortBy(byCmc, ({ type }) => type.includes('Land'));
+	const byNotBasicLand = sortBy(byNotLand, ({ type }) => type.includes('Basic'));
 
-	return byNotLand;
+	return byNotBasicLand;
 };
 
 // eslint-disable-next-line max-params, complexity, max-statements

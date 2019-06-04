@@ -8,6 +8,7 @@ const { Menu, MenuItem } = remote;
 
 const alphaSort = (card) => card.name;
 const cmcSort = (card) => card.cmc;
+const countSort = (card) => card.count || 1;
 const deckSort = (card) => {
 	const inDeck = card.attributes[IS_IN_DECK];
 
@@ -15,8 +16,9 @@ const deckSort = (card) => {
 };
 
 const sortTypes = {
-	ALPHA: { name: 'Alphabetically', sort: alphaSort },
+	ALPHA: { name: 'Alphabetical', sort: alphaSort },
 	CMC: { name: 'CMC', sort: cmcSort },
+	COUNT: { name: 'Count', sort: countSort },
 	DECK: { name: 'In/Out of Deck', sort: deckSort },
 };
 
