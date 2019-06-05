@@ -1,36 +1,20 @@
 import React, { useCallback, useMemo } from 'react';
-import get from 'lodash/get';
-import filter from 'lodash/filter';
 import values from 'lodash/values';
 import CardList from '@components/CardList';
-import useFormat from '@hooks/useFormat';
 import useCards from '@hooks/useCards';
-import { ALL_CARDS, IS_IN_DECK } from '@constants';
+import { ALL_CARDS } from '@constants';
 import useSorting from './useSorting';
+import useInDeckString from './useInDeckString';
 import RemoveButton from './RemoveButton';
 import { attribute as attributeStyle, attributeContainer, attributeTitle } from './styles.scss';
 
-const getInDeckString = (cardsToShow, isSingleton) => {
-	const cardsInDeck = filter(cardsToShow, (card) => get(card, ['attributes', IS_IN_DECK], false));
-
-	if (isSingleton)
-		return ` - ${cardsInDeck.length} of ${cardsToShow.length}`;
-	let count = 0;
-
-	cardsInDeck.forEach((card) => {
-		count += (card.count || 1);
-	});
-	return ` - ${count}`;
-};
-
 const Attribute = ({ attribute }) => {
 	const { cards, addAttribute, cardsByAttribute } = useCards();
-	const { isSingleton } = useFormat();
 	const cardsToShow = useMemo(
 		() => (attribute === ALL_CARDS ? values(cards) : cardsByAttribute(attribute)),
 		[cards, attribute],
 	);
-	const inDeckString = useMemo(() => getInDeckString(cardsToShow, isSingleton), [cardsToShow, isSingleton]);
+	const inDeckString = useInDeckString(attribute);
 	const callback = useCallback((card) => {
 		addAttribute(card, attribute);
 	}, [attribute]);
