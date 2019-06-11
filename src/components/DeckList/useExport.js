@@ -4,7 +4,7 @@ import { remote } from 'electron';
 const { clipboard } = remote;
 
 const formatCards = (cards) => {
-	const names = cards.map(({ name, count = 1 }) => `${count} ${name}`);
+	const names = cards.map(({ name, count }) => `${count || 1} ${name}`);
 
 	return names.join('\r\n');
 };
