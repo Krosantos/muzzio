@@ -7,7 +7,6 @@ import {
 	OATHBREAKER,
 	COMMANDER,
 	VINTAGE,
-	STANDARD,
 	oathbreakerBanlist,
 } from '@constants';
 
@@ -22,11 +21,11 @@ const convertIdentityToQuery = (identity) => {
 // TODO: Remove MH1 hack once it releases.
 const getFormatQuery = (format) => {
 	if (format !== OATHBREAKER)
-		return format === STANDARD ? `format:${format}` : `(format:${format} OR e:MH1)`;
+		return `format:${format}`;
 
 	const bannedSection = oathbreakerBanlist.join('" -"');
 
-	return `(format:${VINTAGE} OR e:MH1) -"${bannedSection}"`;
+	return `format:${VINTAGE} -"${bannedSection}"`;
 };
 
 const getIdentityQuery = (format, commanderIdentity, oathbreakerIdentity) => {
