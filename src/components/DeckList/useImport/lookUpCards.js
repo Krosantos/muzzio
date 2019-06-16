@@ -46,9 +46,9 @@ const convertToPostBody = (mainCount = {}, sideCount = {}) => {
 	return result;
 };
 
-const lookUpCards = async (rawData) => {
+const lookUpCards = async (rawData, isSingleton) => {
 	const [maindeck = '', sideboard = ''] = rawData.split(DOUBLE_LINE_REGEX);
-
+	const defaultCount = isSingleton ? 1 : 0;
 	const mainCount = getCountMap(maindeck);
 	const sideCount = getCountMap(sideboard);
 
@@ -58,7 +58,7 @@ const lookUpCards = async (rawData) => {
 
 	return cards.map((card) => {
 		const { name = '' } = card;
-		const count = mainCount[name.toLowerCase()] || 1;
+		const count = mainCount[name.toLowerCase()] || defaultCount;
 		const sideboardCount = sideCount[name.toLowerCase()] || 0;
 
 		return { ...card, count, sideboardCount };
