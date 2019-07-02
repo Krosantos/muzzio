@@ -18,7 +18,6 @@ const convertIdentityToQuery = (identity) => {
 	return ` identity:${identity.join('')}`;
 };
 
-// TODO: Remove MH1 hack once it releases.
 const getFormatQuery = (format) => {
 	if (format !== OATHBREAKER)
 		return `format:${format}`;
@@ -55,7 +54,7 @@ const useQueryConstraints = (bypassIdentity) => {
 			return formatQuery;
 		const identityQuery = getIdentityQuery(format, commanderIdentity, oathbreakerIdentity);
 
-		return `${formatQuery} ${identityQuery}`;
+		return `${formatQuery} ${identityQuery} prefer:newest`;
 	}, [format, commanderIdentity, oathbreakerIdentity]);
 
 	return query;
