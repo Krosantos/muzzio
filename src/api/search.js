@@ -6,7 +6,7 @@ import api from '.';
 const search = async (query) => {
 	let newQuery = query;
 
-	newQuery += ' game:paper order:cmc';
+	newQuery += ' game:paper not:promo order:cmc';
 	const config = {
 		params: {
 			q: newQuery,
