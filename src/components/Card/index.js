@@ -24,6 +24,7 @@ const Card = ({
 }) => {
 	const card = useCard(cardId, rawCard);
 	const {
+		id,
 		attributes,
 		cost,
 		imageUrl,
@@ -58,7 +59,7 @@ const Card = ({
 				{nameAndCount}
 				<ManaCost cost={cost} />
 			</div>
-			{shouldShowArt && <HoverArt imageUrl={imageUrl} reverseUrl={reverseUrl} />}
+			{shouldShowArt && <HoverArt id={id} imageUrl={imageUrl} reverseUrl={reverseUrl} />}
 			{isCardCountModalOpen
 			&& ReactDOM.createPortal(
 				<CardCountModal

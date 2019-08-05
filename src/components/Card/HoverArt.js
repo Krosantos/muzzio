@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import throttle from 'lodash/throttle';
 import clamp from 'lodash/clamp';
+import useRefreshCard from './useRefreshCard';
 import { imageContainer, image } from './styles.scss';
 
 const IMAGE_WIDTH = 366;
@@ -31,7 +32,7 @@ const calculateOffset = (clientX, clientY, hasBackside) => {
 	return result;
 };
 
-const HoverArt = ({ imageUrl, reverseUrl }) => {
+const HoverArt = ({ id, imageUrl, reverseUrl }) => {
 	const [style, setMousePosition] = useState({ left: '0px', top: '0px' });
 	const updatePosition = useCallback(
 		throttle(({ clientX, clientY }) => {
@@ -40,6 +41,7 @@ const HoverArt = ({ imageUrl, reverseUrl }) => {
 			setMousePosition({ ...offset, visibility: 'visible' });
 		}, 100),
 	);
+	const refreshCard = useRefreshCard(id);
 
 	useEffect(() => {
 		window.addEventListener('mousemove', updatePosition);
@@ -50,8 +52,8 @@ const HoverArt = ({ imageUrl, reverseUrl }) => {
 
 	return (
 		<div className={imageContainer} style={style}>
-			<img alt="" className={image} src={imageUrl} />
-			{reverseUrl && <img alt="" className={image} src={reverseUrl} />}
+			<img alt="" className={image} onError={refreshCard} src={imageUrl} />
+			{reverseUrl && <img alt="" className={image} onError={refreshCard} src={reverseUrl} />}
 		</div>
 	);
 };

@@ -106,6 +106,14 @@ const useCards = () => {
 
 	const getCard = useCallback((id) => get(cards, id), [cards]);
 
+	const updateCard = useCallback((newCard) => {
+		const { id } = newCard;
+		const toUpdate = get(cards, id, {});
+		const toSet = merge({}, toUpdate, newCard);
+
+		dispatch({ card: toSet, type: UPDATE_ACTION });
+	});
+
 	return {
 		addAttribute,
 		addCard,
@@ -118,6 +126,7 @@ const useCards = () => {
 		removeCard,
 		setCount,
 		setSideboardCount,
+		updateCard,
 	};
 };
 
