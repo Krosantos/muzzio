@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import ReactDOM from 'react-dom';
 import SampleHandModal from './SampleHandModal';
-import { button } from './styles.scss';
+import { menuButton } from './styles.scss';
 
 const SAMPLE_HAND_BUTTON_TEXT = 'Sample Hand';
 
@@ -13,7 +13,7 @@ const SampleHand = () => {
 	return (
 		<div>
 			<button
-				className={button}
+				className={menuButton}
 				onClick={openSampleHandModal}
 				type="button"
 			>
