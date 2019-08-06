@@ -5,6 +5,7 @@ const REMOVE_ACTION = 'remove';
 const OVERWRITE = 'overwrite';
 
 const CARD_MAX = 4;
+const HAND_SIZE = 7;
 
 const ALL_CARDS = 'All Cards';
 const IS_IN_DECK = 'indeck';
@@ -70,7 +71,6 @@ const oathbreakerBanlist = [
 	"Painter's Servant",
 	'Panoptic Mirror',
 	'Primal Surge',
-	'Primeval Titan',
 	'Recurring Nightmare',
 	'Saheeli, the Gifted',
 	'Sol Ring',
@@ -94,6 +94,7 @@ export {
 	UPDATE_ACTION,
 	OVERWRITE,
 	CARD_MAX,
+	HAND_SIZE,
 	ALL_CARDS,
 	IS_IN_DECK,
 	IS_IN_SIDEBOARD,

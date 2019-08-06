@@ -47,12 +47,12 @@ const Commander = () => {
 				<ManaCost className={manaCost} cost={identityAsCost} />
 			</div>
 			{isCommanderModalOpen
-			&& ReactDOM.createPortal(
-				<CommanderModal
-					closeModal={closeCommanderModal}
-				/>,
-				document.querySelector('body'),
-			)}
+				&& ReactDOM.createPortal(
+					<CommanderModal
+						closeModal={closeCommanderModal}
+					/>,
+					document.querySelector('body'),
+				)}
 		</div>
 	);
 };
