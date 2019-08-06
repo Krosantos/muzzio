@@ -39,6 +39,7 @@
 .cardContainer {
     display: flex;
     overflow-y: scroll;
+    width: fit-content;
     max-height: 658px;
     flex-wrap: wrap;
     justify-content: center;     
