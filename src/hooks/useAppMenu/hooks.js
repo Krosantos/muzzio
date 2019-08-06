@@ -2,10 +2,12 @@ import path from 'path';
 import { useCallback } from 'react';
 import { remote } from 'electron';
 import settings from 'electron-settings';
+import getList from '@api/getList';
 import useSave from '@hooks/useSave';
 import useLoad from '@hooks/useLoad';
 import useFormat from '@hooks/useFormat';
 import useOverwrite from '@hooks/useOverwrite';
+import useCards from '@hooks/useCards';
 import setWindowTitle from '@utils/setWindowTitle';
 import { CURRENT_FILE_SETTING, OPEN_FOLDER_SETTING } from '@constants';
 
@@ -77,9 +79,23 @@ const useChangeFormat = () => {
 	return changeFormat;
 };
 
+const useRefreshCards = () => {
+	const { cards, addCard } = useCards();
+
+	const refreshCards = useCallback(async () => {
+		const identifiers = Object.keys(cards).map((id) => ({ id }));
+		const newCards = await getList(identifiers);
+
+		newCards.forEach((card) => addCard(card));
+	}, [cards]);
+
+	return refreshCards;
+};
+
 export {
 	useSaveDeck,
 	useLoadDeck,
 	useNewDeck,
 	useChangeFormat,
+	useRefreshCards,
 };

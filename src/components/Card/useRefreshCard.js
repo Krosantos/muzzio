@@ -3,11 +3,11 @@ import getCardById from '@api/getCardById';
 import useCards from '@hooks/useCards';
 
 const useRefreshCard = (id) => {
-	const { updateCard } = useCards();
+	const { addCard } = useCards();
 	const repairImage = useCallback(async () => {
 		const newCard = await getCardById(id);
 
-		updateCard(newCard);
+		addCard(newCard);
 	}, [id]);
 
 	return repairImage;

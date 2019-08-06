@@ -42,6 +42,7 @@ const viewMenu = {
 
 const getFileMenu = ({
 	changeFormat,
+	refreshCards,
 	newDeck,
 	loadDeck,
 	saveDeck,
@@ -64,6 +65,8 @@ const getFileMenu = ({
 				{ accelerator: 'Shift+Alt+V', click: changeFormat(VINTAGE), label: 'Vintage' },
 			],
 		},
+		{ type: 'separator' },
+		{ accelerator: 'CommandOrControl+Shift+R', click: refreshCards, label: 'Refresh Card Data' },
 		{ type: 'separator' },
 		{ accelerator: 'CommandOrControl+S', click: saveDeck, label: 'Save Deck' },
 		{ accelerator: 'CommandOrControl+Shift+S', click: saveDeckAs, label: 'Save As' },

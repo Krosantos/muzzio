@@ -6,6 +6,7 @@ import {
 	useSaveDeck,
 	useLoadDeck,
 	useChangeFormat,
+	useRefreshCards,
 } from './hooks';
 
 const { Menu } = remote;
@@ -15,6 +16,7 @@ const useAppMenu = () => {
 		changeFormat: useChangeFormat(),
 		loadDeck: useLoadDeck(),
 		newDeck: useNewDeck(),
+		refreshCards: useRefreshCards(),
 		saveDeck: useSaveDeck(),
 		saveDeckAs: useSaveDeck(true),
 	};
