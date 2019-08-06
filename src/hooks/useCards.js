@@ -24,8 +24,8 @@ const useCards = () => {
 
 	const addCard = useCallback((card) => {
 		const maybeCard = get(cards, card.id, {});
-		const { count } = maybeCard;
-		const toAdd = merge({}, maybeCard, card, { count });
+		const { count, sideboardCount } = maybeCard;
+		const toAdd = merge({}, maybeCard, card, { count, sideboardCount });
 
 		dispatch({ card: toAdd, type: ADD_ACTION });
 	}, [cards]);

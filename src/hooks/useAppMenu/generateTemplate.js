@@ -66,7 +66,7 @@ const getFileMenu = ({
 			],
 		},
 		{ type: 'separator' },
-		{ accelerator: 'CommandOrControl+Shift+R', click: refreshCards, label: 'Refresh Card Data' },
+		{ accelerator: 'CommandOrControl+Alt+R', click: refreshCards, label: 'Refresh Card Data' },
 		{ type: 'separator' },
 		{ accelerator: 'CommandOrControl+S', click: saveDeck, label: 'Save Deck' },
 		{ accelerator: 'CommandOrControl+Shift+S', click: saveDeckAs, label: 'Save As' },
