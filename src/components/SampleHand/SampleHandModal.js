@@ -22,8 +22,8 @@ const CardSection = ({ cardsInHand }) => (
 
 const ButtonSection = ({ generateNewHand, addCard }) => (
 	<div className={buttonContainer}>
-		<button className={modifyButton} onClick={generateNewHand} type="button">{NEW_HAND_TEXT}</button>
 		<button className={modifyButton} onClick={addCard} type="button">{ADD_CARD_TEXT}</button>
+		<button className={modifyButton} onClick={generateNewHand} type="button">{NEW_HAND_TEXT}</button>
 	</div>
 );
 
