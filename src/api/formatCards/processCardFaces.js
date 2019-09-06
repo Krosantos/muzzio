@@ -4,8 +4,8 @@ const getTransformData = (cardFaces) => {
 	const result = {};
 
 	result.face = get(cardFaces, 0);
-	result.imageUrl = get(cardFaces, [0, 'image_uris', 'png']);
-	result.reverseUrl = get(cardFaces, [1, 'image_uris', 'png']);
+	result.imageUrl = get(cardFaces, [0, 'image_uris', 'border_crop']);
+	result.reverseUrl = get(cardFaces, [1, 'image_uris', 'border_crop']);
 	return result;
 };
 
@@ -22,7 +22,7 @@ const processCardFaces = (card) => {
 		return getTransformData(cardFaces);
 
 	result.face = card;
-	result.imageUrl = get(imageUris, 'png');
+	result.imageUrl = get(imageUris, 'border_crop');
 
 	return result;
 };

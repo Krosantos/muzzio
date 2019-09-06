@@ -4,13 +4,13 @@ import useCards from '@hooks/useCards';
 
 const useRefreshCard = (id) => {
 	const { addCard } = useCards();
-	const repairImage = useCallback(async () => {
+	const refreshedCard = useCallback(async () => {
 		const newCard = await getCardById(id);
 
 		addCard(newCard);
 	}, [id]);
 
-	return repairImage;
+	return refreshedCard;
 };
 
 export default useRefreshCard;
