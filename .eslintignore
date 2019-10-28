@@ -1,5 +1,5 @@
 dist
-staging
+app/pack
 compiled
 node_modules
 yarn.lock

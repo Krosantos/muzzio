@@ -23,6 +23,7 @@ const MODERN = 'modern';
 const COMMANDER = 'commander';
 const OATHBREAKER = 'oathbreaker';
 const STANDARD = 'standard';
+const PIONEER = 'pioneer';
 const VINTAGE = 'vintage';
 const LEGACY = 'legacy';
 const PAUPER = 'pauper';
@@ -37,6 +38,7 @@ const formats = [
 	COMMANDER,
 	OATHBREAKER,
 	STANDARD,
+	PIONEER,
 	VINTAGE,
 	LEGACY,
 	PAUPER,
@@ -105,6 +107,7 @@ export {
 	CURRENT_FILE_SETTING,
 	OPEN_FOLDER_SETTING,
 	MODERN,
+	PIONEER,
 	COMMANDER,
 	OATHBREAKER,
 	STANDARD,
