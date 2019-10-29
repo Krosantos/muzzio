@@ -7,7 +7,7 @@ import { imageContainer, image } from './styles.scss';
 const IMAGE_WIDTH = 366;
 const IMAGE_HEIGHT = 510;
 
-// eslint-disable-next-line max-statements, complexity
+// eslint-disable-next-line complexity
 const calculateOffset = (clientX, clientY, hasBackside) => {
 	const TOTAL_HEIGHT = IMAGE_HEIGHT * (hasBackside ? 2 : 1);
 	const TOTAL_WIDTH = IMAGE_WIDTH * (hasBackside ? 2 : 1);

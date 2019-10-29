@@ -21,7 +21,7 @@ const useExport = (maindeck = [], sideboard = []) => {
 	}, [maindeck, sideboard]);
 	const exportList = useCallback(async () => {
 		clipboard.writeText(toWrite);
-	});
+	}, [toWrite]);
 
 	return exportList;
 };

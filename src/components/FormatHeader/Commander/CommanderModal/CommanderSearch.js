@@ -19,7 +19,7 @@ const CommanderSearch = ({ closeModal }) => {
 		setCommander(toSet);
 		if (partnerType === NO_PARTNER)
 			closeModal();
-	}, []);
+	}, [closeModal, setCommander]);
 	const placeholder = useMemo(() => get(commander, 'name', DEFAULT_PLACEHOLDER), [commander]);
 
 	return (

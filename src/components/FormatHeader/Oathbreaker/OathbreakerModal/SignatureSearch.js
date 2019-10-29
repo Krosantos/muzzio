@@ -8,19 +8,17 @@ import { cardList, searchSection } from '../styles.scss';
 const SIGNATURE_SPELL_QUERY = ' (t:instant OR t:sorcery)';
 const DEFAULT_PLACEHOLDER = 'Search for Signature Spell';
 
-// eslint-disable-next-line max-statements
 const SignatureSearch = ({ closeModal }) => {
 	const [results, setResults] = useState([]);
 	const {
 		colorIdentity,
-		oathbreaker,
 		signatureSpell,
 		setSignatureSpell,
 	} = useOathbreaker();
 	const wrappedSetPartner = useCallback((card) => {
 		setSignatureSpell(card);
 		closeModal();
-	}, [oathbreaker]);
+	}, [closeModal, setSignatureSpell]);
 	const identity = useMemo(() => `identity:${colorIdentity.join('')}`, [colorIdentity]);
 	const placeholder = useMemo(() => get(signatureSpell, 'name', DEFAULT_PLACEHOLDER), [signatureSpell]);
 	const finalQuery = `${SIGNATURE_SPELL_QUERY} ${identity}`;

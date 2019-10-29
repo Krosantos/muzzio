@@ -28,8 +28,8 @@ const spreadCardsInDeck = (cardsInDeck) => {
 };
 
 const useShuffledDeck = () => {
-	const { cardsByAttribute, cards } = useCards();
-	const cardsInDeck = useMemo(() => cardsByAttribute(IS_IN_DECK), [cards]);
+	const { cardsByAttribute } = useCards();
+	const cardsInDeck = useMemo(() => cardsByAttribute(IS_IN_DECK), [cardsByAttribute]);
 	const shuffledCards = useMemo(() => spreadCardsInDeck(cardsInDeck), [cardsInDeck]);
 
 	return shuffledCards;
@@ -65,8 +65,8 @@ const sampleHandReducer = ({ cardsInDeck, cardsInHand }, action) => {
 const useSampleHand = () => {
 	const initialState = useShuffledDeck();
 	const [{ cardsInHand }, dispatch] = useReducer(sampleHandReducer, initialState);
-	const addCard = useCallback(() => dispatch(ADD_CARD));
-	const generateNewHand = useCallback(() => dispatch(NEW_HAND));
+	const addCard = useCallback(() => dispatch(ADD_CARD), []);
+	const generateNewHand = useCallback(() => dispatch(NEW_HAND), []);
 
 	return { addCard, cardsInHand, generateNewHand };
 };

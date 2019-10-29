@@ -2,16 +2,16 @@
 import { useMemo } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import sortBy from 'lodash/sortBy';
+import useCards from '@hooks/useCards';
+import useCommander from '@hooks/useCommander';
+import useFormat from '@hooks/useFormat';
+import useOathbreaker from '@hooks/useOathbreaker';
 import {
 	IS_IN_DECK,
 	IS_IN_SIDEBOARD,
 	OATHBREAKER,
 	COMMANDER,
 } from '@constants';
-import useCards from '@hooks/useCards';
-import useCommander from '@hooks/useCommander';
-import useFormat from '@hooks/useFormat';
-import useOathbreaker from '@hooks/useOathbreaker';
 
 const sortCards = (cards) => {
 	const byAlpha = sortBy(cards, ({ name }) => name);
@@ -30,7 +30,7 @@ const useSideboardCount = (cards) => cards.map((card) => {
 	return { ...card, count: sideboardCount, sideboardCount: 0 };
 });
 
-// eslint-disable-next-line max-params, complexity, max-statements
+// eslint-disable-next-line max-params, complexity
 const appendCards = (sortedCards, format, commanderData, oathbreakerData) => {
 	const cards = [...sortedCards];
 	const { commander, partner } = commanderData;
@@ -52,7 +52,6 @@ const appendCards = (sortedCards, format, commanderData, oathbreakerData) => {
 	return cards;
 };
 
-// eslint-disable-next-line max-statements
 const useMaindeck = () => {
 	const { cardsByAttribute } = useCards();
 	const cardsInDeck = useMemo(() => cardsByAttribute(IS_IN_DECK), [cardsByAttribute]);
@@ -71,6 +70,7 @@ const useSideboard = () => {
 		const sideboardCards = cardsByAttribute(IS_IN_SIDEBOARD);
 		const sorted = sortCards(sideboardCards);
 
+		// eslint-disable-next-line react-hooks/rules-of-hooks, (It's not a hook)
 		return useSideboardCount(sorted);
 	}, [cardsByAttribute]);
 

@@ -8,7 +8,7 @@ const useRefreshCard = (id) => {
 		const newCard = await getCardById(id);
 
 		addCard(newCard);
-	}, [id]);
+	}, [addCard, id]);
 
 	return refreshedCard;
 };

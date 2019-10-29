@@ -37,7 +37,7 @@ const Oathbreaker = () => {
 	const formattedFormat = useMemo(() => capitalize(format), [format]);
 	const { cardsByAttribute } = useCards();
 	const deckIdentity = useMemo(() => getIdentityFromCards(cardsByAttribute(IS_IN_DECK)),
-		[cardsByAttribute(IS_IN_DECK)]);
+		[cardsByAttribute]);
 
 	return (
 		<div className={container}>

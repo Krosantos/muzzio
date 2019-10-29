@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { IS_IN_DECK } from '@constants';
 import useCards from '@hooks/useCards';
+import { IS_IN_DECK } from '@constants';
 import { countContainer } from './styles.scss';
 
 const LANDS = 'Lands: ';

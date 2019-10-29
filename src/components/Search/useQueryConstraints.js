@@ -55,7 +55,7 @@ const useQueryConstraints = (bypassIdentity) => {
 		const identityQuery = getIdentityQuery(format, commanderIdentity, oathbreakerIdentity);
 
 		return `${formatQuery} ${identityQuery} prefer:newest`;
-	}, [format, commanderIdentity, oathbreakerIdentity]);
+	}, [format, commander, oathbreaker, bypassIdentity, commanderIdentity, oathbreakerIdentity]);
 
 	return query;
 };

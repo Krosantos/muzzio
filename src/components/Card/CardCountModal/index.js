@@ -17,7 +17,7 @@ const CardCountModal = ({ card, setCountCallback, closeModal }) => {
 
 		setCountCallback(card, count);
 		closeModal();
-	}, [internalCount]);
+	}, [card, closeModal, internalCount, setCountCallback]);
 
 	return (
 		<ModalContainer closeModal={closeModal}>

@@ -60,7 +60,19 @@ const useRightClickMenu = (card, openCardCountModal, openSideboardCountModal) =>
 		setCount,
 		setSideboardCount,
 	}),
-	[card, attributes, isSingleton]);
+	[
+		addAttribute,
+		attributes,
+		card,
+		cardExists,
+		isSingleton,
+		openCardCountModal,
+		openSideboardCountModal,
+		removeAttribute,
+		removeCard,
+		setCount,
+		setSideboardCount,
+	]);
 
 	return openMenu;
 };

@@ -12,12 +12,12 @@ const Attribute = ({ attribute }) => {
 	const { cards, addAttribute, cardsByAttribute } = useCards();
 	const cardsToShow = useMemo(
 		() => (attribute === ALL_CARDS ? values(cards) : cardsByAttribute(attribute)),
-		[cards, attribute],
+		[attribute, cards, cardsByAttribute],
 	);
 	const inDeckString = useInDeckString(attribute);
 	const callback = useCallback((card) => {
 		addAttribute(card, attribute);
-	}, [attribute]);
+	}, [addAttribute, attribute]);
 	const { openMenu, sortedCards } = useSorting(cardsToShow);
 
 	return (

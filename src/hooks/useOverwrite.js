@@ -10,7 +10,6 @@ import {
 	COMMANDER,
 } from '@constants';
 
-// eslint-disable-next-line max-statements
 const useOverwrite = () => {
 	const { setAttributes } = useContext(AttributesContext);
 	const { dispatch: cardsDispatch } = useContext(CardContext);
@@ -32,7 +31,7 @@ const useOverwrite = () => {
 		setAttributes(attributes);
 		cardsDispatch({ card: cards, type: OVERWRITE });
 		setCommanderData(commanderData);
-	}, []);
+	}, [cardsDispatch, setAttributes, setCommanderData, setFormat, setOathbreakerData]);
 
 	return overwrite;
 };

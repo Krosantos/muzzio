@@ -15,7 +15,7 @@ const OathbreakerSearch = () => {
 		const toSet = { ...card, attributes: {}, disableMenu: true };
 
 		setOathbreaker(toSet);
-	}, []);
+	}, [setOathbreaker]);
 	const placeholder = useMemo(() => get(oathbreaker, 'name', DEFAULT_PLACEHOLDER), [oathbreaker]);
 
 	return (

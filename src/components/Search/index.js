@@ -14,7 +14,7 @@ const Search = ({
 	const [value, setValue] = useState('');
 	const updateValue = useCallback((event) => {
 		setValue(event.target.value);
-	});
+	}, []);
 	const constraint = useQueryConstraints(bypassIdentity);
 	const onEnter = useCallback(async ({ key }) => {
 		if (key !== 'Enter')
@@ -22,7 +22,7 @@ const Search = ({
 		const searchResults = await search(`${value} ${constraint} ${additionalConstraint}`);
 
 		setResults(searchResults);
-	});
+	}, [additionalConstraint, constraint, setResults, value]);
 
 	return (
 		<input

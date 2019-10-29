@@ -1,5 +1,5 @@
-import { CARD_MAX } from '@constants';
 import { remote } from 'electron';
+import { CARD_MAX } from '@constants';
 
 const { MenuItem } = remote;
 

@@ -10,11 +10,9 @@ const BASE_PARTNER_QUERY = ' t:legendary t:creature o:Partner';
 const DEFAULT_PLACEHOLDER = 'Search for Partner';
 const eligibleTypes = [ANY_PARTNER, SPECIFIC_PARTNER];
 
-// eslint-disable-next-line max-statements
 const PartnerSearch = ({ closeModal }) => {
 	const [results, setResults] = useState([]);
 	const {
-		commander,
 		partner,
 		setPartner,
 		partnerQuery = {},
@@ -22,7 +20,7 @@ const PartnerSearch = ({ closeModal }) => {
 	const wrappedSetPartner = useCallback((card) => {
 		setPartner(card);
 		closeModal();
-	}, [commander]);
+	}, [closeModal, setPartner]);
 	const placeholder = useMemo(() => get(partner, 'name', DEFAULT_PLACEHOLDER), [partner]);
 	const { type, query } = partnerQuery;
 

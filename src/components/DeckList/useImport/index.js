@@ -27,7 +27,7 @@ const useImport = () => {
 				set(toSet, ['attributes', IS_IN_SIDEBOARD], true);
 			addCard(toSet);
 		});
-	});
+	}, [addCard, clearDeck, isSingleton]);
 
 	return importFile;
 };

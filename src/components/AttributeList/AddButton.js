@@ -13,7 +13,7 @@ const AddButton = () => {
 			return;
 		addAttribute(toAdd);
 		setToAdd('');
-	}, [toAdd, attributes]);
+	}, [attributes, toAdd, addAttribute]);
 
 	return (
 		<div className={attributeContainer}>

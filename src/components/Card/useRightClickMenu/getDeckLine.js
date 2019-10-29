@@ -1,6 +1,6 @@
 import get from 'lodash/get';
-import { IS_IN_DECK } from '@constants';
 import { remote } from 'electron';
+import { IS_IN_DECK } from '@constants';
 
 const { MenuItem } = remote;
 

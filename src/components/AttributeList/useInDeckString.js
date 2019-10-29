@@ -24,7 +24,6 @@ const getSingletonString = (cards = []) => {
 	return ` - ${inDeck} of ${inTotal}`;
 };
 
-// eslint-disable-next-line max-statements
 const getNonSingletonString = (cards) => {
 	const inDeck = filterCards(cards, IS_IN_DECK);
 	const inSideboard = filterCards(cards, IS_IN_SIDEBOARD);
@@ -52,7 +51,7 @@ const useInDeckString = (attribute) => {
 		if (isSingleton)
 			return getSingletonString(cardsWithAttribute);
 		return getNonSingletonString(cardsWithAttribute);
-	}, [attribute, isSingleton, cardsByAttribute]);
+	}, [attribute, isSingleton, cards, cardsByAttribute]);
 
 	return inDeckString;
 };

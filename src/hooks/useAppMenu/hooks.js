@@ -28,7 +28,7 @@ const useSaveDeck = (saveAs = false) => {
 		save(filepath);
 		setWindowTitle(filepath);
 		settings.set(CURRENT_FILE_SETTING, filepath);
-	}, [save]);
+	}, [save, saveAs]);
 
 	return saveDeck;
 };
@@ -51,7 +51,7 @@ const useLoadDeck = () => {
 		setWindowTitle(filepath);
 		settings.set(CURRENT_FILE_SETTING, filepath);
 		settings.set(OPEN_FOLDER_SETTING, path.dirname(filepath));
-	}, [load]);
+	}, [load, overwrite]);
 
 	return loadDeck;
 };
@@ -63,7 +63,7 @@ const useNewDeck = () => {
 		setWindowTitle();
 		settings.delete(CURRENT_FILE_SETTING);
 		overwrite({ format });
-	}, [format]);
+	}, [format, overwrite]);
 
 	return newDeck;
 };
@@ -74,7 +74,7 @@ const useChangeFormat = () => {
 		setWindowTitle();
 		settings.delete(CURRENT_FILE_SETTING);
 		overwrite({ format });
-	}, []);
+	}, [overwrite]);
 
 	return changeFormat;
 };
@@ -87,7 +87,7 @@ const useRefreshCards = () => {
 		const newCards = await getList(identifiers);
 
 		newCards.forEach((card) => addCard(card));
-	}, [cards]);
+	}, [addCard, cards]);
 
 	return refreshCards;
 };

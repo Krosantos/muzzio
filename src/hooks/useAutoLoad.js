@@ -2,13 +2,12 @@ import path from 'path';
 import fs from 'fs';
 import { remote } from 'electron';
 import settings from 'electron-settings';
-import { AUTOSAVE, CURRENT_FILE_SETTING } from '@constants';
 import setWindowTitle from '@utils/setWindowTitle';
+import { AUTOSAVE, CURRENT_FILE_SETTING } from '@constants';
 import useLoad from './useLoad';
 
 const { app } = remote;
 
-// eslint-disable-next-line max-statements
 const useAutoLoad = () => {
 	let readPath = '';
 	const currentFile = settings.get(CURRENT_FILE_SETTING);

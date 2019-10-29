@@ -30,7 +30,7 @@ const useNameAndCount = (card, useMaindeckCount, useSideboardCount) => {
 	} = card;
 	const { isSingleton } = useFormat();
 
-	// eslint-disable-next-line complexity, max-statements
+	// eslint-disable-next-line complexity
 	const nameAndCount = useMemo(() => {
 		if (isSingleton)
 			return getSingletonCount(count, name);
@@ -49,13 +49,7 @@ const useNameAndCount = (card, useMaindeckCount, useSideboardCount) => {
 		if (inSideboard)
 			return `(${sideboardCount}) ${name}`;
 		return name;
-	}, [
-		name,
-		count,
-		sideboardCount,
-		attributes[IS_IN_DECK],
-		attributes[IS_IN_SIDEBOARD],
-	]);
+	}, [isSingleton, count, name, useMaindeckCount, useSideboardCount, sideboardCount, attributes]);
 
 	return nameAndCount;
 };

@@ -3,7 +3,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ManaCost from '@components/ManaCost';
 import useCards from '@hooks/useCards';
-import { IS_IN_DECK } from '@constants';
 import useHoverArt from './useHoverArt';
 import CardCountModal from './CardCountModal';
 import useRightClickMenu from './useRightClickMenu';
@@ -25,7 +24,6 @@ const Card = ({
 	const card = useCard(cardId, rawCard);
 	const {
 		id,
-		attributes,
 		cost,
 		imageUrl,
 		reverseUrl,
@@ -43,7 +41,7 @@ const Card = ({
 	const openSideboardCountModal = useCallback(() => setSideboardCountModalOpen(true), []);
 
 	const fireCallback = useCallback(() => callback(card), [card, callback]);
-	const className = useMemo(() => `${cardRow} ${getColorClass(card, alwaysColorful)}`, [attributes[IS_IN_DECK]]);
+	const className = useMemo(() => `${cardRow} ${getColorClass(card, alwaysColorful)}`, [alwaysColorful, card]);
 	const handleContextClick = useRightClickMenu(card, openCardCountModal, openSideboardCountModal);
 	const { shouldShowArt, showArt, hideArt } = useHoverArt();
 

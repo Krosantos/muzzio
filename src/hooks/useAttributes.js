@@ -9,13 +9,13 @@ const useAttributes = () => {
 
 		toSet.push(attribute);
 		return setAttributes(toSet);
-	}), [attributes]);
+	}), [attributes, setAttributes]);
 
 	const removeAttribute = useCallback(((attribute) => {
 		const toSet = attributes.filter((att) => att !== attribute);
 
 		return setAttributes(toSet);
-	}), [attributes]);
+	}), [attributes, setAttributes]);
 
 	return {
 		addAttribute,

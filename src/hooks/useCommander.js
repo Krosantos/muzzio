@@ -15,7 +15,6 @@ const calculateIdentity = (commanderData) => {
 	return identities;
 };
 
-// eslint-disable-next-line max-statements
 const useCommander = () => {
 	const { commanderData, setCommanderData } = useContext(CommanderContext);
 
@@ -23,13 +22,13 @@ const useCommander = () => {
 		const toSet = assign({}, commanderData, { commander, partner: {} });
 
 		setCommanderData(toSet);
-	}, [commanderData]);
+	}, [commanderData, setCommanderData]);
 
 	const setPartner = useCallback((partner) => {
 		const toSet = assign({}, commanderData, { partner });
 
 		setCommanderData(toSet);
-	});
+	}, [commanderData, setCommanderData]);
 
 	const colorIdentity = useMemo(() => calculateIdentity(commanderData), [commanderData]);
 	const commander = useMemo(() => get(commanderData, 'commander'), [commanderData]);

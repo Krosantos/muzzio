@@ -18,13 +18,13 @@ const useOathbreaker = () => {
 		const toSet = assign({}, oathbreakerData, { oathbreaker, signatureSpell: {} });
 
 		setOathbreakerData(toSet);
-	}, [oathbreakerData]);
+	}, [oathbreakerData, setOathbreakerData]);
 
 	const setSignatureSpell = useCallback((signatureSpell) => {
 		const toSet = assign({}, oathbreakerData, { signatureSpell });
 
 		setOathbreakerData(toSet);
-	});
+	}, [oathbreakerData, setOathbreakerData]);
 
 	const colorIdentity = useMemo(() => calculateIdentity(oathbreakerData), [oathbreakerData]);
 	const oathbreaker = useMemo(() => get(oathbreakerData, 'oathbreaker'), [oathbreakerData]);

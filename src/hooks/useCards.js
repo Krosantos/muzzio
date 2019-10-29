@@ -28,9 +28,9 @@ const useCards = () => {
 		const toAdd = merge({}, maybeCard, card, { count, sideboardCount });
 
 		dispatch({ card: toAdd, type: ADD_ACTION });
-	}, [cards]);
+	}, [cards, dispatch]);
 
-	const removeCard = useCallback((card) => dispatch({ card, type: REMOVE_ACTION }), []);
+	const removeCard = useCallback((card) => dispatch({ card, type: REMOVE_ACTION }), [dispatch]);
 
 	const cardExists = useCallback((card) => {
 		const id = get(card, 'id');
@@ -42,7 +42,7 @@ const useCards = () => {
 		const toAdd = set(card, ['attributes', attribute], true);
 
 		dispatch({ card: toAdd, type: UPDATE_ACTION });
-	}, []);
+	}, [dispatch]);
 
 	const removeAttribute = useCallback((card, attribute) => {
 		const toDispatch = { ...card };
@@ -50,7 +50,7 @@ const useCards = () => {
 		unset(toDispatch, ['attributes', attribute]);
 
 		dispatch({ card: toDispatch, type: UPDATE_ACTION });
-	}, []);
+	}, [dispatch]);
 
 	const setCount = useCallback((card, count) => {
 		const {
@@ -68,7 +68,7 @@ const useCards = () => {
 		set(toDispatch, ['attributes', IS_IN_SIDEBOARD], clampedSideboardCount > 0);
 
 		dispatch({ card: toDispatch, type: UPDATE_ACTION });
-	}, []);
+	}, [dispatch]);
 
 	const setSideboardCount = useCallback((card, sideboardCount) => {
 		const {
@@ -84,7 +84,7 @@ const useCards = () => {
 		set(toDispatch, ['attributes', IS_IN_SIDEBOARD], sideboardCount > 0);
 
 		dispatch({ card: toDispatch, type: UPDATE_ACTION });
-	}, []);
+	}, [dispatch]);
 
 	const clearDeck = useCallback(() => {
 		const inDeck = cardsByAttribute(IS_IN_DECK);
@@ -103,7 +103,7 @@ const useCards = () => {
 			set(toSet, ['attributes', IS_IN_SIDEBOARD], false);
 			dispatch({ card: toSet, type: UPDATE_ACTION });
 		});
-	}, [cardsByAttribute]);
+	}, [cardsByAttribute, dispatch]);
 
 	const getCard = useCallback((id) => get(cards, id), [cards]);
 

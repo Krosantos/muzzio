@@ -2,7 +2,6 @@ import get from 'lodash/get';
 import formatCards from './formatCards';
 import api from '.';
 
-// eslint-disable-next-line max-statements
 const search = async (query) => {
 	let newQuery = query;
 

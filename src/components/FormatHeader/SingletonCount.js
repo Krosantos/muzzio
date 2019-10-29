@@ -22,7 +22,7 @@ const CMC = 'CMC: ';
 const useCommandZoneCards = (format) => {
 	const { commander, partner } = useCommander();
 	const { oathbreaker, signatureSpell } = useOathbreaker();
-	// eslint-disable-next-line max-statements, complexity
+	// eslint-disable-next-line complexity
 	const commandZoneCount = useMemo(() => {
 		let result = 0;
 
@@ -54,7 +54,6 @@ const calculateCardCount = (cardsInDeck = [], commandZoneCount = 0) => {
 	return result;
 };
 
-// eslint-disable-next-line max-statements
 const SingletonCount = () => {
 	const { cardsByAttribute } = useCards();
 	const { format } = useFormat();

@@ -19,7 +19,7 @@ const convertIdentityToCost = (identity) => {
 	return `{${identity.join('}{')}}`;
 };
 
-// eslint-disable-next-line max-statements, max-lines-per-function
+// eslint-disable-next-line max-lines-per-function
 const Commander = () => {
 	const [isCommanderModalOpen, setCommanderModalOpen] = useState(false);
 	const closeCommanderModal = useCallback(() => setCommanderModalOpen(false), []);

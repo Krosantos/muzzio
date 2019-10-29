@@ -1,6 +1,6 @@
 import get from 'lodash/get';
-import { ALL_CARDS } from '@constants';
 import { remote } from 'electron';
+import { ALL_CARDS } from '@constants';
 
 const { MenuItem } = remote;
 

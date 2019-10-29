@@ -18,7 +18,7 @@ const calculateSliderStyle = (isOpen, left) => {
 };
 
 const useSliderStyle = (isOpen, left) => {
-	const result = useMemo(() => calculateSliderStyle(isOpen, left));
+	const result = useMemo(() => calculateSliderStyle(isOpen, left), [isOpen, left]);
 
 	return result;
 };
@@ -28,7 +28,7 @@ const useTabStyle = (left) => {
 		const direction = left ? tabLeft : tabRight;
 
 		return `${tabOuter} ${direction}`;
-	}, []);
+	}, [left]);
 
 	return tabStyle;
 };
