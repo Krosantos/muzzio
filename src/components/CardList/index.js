@@ -20,10 +20,10 @@ const CardList = ({
 			{
 				cardArray.map((card) => (
 					<Card
-						key={card.id}
 						alwaysColorful={alwaysColorful}
 						callback={callback}
 						cardId={card.id}
+						key={card.id}
 						rawCard={card}
 						useMaindeckCount={useMaindeckCount}
 						useSideboardCount={useSideboardCount}

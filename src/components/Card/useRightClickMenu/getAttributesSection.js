@@ -30,7 +30,13 @@ const getAttributesSection = (card, menu, attributes, addAttribute, removeAttrib
 	menu.append(
 		new MenuItem({ type: 'separator' }),
 	);
-	attributes.forEach((attribute) => getAttributeLine(card, menu, attribute, addAttribute, removeAttribute));
+	attributes.forEach((attribute) => getAttributeLine(
+		card,
+		menu,
+		attribute,
+		addAttribute,
+		removeAttribute,
+	));
 };
 
 export default getAttributesSection;

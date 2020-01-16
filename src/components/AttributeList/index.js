@@ -9,7 +9,7 @@ const AttributeList = () => {
 
 	return (
 		<div className={attributeList}>
-			{attributes.map((attribute) => <Attribute key={attribute} attribute={attribute} />)}
+			{attributes.map((attribute) => <Attribute attribute={attribute} key={attribute} />)}
 			<AddButton />
 		</div>
 	);

@@ -29,8 +29,13 @@ const calculateSideboardCount = (cards = []) => {
 
 const CardCount = () => {
 	const { cardsByAttribute } = useCards();
-	const mainCount = useMemo(() => calculateCardCount(cardsByAttribute(IS_IN_DECK)), [cardsByAttribute]);
-	const sideCount = useMemo(() => calculateSideboardCount(cardsByAttribute(IS_IN_SIDEBOARD)), [cardsByAttribute]);
+	const mainCount = useMemo(() => calculateCardCount(
+		cardsByAttribute(IS_IN_DECK),
+	),
+	[cardsByAttribute]);
+	const sideCount = useMemo(() => calculateSideboardCount(
+		cardsByAttribute(IS_IN_SIDEBOARD),
+	), [cardsByAttribute]);
 
 	return (
 		<div className={cardCount}>

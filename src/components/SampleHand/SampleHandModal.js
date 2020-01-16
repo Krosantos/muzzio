@@ -14,7 +14,7 @@ const CardSection = ({ cardsInHand }) => (
 			const key = `${index}_${name}`;
 
 			return (
-				<img key={key} alt={name} className={cardImage} src={imageUrl} />
+				<img alt={name} className={cardImage} key={key} src={imageUrl} />
 			);
 		})}
 	</div>

@@ -1,12 +1,12 @@
 import React from 'react';
 import useFormat from '@hooks/useFormat';
-import Commander from './Commander';
-import Oathbreaker from './Oathbreaker';
-import Default from './Default';
 import {
 	COMMANDER,
 	OATHBREAKER,
 } from '@constants';
+import Commander from './Commander';
+import Oathbreaker from './Oathbreaker';
+import Default from './Default';
 
 const componentMap = {
 	[COMMANDER]: Commander,

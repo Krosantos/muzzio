@@ -31,12 +31,11 @@ const ManaCost = ({ cost = '' }) => {
 			<Cost cost={frontCost} />
 			{backCost
 			&& (
-			<>
-				<span>{SLASHES}</span>
-				<Cost cost={backCost} />
-			</>
-			)
-			}
+				<>
+					<span>{SLASHES}</span>
+					<Cost cost={backCost} />
+				</>
+			)}
 		</div>
 	);
 };
@@ -48,7 +47,7 @@ const Cost = ({ cost }) => {
 
 	return (
 		<>
-			{fragments.map((fragment, index) => <Symbol key={index} costFragment={fragment} />)}
+			{fragments.map((fragment, index) => <Symbol costFragment={fragment} key={index} />)}
 		</>
 	);
 };

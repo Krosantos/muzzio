@@ -6,12 +6,6 @@ const createConnection = () => {
 		timeout: 10000,
 	});
 
-	connection.interceptors.request.use((config) => {
-		const newConfig = { ...config };
-
-		return newConfig;
-	});
-
 	return connection;
 };
 

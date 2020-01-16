@@ -70,7 +70,7 @@ const useSideboard = () => {
 		const sideboardCards = cardsByAttribute(IS_IN_SIDEBOARD);
 		const sorted = sortCards(sideboardCards);
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks, (It's not a hook)
+		// eslint-disable-next-line react-hooks/rules-of-hooks
 		return useSideboardCount(sorted);
 	}, [cardsByAttribute]);
 

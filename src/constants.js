@@ -73,7 +73,6 @@ const oathbreakerBanlist = [
 	"Painter's Servant",
 	'Panoptic Mirror',
 	'Primal Surge',
-	'Recurring Nightmare',
 	'Saheeli, the Gifted',
 	'Sol Ring',
 	'Sundering Titan',
