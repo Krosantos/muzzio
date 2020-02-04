@@ -9,7 +9,7 @@
   "scripts": {
     "compile": "webpack && electron-builder --config build/config.json",
     "lint": "eslint .",
-    "start": "concurrently --kill-others \"webpack-dev-server --mode development\" \"cross-env FROM_LOCAL=true electron .\""
+    "dev": "concurrently --kill-others \"webpack-dev-server --mode development\" \"cross-env FROM_LOCAL=true electron .\""
   },
   "dependencies": {
     "axios": "^0.19.0",
