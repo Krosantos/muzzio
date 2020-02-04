@@ -63,3 +63,9 @@ typings/
 # electron and build folders
 app/pack
 compiled/
+
+# vscode editor
+vscode*
+
+# MacOS stuff
+.DS_Store
