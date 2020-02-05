@@ -41,7 +41,7 @@ const Card = ({
 	const openSideboardCountModal = useCallback(() => setSideboardCountModalOpen(true), []);
 
 	const fireCallback = useCallback(() => callback(card), [card, callback]);
-	const className = useMemo(() => `${cardRow} ${getColorClass(card, alwaysColorful)}`, [alwaysColorful, card]);
+	const className = useMemo(() => `${cardRow} ${getColorClass(card.count, card.sideboardCount, card.colors, alwaysColorful)}`, [alwaysColorful, card.colors, card.count, card.sideboardCount]);
 	const handleContextClick = useRightClickMenu(card, openCardCountModal, openSideboardCountModal);
 	const { shouldShowArt, showArt, hideArt } = useHoverArt();
 
@@ -59,23 +59,23 @@ const Card = ({
 			</div>
 			{shouldShowArt && <HoverArt id={id} imageUrl={imageUrl} reverseUrl={reverseUrl} />}
 			{isCardCountModalOpen
-			&& ReactDOM.createPortal(
-				<CardCountModal
-					card={card}
-					closeModal={closeCardCountModal}
-					setCountCallback={setCount}
-				/>,
-				document.querySelector('body'),
-			)}
+				&& ReactDOM.createPortal(
+					<CardCountModal
+						card={card}
+						closeModal={closeCardCountModal}
+						setCountCallback={setCount}
+					/>,
+					document.querySelector('body'),
+				)}
 			{isSideboardCountModalOpen
-			&& ReactDOM.createPortal(
-				<CardCountModal
-					card={card}
-					closeModal={closeSideboardCountModal}
-					setCountCallback={setSideboardCount}
-				/>,
-				document.querySelector('body'),
-			)}
+				&& ReactDOM.createPortal(
+					<CardCountModal
+						card={card}
+						closeModal={closeSideboardCountModal}
+						setCountCallback={setSideboardCount}
+					/>,
+					document.querySelector('body'),
+				)}
 		</>
 	);
 };

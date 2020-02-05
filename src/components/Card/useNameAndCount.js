@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
-import get from 'lodash/get';
 import useFormat from '@hooks/useFormat';
-import { IS_IN_DECK, IS_IN_SIDEBOARD } from '@constants';
 
 const getMaindeckCount = (count, name) => {
 	if (count > 0)
@@ -23,7 +21,6 @@ const getSingletonCount = (count, name) => {
 
 const useNameAndCount = (card, useMaindeckCount, useSideboardCount) => {
 	const {
-		attributes,
 		count,
 		name,
 		sideboardCount,
@@ -39,8 +36,8 @@ const useNameAndCount = (card, useMaindeckCount, useSideboardCount) => {
 		if (useSideboardCount)
 			return getSideboardCount(sideboardCount, name);
 
-		const inDeck = get(attributes, IS_IN_DECK, false) && count;
-		const inSideboard = get(attributes, IS_IN_SIDEBOARD, false) && sideboardCount;
+		const inDeck = count > 0;
+		const inSideboard = sideboardCount > 0;
 
 		if (inDeck && inSideboard)
 			return `${count} - (${sideboardCount}) ${name}`;
@@ -49,7 +46,7 @@ const useNameAndCount = (card, useMaindeckCount, useSideboardCount) => {
 		if (inSideboard)
 			return `(${sideboardCount}) ${name}`;
 		return name;
-	}, [isSingleton, count, name, useMaindeckCount, useSideboardCount, sideboardCount, attributes]);
+	}, [count, isSingleton, name, sideboardCount, useMaindeckCount, useSideboardCount]);
 
 	return nameAndCount;
 };

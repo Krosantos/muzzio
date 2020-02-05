@@ -3,7 +3,6 @@ import capitalize from 'lodash/capitalize';
 import useFormat from '@hooks/useFormat';
 import useCards from '@hooks/useCards';
 import ManaCost from '@components/ManaCost';
-import { IS_IN_DECK } from '@constants';
 import CardCount from './CardCount';
 import {
 	container,
@@ -35,9 +34,9 @@ const getIdentityFromCards = (cardsInDeck = []) => {
 const Oathbreaker = () => {
 	const { format } = useFormat();
 	const formattedFormat = useMemo(() => capitalize(format), [format]);
-	const { cardsByAttribute } = useCards();
-	const deckIdentity = useMemo(() => getIdentityFromCards(cardsByAttribute(IS_IN_DECK)),
-		[cardsByAttribute]);
+	const { cardsInDeck } = useCards();
+	const deckIdentity = useMemo(() => getIdentityFromCards(cardsInDeck()),
+		[cardsInDeck]);
 
 	return (
 		<div className={container}>

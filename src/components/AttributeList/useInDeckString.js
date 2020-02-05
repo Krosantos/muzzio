@@ -1,15 +1,8 @@
 import { useMemo } from 'react';
-import get from 'lodash/get';
 import filter from 'lodash/filter';
 import useFormat from '@hooks/useFormat';
 import useCards from '@hooks/useCards';
-import {
-	ALL_CARDS,
-	IS_IN_DECK,
-	IS_IN_SIDEBOARD,
-} from '@constants';
-
-const filterCards = (cards, attribute) => filter(cards, (card) => get(card, ['attributes', attribute], false));
+import { ALL_CARDS } from '@constants';
 
 const getAllCardsString = (isSingleton, cards) => {
 	if (!isSingleton)
@@ -18,15 +11,15 @@ const getAllCardsString = (isSingleton, cards) => {
 };
 
 const getSingletonString = (cards = []) => {
-	const inDeck = filterCards(cards, IS_IN_DECK).length;
+	const inDeck = filter(cards, (card) => card.count >= 1).length;
 	const inTotal = cards.length;
 
 	return ` - ${inDeck} of ${inTotal}`;
 };
 
 const getNonSingletonString = (cards) => {
-	const inDeck = filterCards(cards, IS_IN_DECK);
-	const inSideboard = filterCards(cards, IS_IN_SIDEBOARD);
+	const inDeck = filter(cards, (card) => card.count >= 1);
+	const inSideboard = filter(cards, (card) => card.sideboardCount >= 1);
 
 	const inDeckCount = inDeck.reduce((prev, curr) => prev + (curr.count || 0), 0);
 	const inSideboardCount = inSideboard.reduce((prev, curr) => prev + (curr.sideboardCount || 0), 0);

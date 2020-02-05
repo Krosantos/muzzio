@@ -1,9 +1,5 @@
 import React, { useMemo } from 'react';
 import useCards from '@hooks/useCards';
-import {
-	IS_IN_DECK,
-	IS_IN_SIDEBOARD,
-} from '@constants';
 import { cardCount } from './styles.scss';
 
 const MAIN_COUNT = '/60';
@@ -28,14 +24,13 @@ const calculateSideboardCount = (cards = []) => {
 };
 
 const CardCount = () => {
-	const { cardsByAttribute } = useCards();
+	const { cardsInDeck, cardsInSideboard } = useCards();
 	const mainCount = useMemo(() => calculateCardCount(
-		cardsByAttribute(IS_IN_DECK),
-	),
-	[cardsByAttribute]);
+		cardsInDeck(),
+	),	[cardsInDeck]);
 	const sideCount = useMemo(() => calculateSideboardCount(
-		cardsByAttribute(IS_IN_SIDEBOARD),
-	), [cardsByAttribute]);
+		cardsInSideboard(),
+	), [cardsInSideboard]);
 
 	return (
 		<div className={cardCount}>

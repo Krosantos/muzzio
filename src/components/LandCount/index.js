@@ -1,13 +1,11 @@
 import React, { useMemo } from 'react';
 import useCards from '@hooks/useCards';
-import { IS_IN_DECK } from '@constants';
 import { countContainer } from './styles.scss';
 
 const LANDS = 'Lands: ';
 
-const getLandCount = (cardsByAttribute) => {
-	const cardsInDeck = cardsByAttribute(IS_IN_DECK);
-	const landsInDeck = cardsInDeck.filter(({ type }) => type.includes('Land'));
+const getLandCount = (cardsInDeck) => {
+	const landsInDeck = cardsInDeck().filter(({ type }) => type.includes('Land'));
 
 	let count = 0;
 
@@ -18,8 +16,8 @@ const getLandCount = (cardsByAttribute) => {
 };
 
 const LandCount = () => {
-	const { cardsByAttribute } = useCards();
-	const landCount = useMemo(() => getLandCount(cardsByAttribute), [cardsByAttribute]);
+	const { cardsInDeck } = useCards();
+	const landCount = useMemo(() => getLandCount(cardsInDeck), [cardsInDeck]);
 
 	return (
 		<div className={countContainer}>

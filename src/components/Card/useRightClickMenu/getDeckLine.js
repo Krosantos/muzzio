@@ -1,22 +1,19 @@
-import get from 'lodash/get';
 import { remote } from 'electron';
-import { IS_IN_DECK } from '@constants';
 
 const { MenuItem } = remote;
 
-// eslint-disable-next-line max-params
-const getDeckLine = (isSingleton, card, menu, addAttribute, removeAttribute) => {
+const getDeckLine = (isSingleton, card, menu, setCount) => {
 	if (!isSingleton)
 		return;
-	const isInDeck = get(card, ['attributes', IS_IN_DECK], false);
+	const isInDeck = card.count >= 1;
 
 	if (isInDeck) {
 		menu.append(
-			new MenuItem({ click() { removeAttribute(card, IS_IN_DECK); }, label: 'Remove From Deck' }),
+			new MenuItem({ click() { setCount(card, 0); }, label: 'Remove From Deck' }),
 		);
 	} else {
 		menu.append(
-			new MenuItem({ click() { addAttribute(card, IS_IN_DECK); }, label: 'Add to Deck' }),
+			new MenuItem({ click() { setCount(card, 1); }, label: 'Add to Deck' }),
 		);
 	}
 };
