@@ -26,7 +26,8 @@ const useSave = () => {
 	const allData = useAllContexts();
 
 	const save = useCallback((filePath) => {
-		const fileContents = Buffer.from(JSON.stringify(allData), 'utf8').toString('base64');
+		// const fileContents = Buffer.from(JSON.stringify(allData), 'utf8').toString('base64');
+		const fileContents = JSON.stringify(allData);
 
 		fs.writeFileSync(filePath, fileContents);
 	}, [allData]);
