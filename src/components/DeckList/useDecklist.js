@@ -1,4 +1,3 @@
-/* eslint-disable max-depth */
 import { useMemo } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import sortBy from 'lodash/sortBy';
@@ -7,8 +6,6 @@ import useCommander from '@hooks/useCommander';
 import useFormat from '@hooks/useFormat';
 import useOathbreaker from '@hooks/useOathbreaker';
 import {
-	IS_IN_DECK,
-	IS_IN_SIDEBOARD,
 	OATHBREAKER,
 	COMMANDER,
 } from '@constants';
@@ -22,9 +19,9 @@ const sortCards = (cards) => {
 	return byNotBasicLand;
 };
 
-const useMaindeckCount = (cards) => cards.map((card) => ({ ...card, sideboardCount: 0 }));
+const getMaindeckCount = (cards) => cards.map((card) => ({ ...card, sideboardCount: 0 }));
 
-const useSideboardCount = (cards) => cards.map((card) => {
+const getSideboardCount = (cards) => cards.map((card) => {
 	const { sideboardCount = 0 } = card;
 
 	return { ...card, count: sideboardCount, sideboardCount: 0 };
@@ -53,28 +50,25 @@ const appendCards = (sortedCards, format, commanderData, oathbreakerData) => {
 };
 
 const useMaindeck = () => {
-	const { cardsByAttribute } = useCards();
-	const cardsInDeck = useMemo(() => cardsByAttribute(IS_IN_DECK), [cardsByAttribute]);
+	const { cardsInDeck } = useCards();
 	const commanderData = useCommander();
 	const oathbreakerData = useOathbreaker();
 	const { format } = useFormat();
-	const sortedCards = useMemo(() => sortCards(cardsInDeck), [cardsInDeck]);
-	const mainCounted = useMaindeckCount(sortedCards);
+	const sortedCards = useMemo(() => sortCards(cardsInDeck()), [cardsInDeck]);
+	const mainCounted = getMaindeckCount(sortedCards);
 
 	return appendCards(mainCounted, format, commanderData, oathbreakerData);
 };
 
 const useSideboard = () => {
-	const { cardsByAttribute } = useCards();
-	const cardsInSideboard = useMemo(() => {
-		const sideboardCards = cardsByAttribute(IS_IN_SIDEBOARD);
-		const sorted = sortCards(sideboardCards);
+	const { cardsInSideboard } = useCards();
+	const countedAndSorted = useMemo(() => {
+		const sorted = sortCards(cardsInSideboard());
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		return useSideboardCount(sorted);
-	}, [cardsByAttribute]);
+		return getSideboardCount(sorted);
+	}, [cardsInSideboard]);
 
-	return cardsInSideboard;
+	return countedAndSorted;
 };
 
 const useDecklist = () => {

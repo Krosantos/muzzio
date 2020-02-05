@@ -2,18 +2,13 @@ import { useState, useCallback, useMemo } from 'react';
 import { remote } from 'electron';
 import sortBy from 'lodash/sortBy';
 import forEach from 'lodash/forEach';
-import { IS_IN_DECK } from '@constants';
 
 const { Menu, MenuItem } = remote;
 
 const alphaSort = (card) => card.name;
 const cmcSort = (card) => card.cmc;
 const countSort = (card) => card.count || 1;
-const deckSort = (card) => {
-	const inDeck = card.attributes[IS_IN_DECK];
-
-	return inDeck ? 1 : 0;
-};
+const deckSort = (card) => card.count + card.sideboardCount;
 
 const sortTypes = {
 	ALPHA: { name: 'Alphabetical', sort: alphaSort },

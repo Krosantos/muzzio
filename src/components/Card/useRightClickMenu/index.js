@@ -27,7 +27,7 @@ const generateMenu = ({
 }) => {
 	const menu = new Menu();
 
-	getDeckLine(isSingleton, card, menu, addAttribute, removeAttribute);
+	getDeckLine(isSingleton, card, menu, setCount);
 	getCountLine(isSingleton, card, menu, setCount, openCardCountModal);
 	getSideboardLine(isSingleton, card, menu, setSideboardCount, openSideboardCountModal);
 	getAttributesSection(card, menu, attributes, addAttribute, removeAttribute);

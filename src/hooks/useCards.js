@@ -8,8 +8,6 @@ import unset from 'lodash/unset';
 import clamp from 'lodash/clamp';
 import { CardContext } from '@contexts/Card';
 import {
-	IS_IN_DECK,
-	IS_IN_SIDEBOARD,
 	CARD_MAX,
 	ADD_ACTION,
 	REMOVE_ACTION,
@@ -21,6 +19,14 @@ const useCards = () => {
 	const { cards, dispatch } = useContext(CardContext);
 
 	const cardsByAttribute = useCallback((attribute) => filter(cards, (card) => get(card, ['attributes', attribute], false)), [cards]);
+
+	const cardsInDeck = useCallback(()=>{
+		return filter(cards, (card)=>card.count >= 1);
+	}, [cards]);
+
+	const cardsInSideboard = useCallback(()=>{
+		return filter(cards, (card)=>card.sideboardCount >= 1);
+	}, [cards]);
 
 	const addCard = useCallback((card) => {
 		const maybeCard = get(cards, card.id, {});
@@ -57,15 +63,10 @@ const useCards = () => {
 			sideboardCount = 0,
 			isUnlimited = false,
 		} = card;
-
 		const clampedSideboardCount = isUnlimited
 			? sideboardCount
 			: clamp(sideboardCount, 0, CARD_MAX - count);
-
 		const toDispatch = { ...card, count, sideboardCount: clampedSideboardCount };
-
-		set(toDispatch, ['attributes', IS_IN_DECK], count > 0);
-		set(toDispatch, ['attributes', IS_IN_SIDEBOARD], clampedSideboardCount > 0);
 
 		dispatch({ card: toDispatch, type: UPDATE_ACTION });
 	}, [dispatch]);
@@ -75,35 +76,24 @@ const useCards = () => {
 			count = 0,
 			isUnlimited = false,
 		} = card;
-
 		const clampedCount = isUnlimited ? count : clamp(count, 0, CARD_MAX - sideboardCount);
-
 		const toDispatch = { ...card, count: clampedCount, sideboardCount };
-
-		set(toDispatch, ['attributes', IS_IN_DECK], clampedCount > 0);
-		set(toDispatch, ['attributes', IS_IN_SIDEBOARD], sideboardCount > 0);
 
 		dispatch({ card: toDispatch, type: UPDATE_ACTION });
 	}, [dispatch]);
 
 	const clearDeck = useCallback(() => {
-		const inDeck = cardsByAttribute(IS_IN_DECK);
+		cardsInDeck().forEach((card) => {
+			const toSet = { ...card, count: 0 };
 
-		inDeck.forEach((card) => {
-			const toSet = { ...card };
-
-			set(toSet, ['attributes', IS_IN_DECK], false);
 			dispatch({ card: toSet, type: UPDATE_ACTION });
 		});
-		const inBoard = cardsByAttribute(IS_IN_SIDEBOARD);
+		cardsInSideboard().forEach((card) => {
+			const toSet = { ...card, sideboardCount: 0 };
 
-		inBoard.forEach((card) => {
-			const toSet = { ...card };
-
-			set(toSet, ['attributes', IS_IN_SIDEBOARD], false);
 			dispatch({ card: toSet, type: UPDATE_ACTION });
 		});
-	}, [cardsByAttribute, dispatch]);
+	}, [cardsInDeck, cardsInSideboard, dispatch]);
 
 	const getCard = useCallback((id) => get(cards, id), [cards]);
 
@@ -113,6 +103,8 @@ const useCards = () => {
 		cardExists,
 		cards,
 		cardsByAttribute,
+		cardsInDeck,
+		cardsInSideboard,
 		clearDeck,
 		getCard,
 		removeAttribute,

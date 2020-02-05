@@ -1,4 +1,3 @@
-/* eslint-disable max-depth */
 import React, { useMemo } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import useCards from '@hooks/useCards';
@@ -6,11 +5,7 @@ import useFormat from '@hooks/useFormat';
 import useCommander from '@hooks/useCommander';
 import useOathbreaker from '@hooks/useOathbreaker';
 import getAverageCmc from '@utils/getAverageCmc';
-import {
-	IS_IN_DECK,
-	COMMANDER,
-	OATHBREAKER,
-} from '@constants';
+import { COMMANDER, OATHBREAKER } from '@constants';
 import { cardCount } from './styles.scss';
 
 const formatCounts = {
@@ -55,13 +50,13 @@ const calculateCardCount = (cardsInDeck = [], commandZoneCount = 0) => {
 };
 
 const SingletonCount = () => {
-	const { cardsByAttribute } = useCards();
+	const { cardsInDeck } = useCards();
 	const { format } = useFormat();
 	const commandZoneCount = useCommandZoneCards(format);
 	const OUT_OF_X = useMemo(() => `/${formatCounts[format] || DEFAULT_COUNT}`, [format]);
-	const count = useMemo(() => calculateCardCount(cardsByAttribute(IS_IN_DECK), commandZoneCount),
-		[cardsByAttribute, commandZoneCount]);
-	const cmc = getAverageCmc(cardsByAttribute(IS_IN_DECK)).toPrecision(3);
+	const count = useMemo(() => calculateCardCount(cardsInDeck(), commandZoneCount),
+		[cardsInDeck, commandZoneCount]);
+	const cmc = getAverageCmc(cardsInDeck()).toPrecision(3);
 
 	return (
 		<div className={cardCount}>

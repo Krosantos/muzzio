@@ -1,19 +1,18 @@
 import React, { useMemo } from 'react';
 import useFormat from '@hooks/useFormat';
 import useCards from '@hooks/useCards';
-import { IS_IN_SIDEBOARD } from '@constants';
 import { divider } from './styles.scss';
 
 const Divider = ({ label }) => {
 	const { isSingleton } = useFormat();
-	const { cardsByAttribute } = useCards();
+	const { cardsInSideboard } = useCards();
 	const shouldHideDivider = useMemo(() => {
 		if (isSingleton)
 			return true;
-		const sideboardCards = cardsByAttribute(IS_IN_SIDEBOARD);
+		const sideboardCards = cardsInSideboard();
 
 		return sideboardCards.length <= 0;
-	}, [isSingleton, cardsByAttribute]);
+	}, [cardsInSideboard, isSingleton]);
 
 	if (shouldHideDivider)
 		return null;
