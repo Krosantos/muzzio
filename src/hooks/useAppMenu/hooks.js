@@ -1,8 +1,8 @@
 import path from 'path';
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import { remote } from 'electron';
-import settings from 'electron-settings';
 import getList from '@api/getList';
+import { SettingsContext } from '@contexts/Settings';
 import useSave from '@hooks/useSave';
 import useLoad from '@hooks/useLoad';
 import useFormat from '@hooks/useFormat';
@@ -15,29 +15,31 @@ const { app, dialog } = remote;
 
 const useSaveDeck = (saveAs = false) => {
 	const save = useSave();
+	const { setSettings, settings } = useContext(SettingsContext);
 	const saveDeck = useCallback(() => {
-		const needsChoosing = saveAs || !settings.has(CURRENT_FILE_SETTING);
+		const needsChoosing = saveAs || !settings[CURRENT_FILE_SETTING];
 		const filepath = needsChoosing ? dialog.showSaveDialog({
 			defaultPath: app.getPath('documents'),
 			filters: [
 				{ extensions: ['muz'], name: 'Deck Files' },
 				{ extensions: ['*'], name: 'All Files' },
 			],
-		}) : settings.get(CURRENT_FILE_SETTING);
+		}) : settings[CURRENT_FILE_SETTING];
 
 		save(filepath);
 		setWindowTitle(filepath);
-		settings.set(CURRENT_FILE_SETTING, filepath);
-	}, [save, saveAs]);
+		setSettings(CURRENT_FILE_SETTING, filepath);
+	}, [save, saveAs, setSettings, settings]);
 
 	return saveDeck;
 };
 
 const useLoadDeck = () => {
 	const load = useLoad();
+	const { setSettings, settings } = useContext(SettingsContext);
 	const overwrite = useOverwrite();
 	const loadDeck = useCallback(() => {
-		const openPath = settings.get(OPEN_FOLDER_SETTING) || app.getPath('documents');
+		const openPath = settings[OPEN_FOLDER_SETTING] || app.getPath('documents');
 		const [filepath] = dialog.showOpenDialog({
 			defaultPath: openPath,
 			filters: [
@@ -49,9 +51,9 @@ const useLoadDeck = () => {
 
 		overwrite(saveData);
 		setWindowTitle(filepath);
-		settings.set(CURRENT_FILE_SETTING, filepath);
-		settings.set(OPEN_FOLDER_SETTING, path.dirname(filepath));
-	}, [load, overwrite]);
+		setSettings(CURRENT_FILE_SETTING, filepath);
+		setSettings(OPEN_FOLDER_SETTING, path.dirname(filepath));
+	}, [load, overwrite, setSettings, settings]);
 
 	return loadDeck;
 };
@@ -59,22 +61,24 @@ const useLoadDeck = () => {
 const useNewDeck = () => {
 	const overwrite = useOverwrite();
 	const { format } = useFormat();
+	const { setSettings } = useContext(SettingsContext);
 	const newDeck = useCallback(() => {
 		setWindowTitle();
-		settings.delete(CURRENT_FILE_SETTING);
+		setSettings(CURRENT_FILE_SETTING, null);
 		overwrite({ format });
-	}, [format, overwrite]);
+	}, [format, overwrite, setSettings]);
 
 	return newDeck;
 };
 
 const useChangeFormat = () => {
 	const overwrite = useOverwrite();
+	const { setSettings } = useContext(SettingsContext);
 	const changeFormat = useCallback((format) => () => {
 		setWindowTitle();
-		settings.delete(CURRENT_FILE_SETTING);
+		setSettings(CURRENT_FILE_SETTING, null);
 		overwrite({ format });
-	}, [overwrite]);
+	}, [overwrite, setSettings]);
 
 	return changeFormat;
 };

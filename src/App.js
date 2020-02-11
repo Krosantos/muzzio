@@ -5,6 +5,7 @@ import { CardMenuProvider } from '@contexts/CardMenu';
 import { CommanderProvider } from '@contexts/Commander';
 import { OathbreakerProvider } from '@contexts/Oathbreaker';
 import { AttributesProvider } from '@contexts/Attributes';
+import { SettingsProvider } from '@contexts/Settings';
 import { FormatProvider } from '@contexts/Format';
 import useAutoLoad from '@hooks/useAutoLoad';
 import './index.scss';
@@ -25,9 +26,11 @@ const App = () => {
 				<CommanderProvider initialValue={commanderData}>
 					<OathbreakerProvider initialValue={oathbreakerData}>
 						<AttributesProvider initialValue={attributes}>
-							<CardMenuProvider>
-								<Layout />
-							</CardMenuProvider>
+							<SettingsProvider>
+								<CardMenuProvider>
+									<Layout />
+								</CardMenuProvider>
+							</SettingsProvider>
 						</AttributesProvider>
 					</OathbreakerProvider>
 				</CommanderProvider>

@@ -22,7 +22,7 @@ function createWindow() {
 	mainWindow.on('closed', () => {
 		mainWindow = null;
 	});
-	// Check for content either from local (when developing), or from compoiled code.
+	// Check for content either from local (when developing), or from compiled code.
 	if (process.env.FROM_LOCAL) {
 		mainWindow.loadURL('http://localhost:3000');
 	} else {
@@ -36,7 +36,6 @@ function createWindow() {
 
 // Ensure that opening a .muz file loads it.
 if (isWindows) {
-	// eslint-disable-next-line max-depth
 	if (process.argv.length > 1)
 		settings.set('currentFilePath', process.argv[1]);
 } else {
