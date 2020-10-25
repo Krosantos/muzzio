@@ -1,5 +1,6 @@
-import { MenuItem } from '@electron/remote';
 import { CARD_MAX } from '@constants';
+
+const { MenuItem } = require('electron').remote;
 
 const generateUnlimitedMenu = (openCountModal) => new MenuItem({
   click: openCountModal,

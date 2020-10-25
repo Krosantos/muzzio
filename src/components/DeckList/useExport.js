@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
-import { clipboard } from '@electron/remote';
+
+const { clipboard } = require('electron').remote;
 
 const formatCards = (cards) => {
   const names = cards.map(({ name, count }) => `${count || 1} ${name}`);

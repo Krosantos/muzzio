@@ -1,6 +1,7 @@
 import get from 'lodash/get';
-import { MenuItem } from '@electron/remote';
 import { ALL_CARDS } from '@constants';
+
+const { MenuItem } = require('electron').remote;
 
 // eslint-disable-next-line max-params
 const getAttributeLine = (card, menu, attribute, addAttribute, removeAttribute) => {

@@ -13,13 +13,13 @@
     "dev": "concurrently --kill-others \"webpack serve\" \"cross-env FROM_LOCAL=true electron .\""
   },
   "dependencies": {
-    "@electron/remote": "^1.0.0",
     "axios": "^0.21.0",
     "electron-settings": "^4.0.2",
     "express": "^4.16.3",
     "lodash": "^4.17.20",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.0"
   },
   "devDependencies": {
     "@types/electron": "^1.6.10",
@@ -28,6 +28,7 @@
     "@types/lodash": "^4.14.162",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.4",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.0",

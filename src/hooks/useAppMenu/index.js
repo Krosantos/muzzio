@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Menu } from '@electron/remote';
 import generateTemplate from './generateTemplate';
 import {
   useNewDeck,
@@ -8,6 +7,8 @@ import {
   useChangeFormat,
   useRefreshCards,
 } from './hooks';
+
+const { Menu } = require('electron').remote;
 
 const useAppMenu = () => {
   const callbacks = {

@@ -18,8 +18,9 @@
         "@contexts/*": ["./contexts/*"],
         "@hooks/*": ["./hooks/*"],
         "@static/*": ["./static/*"],
-        "@theme/*": ["./theme/*"],
+        "@theme": ["./theme"],
         "@utils/*": ["./utils/*"],
       }
-    }
+    },
+    "exclude": ["node_modules"]
 }

@@ -1,4 +1,4 @@
-import { MenuItem } from '@electron/remote';
+const { MenuItem } = require('electron').remote;
 
 const getRemoveLine = (card, menu, removeCard) => {
   menu.append(

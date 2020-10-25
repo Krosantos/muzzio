@@ -1,5 +1,4 @@
 /* eslint-disable max-params */
-import { Menu } from '@electron/remote';
 import { useCallback } from 'react';
 import useFormat from '@hooks/useFormat';
 import useAttributes from '@hooks/useAttributes';
@@ -9,6 +8,8 @@ import getDeckLine from './getDeckLine';
 import getCountLine from './getCountLine';
 import getSideboardLine from './getSideboardLine';
 import getRemoveLine from './getRemoveLine';
+
+const { Menu } = require('electron').remote;
 
 const generateMenu = ({
   addAttribute,

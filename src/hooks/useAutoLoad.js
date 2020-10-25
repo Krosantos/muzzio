@@ -1,10 +1,11 @@
 import path from 'path';
 import fs from 'fs';
-import { app } from '@electron/remote';
 import settings from 'electron-settings';
 import setWindowTitle from '@utils/setWindowTitle';
 import { AUTOSAVE, CURRENT_FILE_SETTING } from '@constants';
 import useLoad from './useLoad';
+
+const { app } = require('electron').remote;
 
 const useAutoLoad = () => {
   let readPath = '';

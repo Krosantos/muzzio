@@ -1,4 +1,6 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import theme from '@theme';
 import Layout from '@components/Layout';
 import { CardProvider } from '@contexts/Card';
 import { CardMenuProvider } from '@contexts/CardMenu';
@@ -28,7 +30,9 @@ const App:React.FC = () => {
             <AttributesProvider initialValue={attributes}>
               <SettingsProvider>
                 <CardMenuProvider>
-                  <Layout />
+                  <ThemeProvider theme={theme}>
+                    <Layout />
+                  </ThemeProvider>
                 </CardMenuProvider>
               </SettingsProvider>
             </AttributesProvider>

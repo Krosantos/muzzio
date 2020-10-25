@@ -1,8 +1,9 @@
 import path from 'path';
 import { useEffect } from 'react';
-import { app } from '@electron/remote';
 import { AUTOSAVE } from '@constants';
 import useSave from './useSave';
+
+const { app } = require('electron').remote;
 
 const useAutoSave = () => {
   const basePath = app.getPath('userData');

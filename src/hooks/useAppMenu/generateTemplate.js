@@ -1,4 +1,3 @@
-import { app } from '@electron/remote';
 import {
   COMMANDER,
   OATHBREAKER,
@@ -9,6 +8,8 @@ import {
   LEGACY,
   VINTAGE,
 } from '@constants';
+
+const { app } = require('electron').remote;
 
 const isMac = process.platform === 'darwin';
 

@@ -3,8 +3,6 @@ const { app, BrowserWindow } = require('electron');
 const settings = require('electron-settings');
 const path = require('path');
 
-require('@electron/remote/main').initialize();
-
 // Keep a global reference of the window object, to spare it from garbage collection.
 let mainWindow;
 const isWindows = process.platform !== 'darwin';
