@@ -1,6 +1,7 @@
 {
 	"extends": "eslint-config-tecca",
 	"rules":{
-		"multiline-ternary":"off"
+		"multiline-ternary":"off",
+		"@typescript-eslint/no-explicit-any":1
 	}
 }

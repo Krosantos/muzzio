@@ -2,12 +2,14 @@ import { useState, useCallback, useMemo } from 'react';
 import sortBy from 'lodash/sortBy';
 import forEach from 'lodash/forEach';
 
+type Card = any;
+
 const { Menu, MenuItem } = require('electron').remote;
 
-const alphaSort = (card) => card.name;
-const cmcSort = (card) => card.cmc;
-const countSort = (card) => card.count || 1;
-const deckSort = (card) => card.count + card.sideboardCount;
+const alphaSort = (card:Card) => card.name;
+const cmcSort = (card:Card) => card.cmc;
+const countSort = (card:Card) => card.count || 1;
+const deckSort = (card:Card) => card.count + card.sideboardCount;
 
 const sortTypes = {
   ALPHA: { name: 'Alphabetical', sort: alphaSort },
@@ -16,7 +18,11 @@ const sortTypes = {
   DECK: { name: 'In/Out of Deck', sort: deckSort },
 };
 
-const useSorting = (cards = []) => {
+type UseSorting = (cards:Card[])=>{
+  openMenu: ()=>void;
+  sortedCards: Card[];
+}
+const useSorting:UseSorting = (cards = []) => {
   const [sortType, setSort] = useState(sortTypes.CMC);
   const openMenu = useCallback(() => {
     const menu = new Menu();

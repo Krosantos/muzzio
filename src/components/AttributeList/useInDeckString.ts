@@ -4,20 +4,25 @@ import useFormat from '@hooks/useFormat';
 import useCards from '@hooks/useCards';
 import { ALL_CARDS } from '@constants';
 
-const getAllCardsString = (isSingleton, cards) => {
+type Card = any;
+
+type GetAllCardsString = (isSingleton:boolean, cards: Card[])=>string
+const getAllCardsString:GetAllCardsString = (isSingleton, cards) => {
   if (!isSingleton)
     return '';
   return ` - ${Object.keys(cards).length}`;
 };
 
-const getSingletonString = (cards = []) => {
+type GetSingletonString = (cards:Card[])=>string
+const getSingletonString:GetSingletonString = (cards = []) => {
   const inDeck = filter(cards, (card) => card.count >= 1).length;
   const inTotal = cards.length;
 
   return ` - ${inDeck} of ${inTotal}`;
 };
 
-const getNonSingletonString = (cards) => {
+type GetNonSingletonString = (cards:Card[])=>string
+const getNonSingletonString:GetNonSingletonString = (cards) => {
   const inDeck = filter(cards, (card) => card.count >= 1);
   const inSideboard = filter(cards, (card) => card.sideboardCount >= 1);
 
@@ -26,13 +31,14 @@ const getNonSingletonString = (cards) => {
 
   let result = ` - ${inDeckCount}`;
 
-  if (inSideboard < 1)
+  if (inSideboard.length < 1)
     return result;
   result += `/(${inSideboardCount})`;
   return result;
 };
 
-const useInDeckString = (attribute) => {
+type UseInDeckString = (attribute:string)=>string
+const useInDeckString:UseInDeckString = (attribute) => {
   const { isSingleton } = useFormat();
   const { cards, cardsByAttribute } = useCards();
 

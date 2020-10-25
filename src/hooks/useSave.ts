@@ -22,7 +22,9 @@ const useAllContexts = () => {
   };
 };
 
-const useSave = () => {
+type UseSave = ()=>(filePath:string)=>void;
+
+const useSave:UseSave = () => {
   const allData = useAllContexts();
 
   const save = useCallback((filePath) => {

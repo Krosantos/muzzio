@@ -10,7 +10,9 @@ import {
   COMMANDER,
 } from '@constants';
 
-const useOverwrite = () => {
+type UseOverwrite = ()=>(saveData:any)=>void
+
+const useOverwrite:UseOverwrite = () => {
   const { setAttributes } = useContext(AttributesContext);
   const { dispatch: cardsDispatch } = useContext(CardContext);
   const { setCommanderData } = useContext(CommanderContext);

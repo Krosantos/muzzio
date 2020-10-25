@@ -10,7 +10,7 @@ import { AttributesProvider } from '@contexts/Attributes';
 import { SettingsProvider } from '@contexts/Settings';
 import { FormatProvider } from '@contexts/Format';
 import useAutoLoad from '@hooks/useAutoLoad';
-import './index.scss';
+import './index.css';
 
 /* eslint-disable react/jsx-max-depth */
 const App:React.FC = () => {

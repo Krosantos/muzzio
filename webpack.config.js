@@ -3,15 +3,6 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-const CssModuleLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: {
-      localIdentName: '[local]__[hash:base64:5]',
-    },
-  },
-};
-
 module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'src', 'static'),
@@ -32,8 +23,7 @@ module.exports = {
         use: [
           // fallback to style-loader in development
           process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
-          CssModuleLoader,
-          'sass-loader',
+          'css-loader',
         ],
       }],
     },

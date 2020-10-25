@@ -20,7 +20,11 @@
         "@static/*": ["./static/*"],
         "@theme": ["./theme"],
         "@utils/*": ["./utils/*"],
-      }
+      },
+      "types": ["node"],       
+       "typeRoots": [
+        "./node_modules/@types"
+    ]
     },
     "exclude": ["node_modules"]
 }

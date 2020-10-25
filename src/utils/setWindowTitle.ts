@@ -1,6 +1,8 @@
 import path from 'path';
 
-const setWindowTitle = (filepath) => {
+type SetWindowTitle = (filepath:string)=>void;
+
+const setWindowTitle:SetWindowTitle = (filepath) => {
   if (!filepath) {
     document.title = 'Muzzio';
     return;
