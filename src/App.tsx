@@ -11,7 +11,7 @@ import useAutoLoad from '@hooks/useAutoLoad';
 import './index.scss';
 
 /* eslint-disable react/jsx-max-depth */
-const App = () => {
+const App:React.FC = () => {
   const {
     attributes,
     format,

@@ -1,6 +1,6 @@
 import path from 'path';
 import { useCallback, useContext } from 'react';
-import { remote } from 'electron';
+import remote from '@electron/remote';
 import getList from '@api/getList';
 import { SettingsContext } from '@contexts/Settings';
 import useSave from '@hooks/useSave';
@@ -91,7 +91,7 @@ const useRefreshCards = () => {
     const identifiers = Object.keys(cards).map((id) => ({ id }));
     const newCards = await getList(identifiers);
 
-    newCards.forEach((card) => addCard(card));
+    newCards.forEach((card: any) => addCard(card));
   }, [addCard, cards]);
 
   return refreshCards;

@@ -1,5 +1,5 @@
 /* eslint-disable max-params */
-import { remote } from 'electron';
+import remote from '@electron/remote';
 import { useCallback } from 'react';
 import useFormat from '@hooks/useFormat';
 import useAttributes from '@hooks/useAttributes';

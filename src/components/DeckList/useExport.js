@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { remote } from 'electron';
+import remote from '@electron/remote';
 
 const { clipboard } = remote;
 

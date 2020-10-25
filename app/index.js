@@ -3,6 +3,8 @@ const { app, BrowserWindow } = require('electron');
 const settings = require('electron-settings');
 const path = require('path');
 
+require('@electron/remote/main').initialize();
+
 // Keep a global reference of the window object, to spare it from garbage collection.
 let mainWindow;
 const isWindows = process.platform !== 'darwin';
@@ -14,6 +16,7 @@ function createWindow() {
     minWidth: 1280,
     title: 'Muzzio',
     webPreferences: {
+      enableRemoteModule: true,
       nodeIntegration: true,
       webSecurity: true,
     },

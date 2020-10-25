@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
-import { remote } from 'electron';
+import remote from '@electron/remote';
 import sortBy from 'lodash/sortBy';
 import forEach from 'lodash/forEach';
 

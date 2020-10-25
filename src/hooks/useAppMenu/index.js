@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { remote } from 'electron';
+import remote from '@electron/remote';
 import generateTemplate from './generateTemplate';
 import {
   useNewDeck,

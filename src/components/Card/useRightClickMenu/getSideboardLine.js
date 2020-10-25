@@ -1,4 +1,4 @@
-import { remote } from 'electron';
+import remote from '@electron/remote';
 import { CARD_MAX } from '@constants';
 
 const { MenuItem } = remote;

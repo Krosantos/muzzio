@@ -1,12 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const CssModuleLoader = {
   loader: 'css-loader',
-  query: {
-    localIdentName: '[local]__[hash:base64:5]',
-    modules: true,
+  options: {
+    modules: {
+      localIdentName: '[local]__[hash:base64:5]',
+    },
   },
 };
 
@@ -15,7 +17,8 @@ module.exports = {
     contentBase: path.join(__dirname, 'src', 'static'),
     port: 3000,
   },
-  entry: './src/index.js',
+  devtool: 'inline-source-map',
+  entry: './src/index.tsx',
   mode: process.env.FROM_LOCAL ? 'development' : 'production',
   module: {
     rules: [{
@@ -87,7 +90,13 @@ module.exports = {
     new MiniCssExtractPlugin(),
   ],
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@theme': path.resolve(__dirname, 'src/theme'),
+    },
+    extensions: ['*', '.js', '.ts', '.tsx'],
+    plugins: [
+      new TsconfigPathsPlugin({ extensions: ['*', '.js', '.ts', '.tsx'] }),
+    ],
   },
   target: 'electron-renderer',
 };

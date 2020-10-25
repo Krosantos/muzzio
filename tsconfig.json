@@ -2,20 +2,24 @@
     "compilerOptions": {
       "outDir": "./app/dist/",
       "noImplicitAny": true,
+      "allowSyntheticDefaultImports": true,
       "module": "es6",
+      "sourceMap": true,
       "target": "ES5",
+      "lib": ["ES2015", "DOM"],
       "jsx": "react",
+      "moduleResolution": "node",
       "allowJs": true,
       "baseUrl": "src",
       "paths": {
-        "@api*": ["/api*"],
-        "@components*": ["/components*"],
-        "@constants": ["/constants"],
-        "@contexts*": ["/contexts*"],
-        "@hooks*": ["/hooks*"],
-        "@static*": ["/static*"],
-        "@theme*": ["/theme*"],
-        "@utils*": ["/utils*"],
+        "@api/*": ["./api/*"],
+        "@components/*": ["./components/*"],
+        "@constants": ["./constants"],
+        "@contexts/*": ["./contexts/*"],
+        "@hooks/*": ["./hooks/*"],
+        "@static/*": ["./static/*"],
+        "@theme/*": ["./theme/*"],
+        "@utils/*": ["./utils/*"],
       }
     }
 }
