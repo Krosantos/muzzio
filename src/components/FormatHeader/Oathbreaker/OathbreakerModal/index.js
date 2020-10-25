@@ -5,14 +5,14 @@ import SignatureSearch from './SignatureSearch';
 import { searchContainer } from '../styles.scss';
 
 const Modal = ({
-	closeModal,
+  closeModal,
 }) => (
-	<ModalContainer closeModal={closeModal}>
-		<div className={searchContainer}>
-			<OathbreakerSearch />
-			<SignatureSearch closeModal={closeModal} />
-		</div>
-	</ModalContainer>
+  <ModalContainer closeModal={closeModal}>
+    <div className={searchContainer}>
+      <OathbreakerSearch />
+      <SignatureSearch closeModal={closeModal} />
+    </div>
+  </ModalContainer>
 );
 
 export default Modal;

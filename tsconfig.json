@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "outDir": "./app/dist/",
+      "noImplicitAny": true,
+      "module": "es6",
+      "target": "ES5",
+      "jsx": "react",
+      "allowJs": true,
+      "baseUrl": "src",
+      "paths": {
+        "@api*": ["/api*"],
+        "@components*": ["/components*"],
+        "@constants": ["/constants"],
+        "@contexts*": ["/contexts*"],
+        "@hooks*": ["/hooks*"],
+        "@static*": ["/static*"],
+        "@theme*": ["/theme*"],
+        "@utils*": ["/utils*"],
+      }
+    }
+}

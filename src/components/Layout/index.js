@@ -8,20 +8,20 @@ import Header from './Header';
 import MainPanel from './MainPanel';
 
 const Layout = () => {
-	useAppMenu();
-	useAutoSave();
-	return (
-		<>
-			<Header />
-			<Slider label="Deck" left>
-				<DeckList />
-			</Slider>
-			<MainPanel />
-			<Slider label="Search">
-				<AddCards />
-			</Slider>
-		</>
-	);
+  useAppMenu();
+  useAutoSave();
+  return (
+    <>
+      <Header />
+      <Slider label="Deck" left>
+        <DeckList />
+      </Slider>
+      <MainPanel />
+      <Slider label="Search">
+        <AddCards />
+      </Slider>
+    </>
+  );
 };
 
 export default Layout;

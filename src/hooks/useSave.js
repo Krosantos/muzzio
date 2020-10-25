@@ -7,31 +7,31 @@ import { AttributesContext } from '@contexts/Attributes';
 import { FormatContext } from '@contexts/Format';
 
 const useAllContexts = () => {
-	const { attributes } = useContext(AttributesContext);
-	const { cards } = useContext(CardContext);
-	const { commanderData } = useContext(CommanderContext);
-	const { oathbreakerData } = useContext(OathbreakerContext);
-	const { format } = useContext(FormatContext);
+  const { attributes } = useContext(AttributesContext);
+  const { cards } = useContext(CardContext);
+  const { commanderData } = useContext(CommanderContext);
+  const { oathbreakerData } = useContext(OathbreakerContext);
+  const { format } = useContext(FormatContext);
 
-	return {
-		attributes,
-		cards,
-		commanderData,
-		format,
-		oathbreakerData,
-	};
+  return {
+    attributes,
+    cards,
+    commanderData,
+    format,
+    oathbreakerData,
+  };
 };
 
 const useSave = () => {
-	const allData = useAllContexts();
+  const allData = useAllContexts();
 
-	const save = useCallback((filePath) => {
-		const fileContents = JSON.stringify(allData);
+  const save = useCallback((filePath) => {
+    const fileContents = JSON.stringify(allData);
 
-		fs.writeFileSync(filePath, fileContents);
-	}, [allData]);
+    fs.writeFileSync(filePath, fileContents);
+  }, [allData]);
 
-	return save;
+  return save;
 };
 
 export default useSave;

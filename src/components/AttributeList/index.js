@@ -5,14 +5,14 @@ import AddButton from './AddButton';
 import { attributeList } from './styles.scss';
 
 const AttributeList = () => {
-	const { attributes } = useAttributes();
+  const { attributes } = useAttributes();
 
-	return (
-		<div className={attributeList}>
-			{attributes.map((attribute) => <Attribute attribute={attribute} key={attribute} />)}
-			<AddButton />
-		</div>
-	);
+  return (
+    <div className={attributeList}>
+      {attributes.map((attribute) => <Attribute attribute={attribute} key={attribute} />)}
+      <AddButton />
+    </div>
+  );
 };
 
 export default AttributeList;

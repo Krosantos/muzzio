@@ -13,68 +13,68 @@ import getRemoveLine from './getRemoveLine';
 const { Menu } = remote;
 
 const generateMenu = ({
-	addAttribute,
-	attributes,
-	card,
-	cardExists,
-	isSingleton,
-	openCardCountModal,
-	openSideboardCountModal,
-	removeAttribute,
-	removeCard,
-	setCount,
-	setSideboardCount,
+  addAttribute,
+  attributes,
+  card,
+  cardExists,
+  isSingleton,
+  openCardCountModal,
+  openSideboardCountModal,
+  removeAttribute,
+  removeCard,
+  setCount,
+  setSideboardCount,
 }) => {
-	const menu = new Menu();
+  const menu = new Menu();
 
-	getDeckLine(isSingleton, card, menu, setCount);
-	getCountLine(isSingleton, card, menu, setCount, openCardCountModal);
-	getSideboardLine(isSingleton, card, menu, setSideboardCount, openSideboardCountModal);
-	getAttributesSection(card, menu, attributes, addAttribute, removeAttribute);
-	if (cardExists(card))
-		getRemoveLine(card, menu, removeCard);
-	menu.popup();
+  getDeckLine(isSingleton, card, menu, setCount);
+  getCountLine(isSingleton, card, menu, setCount, openCardCountModal);
+  getSideboardLine(isSingleton, card, menu, setSideboardCount, openSideboardCountModal);
+  getAttributesSection(card, menu, attributes, addAttribute, removeAttribute);
+  if (cardExists(card))
+    getRemoveLine(card, menu, removeCard);
+  menu.popup();
 };
 
 const useRightClickMenu = (card, openCardCountModal, openSideboardCountModal) => {
-	const { attributes } = useAttributes();
-	const {
-		addAttribute,
-		cardExists,
-		removeAttribute,
-		removeCard,
-		setCount,
-		setSideboardCount,
-	} = useCards();
-	const { isSingleton } = useFormat();
-	const openMenu = useCallback(() => generateMenu({
-		addAttribute,
-		attributes,
-		card,
-		cardExists,
-		isSingleton,
-		openCardCountModal,
-		openSideboardCountModal,
-		removeAttribute,
-		removeCard,
-		setCount,
-		setSideboardCount,
-	}),
-	[
-		addAttribute,
-		attributes,
-		card,
-		cardExists,
-		isSingleton,
-		openCardCountModal,
-		openSideboardCountModal,
-		removeAttribute,
-		removeCard,
-		setCount,
-		setSideboardCount,
-	]);
+  const { attributes } = useAttributes();
+  const {
+    addAttribute,
+    cardExists,
+    removeAttribute,
+    removeCard,
+    setCount,
+    setSideboardCount,
+  } = useCards();
+  const { isSingleton } = useFormat();
+  const openMenu = useCallback(() => generateMenu({
+    addAttribute,
+    attributes,
+    card,
+    cardExists,
+    isSingleton,
+    openCardCountModal,
+    openSideboardCountModal,
+    removeAttribute,
+    removeCard,
+    setCount,
+    setSideboardCount,
+  }),
+  [
+    addAttribute,
+    attributes,
+    card,
+    cardExists,
+    isSingleton,
+    openCardCountModal,
+    openSideboardCountModal,
+    removeAttribute,
+    removeCard,
+    setCount,
+    setSideboardCount,
+  ]);
 
-	return openMenu;
+  return openMenu;
 };
 
 export default useRightClickMenu;

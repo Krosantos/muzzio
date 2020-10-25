@@ -9,22 +9,22 @@ import useLoad from './useLoad';
 const { app } = remote;
 
 const useAutoLoad = () => {
-	let readPath = '';
-	const currentFile = settings.get(CURRENT_FILE_SETTING);
-	const currentFileExists = fs.existsSync(currentFile);
+  let readPath = '';
+  const currentFile = settings.get(CURRENT_FILE_SETTING);
+  const currentFileExists = fs.existsSync(currentFile);
 
-	if (currentFileExists && currentFile.length > 1) {
-		readPath = settings.get(CURRENT_FILE_SETTING);
-		setWindowTitle(readPath);
-	} else {
-		const basePath = app.getPath('userData');
+  if (currentFileExists && currentFile.length > 1) {
+    readPath = settings.get(CURRENT_FILE_SETTING);
+    setWindowTitle(readPath);
+  } else {
+    const basePath = app.getPath('userData');
 
-		readPath = path.join(basePath, AUTOSAVE);
-	}
+    readPath = path.join(basePath, AUTOSAVE);
+  }
 
-	const load = useLoad();
+  const load = useLoad();
 
-	return load(readPath);
+  return load(readPath);
 };
 
 export default useAutoLoad;

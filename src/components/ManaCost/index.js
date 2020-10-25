@@ -6,50 +6,50 @@ import { manaCost, manaSymbol } from './styles.scss';
 const SLASHES = '//';
 
 const splitCosts = (cost) => {
-	const costs = cost.split(/ \/\/ /);
+  const costs = cost.split(/ \/\/ /);
 
-	return costs;
+  return costs;
 };
 
 const splitMana = (cost) => {
-	const fragments = cost.split(/}{/);
+  const fragments = cost.split(/}{/);
 
-	return fragments.map((fragment) => fragment.replace(/[}{]/g, ''));
+  return fragments.map((fragment) => fragment.replace(/[}{]/g, ''));
 };
 
 const Symbol = ({ costFragment }) => {
-	const src = symbolMap[costFragment];
+  const src = symbolMap[costFragment];
 
-	return (<img alt="" className={manaSymbol} src={src} />);
+  return (<img alt="" className={manaSymbol} src={src} />);
 };
 
 const ManaCost = ({ cost = '' }) => {
-	const [frontCost, backCost] = splitCosts(cost);
+  const [frontCost, backCost] = splitCosts(cost);
 
-	return (
-		<div className={manaCost}>
-			<Cost cost={frontCost} />
-			{backCost
-			&& (
-				<>
-					<span>{SLASHES}</span>
-					<Cost cost={backCost} />
-				</>
-			)}
-		</div>
-	);
+  return (
+    <div className={manaCost}>
+      <Cost cost={frontCost} />
+      {backCost
+        && (
+          <>
+            <span>{SLASHES}</span>
+            <Cost cost={backCost} />
+          </>
+        )}
+    </div>
+  );
 };
 
 const Cost = ({ cost }) => {
-	if (!cost)
-		return null;
-	const fragments = splitMana(cost);
+  if (!cost)
+    return null;
+  const fragments = splitMana(cost);
 
-	return (
-		<>
-			{fragments.map((fragment, index) => <Symbol costFragment={fragment} key={index} />)}
-		</>
-	);
+  return (
+    <>
+      {fragments.map((fragment, index) => <Symbol costFragment={fragment} key={index} />)}
+    </>
+  );
 };
 
 export default React.memo(ManaCost);

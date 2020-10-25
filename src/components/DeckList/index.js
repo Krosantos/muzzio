@@ -12,24 +12,24 @@ const MAINBOARD = 'Main Deck';
 const SIDEBOARD = 'Sideboard';
 
 const DeckList = () => {
-	const importFile = useImport();
-	const { maindeck, sideboard } = useDecklist();
-	const exportFile = useExport(maindeck, sideboard);
+  const importFile = useImport();
+  const { maindeck, sideboard } = useDecklist();
+  const exportFile = useExport(maindeck, sideboard);
 
-	return (
-		<>
-			<div className={deckList}>
-				<Divider label={MAINBOARD} />
-				<CardList alwaysColorful cards={maindeck} useMaindeckCount />
-				<Divider label={SIDEBOARD} />
-				<CardList alwaysColorful cards={sideboard} useSideboardCount />
-			</div>
-			<div className={buttonContainer}>
-				<button className={importButton} onClick={importFile} type="button">{IMPORT}</button>
-				<button className={importButton} onClick={exportFile} type="button">{EXPORT}</button>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <div className={deckList}>
+        <Divider label={MAINBOARD} />
+        <CardList alwaysColorful cards={maindeck} useMaindeckCount />
+        <Divider label={SIDEBOARD} />
+        <CardList alwaysColorful cards={sideboard} useSideboardCount />
+      </div>
+      <div className={buttonContainer}>
+        <button className={importButton} onClick={importFile} type="button">{IMPORT}</button>
+        <button className={importButton} onClick={exportFile} type="button">{EXPORT}</button>
+      </div>
+    </>
+  );
 };
 
 export default DeckList;

@@ -10,32 +10,32 @@ const LEGENDARY_CREATURE_QUERY = 'is:commander';
 const DEFAULT_PLACEHOLDER = 'Search for Commander';
 
 const CommanderSearch = ({ closeModal }) => {
-	const [results, setResults] = useState([]);
-	const {	commander, setCommander } = useCommander();
-	const wrappedSetCommander = useCallback((card) => {
-		const partnerType = get(card, 'partnerQuery.type', NO_PARTNER);
-		const toSet = { ...card, attributes: {}, disableMenu: true };
+  const [results, setResults] = useState([]);
+  const {	commander, setCommander } = useCommander();
+  const wrappedSetCommander = useCallback((card) => {
+    const partnerType = get(card, 'partnerQuery.type', NO_PARTNER);
+    const toSet = { ...card, attributes: {}, disableMenu: true };
 
-		setCommander(toSet);
-		if (partnerType === NO_PARTNER)
-			closeModal();
-	}, [closeModal, setCommander]);
-	const placeholder = useMemo(() => get(commander, 'name', DEFAULT_PLACEHOLDER), [commander]);
+    setCommander(toSet);
+    if (partnerType === NO_PARTNER)
+      closeModal();
+  }, [closeModal, setCommander]);
+  const placeholder = useMemo(() => get(commander, 'name', DEFAULT_PLACEHOLDER), [commander]);
 
-	return (
-		<div className={searchSection}>
-			<Search
-				additionalConstraint={LEGENDARY_CREATURE_QUERY}
-				autoFocus
-				bypassIdentity
-				placeholder={placeholder}
-				setResults={setResults}
-			/>
-			<div className={cardList}>
-				<CardList alwaysColorful callback={wrappedSetCommander} cards={results} />
-			</div>
-		</div>
-	);
+  return (
+    <div className={searchSection}>
+      <Search
+        additionalConstraint={LEGENDARY_CREATURE_QUERY}
+        autoFocus
+        bypassIdentity
+        placeholder={placeholder}
+        setResults={setResults}
+      />
+      <div className={cardList}>
+        <CardList alwaysColorful callback={wrappedSetCommander} cards={results} />
+      </div>
+    </div>
+  );
 };
 
 export default CommanderSearch;

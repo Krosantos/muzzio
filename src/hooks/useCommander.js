@@ -6,43 +6,43 @@ import assign from 'lodash/assign';
 import { CommanderContext } from '@contexts/Commander';
 
 const calculateIdentity = (commanderData) => {
-	const commanderIdentity = get(commanderData, 'commander.identity', []);
-	const partnerIdentity = get(commanderData, 'partner.identity', []);
-	const identities = uniq(concat(commanderIdentity, partnerIdentity));
+  const commanderIdentity = get(commanderData, 'commander.identity', []);
+  const partnerIdentity = get(commanderData, 'partner.identity', []);
+  const identities = uniq(concat(commanderIdentity, partnerIdentity));
 
-	if (identities.length < 1)
-		identities.push('C');
-	return identities;
+  if (identities.length < 1)
+    identities.push('C');
+  return identities;
 };
 
 const useCommander = () => {
-	const { commanderData, setCommanderData } = useContext(CommanderContext);
+  const { commanderData, setCommanderData } = useContext(CommanderContext);
 
-	const setCommander = useCallback((commander) => {
-		const toSet = assign({}, commanderData, { commander, partner: {} });
+  const setCommander = useCallback((commander) => {
+    const toSet = assign({}, commanderData, { commander, partner: {} });
 
-		setCommanderData(toSet);
-	}, [commanderData, setCommanderData]);
+    setCommanderData(toSet);
+  }, [commanderData, setCommanderData]);
 
-	const setPartner = useCallback((partner) => {
-		const toSet = assign({}, commanderData, { partner });
+  const setPartner = useCallback((partner) => {
+    const toSet = assign({}, commanderData, { partner });
 
-		setCommanderData(toSet);
-	}, [commanderData, setCommanderData]);
+    setCommanderData(toSet);
+  }, [commanderData, setCommanderData]);
 
-	const colorIdentity = useMemo(() => calculateIdentity(commanderData), [commanderData]);
-	const commander = useMemo(() => get(commanderData, 'commander'), [commanderData]);
-	const partner = useMemo(() => get(commanderData, 'partner'), [commanderData]);
-	const partnerQuery = useMemo(() => get(commanderData, 'commander.partnerQuery'), [commanderData]);
+  const colorIdentity = useMemo(() => calculateIdentity(commanderData), [commanderData]);
+  const commander = useMemo(() => get(commanderData, 'commander'), [commanderData]);
+  const partner = useMemo(() => get(commanderData, 'partner'), [commanderData]);
+  const partnerQuery = useMemo(() => get(commanderData, 'commander.partnerQuery'), [commanderData]);
 
-	return {
-		colorIdentity,
-		commander,
-		partner,
-		partnerQuery,
-		setCommander,
-		setPartner,
-	};
+  return {
+    colorIdentity,
+    commander,
+    partner,
+    partnerQuery,
+    setCommander,
+    setPartner,
+  };
 };
 
 export default useCommander;

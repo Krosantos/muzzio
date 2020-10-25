@@ -11,36 +11,36 @@ const DEFAULT_PLACEHOLDER = 'Search for Partner';
 const eligibleTypes = [ANY_PARTNER, SPECIFIC_PARTNER];
 
 const PartnerSearch = ({ closeModal }) => {
-	const [results, setResults] = useState([]);
-	const {
-		partner,
-		setPartner,
-		partnerQuery = {},
-	} = useCommander();
-	const wrappedSetPartner = useCallback((card) => {
-		setPartner(card);
-		closeModal();
-	}, [closeModal, setPartner]);
-	const placeholder = useMemo(() => get(partner, 'name', DEFAULT_PLACEHOLDER), [partner]);
-	const { type, query } = partnerQuery;
+  const [results, setResults] = useState([]);
+  const {
+    partner,
+    setPartner,
+    partnerQuery = {},
+  } = useCommander();
+  const wrappedSetPartner = useCallback((card) => {
+    setPartner(card);
+    closeModal();
+  }, [closeModal, setPartner]);
+  const placeholder = useMemo(() => get(partner, 'name', DEFAULT_PLACEHOLDER), [partner]);
+  const { type, query } = partnerQuery;
 
-	if (!eligibleTypes.includes(type))
-		return null;
-	const finalQuery = `${BASE_PARTNER_QUERY} ${query}`;
+  if (!eligibleTypes.includes(type))
+    return null;
+  const finalQuery = `${BASE_PARTNER_QUERY} ${query}`;
 
-	return (
-		<div className={searchSection}>
-			<Search
-				additionalConstraint={finalQuery}
-				bypassIdentity
-				placeholder={placeholder}
-				setResults={setResults}
-			/>
-			<div className={cardList}>
-				<CardList alwaysColorful callback={wrappedSetPartner} cards={results} />
-			</div>
-		</div>
-	);
+  return (
+    <div className={searchSection}>
+      <Search
+        additionalConstraint={finalQuery}
+        bypassIdentity
+        placeholder={placeholder}
+        setResults={setResults}
+      />
+      <div className={cardList}>
+        <CardList alwaysColorful callback={wrappedSetPartner} cards={results} />
+      </div>
+    </div>
+  );
 };
 
 export default PartnerSearch;

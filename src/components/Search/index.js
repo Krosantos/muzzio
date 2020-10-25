@@ -5,35 +5,35 @@ import useQueryConstraints from './useQueryConstraints';
 import { searchBox } from './styles.scss';
 
 const Search = ({
-	additionalConstraint = '',
-	autoFocus = false,
-	bypassIdentity,
-	setResults,
-	placeholder,
+  additionalConstraint = '',
+  autoFocus = false,
+  bypassIdentity,
+  setResults,
+  placeholder,
 }) => {
-	const [value, setValue] = useState('');
-	const updateValue = useCallback((event) => {
-		setValue(event.target.value);
-	}, []);
-	const constraint = useQueryConstraints(bypassIdentity);
-	const onEnter = useCallback(async ({ key }) => {
-		if (key !== 'Enter')
-			return;
-		const searchResults = await search(`${value} ${constraint} ${additionalConstraint}`);
+  const [value, setValue] = useState('');
+  const updateValue = useCallback((event) => {
+    setValue(event.target.value);
+  }, []);
+  const constraint = useQueryConstraints(bypassIdentity);
+  const onEnter = useCallback(async ({ key }) => {
+    if (key !== 'Enter')
+      return;
+    const searchResults = await search(`${value} ${constraint} ${additionalConstraint}`);
 
-		setResults(searchResults);
-	}, [additionalConstraint, constraint, setResults, value]);
+    setResults(searchResults);
+  }, [additionalConstraint, constraint, setResults, value]);
 
-	return (
-		<input
-			autoFocus={autoFocus}
-			className={searchBox}
-			onChange={updateValue}
-			onKeyPress={onEnter}
-			placeholder={placeholder}
-			value={value}
-		/>
-	);
+  return (
+    <input
+      autoFocus={autoFocus}
+      className={searchBox}
+      onChange={updateValue}
+      onKeyPress={onEnter}
+      placeholder={placeholder}
+      value={value}
+    />
+  );
 };
 
 export default Search;

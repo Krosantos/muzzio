@@ -7,20 +7,20 @@ import lookUpCards from './lookUpCards';
 const { clipboard } = remote;
 
 const useImport = () => {
-	const { addCard, clearDeck } = useCards();
-	const { isSingleton } = useFormat();
-	const importFile = useCallback(async () => {
-		const raw = clipboard.readText();
+  const { addCard, clearDeck } = useCards();
+  const { isSingleton } = useFormat();
+  const importFile = useCallback(async () => {
+    const raw = clipboard.readText();
 
-		clearDeck();
-		const newDeck = await lookUpCards(raw, isSingleton);
+    clearDeck();
+    const newDeck = await lookUpCards(raw, isSingleton);
 
-		newDeck.forEach((card) => {
-			addCard({ ...card });
-		});
-	}, [addCard, clearDeck, isSingleton]);
+    newDeck.forEach((card) => {
+      addCard({ ...card });
+    });
+  }, [addCard, clearDeck, isSingleton]);
 
-	return importFile;
+  return importFile;
 };
 
 export default useImport;

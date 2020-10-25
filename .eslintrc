@@ -1,14 +1,6 @@
 {
 	"extends": "eslint-config-tecca",
-	"settings": {
-		"import/resolver": {
-			"webpack": {
-				"config": "webpack.config.js"
-			}
-		}
-	},
-	"rules": {
-		"multiline-ternary":"off",
-		"no-magic-numbers":"off"
+	"rules":{
+		"multiline-ternary":"off"
 	}
 }

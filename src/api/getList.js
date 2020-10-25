@@ -5,14 +5,14 @@ import formatCards from './formatCards';
 import api from '.';
 
 const getList = async (identifiers) => {
-	const chunks = chunk(identifiers, 75);
+  const chunks = chunk(identifiers, 75);
 
-	const calls = chunks.map((body) => api.post('collection', { identifiers: body }));
-	const responses = await Promise.all(calls);
+  const calls = chunks.map((body) => api.post('collection', { identifiers: body }));
+  const responses = await Promise.all(calls);
 
-	const rawCards = responses.map((response) => get(response, 'data.data'), []);
+  const rawCards = responses.map((response) => get(response, 'data.data'), []);
 
-	return formatCards(flatten(rawCards));
+  return formatCards(flatten(rawCards));
 };
 
 export default getList;

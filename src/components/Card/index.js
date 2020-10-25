@@ -14,70 +14,70 @@ import useNameAndCount from './useNameAndCount';
 
 // eslint-disable-next-line max-statements, max-lines-per-function
 const Card = ({
-	callback = Function.prototype,
-	rawCard,
-	cardId,
-	alwaysColorful,
-	useMaindeckCount,
-	useSideboardCount,
+  callback = Function.prototype,
+  rawCard,
+  cardId,
+  alwaysColorful,
+  useMaindeckCount,
+  useSideboardCount,
 }) => {
-	const card = useCard(cardId, rawCard);
-	const {
-		id,
-		cost,
-		imageUrl,
-		reverseUrl,
-	} = card;
+  const card = useCard(cardId, rawCard);
+  const {
+    id,
+    cost,
+    imageUrl,
+    reverseUrl,
+  } = card;
 
-	const nameAndCount = useNameAndCount(card, useMaindeckCount, useSideboardCount);
-	const { setCount, setSideboardCount } = useCards();
+  const nameAndCount = useNameAndCount(card, useMaindeckCount, useSideboardCount);
+  const { setCount, setSideboardCount } = useCards();
 
-	const [isCardCountModalOpen, setCardCountModalOpen] = useState(false);
-	const closeCardCountModal = useCallback(() => setCardCountModalOpen(false), []);
-	const openCardCountModal = useCallback(() => setCardCountModalOpen(true), []);
+  const [isCardCountModalOpen, setCardCountModalOpen] = useState(false);
+  const closeCardCountModal = useCallback(() => setCardCountModalOpen(false), []);
+  const openCardCountModal = useCallback(() => setCardCountModalOpen(true), []);
 
-	const [isSideboardCountModalOpen, setSideboardCountModalOpen] = useState(false);
-	const closeSideboardCountModal = useCallback(() => setSideboardCountModalOpen(false), []);
-	const openSideboardCountModal = useCallback(() => setSideboardCountModalOpen(true), []);
+  const [isSideboardCountModalOpen, setSideboardCountModalOpen] = useState(false);
+  const closeSideboardCountModal = useCallback(() => setSideboardCountModalOpen(false), []);
+  const openSideboardCountModal = useCallback(() => setSideboardCountModalOpen(true), []);
 
-	const fireCallback = useCallback(() => callback(card), [card, callback]);
-	const className = useMemo(() => `${cardRow} ${getColorClass(card.count, card.sideboardCount, card.colors, alwaysColorful)}`, [alwaysColorful, card.colors, card.count, card.sideboardCount]);
-	const handleContextClick = useRightClickMenu(card, openCardCountModal, openSideboardCountModal);
-	const { shouldShowArt, showArt, hideArt } = useHoverArt();
+  const fireCallback = useCallback(() => callback(card), [card, callback]);
+  const className = useMemo(() => `${cardRow} ${getColorClass(card.count, card.sideboardCount, card.colors, alwaysColorful)}`, [alwaysColorful, card.colors, card.count, card.sideboardCount]);
+  const handleContextClick = useRightClickMenu(card, openCardCountModal, openSideboardCountModal);
+  const { shouldShowArt, showArt, hideArt } = useHoverArt();
 
-	return (
-		<>
-			<div
-				className={className}
-				onClick={fireCallback}
-				onContextMenu={handleContextClick}
-				onMouseEnter={showArt}
-				onMouseLeave={hideArt}
-			>
-				{nameAndCount}
-				<ManaCost cost={cost} />
-			</div>
-			{shouldShowArt && <HoverArt id={id} imageUrl={imageUrl} reverseUrl={reverseUrl} />}
-			{isCardCountModalOpen
-				&& ReactDOM.createPortal(
-					<CardCountModal
-						card={card}
-						closeModal={closeCardCountModal}
-						setCountCallback={setCount}
-					/>,
-					document.querySelector('body'),
-				)}
-			{isSideboardCountModalOpen
-				&& ReactDOM.createPortal(
-					<CardCountModal
-						card={card}
-						closeModal={closeSideboardCountModal}
-						setCountCallback={setSideboardCount}
-					/>,
-					document.querySelector('body'),
-				)}
-		</>
-	);
+  return (
+    <>
+      <div
+        className={className}
+        onClick={fireCallback}
+        onContextMenu={handleContextClick}
+        onMouseEnter={showArt}
+        onMouseLeave={hideArt}
+      >
+        {nameAndCount}
+        <ManaCost cost={cost} />
+      </div>
+      {shouldShowArt && <HoverArt id={id} imageUrl={imageUrl} reverseUrl={reverseUrl} />}
+      {isCardCountModalOpen
+      && ReactDOM.createPortal(
+        <CardCountModal
+          card={card}
+          closeModal={closeCardCountModal}
+          setCountCallback={setCount}
+        />,
+        document.querySelector('body'),
+      )}
+      {isSideboardCountModalOpen
+      && ReactDOM.createPortal(
+        <CardCountModal
+          card={card}
+          closeModal={closeSideboardCountModal}
+          setCountCallback={setSideboardCount}
+        />,
+        document.querySelector('body'),
+      )}
+    </>
+  );
 };
 
 export default React.memo(Card);

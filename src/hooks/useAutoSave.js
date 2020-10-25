@@ -7,15 +7,15 @@ import useSave from './useSave';
 const { app } = remote;
 
 const useAutoSave = () => {
-	const basePath = app.getPath('userData');
-	const writePath = path.join(basePath, AUTOSAVE);
-	const save = useSave();
+  const basePath = app.getPath('userData');
+  const writePath = path.join(basePath, AUTOSAVE);
+  const save = useSave();
 
-	useEffect(() => {
-		const autoSave = setInterval(() => save(writePath), 10000);
+  useEffect(() => {
+    const autoSave = setInterval(() => save(writePath), 10000);
 
-		return () => clearInterval(autoSave);
-	});
+    return () => clearInterval(autoSave);
+  });
 };
 
 export default useAutoSave;

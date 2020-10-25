@@ -3,14 +3,14 @@ import getCardById from '@api/getCardById';
 import useCards from '@hooks/useCards';
 
 const useRefreshCard = (id) => {
-	const { addCard } = useCards();
-	const refreshedCard = useCallback(async () => {
-		const newCard = await getCardById(id);
+  const { addCard } = useCards();
+  const refreshedCard = useCallback(async () => {
+    const newCard = await getCardById(id);
 
-		addCard(newCard);
-	}, [addCard, id]);
+    addCard(newCard);
+  }, [addCard, id]);
 
-	return refreshedCard;
+  return refreshedCard;
 };
 
 export default useRefreshCard;

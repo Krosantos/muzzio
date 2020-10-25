@@ -5,14 +5,14 @@ import PartnerSearch from './PartnerSearch';
 import { searchContainer } from '../styles.scss';
 
 const Modal = ({
-	closeModal,
+  closeModal,
 }) => (
-	<ModalContainer closeModal={closeModal}>
-		<div className={searchContainer}>
-			<CommanderSearch closeModal={closeModal} />
-			<PartnerSearch closeModal={closeModal} />
-		</div>
-	</ModalContainer>
+  <ModalContainer closeModal={closeModal}>
+    <div className={searchContainer}>
+      <CommanderSearch closeModal={closeModal} />
+      <PartnerSearch closeModal={closeModal} />
+    </div>
+  </ModalContainer>
 );
 
 export default Modal;
