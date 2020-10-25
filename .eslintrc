@@ -1,5 +1,9 @@
 {
 	"extends": "eslint-config-tecca",
+	"globals": {
+		"Card":false,
+		"RawCard": false
+	},
 	"rules":{
 		"multiline-ternary":"off",
 		"@typescript-eslint/no-explicit-any":1

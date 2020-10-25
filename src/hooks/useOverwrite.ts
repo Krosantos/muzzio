@@ -31,7 +31,7 @@ const useOverwrite:UseOverwrite = () => {
     setFormat(format);
     setOathbreakerData(oathbreakerData);
     setAttributes(attributes);
-    cardsDispatch({ card: cards, type: OVERWRITE });
+    cardsDispatch({ overriddenState: cards, type: OVERWRITE });
     setCommanderData(commanderData);
   }, [cardsDispatch, setAttributes, setCommanderData, setFormat, setOathbreakerData]);
 

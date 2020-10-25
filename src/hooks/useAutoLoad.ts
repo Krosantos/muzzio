@@ -7,13 +7,14 @@ import useLoad from './useLoad';
 
 const { app } = require('electron').remote;
 
-const useAutoLoad = () => {
+type UseAutoLoad = ()=>void
+const useAutoLoad:UseAutoLoad = () => {
   let readPath = '';
-  const currentFile = settings.getSync(CURRENT_FILE_SETTING);
+  const currentFile = settings.getSync(CURRENT_FILE_SETTING) as string;
   const currentFileExists = fs.existsSync(currentFile);
 
   if (currentFileExists && currentFile.length > 1) {
-    readPath = settings.getSync(CURRENT_FILE_SETTING);
+    readPath = settings.getSync(CURRENT_FILE_SETTING) as string;
     setWindowTitle(readPath);
   } else {
     const basePath = app.getPath('userData');

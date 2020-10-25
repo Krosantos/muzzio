@@ -2,7 +2,8 @@ import getPartner from './getPartner';
 import getIsUnlimited from './getIsUnlimited';
 import processCardFaces from './processCardFaces';
 
-const formatCard = (card) => {
+type FormatCard = (card:RawCard)=>Card
+const formatCard:FormatCard = (card) => {
   const {
     id,
     cmc,
@@ -38,6 +39,7 @@ const formatCard = (card) => {
   return result;
 };
 
-const formatCards = (cards) => cards.map(formatCard);
+type FormatCards = (cards:RawCard[])=>Card[]
+const formatCards:FormatCards = (cards) => cards.map(formatCard);
 
 export default formatCards;

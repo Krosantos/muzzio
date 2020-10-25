@@ -2,8 +2,6 @@ import { useState, useCallback, useMemo } from 'react';
 import sortBy from 'lodash/sortBy';
 import forEach from 'lodash/forEach';
 
-type Card = any;
-
 const { Menu, MenuItem } = require('electron').remote;
 
 const alphaSort = (card:Card) => card.name;

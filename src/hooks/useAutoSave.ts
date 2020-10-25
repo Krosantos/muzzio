@@ -5,7 +5,8 @@ import useSave from './useSave';
 
 const { app } = require('electron').remote;
 
-const useAutoSave = () => {
+type UseAutoSave = ()=>void;
+const useAutoSave:UseAutoSave = () => {
   const basePath = app.getPath('userData');
   const writePath = path.join(basePath, AUTOSAVE);
   const save = useSave();

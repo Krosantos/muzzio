@@ -4,7 +4,8 @@ import extractOracleText from './extractOracleText';
 const ANY_NUMBER_RULE = 'A deck can have any number of cards named';
 const BASIC_LAND = 'Basic';
 
-const getIsUnlimited = (card) => {
+type GetIsUnlimited = (card:RawCard)=>boolean
+const getIsUnlimited:GetIsUnlimited = (card) => {
   const type = get(card, 'type_line');
   const oracleText = extractOracleText(card);
 

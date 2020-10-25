@@ -17,30 +17,30 @@ const AUTOSAVE = 'autosave';
 const CURRENT_FILE_SETTING = 'currentFilePath';
 const OPEN_FOLDER_SETTING = 'openFilePath';
 
-const MODERN = 'modern';
-const COMMANDER = 'commander';
-const OATHBREAKER = 'oathbreaker';
-const STANDARD = 'standard';
-const PIONEER = 'pioneer';
-const VINTAGE = 'vintage';
-const LEGACY = 'legacy';
-const PAUPER = 'pauper';
+const MODERN = 'MODERN';
+const COMMANDER = 'COMMANDER';
+const OATHBREAKER = 'OATHBREAKER';
+const STANDARD = 'STANDARD';
+const PIONEER = 'PIONEER';
+const VINTAGE = 'VINTAGE';
+const LEGACY = 'LEGACY';
+const PAUPER = 'PAUPER';
 
 const singletonFormats = [
   COMMANDER,
   OATHBREAKER,
 ];
 
-const formats = [
-  MODERN,
+const formats = {
   COMMANDER,
-  OATHBREAKER,
-  STANDARD,
-  PIONEER,
-  VINTAGE,
   LEGACY,
+  MODERN,
+  OATHBREAKER,
   PAUPER,
-];
+  PIONEER,
+  STANDARD,
+  VINTAGE,
+};
 
 const oathbreakerBanlist = [
   'Ad Nauseam',

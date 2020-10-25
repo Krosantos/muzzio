@@ -3,7 +3,6 @@ import { ThemeProvider } from 'styled-components';
 import theme from '@theme';
 import Layout from '@components/Layout';
 import { CardProvider } from '@contexts/Card';
-import { CardMenuProvider } from '@contexts/CardMenu';
 import { CommanderProvider } from '@contexts/Commander';
 import { OathbreakerProvider } from '@contexts/Oathbreaker';
 import { AttributesProvider } from '@contexts/Attributes';
@@ -29,11 +28,9 @@ const App:React.FC = () => {
           <OathbreakerProvider initialValue={oathbreakerData}>
             <AttributesProvider initialValue={attributes}>
               <SettingsProvider>
-                <CardMenuProvider>
                   <ThemeProvider theme={theme}>
                     <Layout />
                   </ThemeProvider>
-                </CardMenuProvider>
               </SettingsProvider>
             </AttributesProvider>
           </OathbreakerProvider>

@@ -1,7 +1,12 @@
 import { useContext, useCallback } from 'react';
 import { AttributesContext } from '@contexts/Attributes';
 
-const useAttributes = () => {
+type UseAttributes = () => {
+  addAttribute: (attribute: string) => void;
+  attributes: string[];
+  removeAttribute: (attribute: string) => void;
+}
+const useAttributes:UseAttributes = () => {
   const { attributes, setAttributes } = useContext(AttributesContext);
 
   const addAttribute = useCallback(((attribute) => {

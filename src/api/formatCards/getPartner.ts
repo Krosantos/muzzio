@@ -5,7 +5,8 @@ import {
 } from '@constants';
 import extractOracleText from './extractOracleText';
 
-const getPartner = (card) => {
+type GetPartner = (card:RawCard)=>Card["partner"]
+const getPartner:GetPartner = (card) => {
   const {
     all_parts: allParts,
     name,
