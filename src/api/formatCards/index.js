@@ -18,7 +18,7 @@ const formatCard = (card) => {
 	const partnerQuery = getPartner(card);
 	const isUnlimited = getIsUnlimited(card);
 
-	return {
+	const result = {
 		attributes: {},
 		cmc,
 		colors,
@@ -34,6 +34,8 @@ const formatCard = (card) => {
 		sideboardCount: 0,
 		type,
 	};
+	console.log(result)
+	return result
 };
 
 const formatCards = (cards) => cards.map(formatCard);
