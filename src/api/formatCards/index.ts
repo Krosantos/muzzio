@@ -19,7 +19,7 @@ const formatCard:FormatCard = (card) => {
   const partnerQuery = getPartner(card);
   const isUnlimited = getIsUnlimited(card);
 
-  const result = {
+  return {
     attributes: {},
     cmc,
     colors,
@@ -35,8 +35,6 @@ const formatCard:FormatCard = (card) => {
     sideboardCount: 0,
     type,
   };
-
-  return result;
 };
 
 type FormatCards = (cards:RawCard[])=>Card[]

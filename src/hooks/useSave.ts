@@ -5,8 +5,10 @@ import { OathbreakerContext } from '@contexts/Oathbreaker';
 import { CardContext } from '@contexts/Card';
 import { AttributesContext } from '@contexts/Attributes';
 import { FormatContext } from '@contexts/Format';
+import type SaveData from './SaveData';
 
-const useAllContexts = () => {
+type UseAllContexts = ()=>SaveData
+const useAllContexts:UseAllContexts = () => {
   const { attributes } = useContext(AttributesContext);
   const { cards } = useContext(CardContext);
   const { commanderData } = useContext(CommanderContext);

@@ -71,4 +71,4 @@ const CardProvider:React.FC<CardProviderProps> = ({ children, initialValue = {} 
   );
 };
 
-export { CardContext, CardProvider };
+export { CardContext, CardProvider, CardState };

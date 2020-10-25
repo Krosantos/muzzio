@@ -3,9 +3,10 @@ import get from 'lodash/get';
 import concat from 'lodash/concat';
 import uniq from 'lodash/uniq';
 import assign from 'lodash/assign';
-import { CommanderContext } from '@contexts/Commander';
+import { CommanderContext, CommanderData } from '@contexts/Commander';
 
-const calculateIdentity = (commanderData) => {
+type CalculateIdentity = (commanderData:CommanderData)=>string[]
+const calculateIdentity:CalculateIdentity = (commanderData) => {
   const commanderIdentity = get(commanderData, 'commander.identity', []);
   const partnerIdentity = get(commanderData, 'partner.identity', []);
   const identities = uniq(concat(commanderIdentity, partnerIdentity));
@@ -15,16 +16,24 @@ const calculateIdentity = (commanderData) => {
   return identities;
 };
 
-const useCommander = () => {
+type UseCommander = ()=>{
+  colorIdentity:string[];
+  commander:Card;
+  partner:Card;
+  partnerQuery:Card["partnerQuery"];
+  setCommander:(commander:Card)=>void;
+  setPartner:(partner:Card)=>void;
+}
+const useCommander:UseCommander = () => {
   const { commanderData, setCommanderData } = useContext(CommanderContext);
 
-  const setCommander = useCallback((commander) => {
+  const setCommander = useCallback((commander:Card) => {
     const toSet = assign({}, commanderData, { commander, partner: {} });
 
     setCommanderData(toSet);
   }, [commanderData, setCommanderData]);
 
-  const setPartner = useCallback((partner) => {
+  const setPartner = useCallback((partner:Card) => {
     const toSet = assign({}, commanderData, { partner });
 
     setCommanderData(toSet);
@@ -33,7 +42,7 @@ const useCommander = () => {
   const colorIdentity = useMemo(() => calculateIdentity(commanderData), [commanderData]);
   const commander = useMemo(() => get(commanderData, 'commander'), [commanderData]);
   const partner = useMemo(() => get(commanderData, 'partner'), [commanderData]);
-  const partnerQuery = useMemo(() => get(commanderData, 'commander.partnerQuery'), [commanderData]);
+  const partnerQuery = useMemo<Card["partnerQuery"]>(() => get(commanderData, 'commander.partnerQuery'), [commanderData]);
 
   return {
     colorIdentity,

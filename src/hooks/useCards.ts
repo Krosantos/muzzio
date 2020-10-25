@@ -14,11 +14,27 @@ import {
   UPDATE_ACTION,
 } from '@constants';
 
+type UseCards = ()=>{
+  addAttribute:(card: Card, attribute: string) => void;
+  addCard:(card: Card) => void;
+  cardExists:(card: Card) => boolean;
+  cards: {[id:string]:Card};
+  cardsByAttribute:(attribute: string) => Card[];
+  cardsInDeck:() => Card[];
+  cardsInSideboard:() => Card[];
+  clearDeck: ()=>void;
+  getCard:(id:string)=>Card;
+  removeAttribute:(card: Card, attribute: string) => void;
+  removeCard:(card: Card) => void;
+  setCount:(card: Card, count:number) => void;
+  setSideboardCount:(card: Card, sideboardCount:number) => void;
+}
+
 // eslint-disable-next-line max-statements, max-lines-per-function
-const useCards = () => {
+const useCards:UseCards = () => {
   const { cards, dispatch } = useContext(CardContext);
 
-  const cardsByAttribute = useCallback((attribute) => filter(cards, (card) => get(card, ['attributes', attribute], false)), [cards]);
+  const cardsByAttribute = useCallback((attribute:string) => filter(cards, (card) => get(card, ['attributes', attribute], false)), [cards]);
 
   const cardsInDeck = useCallback(() => {
     return filter(cards, (card) => card.count >= 1);
@@ -28,29 +44,29 @@ const useCards = () => {
     return filter(cards, (card) => card.sideboardCount >= 1);
   }, [cards]);
 
-  const addCard = useCallback((card) => {
-    const maybeCard = get(cards, card.id, {});
+  const addCard = useCallback((card:Card) => {
+    const maybeCard = get(cards, card.id, { count: 1, sideboardCount: 1 });
     const { count, sideboardCount } = maybeCard;
     const toAdd = merge({}, maybeCard, card, { count, sideboardCount });
 
     dispatch({ card: toAdd, type: ADD_ACTION });
   }, [cards, dispatch]);
 
-  const removeCard = useCallback((card) => dispatch({ card, type: REMOVE_ACTION }), [dispatch]);
+  const removeCard = useCallback((card:Card) => dispatch({ card, type: REMOVE_ACTION }), [dispatch]);
 
-  const cardExists = useCallback((card) => {
+  const cardExists = useCallback((card:Card) => {
     const id = get(card, 'id');
 
     return id && has(cards, id);
   }, [cards]);
 
-  const addAttribute = useCallback((card, attribute) => {
+  const addAttribute = useCallback((card:Card, attribute:string) => {
     const toAdd = set(card, ['attributes', attribute], true);
 
     dispatch({ card: toAdd, type: UPDATE_ACTION });
   }, [dispatch]);
 
-  const removeAttribute = useCallback((card, attribute) => {
+  const removeAttribute = useCallback((card:Card, attribute:string) => {
     const toDispatch = { ...card };
 
     unset(toDispatch, ['attributes', attribute]);
@@ -58,10 +74,10 @@ const useCards = () => {
     dispatch({ card: toDispatch, type: UPDATE_ACTION });
   }, [dispatch]);
 
-  const setCount = useCallback((card, count) => {
+  const setCount = useCallback((card:Card, count:number) => {
     const {
-      sideboardCount = 0,
       isUnlimited = false,
+      sideboardCount = 0,
     } = card;
     const clampedSideboardCount = isUnlimited
       ? sideboardCount
@@ -71,7 +87,7 @@ const useCards = () => {
     dispatch({ card: toDispatch, type: UPDATE_ACTION });
   }, [dispatch]);
 
-  const setSideboardCount = useCallback((card, sideboardCount) => {
+  const setSideboardCount = useCallback((card:Card, sideboardCount:number) => {
     const {
       count = 0,
       isUnlimited = false,
@@ -95,7 +111,7 @@ const useCards = () => {
     });
   }, [cardsInDeck, cardsInSideboard, dispatch]);
 
-  const getCard = useCallback((id) => get(cards, id), [cards]);
+  const getCard = useCallback((id:string) => get(cards, id), [cards]);
 
   return {
     addAttribute,

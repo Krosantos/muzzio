@@ -1,9 +1,10 @@
 import { useContext, useMemo, useCallback } from 'react';
 import get from 'lodash/get';
 import assign from 'lodash/assign';
-import { OathbreakerContext } from '@contexts/Oathbreaker';
+import { OathbreakerContext, OathbreakerData } from '@contexts/Oathbreaker';
 
-const calculateIdentity = (oathbreakerData) => {
+type CalculateIdentity = (oathbreakerData:OathbreakerData)=>string[]
+const calculateIdentity:CalculateIdentity = (oathbreakerData) => {
   const identity = get(oathbreakerData, 'oathbreaker.identity', []);
 
   if (identity.length < 1)
@@ -11,7 +12,14 @@ const calculateIdentity = (oathbreakerData) => {
   return identity;
 };
 
-const useOathbreaker = () => {
+type UseOathbreaker = ()=>{
+  colorIdentity: string[];
+  oathbreaker:Card;
+  setOathbreaker:(oathbreaker:Card)=>void;
+  setSignatureSpell:(signatureSpell:Card)=>void;
+  signatureSpell:Card;
+}
+const useOathbreaker:UseOathbreaker = () => {
   const { oathbreakerData, setOathbreakerData } = useContext(OathbreakerContext);
 
   const setOathbreaker = useCallback((oathbreaker) => {

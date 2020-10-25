@@ -9,8 +9,9 @@ import {
   OVERWRITE,
   COMMANDER,
 } from '@constants';
+import type SaveData from './SaveData';
 
-type UseOverwrite = ()=>(saveData:any)=>void
+type UseOverwrite = ()=>(saveData:SaveData)=>void
 
 const useOverwrite:UseOverwrite = () => {
   const { setAttributes } = useContext(AttributesContext);

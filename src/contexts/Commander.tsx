@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { ANY_PARTNER, SPECIFIC_PARTNER } from '@constants';
 
 type CommanderData = {
-  commander:Card;
+  commander?:Card;
   partner?: Card;
   partnerQuery?: {
     type: typeof ANY_PARTNER | typeof SPECIFIC_PARTNER;
@@ -19,7 +19,6 @@ type CommanderContextValue = {
 const DEFAULT_VALUE:CommanderContextValue = {
   commanderData: {
     colorIdentity: ['c'],
-    commander: {},
   },
   setCommanderData: () => {},
 };
@@ -42,4 +41,4 @@ const CommanderProvider:React.FC<CommanderProviderProps> = ({
   );
 };
 
-export { CommanderContext, CommanderProvider };
+export { CommanderContext, CommanderProvider, CommanderData };
