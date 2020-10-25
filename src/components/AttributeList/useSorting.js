@@ -1,9 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
-import remote from '@electron/remote';
+import { Menu, MenuItem } from '@electron/remote';
 import sortBy from 'lodash/sortBy';
 import forEach from 'lodash/forEach';
-
-const { Menu, MenuItem } = remote;
 
 const alphaSort = (card) => card.name;
 const cmcSort = (card) => card.cmc;

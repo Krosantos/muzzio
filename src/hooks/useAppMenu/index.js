@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import remote from '@electron/remote';
+import { Menu } from '@electron/remote';
 import generateTemplate from './generateTemplate';
 import {
   useNewDeck,
@@ -8,8 +8,6 @@ import {
   useChangeFormat,
   useRefreshCards,
 } from './hooks';
-
-const { Menu } = remote;
 
 const useAppMenu = () => {
   const callbacks = {

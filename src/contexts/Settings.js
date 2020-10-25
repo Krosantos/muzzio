@@ -14,7 +14,7 @@ const settingReducer = (prevState, action) => {
 const SettingsContext = React.createContext();
 
 const SettingsProvider = ({ children }) => {
-  const [settings, dispatch] = useReducer(settingReducer, electronSettings.getAll());
+  const [settings, dispatch] = useReducer(settingReducer, electronSettings.getSync());
   const setSettings = useCallback((key, value) => {
     dispatch({ key, value });
   }, [dispatch]);

@@ -1,10 +1,8 @@
 import { useCallback } from 'react';
-import remote from '@electron/remote';
+import { clipboard } from '@electron/remote';
 import useCards from '@hooks/useCards';
 import useFormat from '@hooks/useFormat';
 import lookUpCards from './lookUpCards';
-
-const { clipboard } = remote;
 
 const useImport = () => {
   const { addCard, clearDeck } = useCards();

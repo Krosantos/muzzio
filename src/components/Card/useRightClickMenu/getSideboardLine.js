@@ -1,7 +1,5 @@
-import remote from '@electron/remote';
+import { MenuItem } from '@electron/remote';
 import { CARD_MAX } from '@constants';
-
-const { MenuItem } = remote;
 
 const generateUnlimitedMenu = (openSideboardCountModal) => new MenuItem({
   click: openSideboardCountModal,

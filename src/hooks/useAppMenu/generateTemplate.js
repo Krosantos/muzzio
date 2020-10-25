@@ -1,4 +1,4 @@
-import remote from '@electron/remote';
+import { app } from '@electron/remote';
 import {
   COMMANDER,
   OATHBREAKER,
@@ -10,7 +10,6 @@ import {
   VINTAGE,
 } from '@constants';
 
-const { app } = remote;
 const isMac = process.platform === 'darwin';
 
 const macMenu = {

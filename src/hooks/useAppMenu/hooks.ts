@@ -1,6 +1,6 @@
 import path from 'path';
 import { useCallback, useContext } from 'react';
-import remote from '@electron/remote';
+import { app, dialog } from '@electron/remote';
 import getList from '@api/getList';
 import { SettingsContext } from '@contexts/Settings';
 import useSave from '@hooks/useSave';
@@ -10,8 +10,6 @@ import useOverwrite from '@hooks/useOverwrite';
 import useCards from '@hooks/useCards';
 import setWindowTitle from '@utils/setWindowTitle';
 import { CURRENT_FILE_SETTING, OPEN_FOLDER_SETTING } from '@constants';
-
-const { app, dialog } = remote;
 
 const useSaveDeck = (saveAs = false) => {
   const save = useSave();

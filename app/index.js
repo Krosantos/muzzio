@@ -40,10 +40,10 @@ function createWindow() {
 // Ensure that opening a .muz file loads it.
 if (isWindows) {
   if (process.argv.length > 1)
-    settings.set('currentFilePath', process.argv[1]);
+    settings.setSync('currentFilePath', process.argv[1]);
 } else {
   app.on('open-file', (_, filePath) => {
-    settings.set('currentFilePath', filePath);
+    settings.setSync('currentFilePath', filePath);
   });
 }
 

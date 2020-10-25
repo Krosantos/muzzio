@@ -1,6 +1,4 @@
-import remote from '@electron/remote';
-
-const { MenuItem } = remote;
+import { MenuItem } from '@electron/remote';
 
 const getDeckLine = (isSingleton, card, menu, setCount) => {
   if (!isSingleton)
