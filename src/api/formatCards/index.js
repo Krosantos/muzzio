@@ -34,8 +34,8 @@ const formatCard = (card) => {
 		sideboardCount: 0,
 		type,
 	};
-	console.log(result)
-	return result
+
+	return result;
 };
 
 const formatCards = (cards) => cards.map(formatCard);

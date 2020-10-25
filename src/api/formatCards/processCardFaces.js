@@ -9,14 +9,16 @@ const getTransformData = (cardFaces) => {
 	return result;
 };
 
-const getDfcData = (cardFaces, name) => {
+const getDfcData = (card) => {
 	const result = {};
-	result.face = get(cardFaces, 0);
-	result.face.name = name;
-	result.imageUrl = get(cardFaces, [0, 'image_uris', 'border_crop']);
-	result.reverseUrl = get(cardFaces, [1, 'image_uris', 'border_crop']);
+
+	result.face = get(card, ['card_faces', 0]);
+	result.face.name = get(card, 'name');
+	result.face.type_line = get(card, 'type_line');
+	result.imageUrl = get(card, ['card_faces', 0, 'image_uris', 'border_crop']);
+	result.reverseUrl = get(card, 'card_faces', [1, 'image_uris', 'border_crop']);
 	return result;
-}
+};
 
 const processCardFaces = (card) => {
 	const {
@@ -30,7 +32,7 @@ const processCardFaces = (card) => {
 	if (layout === 'transform')
 		return getTransformData(cardFaces);
 	if (layout === 'modal_dfc')
-		return getDfcData(cardFaces, card.name);
+		return getDfcData(card);
 	result.face = card;
 	result.imageUrl = get(imageUris, 'border_crop');
 
