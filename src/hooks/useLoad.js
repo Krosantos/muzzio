@@ -6,8 +6,10 @@ const useLoad = () => {
 		try {
 			const raw = fs.readFileSync(filePath).toString('utf8');
 
+			console.log('gucci', raw);
 			return JSON.parse(raw);
 		} catch (e) {
+			console.log(e);
 			return {};
 		}
 	}, []);

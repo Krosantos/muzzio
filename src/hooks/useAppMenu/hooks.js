@@ -38,15 +38,16 @@ const useLoadDeck = () => {
 	const load = useLoad();
 	const { setSettings, settings } = useContext(SettingsContext);
 	const overwrite = useOverwrite();
-	const loadDeck = useCallback(() => {
+	const loadDeck = useCallback(async () => {
 		const openPath = settings[OPEN_FOLDER_SETTING] || app.getPath('documents');
-		const [filepath] = dialog.showOpenDialog({
+		const { filePaths } = await dialog.showOpenDialog({
 			defaultPath: openPath,
 			filters: [
 				{ extensions: ['muz'], name: 'Deck Files' },
 				{ extensions: ['*'], name: 'All Files' },
 			],
 		});
+		const filepath = filePaths[0];
 		const saveData = load(filepath);
 
 		overwrite(saveData);
