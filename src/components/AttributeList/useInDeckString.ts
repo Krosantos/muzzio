@@ -4,7 +4,7 @@ import useFormat from '@hooks/useFormat';
 import useCards from '@hooks/useCards';
 import { ALL_CARDS } from '@constants';
 
-type GetAllCardsString = (isSingleton:boolean, cards: Card[])=>string
+type GetAllCardsString = (isSingleton:boolean, cards: {[id:string]:Card})=>string
 const getAllCardsString:GetAllCardsString = (isSingleton, cards) => {
   if (!isSingleton)
     return '';

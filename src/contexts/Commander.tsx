@@ -1,13 +1,9 @@
 import React, { useState, useMemo } from 'react';
-import { ANY_PARTNER, SPECIFIC_PARTNER } from '@constants';
 
 type CommanderData = {
   commander?:Card;
   partner?: Card;
-  partnerQuery?: {
-    type: typeof ANY_PARTNER | typeof SPECIFIC_PARTNER;
-    query: string;
-  };
+  partnerQuery?: Card["partnerQuery"];
   colorIdentity: string[];
 }
 

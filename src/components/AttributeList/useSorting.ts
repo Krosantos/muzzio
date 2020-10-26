@@ -9,7 +9,12 @@ const cmcSort = (card:Card) => card.cmc;
 const countSort = (card:Card) => card.count || 1;
 const deckSort = (card:Card) => card.count + card.sideboardCount;
 
-const sortTypes = {
+type SortType ={
+  name: string;
+  sort:(card:Card)=>string|number;
+}
+
+const sortTypes:{[key:string]:SortType} = {
   ALPHA: { name: 'Alphabetical', sort: alphaSort },
   CMC: { name: 'CMC', sort: cmcSort },
   COUNT: { name: 'Count', sort: countSort },
@@ -21,7 +26,7 @@ type UseSorting = (cards:Card[])=>{
   sortedCards: Card[];
 }
 const useSorting:UseSorting = (cards = []) => {
-  const [sortType, setSort] = useState(sortTypes.CMC);
+  const [sortType, setSort] = useState<SortType>(sortTypes.CMC);
   const openMenu = useCallback(() => {
     const menu = new Menu();
 

@@ -10,7 +10,7 @@ type ApiResponse = {
   };
 }
 
-type GetList = (identifiers:string[])=>Promise<Card[]>
+type GetList = (identifiers:{name:string}[])=>Promise<Card[]>
 const getList:GetList = async (identifiers) => {
   const chunks = chunk(identifiers, 75);
 

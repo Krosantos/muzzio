@@ -24,20 +24,20 @@ const AddCards:React.FC = () => {
 const SearchSelection = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0px 0.5rem 0.5rem;
+  padding: 8px 0px 8px 8px;
   height: 100%;
 
   input {
-      margin-right: 0.5rem;
+      margin-right: 8px;
   }
 `;
 
 const ListWrapper = styled.div`
-  margin-top: 0.25rem;
+  margin-top: 4px;
   overflow-y: auto;
-  margin-right: 0.25rem;
-  padding-right: 0.25rem;
-  height: calc(100% - 2.25rem);
+  margin-right: 4px;
+  padding-right: 4px;
+  height: calc(100% - 36px);
 `;
 
 export default AddCards;
