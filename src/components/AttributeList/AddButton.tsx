@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.smoke};
   border-radius: 4px;
   width: 250px;
-  background-color: $taupe;
+  background-color: ${({ theme }) => theme.taupe};
   padding: 4px 0px 4px 4px;
   max-height: calc(100% - 10px);
   margin-bottom: 4px;

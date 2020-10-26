@@ -42,7 +42,7 @@ const CardCountModal:React.FC<CardCountModalProps> = ({ card, setCountCallback, 
 const Form = styled.form`
   padding: 8px;
   & input{
-      background-color: $white;
+      background-color: $${({ theme }) => theme.white};
       border: none;
       padding: 0 4px;
       margin-right: 4px;

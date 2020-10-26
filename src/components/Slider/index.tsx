@@ -28,8 +28,8 @@ const Container = styled.div<{left:boolean; isOpen:boolean}>`
   height: calc(100vh - 3em);
   position: fixed;
   top: 3em;
-  border-top: 1px solid $white;
-  background-color: $smoke;
+  border-top: 1px solid ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.smoke};
   width: 300px;
   transition: transform 250ms ease-in-out;
 
@@ -43,9 +43,9 @@ const Container = styled.div<{left:boolean; isOpen:boolean}>`
   }
 
   & ::-webkit-scrollbar-thumb {
-      background: $white;
+      background: ${({ theme }) => theme.white};
       border-radius: 4px;
-      border: 1px solid $white;
+      border: 1px solid ${({ theme }) => theme.white};
   }
 
   ${({ left, isOpen }) => {

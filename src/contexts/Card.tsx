@@ -31,7 +31,7 @@ const DEFAULT_VALUE = {
 const CardContext = React.createContext<CardContextValue>(DEFAULT_VALUE);
 
 // eslint-disable-next-line complexity
-const cardReducer:Reducer<CardState, Action> = (state, { type, card, overriddenState }) => {
+const cardReducer:Reducer<CardState, Action> = (state, { type, card = {}, overriddenState }) => {
   const { id } = card;
   const newState = { ...state };
 

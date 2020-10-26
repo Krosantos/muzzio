@@ -35,8 +35,8 @@ const useOathbreaker:UseOathbreaker = () => {
   }, [oathbreakerData, setOathbreakerData]);
 
   const colorIdentity = useMemo(() => calculateIdentity(oathbreakerData), [oathbreakerData]);
-  const oathbreaker = useMemo(() => get(oathbreakerData, 'oathbreaker'), [oathbreakerData]);
-  const signatureSpell = useMemo(() => get(oathbreakerData, 'signatureSpell'), [oathbreakerData]);
+  const oathbreaker = useMemo(() => get(oathbreakerData, 'oathbreaker', {}), [oathbreakerData]);
+  const signatureSpell = useMemo(() => get(oathbreakerData, 'signatureSpell', {}), [oathbreakerData]);
 
   return {
     colorIdentity,

@@ -22,10 +22,6 @@ const getCardColor:GetCardColor = ({ card, alwaysColorful, theme }) => {
     color: theme.smoke,
   };
 
-  if (notInDeck) {
-    result.bgColor = theme.granite;
-    result.color = theme.white;
-  }
   if (colors.length < 1) { result.bgColor = theme.cardColorless; } else {
     const color = colors[0];
 
@@ -48,6 +44,10 @@ const getCardColor:GetCardColor = ({ card, alwaysColorful, theme }) => {
     default:
       break;
     }
+  }
+  if (notInDeck) {
+    result.bgColor = theme.granite;
+    result.color = theme.white;
   }
 
   return result;

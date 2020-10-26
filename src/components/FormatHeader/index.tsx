@@ -16,19 +16,18 @@ import Default from './Default';
 
 const componentMap = {
   [COMMANDER]: Commander,
+  [LEGACY]: Default,
+  [MODERN]: Default,
   [OATHBREAKER]: Oathbreaker,
-  [LEGACY]:Default,
-  [MODERN]:Default,
-  [PAUPER]:Default,
-  [PIONEER]:Default,
-  [STANDARD]:Default,
-  [VINTAGE]:Default,
+  [PAUPER]: Default,
+  [PIONEER]: Default,
+  [STANDARD]: Default,
+  [VINTAGE]: Default,
 };
-
 
 const FormatHeader:React.FC = () => {
   const { format } = useFormat();
-  const Component = componentMap[format];
+  const Component = componentMap[format] || Default;
 
   return <Component />;
 };
