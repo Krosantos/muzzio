@@ -19,7 +19,7 @@ const getCardColor:GetCardColor = ({ card, alwaysColorful, theme }) => {
 
   const result:ColorResult = {
     bgColor: theme.cardMulti,
-    color: theme.smoke,
+    color: theme.black,
   };
 
   if (colors.length < 1) { result.bgColor = theme.cardColorless; } else {

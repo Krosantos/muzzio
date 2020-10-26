@@ -1,4 +1,5 @@
 const theme = {
+  black: "#000000",
   cardBlack: "#b9adad",
   cardBlue: "#a0c5df",
   cardColorless: "#cdd6db",

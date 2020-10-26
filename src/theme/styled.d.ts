@@ -3,6 +3,7 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
+    black: string;
     cardBlack: string;
     cardBlue: string;
     cardColorless: string;

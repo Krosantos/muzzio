@@ -93,6 +93,7 @@ const ModalBody = styled.div`
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  padding: 8px;
 `;
 
 export default SampleHandModal;
