@@ -7,7 +7,7 @@ import PartnerSearch from './PartnerSearch';
 type ModalProps = {
   closeModal: ()=>void;
 }
-const Modal:React.FC<ModalProps> = ({  closeModal,}) => (
+const Modal:React.FC<ModalProps> = ({ closeModal }) => (
   <ModalContainer closeModal={closeModal}>
     <SearchContainer>
       <CommanderSearch closeModal={closeModal} />

@@ -83,7 +83,7 @@ type UseSampleHand = ()=>{
 }
 const useSampleHand:UseSampleHand = () => {
   const initialState = useShuffledDeck();
-  const [{ cardsInHand }, dispatch] = useReducer(sampleHandReducer, initialState);
+  const [{ cardsInHand = [] }, dispatch] = useReducer(sampleHandReducer, initialState);
   const addCard = useCallback(() => dispatch(ADD_CARD), []);
   const generateNewHand = useCallback(() => dispatch(NEW_HAND), []);
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import SampleHandModal from './SampleHandModal';
 
@@ -26,17 +26,17 @@ const SampleHand:React.FC = () => {
 
 const Button = styled.button`
   cursor: pointer;
-  color: ${({theme})=>theme.white};
-  background-color: ${({theme})=>theme.smoke};
-  border: 1px solid ${({theme})=>theme.white};
+  color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.smoke};
+  border: 1px solid ${({ theme }) => theme.white};
   font-family: "Bitter", sans-serif;
   height: 2em;
   padding: 4px;
   margin: 4px;
   vertical-align: middle;
   &:hover {
-      color: ${({theme})=>theme.smoke};;
-      background-color: ${({theme})=>theme.white};
+      color: ${({ theme }) => theme.smoke};;
+      background-color: ${({ theme }) => theme.white};
   }
   transition: all 100ms ease-in;
 `;

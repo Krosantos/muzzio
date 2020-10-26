@@ -42,7 +42,7 @@ const useCommander:UseCommander = () => {
   const colorIdentity = useMemo(() => calculateIdentity(commanderData), [commanderData]);
   const commander = useMemo(() => get(commanderData, 'commander', {}), [commanderData]);
   const partner = useMemo(() => get(commanderData, 'partner', {}), [commanderData]);
-  const partnerQuery = useMemo<Card["partnerQuery"]>(() => get(commanderData, 'commander.partnerQuery'), [commanderData]);
+  const partnerQuery = useMemo<Card["partnerQuery"]>(() => get(commanderData, 'commander.partnerQuery', {}), [commanderData]);
 
   return {
     colorIdentity,

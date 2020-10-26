@@ -1,3 +1,4 @@
+import { NO_PARTNER } from '@constants';
 import React, { useState, useMemo } from 'react';
 
 type CommanderData = {
@@ -15,6 +16,9 @@ type CommanderContextValue = {
 const DEFAULT_VALUE:CommanderContextValue = {
   commanderData: {
     colorIdentity: ['c'],
+    partnerQuery: {
+      type: NO_PARTNER,
+    },
   },
   setCommanderData: () => {},
 };

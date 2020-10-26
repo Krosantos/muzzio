@@ -20,8 +20,7 @@ const ModalContainer:React.FC<ModalContainerProps> = ({ closeModal, children }) 
 
 const Underlay = styled.div`
   position: fixed;
-  background-color: ${({ theme }) => theme.smoke};
-  opacity: 55%;
+  background-color: ${({ theme }) => theme.smoke}55;
   width: 100vw;
   height: 100vh;
   display: flex;
