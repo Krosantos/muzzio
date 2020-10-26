@@ -8,7 +8,11 @@ const useLoad:UseLoad = () => {
     try {
       const raw = fs.readFileSync(filePath).toString('utf8');
 
-      return JSON.parse(raw);
+      const result = JSON.parse(raw) as SaveData;
+      // Temporary, until I map/update it
+
+      result.format = result.format.toUpperCase() as SaveData["format"];
+      return result;
     } catch (e) {
       return {};
     }

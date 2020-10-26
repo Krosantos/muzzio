@@ -1,6 +1,6 @@
 {
   "name": "muzzio",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A nerdy tool to help build EDH decks",
   "main": "app/index.js",
   "repository": "https://github.com/Krosantos/muzzio.git",
@@ -9,7 +9,6 @@
   "scripts": {
     "compile": "webpack && electron-builder --config build/config.json",
     "lint": "eslint . --fix",
-    "lip": "webpack serve",
     "dev": "concurrently --kill-others \"webpack serve\" \"cross-env FROM_LOCAL=true electron .\""
   },
   "dependencies": {
