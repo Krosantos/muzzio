@@ -41,7 +41,22 @@ const viewMenu = {
   ],
 };
 
-const getFileMenu = ({
+type Callbacks = {
+  changeFormat: (format:string)=>void;
+  refreshCards:()=>void;
+  newDeck:()=>void;
+  loadDeck:()=>void;
+  saveDeck:()=>void;
+  saveDeckAs:()=>void;
+}
+type TemplateItem = {
+  label: string;
+  submenu: unknown[];
+}
+type Template = TemplateItem[]
+
+type GetFileMenu = (callbacks:Callbacks)=>TemplateItem
+const getFileMenu:GetFileMenu = ({
   changeFormat,
   refreshCards,
   newDeck,
@@ -92,8 +107,9 @@ const windowMenu = {
   ],
 };
 
-const generateTemplate = (callbacks) => {
-  const template = [];
+type GenerateTemplate = (callbacks:Callbacks)=>Template;
+const generateTemplate:GenerateTemplate = (callbacks) => {
+  const template:Template = [];
 
   if (isMac)
     template.unshift(macMenu);

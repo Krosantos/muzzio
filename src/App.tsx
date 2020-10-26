@@ -28,9 +28,9 @@ const App:React.FC = () => {
           <OathbreakerProvider initialValue={oathbreakerData}>
             <AttributesProvider initialValue={attributes}>
               <SettingsProvider>
-                  <ThemeProvider theme={theme}>
-                    <Layout />
-                  </ThemeProvider>
+                <ThemeProvider theme={theme}>
+                  <Layout />
+                </ThemeProvider>
               </SettingsProvider>
             </AttributesProvider>
           </OathbreakerProvider>

@@ -9,10 +9,12 @@ import useOverwrite from '@hooks/useOverwrite';
 import useCards from '@hooks/useCards';
 import setWindowTitle from '@utils/setWindowTitle';
 import { CURRENT_FILE_SETTING, OPEN_FOLDER_SETTING } from '@constants';
+import SaveData from '@hooks/SaveData';
 
 const { app, dialog } = require('electron').remote;
 
-const useSaveDeck = (saveAs = false) => {
+type UseSaveDeck = (saveAs?:boolean)=>()=>void
+const useSaveDeck:UseSaveDeck = (saveAs = false) => {
   const save = useSave();
   const { setSettings, settings } = useContext(SettingsContext);
   const saveDeck = useCallback(() => {
@@ -33,7 +35,8 @@ const useSaveDeck = (saveAs = false) => {
   return saveDeck;
 };
 
-const useLoadDeck = () => {
+type UseLoadDeck = ()=>()=>Promise<void>
+const useLoadDeck:UseLoadDeck = () => {
   const load = useLoad();
   const { setSettings, settings } = useContext(SettingsContext);
   const overwrite = useOverwrite();
@@ -58,7 +61,8 @@ const useLoadDeck = () => {
   return loadDeck;
 };
 
-const useNewDeck = () => {
+type UseNewDeck = () =>()=>void
+const useNewDeck:UseNewDeck = () => {
   const overwrite = useOverwrite();
   const { format } = useFormat();
   const { setSettings } = useContext(SettingsContext);
@@ -71,7 +75,8 @@ const useNewDeck = () => {
   return newDeck;
 };
 
-const useChangeFormat = () => {
+type UseChangeFormat=()=>(format:SaveData["format"])=>void
+const useChangeFormat:UseChangeFormat = () => {
   const overwrite = useOverwrite();
   const { setSettings } = useContext(SettingsContext);
   const changeFormat = useCallback((format) => () => {
@@ -83,14 +88,15 @@ const useChangeFormat = () => {
   return changeFormat;
 };
 
-const useRefreshCards = () => {
+type UseRefreshCards = ()=>()=>Promise<void>
+const useRefreshCards:UseRefreshCards = () => {
   const { cards, addCard } = useCards();
 
   const refreshCards = useCallback(async () => {
     const identifiers = Object.keys(cards).map((id) => ({ id }));
     const newCards = await getList(identifiers);
 
-    newCards.forEach((card: any) => addCard(card));
+    newCards.forEach((card: Card) => addCard(card));
   }, [addCard, cards]);
 
   return refreshCards;

@@ -3,18 +3,18 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    cardBlack: "#b9adad";
-    cardBlue: "#a0c5df";
-    cardColorless: "#cdd6db";
-    cardGreen: "#bbc9b2";
-    cardMulti: "#d6b16a";
-    cardRed: "#eec0a6";
-    cardWhite: "#eee9d6";
-    granite: "#5F6062";
-    nickel: "#7B7263";
-    pale: "#d6d5c9";
-    smoke: "#3b2b2e";
-    taupe: "#C5BAAF";
-    white: "#F6F6F6";
+    cardBlack: string;
+    cardBlue: string;
+    cardColorless: string;
+    cardGreen: string;
+    cardMulti: string;
+    cardRed: string;
+    cardWhite: string;
+    granite: string;
+    nickel: string;
+    pale: string;
+    smoke: string;
+    taupe: string;
+    white: string;
   }
 }

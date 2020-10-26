@@ -1,6 +1,6 @@
 import path from 'path';
 
-type SetWindowTitle = (filepath:string)=>void;
+type SetWindowTitle = (filepath?:string)=>void;
 
 const setWindowTitle:SetWindowTitle = (filepath) => {
   if (!filepath) {

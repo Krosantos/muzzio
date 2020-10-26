@@ -10,7 +10,8 @@ import {
 
 const { Menu } = require('electron').remote;
 
-const useAppMenu = () => {
+type UseAppMenu = ()=>void
+const useAppMenu:UseAppMenu = () => {
   const callbacks = {
     changeFormat: useChangeFormat(),
     loadDeck: useLoadDeck(),

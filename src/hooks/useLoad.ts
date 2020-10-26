@@ -1,7 +1,8 @@
 import fs from 'fs';
 import { useCallback } from 'react';
+import SaveData from './SaveData';
 
-type UseLoad = ()=>(filePath:string)=>void
+type UseLoad = ()=>(filePath:string)=>SaveData
 const useLoad:UseLoad = () => {
   const load = useCallback((filePath) => {
     try {
