@@ -1,0 +1,31 @@
+import React, { useState, useMemo } from 'react';
+import { COMMANDER, formats } from '@constants';
+
+type Format = keyof typeof formats
+type FormatContextValue = {
+  format:Format;
+  setFormat: React.Dispatch<React.SetStateAction<Format>>;
+}
+
+const DEFAULT_VALUE:FormatContextValue = {
+  format: COMMANDER,
+  setFormat: () => {},
+};
+const FormatContext = React.createContext<FormatContextValue>(DEFAULT_VALUE);
+
+type FormatProviderProps ={
+  initialValue?: Format;
+}
+const FormatProvider:React.FC<FormatProviderProps> = ({ children, initialValue }) => {
+  const [format, setFormat] = useState<Format>(initialValue || COMMANDER);
+
+  const value = useMemo<FormatContextValue>(() => ({ format, setFormat }), [format]);
+
+  return (
+    <FormatContext.Provider value={value}>
+      {children}
+    </FormatContext.Provider>
+  );
+};
+
+export { FormatContext, FormatProvider };

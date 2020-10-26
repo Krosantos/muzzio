@@ -1,14 +1,11 @@
 {
 	"extends": "eslint-config-tecca",
-	"settings": {
-		"import/resolver": {
-			"webpack": {
-				"config": "webpack.config.js"
-			}
-		}
+	"globals": {
+		"Card":false,
+		"RawCard": false
 	},
-	"rules": {
+	"rules":{
 		"multiline-ternary":"off",
-		"no-magic-numbers":"off"
+		"@typescript-eslint/no-explicit-any":1
 	}
 }
