@@ -1,54 +1,45 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components'
-import ReactDOM from 'react-dom';
-import useOathbreaker from '@hooks/useOathbreaker';
-import ManaCost from '@components/ManaCost';
-import SingletonCount from '../SingletonCount';
-import OathbreakerModal from './OathbreakerModal';
+import React, { useCallback, useMemo, useState } from "react";
+import styled from "styled-components";
+import ReactDOM from "react-dom";
+import useOathbreaker from "@hooks/useOathbreaker";
+import ManaCost from "@components/ManaCost";
+import SingletonCount from "../SingletonCount";
+import OathbreakerModal from "./OathbreakerModal";
 
-const SELECT_OATHBREAKER_TEXT = 'Select Oathbreaker';
-const SELECT_SIGNATURE_TEXT = 'Select Signature Spell';
+const SELECT_OATHBREAKER_TEXT = "Select Oathbreaker";
+const SELECT_SIGNATURE_TEXT = "Select Signature Spell";
 
-type ConvertIdentityToCost = (identity:string[])=>string
-const convertIdentityToCost:ConvertIdentityToCost = (identity) => {
-  if (identity.length === 0)
-    return '{C}';
-  return `{${identity.join('}{')}}`;
+type ConvertIdentityToCost = (identity: string[]) => string;
+const convertIdentityToCost: ConvertIdentityToCost = (identity) => {
+  if (identity.length === 0) return "{C}";
+  return `{${identity.join("}{")}}`;
 };
 // eslint-disable-next-line max-statements, max-lines-per-function, complexity
-const Oathbreaker:React.FC = () => {
+const Oathbreaker: React.FC = () => {
   const [isOathbreakerModalOpen, setOathbreakerModalOpen] = useState(false);
   const closeOathbreakerModal = useCallback(() => setOathbreakerModalOpen(false), []);
   const openOathbreakerModal = useCallback(() => setOathbreakerModalOpen(true), []);
-  const {
-    colorIdentity,
-    oathbreaker,
-    signatureSpell,
-  } = useOathbreaker();
+  const { colorIdentity, oathbreaker, signatureSpell } = useOathbreaker();
 
-  const identityAsCost = useMemo(() => convertIdentityToCost(colorIdentity), [colorIdentity]);
+  const identityAsCost = useMemo(() => convertIdentityToCost(colorIdentity), [
+    colorIdentity,
+  ]);
 
   return (
-    <Container >
+    <Container>
       <Title onClick={openOathbreakerModal}>
-        <span>
-          {oathbreaker.name || SELECT_OATHBREAKER_TEXT}
-        </span>
-        <span>
-          {signatureSpell.name || SELECT_SIGNATURE_TEXT}
-        </span>
+        <span>{oathbreaker.name || SELECT_OATHBREAKER_TEXT}</span>
+        <span>{signatureSpell.name || SELECT_SIGNATURE_TEXT}</span>
       </Title>
       <SingletonCount />
       <Cost>
         <ManaCost cost={identityAsCost} />
       </Cost>
-      {isOathbreakerModalOpen
-        && ReactDOM.createPortal(
-          <OathbreakerModal
-            closeModal={closeOathbreakerModal}
-          />,
-          document.querySelector('body'),
+      {isOathbreakerModalOpen &&
+        ReactDOM.createPortal(
+          <OathbreakerModal closeModal={closeOathbreakerModal} />,
+          document.querySelector("body"),
         )}
     </Container>
   );
@@ -56,7 +47,7 @@ const Oathbreaker:React.FC = () => {
 
 const Container = styled.div`
   width: 40%;
-  border-right: 1px solid ${({theme})=>theme.white};
+  border-right: 1px solid ${({ theme }) => theme.white};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -68,7 +59,7 @@ const Title = styled.div`
   padding-left: 8px;
   width: 250px;
   > * {
-      height:50%;
+    height: 50%;
   }
 `;
 const Cost = styled.div`
@@ -79,4 +70,3 @@ const Cost = styled.div`
 `;
 
 export default Oathbreaker;
-

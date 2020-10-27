@@ -1,15 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 type SliderButtonProps = {
   label: string;
   handleClick: React.FormEventHandler<HTMLButtonElement>;
-}
-const SliderButton:React.FC<SliderButtonProps> = ({ label, handleClick }) => (
-  <Button
-    onClick={handleClick}
-    type="button"
-  >
+};
+const SliderButton: React.FC<SliderButtonProps> = ({ label, handleClick }) => (
+  <Button onClick={handleClick} type="button">
     {label}
   </Button>
 );

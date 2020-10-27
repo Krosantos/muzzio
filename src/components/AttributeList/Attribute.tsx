@@ -1,27 +1,30 @@
-import React, { useCallback, useMemo } from 'react';
-import styled from 'styled-components';
-import values from 'lodash/values';
-import CardList from '@components/CardList';
-import useCards from '@hooks/useCards';
-import { ALL_CARDS } from '@constants';
-import useSorting from './useSorting';
-import useInDeckString from './useInDeckString';
-import RemoveButton from './RemoveButton';
+import React, { useCallback, useMemo } from "react";
+import styled from "styled-components";
+import values from "lodash/values";
+import CardList from "@components/CardList";
+import useCards from "@hooks/useCards";
+import { ALL_CARDS } from "@constants";
+import useSorting from "./useSorting";
+import useInDeckString from "./useInDeckString";
+import RemoveButton from "./RemoveButton";
 
 type AttributeProps = {
   attribute: string;
-}
+};
 
-const Attribute:React.FC<AttributeProps> = ({ attribute }) => {
+const Attribute: React.FC<AttributeProps> = ({ attribute }) => {
   const { cards, addAttribute, cardsByAttribute } = useCards();
   const cardsToShow = useMemo(
     () => (attribute === ALL_CARDS ? values(cards) : cardsByAttribute(attribute)),
     [attribute, cards, cardsByAttribute],
   );
   const inDeckString = useInDeckString(attribute);
-  const callback = useCallback((card) => {
-    addAttribute(card, attribute);
-  }, [addAttribute, attribute]);
+  const callback = useCallback(
+    (card) => {
+      addAttribute(card, attribute);
+    },
+    [addAttribute, attribute],
+  );
   const { openMenu, sortedCards } = useSorting(cardsToShow);
 
   return (
@@ -51,17 +54,17 @@ const Container = styled.div`
   margin-right: 4px;
 
   & ::-webkit-scrollbar {
-      width: 10px;
+    width: 10px;
   }
 
   & ::-webkit-scrollbar-button {
-      display: none;
+    display: none;
   }
 
   & ::-webkit-scrollbar-thumb {
-      background: ${({ theme }) => theme.smoke};
-      border-radius: 4px;
-      border: 1px solid ${({ theme }) => theme.smoke};
+    background: ${({ theme }) => theme.smoke};
+    border-radius: 4px;
+    border: 1px solid ${({ theme }) => theme.smoke};
   }
 `;
 
@@ -74,7 +77,7 @@ const Title = styled.div`
   align-items: center;
   justify-content: space-between;
   span {
-      display: block;
+    display: block;
   }
 `;
 

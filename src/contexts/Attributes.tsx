@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
-import { ALL_CARDS } from '@constants';
+import React, { useState, useMemo } from "react";
+import { ALL_CARDS } from "@constants";
 
 type AttributesProviderValue = {
   attributes: string[];
   setAttributes: React.Dispatch<React.SetStateAction<string[]>>;
-}
+};
 
-const DEFAULT_VALUE:AttributesProviderValue = {
+const DEFAULT_VALUE: AttributesProviderValue = {
   attributes: [ALL_CARDS],
   setAttributes: () => {},
 };
@@ -15,16 +15,19 @@ const AttributesContext = React.createContext<AttributesProviderValue>(DEFAULT_V
 
 type AttributesProviderProps = {
   initialValue?: string[];
-}
-const AttributesProvider:React.FC<AttributesProviderProps> = ({ children, initialValue }) => {
+};
+const AttributesProvider: React.FC<AttributesProviderProps> = ({
+  children,
+  initialValue,
+}) => {
   const [attributes, setAttributes] = useState<string[]>(initialValue || [ALL_CARDS]);
 
-  const value = useMemo<AttributesProviderValue>(() => ({ attributes, setAttributes }), [attributes]);
+  const value = useMemo<AttributesProviderValue>(() => ({ attributes, setAttributes }), [
+    attributes,
+  ]);
 
   return (
-    <AttributesContext.Provider value={value}>
-      {children}
-    </AttributesContext.Provider>
+    <AttributesContext.Provider value={value}>{children}</AttributesContext.Provider>
   );
 };
 

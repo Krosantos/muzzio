@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import generateTemplate from './generateTemplate';
+import { useEffect } from "react";
+import generateTemplate from "./generateTemplate";
 import {
   useNewDeck,
   useSaveDeck,
   useLoadDeck,
   useChangeFormat,
   useRefreshCards,
-} from './hooks';
+} from "./hooks";
 
-const { Menu } = require('electron').remote;
+const { Menu } = require("electron").remote;
 
-type UseAppMenu = ()=>void
-const useAppMenu:UseAppMenu = () => {
+type UseAppMenu = () => void;
+const useAppMenu: UseAppMenu = () => {
   const callbacks = {
     changeFormat: useChangeFormat(),
     loadDeck: useLoadDeck(),

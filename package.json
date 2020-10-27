@@ -9,7 +9,8 @@
   "scripts": {
     "compile": "webpack && electron-builder --config build/config.json",
     "lint": "eslint . --fix",
-    "dev": "concurrently --kill-others \"webpack serve\" \"cross-env FROM_LOCAL=true electron .\""
+    "dev": "concurrently --kill-others \"webpack serve\" \"cross-env FROM_LOCAL=true electron .\"",
+    "pretty": "prettier --write **/*.{js,ts,tsx,json}"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -35,9 +36,12 @@
     "electron": "^10.1.5",
     "electron-builder": "^22.9.1",
     "eslint": "^7.12.0",
+    "eslint-config-prettier": "^6.14.0",
     "eslint-config-tecca": "^2.0.1",
+    "eslint-plugin-grapes": "^1.0.0",
     "file-loader": "^6.1.1",
     "mini-css-extract-plugin": "^1.2.0",
+    "prettier": "^2.1.2",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.0.7",
     "tsconfig-paths-webpack-plugin": "^3.3.0",

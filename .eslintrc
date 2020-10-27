@@ -1,11 +1,12 @@
 {
-	"extends": "eslint-config-tecca",
+	"extends": ["eslint-config-tecca", "prettier", "prettier/react"],
+	"plugins": ["grapes"],
 	"globals": {
 		"Card":false,
 		"RawCard": false
 	},
 	"rules":{
-		"multiline-ternary":"off",
-		"@typescript-eslint/no-explicit-any":1
+		"@typescript-eslint/no-explicit-any":"error",
+		"grapes/no-internal-import":"error"
 	}
 }

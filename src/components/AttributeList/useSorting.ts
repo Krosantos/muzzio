@@ -1,38 +1,45 @@
-import { useState, useCallback, useMemo } from 'react';
-import sortBy from 'lodash/sortBy';
-import forEach from 'lodash/forEach';
+import { useState, useCallback, useMemo } from "react";
+import sortBy from "lodash/sortBy";
+import forEach from "lodash/forEach";
 
-const { Menu, MenuItem } = require('electron').remote;
+const { Menu, MenuItem } = require("electron").remote;
 
-const alphaSort = (card:Card) => card.name;
-const cmcSort = (card:Card) => card.cmc;
-const countSort = (card:Card) => card.count || 1;
-const deckSort = (card:Card) => card.count + card.sideboardCount;
+const alphaSort = (card: Card) => card.name;
+const cmcSort = (card: Card) => card.cmc;
+const countSort = (card: Card) => card.count || 1;
+const deckSort = (card: Card) => card.count + card.sideboardCount;
 
-type SortType ={
+type SortType = {
   name: string;
-  sort:(card:Card)=>string|number;
-}
-
-const sortTypes:{[key:string]:SortType} = {
-  ALPHA: { name: 'Alphabetical', sort: alphaSort },
-  CMC: { name: 'CMC', sort: cmcSort },
-  COUNT: { name: 'Count', sort: countSort },
-  DECK: { name: 'In/Out of Deck', sort: deckSort },
+  sort: (card: Card) => string | number;
 };
 
-type UseSorting = (cards:Card[])=>{
-  openMenu: ()=>void;
+const sortTypes: { [key: string]: SortType } = {
+  ALPHA: { name: "Alphabetical", sort: alphaSort },
+  CMC: { name: "CMC", sort: cmcSort },
+  COUNT: { name: "Count", sort: countSort },
+  DECK: { name: "In/Out of Deck", sort: deckSort },
+};
+
+type UseSorting = (
+  cards: Card[],
+) => {
+  openMenu: () => void;
   sortedCards: Card[];
-}
-const useSorting:UseSorting = (cards = []) => {
+};
+const useSorting: UseSorting = (cards = []) => {
   const [sortType, setSort] = useState<SortType>(sortTypes.CMC);
   const openMenu = useCallback(() => {
     const menu = new Menu();
 
     forEach(sortTypes, (type) => {
       menu.append(
-        new MenuItem({ click() { setSort(type); }, label: `Sort by ${type.name}` }),
+        new MenuItem({
+          click() {
+            setSort(type);
+          },
+          label: `Sort by ${type.name}`,
+        }),
       );
     });
     menu.popup();

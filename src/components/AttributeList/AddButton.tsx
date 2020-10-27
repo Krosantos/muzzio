@@ -1,19 +1,21 @@
-import React, { useState, useCallback } from 'react';
-import styled from 'styled-components';
-import useAttributes from '@hooks/useAttributes';
+import React, { useState, useCallback } from "react";
+import styled from "styled-components";
+import useAttributes from "@hooks/useAttributes";
 
-const AddButton:React.FC = () => {
+const AddButton: React.FC = () => {
   const { attributes, addAttribute } = useAttributes();
-  const [toAdd, setToAdd] = useState('');
+  const [toAdd, setToAdd] = useState("");
   const updateValue = useCallback((event) => {
     setToAdd(event.target.value);
   }, []);
-  const onEnter = useCallback(async ({ key }) => {
-    if (key !== 'Enter' || attributes.includes(toAdd) || !toAdd)
-      return;
-    addAttribute(toAdd);
-    setToAdd('');
-  }, [attributes, toAdd, addAttribute]);
+  const onEnter = useCallback(
+    async ({ key }) => {
+      if (key !== "Enter" || attributes.includes(toAdd) || !toAdd) return;
+      addAttribute(toAdd);
+      setToAdd("");
+    },
+    [attributes, toAdd, addAttribute],
+  );
 
   return (
     <Wrapper>
@@ -38,17 +40,17 @@ const Wrapper = styled.div`
   margin-right: 4px;
 
   & ::-webkit-scrollbar {
-      width: 10px;
+    width: 10px;
   }
 
   & ::-webkit-scrollbar-button {
-      display: none;
+    display: none;
   }
 
   & ::-webkit-scrollbar-thumb {
-      background: ${({ theme }) => theme.smoke};
-      border-radius: 4px;
-      border: 1px solid ${({ theme }) => theme.smoke};
+    background: ${({ theme }) => theme.smoke};
+    border-radius: 4px;
+    border: 1px solid ${({ theme }) => theme.smoke};
   }
 `;
 

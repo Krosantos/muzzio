@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import AttributeList from '@components/AttributeList';
+import React from "react";
+import styled from "styled-components";
+import AttributeList from "@components/AttributeList";
 
-const MainPanel:React.FC = () => (
+const MainPanel: React.FC = () => (
   <Panel>
     <AttributeList />
   </Panel>

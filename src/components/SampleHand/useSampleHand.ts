@@ -1,6 +1,4 @@
-import {
-  Reducer, useCallback, useMemo, useReducer,
-} from "react";
+import { Reducer, useCallback, useMemo, useReducer } from "react";
 import shuffle from "lodash/shuffle";
 import useCards from "@hooks/useCards";
 import { HAND_SIZE } from "@constants";
@@ -26,16 +24,14 @@ const spreadCardsInDeck: SpreadCardsInHand = (cardsInDeck) => {
   cardsInDeck.forEach(({ count, imageUrl, name }) => {
     const countInDeck = count || 1;
 
-    for (let x = 0; x < countInDeck; x += 1)
-      deck.push({ imageUrl, name });
+    for (let x = 0; x < countInDeck; x += 1) deck.push({ imageUrl, name });
   });
   const shuffled = shuffle(deck);
 
   for (let x = 0; x < HAND_SIZE; x += 1) {
     const card = shuffled.pop();
 
-    if (card)
-      hand.push(card);
+    if (card) hand.push(card);
   }
 
   return {
@@ -47,9 +43,7 @@ const spreadCardsInDeck: SpreadCardsInHand = (cardsInDeck) => {
 type UseShuffledDeck = () => ShuffleState;
 const useShuffledDeck: UseShuffledDeck = () => {
   const { cardsInDeck } = useCards();
-  const shuffledCards = useMemo(() => spreadCardsInDeck(cardsInDeck()), [
-    cardsInDeck,
-  ]);
+  const shuffledCards = useMemo(() => spreadCardsInDeck(cardsInDeck()), [cardsInDeck]);
 
   return shuffledCards;
 };
@@ -66,25 +60,23 @@ const sampleHandReducer: Reducer<ShuffleState, Action> = (
   let newHand;
 
   switch (action) {
-  case ADD_CARD:
-    newDeck = [...cardsInDeck];
-    newHand = [...cardsInHand];
-    if (newDeck.length)
-      newHand.push(newDeck.pop());
-    break;
-  case NEW_HAND:
-    newDeck = shuffle([].concat(cardsInDeck, cardsInHand));
-    newHand = [];
-    for (let x = 0; x < HAND_SIZE; x += 1) {
-      const topCard = newDeck.pop();
+    case ADD_CARD:
+      newDeck = [...cardsInDeck];
+      newHand = [...cardsInHand];
+      if (newDeck.length) newHand.push(newDeck.pop());
+      break;
+    case NEW_HAND:
+      newDeck = shuffle([].concat(cardsInDeck, cardsInHand));
+      newHand = [];
+      for (let x = 0; x < HAND_SIZE; x += 1) {
+        const topCard = newDeck.pop();
 
-      if (topCard)
-        newHand.push(topCard);
-    }
+        if (topCard) newHand.push(topCard);
+      }
 
-    break;
-  default:
-    break;
+      break;
+    default:
+      break;
   }
 
   return { cardsInDeck: newDeck, cardsInHand: newHand };
@@ -97,10 +89,7 @@ type UseSampleHand = () => {
 };
 const useSampleHand: UseSampleHand = () => {
   const initialState = useShuffledDeck();
-  const [{ cardsInHand = [] }, dispatch] = useReducer(
-    sampleHandReducer,
-    initialState,
-  );
+  const [{ cardsInHand = [] }, dispatch] = useReducer(sampleHandReducer, initialState);
   const addCard = useCallback(() => dispatch(ADD_CARD), []);
   const generateNewHand = useCallback(() => dispatch(NEW_HAND), []);
 

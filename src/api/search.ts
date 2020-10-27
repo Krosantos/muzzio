@@ -1,18 +1,18 @@
-import get from 'lodash/get';
-import formatCards from './formatCards';
-import api from '.';
+import get from "lodash/get";
+import formatCards from "./formatCards";
+import api from ".";
 
 type ApiResponse = {
-  data:{
+  data: {
     data: RawCard[];
   };
-}
+};
 
-type Search = (query:string)=>Promise<Card[]>
-const search:Search = async (query) => {
+type Search = (query: string) => Promise<Card[]>;
+const search: Search = async (query) => {
   let newQuery = query;
 
-  newQuery += ' game:paper not:promo order:cmc lang:english';
+  newQuery += " game:paper not:promo order:cmc lang:english";
   const config = {
     params: {
       q: newQuery,
@@ -20,8 +20,8 @@ const search:Search = async (query) => {
   };
 
   try {
-    const response = await api.get<ApiResponse>('search', config);
-    const cards = get(response, 'data.data', []) as RawCard[];
+    const response = await api.get<ApiResponse>("search", config);
+    const cards = get(response, "data.data", []) as RawCard[];
 
     return formatCards(cards);
   } catch {

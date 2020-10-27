@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import ModalContainer from '@components/ModalContainer';
-import OathbreakerSearch from './OathbreakerSearch';
-import SignatureSearch from './SignatureSearch';
+import React from "react";
+import styled from "styled-components";
+import ModalContainer from "@components/ModalContainer";
+import OathbreakerSearch from "./OathbreakerSearch";
+import SignatureSearch from "./SignatureSearch";
 
 type ModalProps = {
-  closeModal:()=>void;
-}
-const Modal:React.FC<ModalProps> = ({ closeModal }) => (
+  closeModal: () => void;
+};
+const Modal: React.FC<ModalProps> = ({ closeModal }) => (
   <ModalContainer closeModal={closeModal}>
     <SearchContainer>
       <OathbreakerSearch />

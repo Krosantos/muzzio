@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unassigned-import
-import 'styled-components';
+import "styled-components";
 
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
     black: string;
     cardBlack: string;

@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Search from '@components/Search';
-import CardList from '@components/CardList';
-import useCards from '@hooks/useCards';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Search from "@components/Search";
+import CardList from "@components/CardList";
+import useCards from "@hooks/useCards";
 
-const AddCards:React.FC = () => {
+const AddCards: React.FC = () => {
   const [results, setResults] = useState([]);
   const { addCard } = useCards();
 
   return (
     <SearchSelection>
-      <Search
-        placeholder="Search for cards"
-        setResults={setResults}
-      />
+      <Search placeholder="Search for cards" setResults={setResults} />
       <ListWrapper>
         <CardList alwaysColorful callback={addCard} cards={results} />
       </ListWrapper>
@@ -28,7 +25,7 @@ const SearchSelection = styled.div`
   height: 100%;
 
   input {
-      margin-right: 8px;
+    margin-right: 8px;
   }
 `;
 

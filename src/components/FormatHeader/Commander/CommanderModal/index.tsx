@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import ModalContainer from '@components/ModalContainer';
-import CommanderSearch from './CommanderSearch';
-import PartnerSearch from './PartnerSearch';
+import React from "react";
+import styled from "styled-components";
+import ModalContainer from "@components/ModalContainer";
+import CommanderSearch from "./CommanderSearch";
+import PartnerSearch from "./PartnerSearch";
 
 type ModalProps = {
-  closeModal: ()=>void;
-}
-const Modal:React.FC<ModalProps> = ({ closeModal }) => (
+  closeModal: () => void;
+};
+const Modal: React.FC<ModalProps> = ({ closeModal }) => (
   <ModalContainer closeModal={closeModal}>
     <SearchContainer>
       <CommanderSearch closeModal={closeModal} />

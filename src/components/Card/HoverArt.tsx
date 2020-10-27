@@ -1,36 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import throttle from 'lodash/throttle';
-import clamp from 'lodash/clamp';
-import useRefreshCard from './useRefreshCard';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import throttle from "lodash/throttle";
+import clamp from "lodash/clamp";
+import useRefreshCard from "./useRefreshCard";
 
 const IMAGE_WIDTH = 366;
 const IMAGE_HEIGHT = 510;
 
 type CalculateOffset = (
-  clientX:number,
-  clientY:number,
-  hasBackside:boolean
-)=>React.CSSProperties
+  clientX: number,
+  clientY: number,
+  hasBackside: boolean,
+) => React.CSSProperties;
 // eslint-disable-next-line complexity
-const calculateOffset:CalculateOffset = (clientX, clientY, hasBackside) => {
+const calculateOffset: CalculateOffset = (clientX, clientY, hasBackside) => {
   const TOTAL_HEIGHT = IMAGE_HEIGHT * (hasBackside ? 2 : 1);
   const TOTAL_WIDTH = IMAGE_WIDTH * (hasBackside ? 2 : 1);
-  const result:React.CSSProperties = {};
+  const result: React.CSSProperties = {};
 
   let left;
 
   let top;
 
-  if (clientX + IMAGE_WIDTH + 20 > window.innerWidth)
-    left = clientX - 20 - TOTAL_WIDTH;
-  else
-    left = clientX + 20;
+  if (clientX + IMAGE_WIDTH + 20 > window.innerWidth) left = clientX - 20 - TOTAL_WIDTH;
+  else left = clientX + 20;
 
-  if (clientY + IMAGE_HEIGHT + 20 > window.innerHeight)
-    top = clientY - 20 - TOTAL_HEIGHT;
-  else
-    top = clientY + 20;
+  if (clientY + IMAGE_HEIGHT + 20 > window.innerHeight) top = clientY - 20 - TOTAL_HEIGHT;
+  else top = clientY + 20;
 
   result.left = `${clamp(left, 0, window.innerWidth - TOTAL_WIDTH)}px`;
   result.top = `${clamp(top, 0, window.innerHeight - TOTAL_HEIGHT)}px`;
@@ -38,24 +34,27 @@ const calculateOffset:CalculateOffset = (clientX, clientY, hasBackside) => {
 };
 
 type HoverArtProps = {
-  id:string;
+  id: string;
   imageUrl: string;
   reverseUrl: string;
-}
-const HoverArt:React.FC<HoverArtProps> = ({ id, imageUrl, reverseUrl }) => {
-  const [style, setMousePosition] = useState<React.CSSProperties>({ left: '0px', top: '0px' });
+};
+const HoverArt: React.FC<HoverArtProps> = ({ id, imageUrl, reverseUrl }) => {
+  const [style, setMousePosition] = useState<React.CSSProperties>({
+    left: "0px",
+    top: "0px",
+  });
   const refreshCard = useRefreshCard(id);
 
   useEffect(() => {
     const updatePosition = throttle(({ clientX, clientY }) => {
       const offset = calculateOffset(clientX, clientY, !!reverseUrl);
 
-      setMousePosition({ ...offset, visibility: 'visible' });
+      setMousePosition({ ...offset, visibility: "visible" });
     }, 100);
 
-    window.addEventListener('mousemove', updatePosition);
+    window.addEventListener("mousemove", updatePosition);
     return () => {
-      window.removeEventListener('mousemove', updatePosition);
+      window.removeEventListener("mousemove", updatePosition);
     };
   });
 

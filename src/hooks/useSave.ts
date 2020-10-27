@@ -1,14 +1,14 @@
-import fs from 'fs';
-import { useContext, useCallback } from 'react';
-import { CommanderContext } from '@contexts/Commander';
-import { OathbreakerContext } from '@contexts/Oathbreaker';
-import { CardContext } from '@contexts/Card';
-import { AttributesContext } from '@contexts/Attributes';
-import { FormatContext } from '@contexts/Format';
-import type SaveData from './SaveData';
+import fs from "fs";
+import { useContext, useCallback } from "react";
+import { CommanderContext } from "@contexts/Commander";
+import { OathbreakerContext } from "@contexts/Oathbreaker";
+import { CardContext } from "@contexts/Card";
+import { AttributesContext } from "@contexts/Attributes";
+import { FormatContext } from "@contexts/Format";
+import type SaveData from "./SaveData";
 
-type UseAllContexts = ()=>SaveData
-const useAllContexts:UseAllContexts = () => {
+type UseAllContexts = () => SaveData;
+const useAllContexts: UseAllContexts = () => {
   const { attributes } = useContext(AttributesContext);
   const { cards } = useContext(CardContext);
   const { commanderData } = useContext(CommanderContext);
@@ -24,16 +24,19 @@ const useAllContexts:UseAllContexts = () => {
   };
 };
 
-type UseSave = ()=>(filePath:string)=>void;
+type UseSave = () => (filePath: string) => void;
 
-const useSave:UseSave = () => {
+const useSave: UseSave = () => {
   const allData = useAllContexts();
 
-  const save = useCallback((filePath) => {
-    const fileContents = JSON.stringify(allData);
+  const save = useCallback(
+    (filePath) => {
+      const fileContents = JSON.stringify(allData);
 
-    fs.writeFileSync(filePath, fileContents);
-  }, [allData]);
+      fs.writeFileSync(filePath, fileContents);
+    },
+    [allData],
+  );
 
   return save;
 };

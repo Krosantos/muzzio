@@ -1,17 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import CardList from '@components/CardList';
-import Divider from './Divider';
-import useImport from './useImport';
-import useDecklist from './useDecklist';
-import useExport from './useExport';
+import React from "react";
+import styled from "styled-components";
+import CardList from "@components/CardList";
+import Divider from "./Divider";
+import useImport from "./useImport";
+import useDecklist from "./useDecklist";
+import useExport from "./useExport";
 
-const IMPORT = 'Import Clipboard';
-const EXPORT = 'Export to Clipboard';
-const MAINBOARD = 'Main Deck';
-const SIDEBOARD = 'Sideboard';
+const IMPORT = "Import Clipboard";
+const EXPORT = "Export to Clipboard";
+const MAINBOARD = "Main Deck";
+const SIDEBOARD = "Sideboard";
 
-const DeckList:React.FC = () => {
+const DeckList: React.FC = () => {
   const importFile = useImport();
   const { maindeck, sideboard } = useDecklist();
   const exportFile = useExport(maindeck, sideboard);
@@ -25,8 +25,12 @@ const DeckList:React.FC = () => {
         <CardList alwaysColorful cards={sideboard} useSideboardCount />
       </Decklist>
       <ButtonContainer>
-        <ImportButton onClick={importFile} type="button">{IMPORT}</ImportButton>
-        <ImportButton onClick={exportFile} type="button">{EXPORT}</ImportButton>
+        <ImportButton onClick={importFile} type="button">
+          {IMPORT}
+        </ImportButton>
+        <ImportButton onClick={exportFile} type="button">
+          {EXPORT}
+        </ImportButton>
       </ButtonContainer>
     </>
   );
@@ -40,7 +44,7 @@ const Decklist = styled.div`
 `;
 const ButtonContainer = styled.div`
   display: flex;
-  margin-top:4px;
+  margin-top: 4px;
   justify-content: space-evenly;
 `;
 const ImportButton = styled.button`
@@ -55,8 +59,8 @@ const ImportButton = styled.button`
   vertical-align: middle;
   width: 50%;
   &:hover {
-      color: ${({ theme }) => theme.smoke};
-      background-color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.smoke};
+    background-color: ${({ theme }) => theme.white};
   }
   transition: all 100ms ease-in;
 `;

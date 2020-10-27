@@ -1,12 +1,12 @@
-import fs from 'fs';
-import { useCallback } from 'react';
-import SaveData from './SaveData';
+import fs from "fs";
+import { useCallback } from "react";
+import SaveData from "./SaveData";
 
-type UseLoad = ()=>(filePath:string)=>SaveData
-const useLoad:UseLoad = () => {
+type UseLoad = () => (filePath: string) => SaveData;
+const useLoad: UseLoad = () => {
   const load = useCallback((filePath) => {
     try {
-      const raw = fs.readFileSync(filePath).toString('utf8');
+      const raw = fs.readFileSync(filePath).toString("utf8");
 
       const result = JSON.parse(raw) as SaveData;
       // Temporary, until I map/update it

@@ -1,65 +1,65 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
-import styled from 'styled-components';
-import symbolMap from './symbolMap';
+import React from "react";
+import styled from "styled-components";
+import symbolMap from "./symbolMap";
 
-const SLASHES = '//';
+const SLASHES = "//";
 
-type SplitCosts = (cost:string)=>string[]
-const splitCosts:SplitCosts = (cost) => {
+type SplitCosts = (cost: string) => string[];
+const splitCosts: SplitCosts = (cost) => {
   const costs = cost.split(/ \/\/ /);
 
   return costs;
 };
 
-type SplitMana = (cost:string)=>CostFragment[]
-const splitMana:SplitMana = (cost) => {
+type SplitMana = (cost: string) => CostFragment[];
+const splitMana: SplitMana = (cost) => {
   const fragments = cost.split(/}{/);
 
-  return fragments.map((fragment) => fragment.replace(/[}{]/g, '') as CostFragment);
+  return fragments.map((fragment) => fragment.replace(/[}{]/g, "") as CostFragment);
 };
 
-type CostFragment = keyof typeof symbolMap
+type CostFragment = keyof typeof symbolMap;
 type SymbolProps = {
   costFragment: CostFragment;
-}
-const Symbol:React.FC<SymbolProps> = ({ costFragment }) => {
+};
+const Symbol: React.FC<SymbolProps> = ({ costFragment }) => {
   const src = symbolMap[costFragment];
 
-  return (<ManaSymbol alt="" src={src} />);
+  return <ManaSymbol alt="" src={src} />;
 };
 
 type ManaCostProps = {
-  cost:string;
-}
-const ManaCost:React.FC<ManaCostProps> = ({ cost = '' }) => {
+  cost: string;
+};
+const ManaCost: React.FC<ManaCostProps> = ({ cost = "" }) => {
   const [frontCost, backCost] = splitCosts(cost);
 
   return (
     <CostContainer>
       <Cost cost={frontCost} />
-      {backCost
-        && (
-          <>
-            <span>{SLASHES}</span>
-            <Cost cost={backCost} />
-          </>
-        )}
+      {backCost && (
+        <>
+          <span>{SLASHES}</span>
+          <Cost cost={backCost} />
+        </>
+      )}
     </CostContainer>
   );
 };
 
 type CostProps = {
-  cost:string;
-}
-const Cost:React.FC<CostProps> = ({ cost }) => {
-  if (!cost)
-    return null;
+  cost: string;
+};
+const Cost: React.FC<CostProps> = ({ cost }) => {
+  if (!cost) return null;
   const fragments = splitMana(cost);
 
   return (
     <>
-      {fragments.map((fragment, index) => <Symbol costFragment={fragment} key={index} />)}
+      {fragments.map((fragment, index) => (
+        <Symbol costFragment={fragment} key={index} />
+      ))}
     </>
   );
 };

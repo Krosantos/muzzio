@@ -1,13 +1,13 @@
-import path from 'path';
+import path from "path";
 
-type SetWindowTitle = (filepath?:string)=>void;
+type SetWindowTitle = (filepath?: string) => void;
 
-const setWindowTitle:SetWindowTitle = (filepath) => {
+const setWindowTitle: SetWindowTitle = (filepath) => {
   if (!filepath) {
-    document.title = 'Muzzio';
+    document.title = "Muzzio";
     return;
   }
-  const name = path.basename(filepath, '.muz');
+  const name = path.basename(filepath, ".muz");
 
   document.title = `Muzzio - ${name}`;
 };

@@ -1,13 +1,13 @@
-import React from 'react';
-import Slider from '@components/Slider';
-import AddCards from '@components/AddCards';
-import DeckList from '@components/DeckList';
-import useAutoSave from '@hooks/useAutoSave';
-import useAppMenu from '@hooks/useAppMenu';
-import Header from './Header';
-import MainPanel from './MainPanel';
+import React from "react";
+import Slider from "@components/Slider";
+import AddCards from "@components/AddCards";
+import DeckList from "@components/DeckList";
+import useAutoSave from "@hooks/useAutoSave";
+import useAppMenu from "@hooks/useAppMenu";
+import Header from "./Header";
+import MainPanel from "./MainPanel";
 
-const Layout:React.FC = () => {
+const Layout: React.FC = () => {
   useAppMenu();
   useAutoSave();
   return (

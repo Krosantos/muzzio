@@ -1,29 +1,30 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
-import get from 'lodash/get';
-import Search from '@components/Search';
-import useOathbreaker from '@hooks/useOathbreaker';
-import CardList from '@components/CardList';
+import React, { useCallback, useMemo, useState } from "react";
+import styled from "styled-components";
+import get from "lodash/get";
+import Search from "@components/Search";
+import useOathbreaker from "@hooks/useOathbreaker";
+import CardList from "@components/CardList";
 
-const SIGNATURE_SPELL_QUERY = ' (t:instant OR t:sorcery)';
-const DEFAULT_PLACEHOLDER = 'Search for Signature Spell';
+const SIGNATURE_SPELL_QUERY = " (t:instant OR t:sorcery)";
+const DEFAULT_PLACEHOLDER = "Search for Signature Spell";
 
 type SignatureSearchProps = {
-  closeModal: ()=>void;
-}
-const SignatureSearch:React.FC<SignatureSearchProps> = ({ closeModal }) => {
+  closeModal: () => void;
+};
+const SignatureSearch: React.FC<SignatureSearchProps> = ({ closeModal }) => {
   const [results, setResults] = useState([]);
-  const {
-    colorIdentity,
+  const { colorIdentity, signatureSpell, setSignatureSpell } = useOathbreaker();
+  const wrappedSetPartner = useCallback(
+    (card) => {
+      setSignatureSpell(card);
+      closeModal();
+    },
+    [closeModal, setSignatureSpell],
+  );
+  const identity = useMemo(() => `identity:${colorIdentity.join("")}`, [colorIdentity]);
+  const placeholder = useMemo(() => get(signatureSpell, "name", DEFAULT_PLACEHOLDER), [
     signatureSpell,
-    setSignatureSpell,
-  } = useOathbreaker();
-  const wrappedSetPartner = useCallback((card) => {
-    setSignatureSpell(card);
-    closeModal();
-  }, [closeModal, setSignatureSpell]);
-  const identity = useMemo(() => `identity:${colorIdentity.join('')}`, [colorIdentity]);
-  const placeholder = useMemo(() => get(signatureSpell, 'name', DEFAULT_PLACEHOLDER), [signatureSpell]);
+  ]);
   const finalQuery = `${SIGNATURE_SPELL_QUERY} ${identity}`;
 
   return (

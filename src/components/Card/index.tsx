@@ -1,28 +1,28 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useState } from 'react';
-import styled from 'styled-components';
-import ReactDOM from 'react-dom';
-import ManaCost from '@components/ManaCost';
-import useCards from '@hooks/useCards';
-import useHoverArt from './useHoverArt';
-import CardCountModal from './CardCountModal';
-import useRightClickMenu from './useRightClickMenu';
-import useCard from './useCard';
-import HoverArt from './HoverArt';
-import getCardColor from './getCardColor';
-import useNameAndCount from './useNameAndCount';
+import React, { useCallback, useState } from "react";
+import styled from "styled-components";
+import ReactDOM from "react-dom";
+import ManaCost from "@components/ManaCost";
+import useCards from "@hooks/useCards";
+import useHoverArt from "./useHoverArt";
+import CardCountModal from "./CardCountModal";
+import useRightClickMenu from "./useRightClickMenu";
+import useCard from "./useCard";
+import HoverArt from "./HoverArt";
+import getCardColor from "./getCardColor";
+import useNameAndCount from "./useNameAndCount";
 
 type CardProps = {
-  callback?:Function;
-  rawCard:Card;
-  cardId:string;
-  alwaysColorful?:boolean;
-  useMaindeckCount?:boolean;
-  useSideboardCount?:boolean;
-}
+  callback?: Function;
+  rawCard: Card;
+  cardId: string;
+  alwaysColorful?: boolean;
+  useMaindeckCount?: boolean;
+  useSideboardCount?: boolean;
+};
 
 // eslint-disable-next-line max-statements, max-lines-per-function
-const Card:React.FC<CardProps> = ({
+const Card: React.FC<CardProps> = ({
   callback = Function.prototype,
   rawCard,
   cardId,
@@ -31,12 +31,7 @@ const Card:React.FC<CardProps> = ({
   useSideboardCount,
 }) => {
   const card = useCard(cardId, rawCard);
-  const {
-    id,
-    cost,
-    imageUrl,
-    reverseUrl,
-  } = card;
+  const { id, cost, imageUrl, reverseUrl } = card;
 
   const nameAndCount = useNameAndCount(card, useMaindeckCount, useSideboardCount);
   const { setCount, setSideboardCount } = useCards();
@@ -46,11 +41,18 @@ const Card:React.FC<CardProps> = ({
   const openCardCountModal = useCallback(() => setCardCountModalOpen(true), []);
 
   const [isSideboardCountModalOpen, setSideboardCountModalOpen] = useState(false);
-  const closeSideboardCountModal = useCallback(() => setSideboardCountModalOpen(false), []);
+  const closeSideboardCountModal = useCallback(
+    () => setSideboardCountModalOpen(false),
+    [],
+  );
   const openSideboardCountModal = useCallback(() => setSideboardCountModalOpen(true), []);
 
   const fireCallback = useCallback(() => callback(card), [card, callback]);
-  const handleContextClick = useRightClickMenu(card, openCardCountModal, openSideboardCountModal);
+  const handleContextClick = useRightClickMenu(
+    card,
+    openCardCountModal,
+    openSideboardCountModal,
+  );
   const { shouldShowArt, showArt, hideArt } = useHoverArt();
 
   return (
@@ -67,29 +69,29 @@ const Card:React.FC<CardProps> = ({
         <ManaCost cost={cost} />
       </CardRow>
       {shouldShowArt && <HoverArt id={id} imageUrl={imageUrl} reverseUrl={reverseUrl} />}
-      {isCardCountModalOpen
-      && ReactDOM.createPortal(
-        <CardCountModal
-          card={card}
-          closeModal={closeCardCountModal}
-          setCountCallback={setCount}
-        />,
-        document.querySelector('body'),
-      )}
-      {isSideboardCountModalOpen
-      && ReactDOM.createPortal(
-        <CardCountModal
-          card={card}
-          closeModal={closeSideboardCountModal}
-          setCountCallback={setSideboardCount}
-        />,
-        document.querySelector('body'),
-      )}
+      {isCardCountModalOpen &&
+        ReactDOM.createPortal(
+          <CardCountModal
+            card={card}
+            closeModal={closeCardCountModal}
+            setCountCallback={setCount}
+          />,
+          document.querySelector("body"),
+        )}
+      {isSideboardCountModalOpen &&
+        ReactDOM.createPortal(
+          <CardCountModal
+            card={card}
+            closeModal={closeSideboardCountModal}
+            setCountCallback={setSideboardCount}
+          />,
+          document.querySelector("body"),
+        )}
     </>
   );
 };
 
-const CardRow = styled.div<{card:Card; alwaysColorful:boolean}>`
+const CardRow = styled.div<{ card: Card; alwaysColorful: boolean }>`
   display: flex;
   border-radius: 1em;
   flex-shrink: 0;
@@ -97,7 +99,7 @@ const CardRow = styled.div<{card:Card; alwaysColorful:boolean}>`
   align-items: center;
   padding: 2px 5px;
   justify-content: space-between;
-   ${(props) => {
+  ${(props) => {
     const { color, bgColor } = getCardColor(props);
 
     return `

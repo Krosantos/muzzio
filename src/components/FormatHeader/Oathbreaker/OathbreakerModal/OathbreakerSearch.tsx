@@ -1,22 +1,27 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
-import get from 'lodash/get';
-import Search from '@components/Search';
-import useOathbreaker from '@hooks/useOathbreaker';
-import CardList from '@components/CardList';
+import React, { useCallback, useMemo, useState } from "react";
+import styled from "styled-components";
+import get from "lodash/get";
+import Search from "@components/Search";
+import useOathbreaker from "@hooks/useOathbreaker";
+import CardList from "@components/CardList";
 
-const OATHBREAKER_QUERY = '-t:creature t:planeswalker';
-const DEFAULT_PLACEHOLDER = 'Search for Oathbreaker';
+const OATHBREAKER_QUERY = "-t:creature t:planeswalker";
+const DEFAULT_PLACEHOLDER = "Search for Oathbreaker";
 
-const OathbreakerSearch:React.FC = () => {
+const OathbreakerSearch: React.FC = () => {
   const [results, setResults] = useState([]);
-  const {	oathbreaker, setOathbreaker } = useOathbreaker();
-  const wrappedSetOathbreaker = useCallback((card) => {
-    const toSet = { ...card, attributes: {}, disableMenu: true };
+  const { oathbreaker, setOathbreaker } = useOathbreaker();
+  const wrappedSetOathbreaker = useCallback(
+    (card) => {
+      const toSet = { ...card, attributes: {}, disableMenu: true };
 
-    setOathbreaker(toSet);
-  }, [setOathbreaker]);
-  const placeholder = useMemo(() => get(oathbreaker, 'name', DEFAULT_PLACEHOLDER), [oathbreaker]);
+      setOathbreaker(toSet);
+    },
+    [setOathbreaker],
+  );
+  const placeholder = useMemo(() => get(oathbreaker, "name", DEFAULT_PLACEHOLDER), [
+    oathbreaker,
+  ]);
 
   return (
     <Section>

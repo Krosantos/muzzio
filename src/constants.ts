@@ -1,35 +1,32 @@
 /* eslint-disable max-lines */
-const UPDATE_ACTION = 'update';
-const ADD_ACTION = 'add';
-const REMOVE_ACTION = 'remove';
-const OVERWRITE = 'overwrite';
+const UPDATE_ACTION = "update";
+const ADD_ACTION = "add";
+const REMOVE_ACTION = "remove";
+const OVERWRITE = "overwrite";
 
 const CARD_MAX = 4;
 const HAND_SIZE = 7;
 
-const ALL_CARDS = 'All Cards';
+const ALL_CARDS = "All Cards";
 
-const ANY_PARTNER = 'partner';
-const SPECIFIC_PARTNER = 'specific';
-const NO_PARTNER = 'none';
+const ANY_PARTNER = "partner";
+const SPECIFIC_PARTNER = "specific";
+const NO_PARTNER = "none";
 
-const AUTOSAVE = 'autosave';
-const CURRENT_FILE_SETTING = 'currentFilePath';
-const OPEN_FOLDER_SETTING = 'openFilePath';
+const AUTOSAVE = "autosave";
+const CURRENT_FILE_SETTING = "currentFilePath";
+const OPEN_FOLDER_SETTING = "openFilePath";
 
-const MODERN = 'MODERN';
-const COMMANDER = 'COMMANDER';
-const OATHBREAKER = 'OATHBREAKER';
-const STANDARD = 'STANDARD';
-const PIONEER = 'PIONEER';
-const VINTAGE = 'VINTAGE';
-const LEGACY = 'LEGACY';
-const PAUPER = 'PAUPER';
+const MODERN = "MODERN";
+const COMMANDER = "COMMANDER";
+const OATHBREAKER = "OATHBREAKER";
+const STANDARD = "STANDARD";
+const PIONEER = "PIONEER";
+const VINTAGE = "VINTAGE";
+const LEGACY = "LEGACY";
+const PAUPER = "PAUPER";
 
-const singletonFormats = [
-  COMMANDER,
-  OATHBREAKER,
-];
+const singletonFormats = [COMMANDER, OATHBREAKER];
 
 const formats = {
   COMMANDER,
@@ -43,47 +40,47 @@ const formats = {
 };
 
 const oathbreakerBanlist = [
-  'Ad Nauseam',
-  'Ancestral Recall',
-  'Balance',
-  'Biorhythm',
-  'Black Lotus',
-  'Channel',
-  'Doomsday',
-  'Emrakul, the Aeons Torn',
-  'Expropriate',
-  'Fastbond',
-  'Gifts Ungiven',
-  'Griselbrand',
-  'High Tide',
-  'Library of Alexandria',
-  'Limited Resources',
-  'Lion’s Eye Diamond',
-  'Mana Crypt',
-  'Mana Geyser',
-  'Mana Vault',
-  'Mox Emerald',
-  'Mox Jet',
-  'Mox Pearl',
-  'Mox Ruby',
-  'Mox Sapphire',
-  'Natural Order',
+  "Ad Nauseam",
+  "Ancestral Recall",
+  "Balance",
+  "Biorhythm",
+  "Black Lotus",
+  "Channel",
+  "Doomsday",
+  "Emrakul, the Aeons Torn",
+  "Expropriate",
+  "Fastbond",
+  "Gifts Ungiven",
+  "Griselbrand",
+  "High Tide",
+  "Library of Alexandria",
+  "Limited Resources",
+  "Lion’s Eye Diamond",
+  "Mana Crypt",
+  "Mana Geyser",
+  "Mana Vault",
+  "Mox Emerald",
+  "Mox Jet",
+  "Mox Pearl",
+  "Mox Ruby",
+  "Mox Sapphire",
+  "Natural Order",
   "Painter's Servant",
-  'Panoptic Mirror',
-  'Primal Surge',
-  'Saheeli, the Gifted',
-  'Sol Ring',
-  'Sundering Titan',
-  'Sway of the Stars',
-  'Sylvan Primordial',
-  'Time Vault',
-  'Time Walk',
-  'Tinker',
-  'Tolarian  Academy',
-  'Tooth and Nail',
-  'Trade Secrets',
-  'Upheaval',
-  'Worldfire',
+  "Panoptic Mirror",
+  "Primal Surge",
+  "Saheeli, the Gifted",
+  "Sol Ring",
+  "Sundering Titan",
+  "Sway of the Stars",
+  "Sylvan Primordial",
+  "Time Vault",
+  "Time Walk",
+  "Tinker",
+  "Tolarian  Academy",
+  "Tooth and Nail",
+  "Trade Secrets",
+  "Upheaval",
+  "Worldfire",
   "Yawgmoth's Bargain",
 ];
 

@@ -1,12 +1,12 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
-type UseHoverArt = ()=>{
-  hideArt: ()=>void;
+type UseHoverArt = () => {
+  hideArt: () => void;
   shouldShowArt: boolean;
-  showArt:()=>void;
-}
+  showArt: () => void;
+};
 
-const useHoverArt:UseHoverArt = () => {
+const useHoverArt: UseHoverArt = () => {
   const [shouldShowArt, setShowArt] = useState(false);
   const hideArt = useCallback(() => setShowArt(false), []);
   const showArt = useCallback(() => setShowArt(true), []);
