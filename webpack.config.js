@@ -33,17 +33,6 @@ module.exports = {
         ],
       },
       {
-        test: /\.env$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: ".env",
-            },
-          },
-        ],
-      },
-      {
         test: /\.html$/,
         use: [
           {
