@@ -93,6 +93,7 @@ const ModalBody = styled.div`
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  min-width:50vw;
   padding: 8px;
 `;
 
