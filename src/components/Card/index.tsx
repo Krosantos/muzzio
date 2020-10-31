@@ -15,7 +15,7 @@ import useNameAndCount from "./useNameAndCount";
 type CardProps = {
   callback?: Function;
   rawCard: Card;
-  cardId: string;
+  cardName: string;
   alwaysColorful?: boolean;
   useMaindeckCount?: boolean;
   useSideboardCount?: boolean;
@@ -25,12 +25,12 @@ type CardProps = {
 const Card: React.FC<CardProps> = ({
   callback = Function.prototype,
   rawCard,
-  cardId,
+  cardName,
   alwaysColorful,
   useMaindeckCount,
   useSideboardCount,
 }) => {
-  const card = useCard(cardId, rawCard);
+  const card = useCard(cardName, rawCard);
   const { id, cost, imageUrl, reverseUrl } = card;
 
   const nameAndCount = useNameAndCount(card, useMaindeckCount, useSideboardCount);

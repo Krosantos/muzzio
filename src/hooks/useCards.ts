@@ -13,12 +13,12 @@ type UseCards = () => {
   addAttribute: (card: Card, attribute: string) => void;
   addCard: (card: Card) => void;
   cardExists: (card: Card) => boolean;
-  cards: { [id: string]: Card };
+  cards: { [name: string]: Card };
   cardsByAttribute: (attribute: string) => Card[];
   cardsInDeck: () => Card[];
   cardsInSideboard: () => Card[];
   clearDeck: () => void;
-  getCard: (id: string) => Card;
+  getCard: (name: string) => Card;
   removeAttribute: (card: Card, attribute: string) => void;
   removeCard: (card: Card) => void;
   setCount: (card: Card, count: number) => void;
@@ -45,7 +45,7 @@ const useCards: UseCards = () => {
 
   const addCard = useCallback(
     (card: Card) => {
-      const maybeCard = get(cards, card.id, { count: 1, sideboardCount: 1 });
+      const maybeCard = get(cards, card.name, { count: 1, sideboardCount: 1 });
       const { count, sideboardCount } = maybeCard;
       const toAdd = merge({}, maybeCard, card, { count, sideboardCount });
 
@@ -61,9 +61,9 @@ const useCards: UseCards = () => {
 
   const cardExists = useCallback(
     (card: Card) => {
-      const id = get(card, "id");
+      const name = get(card, "name");
 
-      return id && has(cards, id);
+      return name && has(cards, name);
     },
     [cards],
   );
@@ -127,7 +127,7 @@ const useCards: UseCards = () => {
     });
   }, [cardsInDeck, cardsInSideboard, dispatch]);
 
-  const getCard = useCallback((id: string) => get(cards, id), [cards]);
+  const getCard = useCallback((name: string) => get(cards, name), [cards]);
 
   return {
     addAttribute,

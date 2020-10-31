@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import useCards from "@hooks/useCards";
 
-type UseCard = (cardId: string, rawCard: Card) => Card;
-const useCard: UseCard = (cardId, rawCard) => {
+type UseCard = (name: string, rawCard: Card) => Card;
+const useCard: UseCard = (name, rawCard) => {
   const { getCard } = useCards();
-  const card = useMemo(() => getCard(cardId) || rawCard, [cardId, getCard, rawCard]);
+  const card = useMemo(() => getCard(name) || rawCard, [name, getCard, rawCard]);
 
   return card;
 };

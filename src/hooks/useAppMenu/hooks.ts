@@ -20,7 +20,7 @@ const useSaveDeck: UseSaveDeck = (saveAs = false) => {
   const saveDeck = useCallback(() => {
     const needsChoosing = saveAs || !settings[CURRENT_FILE_SETTING];
     const filepath = needsChoosing
-      ? dialog.showSaveDialog({
+      ? dialog.showSaveDialogSync({
           defaultPath: app.getPath("documents"),
           filters: [
             { extensions: ["muz"], name: "Deck Files" },
