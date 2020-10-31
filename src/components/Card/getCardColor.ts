@@ -1,4 +1,4 @@
-import { Format } from "@hooks/useFormat";
+import type { Format } from "@contexts/Format";
 import { DefaultTheme } from "styled-components";
 
 type CardProps = {

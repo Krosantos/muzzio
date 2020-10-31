@@ -98,7 +98,11 @@ const useRefreshCards: UseRefreshCards = () => {
   const { cards, addCard } = useCards();
 
   const refreshCards = useCallback(async () => {
-    const identifiers = Object.keys(cards).map((id) => ({ id }));
+    const identifiers = Object.keys(cards).map((name) => {
+      const { id } = cards[name];
+
+      return { id };
+    });
     const newCards = await getList(identifiers);
 
     newCards.forEach((card: Card) => addCard(card));

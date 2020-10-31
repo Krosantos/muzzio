@@ -1,8 +1,8 @@
 import { useContext, useMemo, useCallback } from "react";
 import { FormatContext } from "@contexts/Format";
 import { formats, singletonFormats } from "@constants";
+import type { Format } from "@contexts/Format";
 
-type Format = keyof typeof formats;
 type UseFormat = () => {
   format: Format;
   isSingleton: boolean;
@@ -28,5 +28,4 @@ const useFormat: UseFormat = () => {
   };
 };
 
-export type { Format };
 export default useFormat;

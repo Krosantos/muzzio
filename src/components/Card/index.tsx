@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import ManaCost from "@components/ManaCost";
 import useCards from "@hooks/useCards";
 import useFormat from "@hooks/useFormat";
-import type { Format } from "@hooks/useFormat";
+import type { Format } from "@contexts/Format";
 import useHoverArt from "./useHoverArt";
 import CardCountModal from "./CardCountModal";
 import useRightClickMenu from "./useRightClickMenu";

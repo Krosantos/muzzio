@@ -24,7 +24,7 @@ const mapLegalities: MapLegalities = (card) => {
 
   // Oathbreaker isn't included in scryfall results, and must be calculated manually.
   const isOathbreakerLegal =
-    legalities.vintage === "legal" && oathbreakerBanlist.indexOf(name) >= 0;
+    legalities.vintage === "legal" && oathbreakerBanlist.indexOf(name) < 0;
 
   result.OATHBREAKER = isOathbreakerLegal;
   return result;

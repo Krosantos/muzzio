@@ -17,7 +17,7 @@ declare type Card = {
   };
   count?: number;
   isUnlimited?: boolean;
-  legalFormats: { [key in Format]: boolean };
+  legalFormats?: { [key in Format]: boolean };
   sideboardCount?: number;
   attributes?: { [attribute: string]: boolean };
   cmc?: number;
