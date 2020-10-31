@@ -28,4 +28,5 @@ const useFormat: UseFormat = () => {
   };
 };
 
+export type { Format };
 export default useFormat;

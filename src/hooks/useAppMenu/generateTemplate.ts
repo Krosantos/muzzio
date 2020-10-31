@@ -7,6 +7,7 @@ import {
   PAUPER,
   LEGACY,
   VINTAGE,
+  BRAWL,
 } from "@constants";
 
 const { app } = require("electron").remote;
@@ -81,6 +82,7 @@ const getFileMenu: GetFileMenu = ({
           label: "Oathbreaker",
         },
         { accelerator: "Shift+Alt+S", click: changeFormat(STANDARD), label: "Standard" },
+        { accelerator: "Shift+Alt+B", click: changeFormat(BRAWL), label: "Brawl" },
         { accelerator: "Shift+Alt+I", click: changeFormat(PIONEER), label: "Pioneer" },
         { accelerator: "Shift+Alt+M", click: changeFormat(MODERN), label: "Modern" },
         { accelerator: "Shift+Alt+P", click: changeFormat(PAUPER), label: "Pauper" },

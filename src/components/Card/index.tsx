@@ -4,6 +4,8 @@ import styled from "styled-components";
 import ReactDOM from "react-dom";
 import ManaCost from "@components/ManaCost";
 import useCards from "@hooks/useCards";
+import useFormat from "@hooks/useFormat";
+import type { Format } from "@hooks/useFormat";
 import useHoverArt from "./useHoverArt";
 import CardCountModal from "./CardCountModal";
 import useRightClickMenu from "./useRightClickMenu";
@@ -31,6 +33,7 @@ const Card: React.FC<CardProps> = ({
   useSideboardCount,
 }) => {
   const card = useCard(cardName, rawCard);
+  const { format } = useFormat();
   const { id, cost, imageUrl, reverseUrl } = card;
 
   const nameAndCount = useNameAndCount(card, useMaindeckCount, useSideboardCount);
@@ -60,6 +63,7 @@ const Card: React.FC<CardProps> = ({
       <CardRow
         alwaysColorful={alwaysColorful}
         card={card}
+        format={format}
         onClick={fireCallback}
         onContextMenu={handleContextClick}
         onMouseEnter={showArt}
@@ -91,7 +95,7 @@ const Card: React.FC<CardProps> = ({
   );
 };
 
-const CardRow = styled.div<{ card: Card; alwaysColorful: boolean }>`
+const CardRow = styled.div<{ card: Card; alwaysColorful: boolean; format: Format }>`
   display: flex;
   border-radius: 1em;
   flex-shrink: 0;

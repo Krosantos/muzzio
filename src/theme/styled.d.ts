@@ -14,6 +14,7 @@ declare module "styled-components" {
     granite: string;
     nickel: string;
     pale: string;
+    red: string;
     smoke: string;
     taupe: string;
     white: string;
