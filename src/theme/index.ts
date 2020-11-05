@@ -10,6 +10,7 @@ const theme = {
   granite: "#5F6062",
   nickel: "#7B7263",
   pale: "#d6d5c9",
+  red: "#FF0000",
   smoke: "#3b2b2e",
   taupe: "#C5BAAF",
   white: "#F6F6F6",

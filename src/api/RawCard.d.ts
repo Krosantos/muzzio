@@ -11,6 +11,23 @@ type Face = {
   type_line: string;
 };
 
+type LegalStatus = "legal" | "not_legal" | "restricted" | "banned";
+type Legality = {
+  brawl: LegalStatus;
+  commander: LegalStatus;
+  duel: LegalStatus;
+  future: LegalStatus;
+  historic: LegalStatus;
+  legacy: LegalStatus;
+  modern: LegalStatus;
+  oldschool: LegalStatus;
+  pauper: LegalStatus;
+  penny: LegalStatus;
+  pioneer: LegalStatus;
+  standard: LegalStatus;
+  vintage: LegalStatus;
+};
+
 type RelatedObject = {
   id: string;
   name: string;
@@ -26,6 +43,7 @@ declare type RawCard = {
   cmc: number;
   color_identity: string[];
   layout: string;
+  legalities: Legality;
   mana_cost: string;
   name: string;
   oracle_text: string;

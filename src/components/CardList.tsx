@@ -4,7 +4,7 @@ import Card from "./Card";
 
 type CardListProps = {
   alwaysColorful?: boolean;
-  cards: Card[] | { [id: string]: Card };
+  cards: Card[] | { [name: string]: Card };
   callback?: Function;
   useMaindeckCount?: boolean;
   useSideboardCount?: boolean;
@@ -28,7 +28,7 @@ const CardList: React.FC<CardListProps> = ({
         <Card
           alwaysColorful={alwaysColorful}
           callback={callback}
-          cardId={card.id}
+          cardName={card.name}
           key={card.id}
           rawCard={card}
           useMaindeckCount={useMaindeckCount}

@@ -7,6 +7,7 @@ import useCommander from "@hooks/useCommander";
 import useOathbreaker from "@hooks/useOathbreaker";
 import getAverageCmc from "@utils/getAverageCmc";
 import {
+  BRAWL,
   COMMANDER,
   OATHBREAKER,
   LEGACY,
@@ -19,6 +20,7 @@ import {
 
 const DEFAULT_COUNT = 60;
 const formatCounts = {
+  [BRAWL]: DEFAULT_COUNT,
   [COMMANDER]: 100,
   [LEGACY]: DEFAULT_COUNT,
   [MODERN]: DEFAULT_COUNT,

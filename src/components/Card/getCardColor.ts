@@ -1,9 +1,11 @@
+import type { Format } from "@contexts/Format";
 import { DefaultTheme } from "styled-components";
 
 type CardProps = {
   card: Card;
   alwaysColorful: boolean;
   theme: DefaultTheme;
+  format: Format;
 };
 type ColorResult = {
   color: string;
@@ -11,8 +13,8 @@ type ColorResult = {
 };
 type GetCardColor = (props: CardProps) => ColorResult;
 // eslint-disable-next-line complexity
-const getCardColor: GetCardColor = ({ card, alwaysColorful, theme }) => {
-  const { count, sideboardCount, colors } = card;
+const getCardColor: GetCardColor = ({ card, alwaysColorful, theme, format }) => {
+  const { count, sideboardCount, colors, legalFormats } = card;
   const inDeck = count > 0;
   const inSideboard = sideboardCount > 0;
   const notInDeck = !inDeck && !inSideboard && !alwaysColorful;
@@ -49,6 +51,13 @@ const getCardColor: GetCardColor = ({ card, alwaysColorful, theme }) => {
   if (notInDeck) {
     result.bgColor = theme.granite;
     result.color = theme.white;
+  }
+
+  const isIllegal = !legalFormats[format];
+
+  if (isIllegal) {
+    result.bgColor = theme.white;
+    result.color = theme.red;
   }
 
   return result;

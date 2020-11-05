@@ -25,10 +25,12 @@ const PIONEER = "PIONEER";
 const VINTAGE = "VINTAGE";
 const LEGACY = "LEGACY";
 const PAUPER = "PAUPER";
+const BRAWL = "BRAWL";
 
 const singletonFormats = [COMMANDER, OATHBREAKER];
 
 const formats = {
+  BRAWL,
   COMMANDER,
   LEGACY,
   MODERN,
@@ -102,6 +104,7 @@ export {
   PIONEER,
   COMMANDER,
   OATHBREAKER,
+  BRAWL,
   STANDARD,
   VINTAGE,
   LEGACY,

@@ -1,6 +1,7 @@
 import getPartner from "./getPartner";
 import getIsUnlimited from "./getIsUnlimited";
 import processCardFaces from "./processCardFaces";
+import mapLegalities from "./mapLegalities";
 
 type FormatCard = (card: RawCard) => Card;
 const formatCard: FormatCard = (card) => {
@@ -9,6 +10,7 @@ const formatCard: FormatCard = (card) => {
   const { colors, name, mana_cost: cost, type_line: type } = face;
   const partnerQuery = getPartner(card);
   const isUnlimited = getIsUnlimited(card);
+  const legalFormats = mapLegalities(card);
 
   return {
     attributes: {},
@@ -20,6 +22,7 @@ const formatCard: FormatCard = (card) => {
     identity,
     imageUrl,
     isUnlimited,
+    legalFormats,
     name,
     partnerQuery,
     reverseUrl,

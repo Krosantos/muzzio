@@ -3,7 +3,7 @@ import React, { Reducer, useReducer, useMemo } from "react";
 import merge from "lodash/merge";
 import { ADD_ACTION, REMOVE_ACTION, UPDATE_ACTION, OVERWRITE } from "@constants";
 
-type CardState = { [id: string]: Card };
+type CardState = { [name: string]: Card };
 type CardContextValue = {
   cards: CardState;
   dispatch: React.Dispatch<Action>;
@@ -30,21 +30,21 @@ const cardReducer: Reducer<CardState, Action> = (
   state,
   { type, card = {}, overriddenState },
 ) => {
-  const { id } = card;
+  const { name } = card;
   const newState = { ...state };
 
   switch (type) {
     case ADD_ACTION:
-      newState[id] = card;
+      newState[name] = card;
       break;
     case REMOVE_ACTION:
-      delete newState[id];
+      delete newState[name];
       break;
     case UPDATE_ACTION:
-      const oldCard = newState[id];
+      const oldCard = newState[name];
       const newCard = merge({}, oldCard, card);
 
-      newState[id] = newCard;
+      newState[name] = newCard;
       break;
     case OVERWRITE:
       // TODO: this is gross and you know it

@@ -20,7 +20,7 @@ const useSaveDeck: UseSaveDeck = (saveAs = false) => {
   const saveDeck = useCallback(() => {
     const needsChoosing = saveAs || !settings[CURRENT_FILE_SETTING];
     const filepath = needsChoosing
-      ? dialog.showSaveDialog({
+      ? dialog.showSaveDialogSync({
           defaultPath: app.getPath("documents"),
           filters: [
             { extensions: ["muz"], name: "Deck Files" },
@@ -98,7 +98,11 @@ const useRefreshCards: UseRefreshCards = () => {
   const { cards, addCard } = useCards();
 
   const refreshCards = useCallback(async () => {
-    const identifiers = Object.keys(cards).map((id) => ({ id }));
+    const identifiers = Object.keys(cards).map((name) => {
+      const { id } = cards[name];
+
+      return { id };
+    });
     const newCards = await getList(identifiers);
 
     newCards.forEach((card: Card) => addCard(card));

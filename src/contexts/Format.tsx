@@ -24,4 +24,5 @@ const FormatProvider: React.FC<FormatProviderProps> = ({ children, initialValue 
   return <FormatContext.Provider value={value}>{children}</FormatContext.Provider>;
 };
 
+export type { Format };
 export { FormatContext, FormatProvider };

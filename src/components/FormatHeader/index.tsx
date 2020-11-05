@@ -9,12 +9,14 @@ import {
   PIONEER,
   STANDARD,
   VINTAGE,
+  BRAWL,
 } from "@constants";
 import Commander from "./Commander";
 import Oathbreaker from "./Oathbreaker";
 import Default from "./Default";
 
 const componentMap = {
+  [BRAWL]: Commander,
   [COMMANDER]: Commander,
   [LEGACY]: Default,
   [MODERN]: Default,
