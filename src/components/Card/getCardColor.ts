@@ -14,7 +14,12 @@ type ColorResult = {
 type GetCardColor = (props: CardProps) => ColorResult;
 // eslint-disable-next-line complexity
 const getCardColor: GetCardColor = ({ card, alwaysColorful, theme, format }) => {
-  const { count, sideboardCount, colors, legalFormats } = card;
+  const {
+    count,
+    sideboardCount,
+    colors,
+    legalFormats = {} as Card["legalFormats"],
+  } = card;
   const inDeck = count > 0;
   const inSideboard = sideboardCount > 0;
   const notInDeck = !inDeck && !inSideboard && !alwaysColorful;

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import throttle from "lodash/throttle";
 import clamp from "lodash/clamp";
-import useRefreshCard from "./useRefreshCard";
 
 const IMAGE_WIDTH = 366;
 const IMAGE_HEIGHT = 510;
@@ -38,12 +37,11 @@ type HoverArtProps = {
   imageUrl: string;
   reverseUrl: string;
 };
-const HoverArt: React.FC<HoverArtProps> = ({ id, imageUrl, reverseUrl }) => {
+const HoverArt: React.FC<HoverArtProps> = ({ imageUrl, reverseUrl }) => {
   const [style, setMousePosition] = useState<React.CSSProperties>({
     left: "0px",
     top: "0px",
   });
-  const refreshCard = useRefreshCard(id);
 
   useEffect(() => {
     const updatePosition = throttle(({ clientX, clientY }) => {
@@ -60,8 +58,8 @@ const HoverArt: React.FC<HoverArtProps> = ({ id, imageUrl, reverseUrl }) => {
 
   return (
     <Container style={style}>
-      <Img alt="" onError={refreshCard} src={imageUrl} />
-      {reverseUrl && <Img alt="" onError={refreshCard} src={reverseUrl} />}
+      <Img alt="" src={imageUrl} />
+      {reverseUrl && <Img alt="" src={reverseUrl} />}
     </Container>
   );
 };
