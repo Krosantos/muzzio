@@ -29,7 +29,7 @@ const useTypeCounts = () => {
 
   cardsInDeck().forEach((card) => {
     Object.keys(result).forEach((cardType: keyof Count) => {
-      if (card.type.toLowerCase().includes(cardType)) result[cardType] += 1;
+      if (card.type.toLowerCase().includes(cardType)) result[cardType] += card.count || 1;
     });
   });
 
