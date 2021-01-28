@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import FormatHeader from "@components/FormatHeader";
-import LandCount from "@components/LandCount";
 import SampleHand from "@components/SampleHand";
+import TypeCount from "./TypeCount";
 
 const Header: React.FC = () => (
   <Wrapper>
     <FormatHeader />
     <RightSection>
-      <LandCount />
+      <TypeCount />
       <SampleHand />
     </RightSection>
   </Wrapper>
