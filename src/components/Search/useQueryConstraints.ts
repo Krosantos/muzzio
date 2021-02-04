@@ -15,7 +15,6 @@ const convertIdentityToQuery: ConvertIdentityToQuery = (identity) => {
 type GetFormatQuery = (format: string) => string;
 const getFormatQuery: GetFormatQuery = (format) => {
   if (format !== OATHBREAKER) return `format:${format}`;
-
   const bannedSection = oathbreakerBanlist.join('" -"');
 
   return `format:${VINTAGE} -"${bannedSection}"`;
