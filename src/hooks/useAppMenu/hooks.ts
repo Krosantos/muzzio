@@ -32,6 +32,7 @@ const useSaveDeck: UseSaveDeck = (saveAs = false) => {
     save(filepath);
     setWindowTitle(filepath);
     setSettings(CURRENT_FILE_SETTING, filepath);
+    setSettings(OPEN_FOLDER_SETTING, path.dirname(filepath));
   }, [save, saveAs, setSettings, settings]);
 
   return saveDeck;
