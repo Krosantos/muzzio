@@ -13,10 +13,10 @@ type SortCards = (cards: Card[]) => Card[];
 const sortCards: SortCards = (cards) => {
   const byAlpha = sortBy(cards, ({ name }) => name);
   const byCmc = sortBy(byAlpha, ({ cmc }) => cmc);
-  const byNotLand = sortBy(
-    byCmc,
-    ({ type }) => type.includes("Land") && !type.includes("//"),
-  );
+  const byNotLand = sortBy(byCmc, ({ type }) => {
+    // Don't sort MDFCs, unless they're pure lands.
+    return type.includes("Land") && (!type.includes("//") || type === "Land // Land");
+  });
   const byNotBasicLand = sortBy(byNotLand, ({ type }) => type.includes("Basic"));
 
   return byNotBasicLand;

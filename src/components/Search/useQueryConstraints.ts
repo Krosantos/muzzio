@@ -3,7 +3,7 @@ import isEmpty from "lodash/isEmpty";
 import useFormat from "@hooks/useFormat";
 import useCommander from "@hooks/useCommander";
 import useOathbreaker from "@hooks/useOathbreaker";
-import { OATHBREAKER, COMMANDER, VINTAGE, oathbreakerBanlist } from "@constants";
+import { OATHBREAKER, COMMANDER, VINTAGE } from "@constants";
 
 type ConvertIdentityToQuery = (identity: string[]) => string;
 const convertIdentityToQuery: ConvertIdentityToQuery = (identity) => {
@@ -15,9 +15,8 @@ const convertIdentityToQuery: ConvertIdentityToQuery = (identity) => {
 type GetFormatQuery = (format: string) => string;
 const getFormatQuery: GetFormatQuery = (format) => {
   if (format !== OATHBREAKER) return `format:${format}`;
-  const bannedSection = oathbreakerBanlist.join('" -"');
 
-  return `format:${VINTAGE} -"${bannedSection}"`;
+  return `format:${VINTAGE}`;
 };
 
 type GetIdentityQuery = (

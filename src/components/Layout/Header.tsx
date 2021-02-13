@@ -27,6 +27,8 @@ const Wrapper = styled.div`
 
 const RightSection = styled.div`
   display: flex;
+  align-items: center;
+  padding-right: 8px;
 `;
 
 export default Header;
