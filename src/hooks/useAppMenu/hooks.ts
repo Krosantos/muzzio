@@ -53,6 +53,8 @@ const useLoadDeck: UseLoadDeck = () => {
       ],
     });
     const filepath = filePaths[0];
+
+    if (!filepath) return;
     const saveData = load(filepath);
 
     overwrite(saveData);
