@@ -6,6 +6,7 @@ import {
   useLoadDeck,
   useChangeFormat,
   useRefreshCards,
+  useRemoveCards,
 } from "./hooks";
 
 const { Menu } = require("electron").remote;
@@ -17,6 +18,7 @@ const useAppMenu: UseAppMenu = () => {
     loadDeck: useLoadDeck(),
     newDeck: useNewDeck(),
     refreshCards: useRefreshCards(),
+    removeCards: useRemoveCards(),
     saveDeck: useSaveDeck(),
     saveDeckAs: useSaveDeck(true),
   };

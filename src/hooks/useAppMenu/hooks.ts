@@ -114,4 +114,24 @@ const useRefreshCards: UseRefreshCards = () => {
   return refreshCards;
 };
 
-export { useSaveDeck, useLoadDeck, useNewDeck, useChangeFormat, useRefreshCards };
+type UseRemoveCards = () => () => void;
+const useRemoveCards: UseRemoveCards = () => {
+  const { cardsInSideboard, cardsInDeck, setCount, setSideboardCount } = useCards();
+  const removeCards = useCallback(() => {
+    cardsInSideboard().forEach((card) => {
+      setSideboardCount(card, 0);
+    });
+    cardsInDeck().forEach((card) => setCount(card, 0));
+  }, [cardsInDeck, cardsInSideboard, setCount, setSideboardCount]);
+
+  return removeCards;
+};
+
+export {
+  useSaveDeck,
+  useLoadDeck,
+  useNewDeck,
+  useChangeFormat,
+  useRefreshCards,
+  useRemoveCards,
+};

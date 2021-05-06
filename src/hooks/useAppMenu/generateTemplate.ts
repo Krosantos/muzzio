@@ -43,6 +43,7 @@ const viewMenu = {
 type Callbacks = {
   changeFormat: (format: string) => void;
   refreshCards: () => void;
+  removeCards: () => void;
   newDeck: () => void;
   loadDeck: () => void;
   saveDeck: () => void;
@@ -58,6 +59,7 @@ type GetFileMenu = (callbacks: Callbacks) => TemplateItem;
 const getFileMenu: GetFileMenu = ({
   changeFormat,
   refreshCards,
+  removeCards,
   newDeck,
   loadDeck,
   saveDeck,
@@ -95,6 +97,11 @@ const getFileMenu: GetFileMenu = ({
       accelerator: "CommandOrControl+Alt+R",
       click: refreshCards,
       label: "Refresh Card Data",
+    },
+    { type: "separator" },
+    {
+      click: removeCards,
+      label: "Remove All",
     },
     { type: "separator" },
     { accelerator: "CommandOrControl+S", click: saveDeck, label: "Save Deck" },
