@@ -13,7 +13,7 @@ const generateUnlimitedMenu: GenerateUnlimitedMenu = (openSideboardCountModal) =
 type GenerateSubmenu = (
   card: Card,
   setSideboardCount: (otherCard: Card, count: number) => void,
-) => { click: Function; label: string }[];
+) => { click: () => void; label: string }[];
 const generateSubmenu: GenerateSubmenu = (card, setSideboardCount) => {
   const submenu = [];
 

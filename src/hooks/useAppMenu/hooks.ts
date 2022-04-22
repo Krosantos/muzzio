@@ -20,14 +20,16 @@ const useSaveDeck: UseSaveDeck = (saveAs = false) => {
   const saveDeck = useCallback(() => {
     const needsChoosing = saveAs || !settings[CURRENT_FILE_SETTING];
     const filepath = needsChoosing
-      ? dialog.showSaveDialogSync({
-          defaultPath: app.getPath("documents"),
-          filters: [
-            { extensions: ["muz"], name: "Deck Files" },
-            { extensions: ["*"], name: "All Files" },
-          ],
-        })
-      : settings[CURRENT_FILE_SETTING];
+      ? dialog
+          .showSaveDialogSync({
+            defaultPath: app.getPath("documents"),
+            filters: [
+              { extensions: ["muz"], name: "Deck Files" },
+              { extensions: ["*"], name: "All Files" },
+            ],
+          })
+          .toString()
+      : settings[CURRENT_FILE_SETTING].toString();
 
     save(filepath);
     setWindowTitle(filepath);
@@ -46,7 +48,7 @@ const useLoadDeck: UseLoadDeck = () => {
   const loadDeck = useCallback(async () => {
     const openPath = settings[OPEN_FOLDER_SETTING] || app.getPath("documents");
     const { filePaths } = await dialog.showOpenDialog({
-      defaultPath: openPath,
+      defaultPath: openPath.toString(),
       filters: [
         { extensions: ["muz"], name: "Deck Files" },
         { extensions: ["*"], name: "All Files" },
