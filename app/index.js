@@ -14,6 +14,7 @@ function createWindow() {
     minWidth: 1280,
     title: "Muzzio",
     webPreferences: {
+      contextIsolation: false,
       enableRemoteModule: true,
       nodeIntegration: true,
       webSecurity: true,

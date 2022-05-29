@@ -33,6 +33,7 @@ const processCardFaces: ProcessCardFaces = (card) => {
 
   if (layout === "transform") return getTransformData(cardFaces);
   if (layout === "modal_dfc") return getDfcData(card);
+  if (layout === "reversible_card") return getTransformData(cardFaces);
   return {
     face: card,
     imageUrl: get(imageUris, "border_crop"),
