@@ -14,6 +14,7 @@ const convertIdentityToQuery: ConvertIdentityToQuery = (identity) => {
 
 type GetFormatQuery = (format: string) => string;
 const getFormatQuery: GetFormatQuery = (format) => {
+  if (format === COMMANDER) return `(format:${format} OR e:CLB)`;
   if (format !== OATHBREAKER) return `format:${format}`;
 
   return `format:${VINTAGE}`;

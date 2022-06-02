@@ -10,9 +10,10 @@ const formatCard: FormatCard = (card) => {
     const { imageUrl, reverseUrl, face } = processCardFaces(card);
     const { colors, name, mana_cost: cost, type_line: type } = face;
     const partnerQuery = getPartner(card);
+
     const isUnlimited = getIsUnlimited(card);
     const legalFormats = mapLegalities(card);
-  
+
     return {
       attributes: {},
       cmc,
@@ -30,13 +31,13 @@ const formatCard: FormatCard = (card) => {
       sideboardCount: 0,
       type,
     };
-  }catch(e){
-    console.log(e)
-    return null
+  } catch (e) {
+    console.log(e);
+    return null;
   }
 };
 
 type FormatCards = (cards: RawCard[]) => Card[];
-const formatCards: FormatCards = (cards) => cards.map(formatCard).filter(t=>!!t);
+const formatCards: FormatCards = (cards) => cards.map(formatCard).filter((t) => !!t);
 
 export default formatCards;

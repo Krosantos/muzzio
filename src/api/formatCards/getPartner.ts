@@ -1,4 +1,9 @@
-import { ANY_PARTNER, SPECIFIC_PARTNER, NO_PARTNER } from "@constants";
+import {
+  ANY_PARTNER,
+  SPECIFIC_PARTNER,
+  NO_PARTNER,
+  BACKGROUND_PARTNER,
+} from "@constants";
 import extractOracleText from "./extractOracleText";
 
 type GetPartner = (card: RawCard) => Card["partnerQuery"];
@@ -15,6 +20,9 @@ const getPartner: GetPartner = (card) => {
   }
   if (oracleText.includes("Partner"))
     return { query: ` -"${name}" o:Partner -o:"Partner with"`, type: ANY_PARTNER };
+
+  if (oracleText.includes("Choose a Background"))
+    return { query: ` t:background`, type: BACKGROUND_PARTNER };
   return { type: NO_PARTNER };
 };
 

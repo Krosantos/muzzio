@@ -11,6 +11,7 @@ const ALL_CARDS = "All Cards";
 
 const ANY_PARTNER = "partner";
 const SPECIFIC_PARTNER = "specific";
+const BACKGROUND_PARTNER = "background";
 const NO_PARTNER = "none";
 
 const AUTOSAVE = "autosave";
@@ -96,6 +97,7 @@ export {
   ALL_CARDS,
   ANY_PARTNER,
   SPECIFIC_PARTNER,
+  BACKGROUND_PARTNER,
   NO_PARTNER,
   AUTOSAVE,
   CURRENT_FILE_SETTING,
