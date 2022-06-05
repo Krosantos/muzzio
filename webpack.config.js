@@ -5,8 +5,8 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = {
   devServer: {
-    contentBase: path.join(__dirname, "src", "static"),
     port: 3000,
+    static: path.join(__dirname, "src", "static"),
   },
   devtool: "inline-source-map",
   entry: "./src/index.tsx",
