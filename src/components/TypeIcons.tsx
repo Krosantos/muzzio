@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import artifact from "@static/typeIcons/artifact.svg";
 import creature from "@static/typeIcons/creature.svg";
 import enchantment from "@static/typeIcons/enchantment.svg";

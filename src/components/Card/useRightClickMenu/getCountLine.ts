@@ -33,7 +33,7 @@ type GetCountLine = (
   setCount: (otherCard: Card, count: number) => void,
   openCountModal: () => void,
 ) => void;
-// eslint-disable-next-line max-params
+
 const getCountLine: GetCountLine = (
   isSingleton,
   card,

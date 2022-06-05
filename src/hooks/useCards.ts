@@ -25,7 +25,6 @@ type UseCards = () => {
   setSideboardCount: (card: Card, sideboardCount: number) => void;
 };
 
-// eslint-disable-next-line max-statements, max-lines-per-function
 const useCards: UseCards = () => {
   const { cards, dispatch } = useContext(CardContext);
 

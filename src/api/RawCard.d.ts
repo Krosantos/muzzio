@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 // The raw card object, as provided by Scryfall
 
 type Face = {

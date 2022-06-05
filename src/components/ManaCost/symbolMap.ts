@@ -1,4 +1,3 @@
-/* eslint-disable import/max-dependencies */
 import Mana0 from "@static/mana/0.svg";
 import Mana1 from "@static/mana/1.svg";
 import Mana2 from "@static/mana/2.svg";
@@ -44,7 +43,6 @@ import Mana2R from "@static/mana/2R.svg";
 import Mana2G from "@static/mana/2G.svg";
 import ManaS from "@static/mana/S.svg";
 
-/* eslint-disable sort-keys */
 const symbolMap = {
   "0": Mana0,
   "1": Mana1,

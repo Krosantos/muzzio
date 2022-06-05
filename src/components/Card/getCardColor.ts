@@ -12,7 +12,7 @@ type ColorResult = {
   bgColor: string;
 };
 type GetCardColor = (props: CardProps) => ColorResult;
-// eslint-disable-next-line complexity
+
 const getCardColor: GetCardColor = ({ card, alwaysColorful, theme, format }) => {
   const {
     count,

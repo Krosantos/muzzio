@@ -38,7 +38,7 @@ type AppendCards = (
   commanderData: CommanderData,
   oathbreakerData: OathbreakerData,
 ) => Card[];
-// eslint-disable-next-line max-params, complexity
+
 const appendCards: AppendCards = (
   sortedCards,
   format,

@@ -1,9 +1,7 @@
 import values from "lodash/values";
 import get from "lodash/get";
 
-type GetAverageCmc = (cardObject: any) => number;
-
-const getAverageCmc: GetAverageCmc = (cardObject) => {
+const getAverageCmc = (cardObject:Card[]):number => {
   const cards = values(cardObject);
   const nonLand = cards.filter((card) => {
     const type = get(card, "type");

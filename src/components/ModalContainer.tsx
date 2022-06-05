@@ -4,7 +4,7 @@ import styled from "styled-components";
 type ModalContainerProps = React.PropsWithChildren<{
   closeModal: () => void;
 }>;
-/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
+
 const ModalContainer: React.FC<ModalContainerProps> = ({ closeModal, children }) => {
   const trapClick = useCallback((event) => event.stopPropagation(), []);
 
@@ -14,7 +14,6 @@ const ModalContainer: React.FC<ModalContainerProps> = ({ closeModal, children })
     </Underlay>
   );
 };
-/* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 
 const Underlay = styled.div`
   position: fixed;

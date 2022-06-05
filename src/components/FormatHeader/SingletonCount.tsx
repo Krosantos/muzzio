@@ -36,7 +36,7 @@ type UseCommandZoneCards = (format: string) => number;
 const useCommandZoneCards: UseCommandZoneCards = (format) => {
   const { commander, partner } = useCommander();
   const { oathbreaker, signatureSpell } = useOathbreaker();
-  // eslint-disable-next-line complexity
+  
   const commandZoneCount = useMemo(() => {
     let result = 0;
 

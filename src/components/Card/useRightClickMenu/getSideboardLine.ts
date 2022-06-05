@@ -33,7 +33,7 @@ type GetSideboardLine = (
   setSideboardCount: (otherCard: Card, sideboardCount: number) => void,
   openSideboardCountModal: () => void,
 ) => void;
-// eslint-disable-next-line max-params
+
 const getSideboardLine: GetSideboardLine = (
   isSingleton,
   card,

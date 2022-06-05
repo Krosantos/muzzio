@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-autofocus */
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import ModalContainer from "@components/ModalContainer";

@@ -1,4 +1,3 @@
-/* eslint-disable max-params */
 import { useCallback } from "react";
 import useFormat from "@hooks/useFormat";
 import useAttributes from "@hooks/useAttributes";

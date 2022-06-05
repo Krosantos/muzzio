@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import "./static/index.html"; // eslint-disable-line import/no-unassigned-import
+import "./static/index.html";
 
 ReactDOM.render(<App />, document.getElementById("root"));

@@ -8,7 +8,7 @@ import {
 import extractOracleText from "./extractOracleText";
 
 type GetPartner = (card: RawCard) => Card["partnerQuery"];
-// eslint-disable-next-line complexity
+
 const getPartner: GetPartner = (card) => {
   const { all_parts: allParts, name } = card;
   const oracleText = extractOracleText(card);

@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import React, { Reducer, useReducer, useMemo } from "react";
 import merge from "lodash/merge";
 import { ADD_ACTION, REMOVE_ACTION, UPDATE_ACTION, OVERWRITE } from "@constants";
@@ -25,7 +24,6 @@ const DEFAULT_VALUE = {
 };
 const CardContext = React.createContext<CardContextValue>(DEFAULT_VALUE);
 
-// eslint-disable-next-line complexity
 const cardReducer: Reducer<CardState, Action> = (
   state,
   { type, card = {}, overriddenState },

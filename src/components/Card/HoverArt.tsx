@@ -11,7 +11,7 @@ type CalculateOffset = (
   clientY: number,
   hasBackside: boolean,
 ) => React.CSSProperties;
-// eslint-disable-next-line complexity
+
 const calculateOffset: CalculateOffset = (clientX, clientY, hasBackside) => {
   const TOTAL_HEIGHT = IMAGE_HEIGHT * (hasBackside ? 2 : 1);
   const TOTAL_WIDTH = IMAGE_WIDTH * (hasBackside ? 2 : 1);

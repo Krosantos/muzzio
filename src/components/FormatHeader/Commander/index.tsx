@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
@@ -15,7 +14,6 @@ const convertIdentityToCost: ConvertIdentityToCost = (identity) => {
   return `{${identity.join("}{")}}`;
 };
 
-// eslint-disable-next-line max-lines-per-function
 const Commander: React.FC = () => {
   const [isCommanderModalOpen, setCommanderModalOpen] = useState(false);
   const closeCommanderModal = useCallback(() => setCommanderModalOpen(false), []);

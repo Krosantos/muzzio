@@ -28,7 +28,6 @@ const useNameAndCount: UseNameAndCount = (card, useMaindeckCount, useSideboardCo
   const { count, name, sideboardCount } = card;
   const { isSingleton } = useFormat();
 
-  // eslint-disable-next-line complexity
   const nameAndCount = useMemo(() => {
     if (isSingleton) return getSingletonCount(count, name);
     if (useMaindeckCount) return getMaindeckCount(count, name);

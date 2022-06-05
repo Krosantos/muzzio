@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
@@ -23,7 +22,6 @@ type CardProps = {
   useSideboardCount?: boolean;
 };
 
-// eslint-disable-next-line max-statements, max-lines-per-function
 const Card: React.FC<CardProps> = ({
   callback = Function.prototype,
   rawCard,

@@ -50,7 +50,6 @@ const useShuffledDeck: UseShuffledDeck = () => {
 
 type Action = typeof ADD_CARD | typeof NEW_HAND;
 
-// eslint-disable-next-line complexity
 const sampleHandReducer: Reducer<ShuffleState, Action> = (
   { cardsInDeck, cardsInHand },
   action,

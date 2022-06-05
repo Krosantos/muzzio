@@ -21,7 +21,6 @@ const eligibleTypes = [
   FRIENDS_FOREVER,
 ];
 
-// eslint-disable-next-line complexity
 const getPartnerQuery = ({ type, query = "" }: Card["partnerQuery"]): string => {
   switch (type) {
     case ANY_PARTNER:

@@ -11,7 +11,6 @@ import { FormatProvider } from "@contexts/Format";
 import useAutoLoad from "@hooks/useAutoLoad";
 import "./index.css";
 
-/* eslint-disable react/jsx-max-depth */
 const App: React.FC = () => {
   const { attributes, format, cards, commanderData, oathbreakerData } = useAutoLoad();
 

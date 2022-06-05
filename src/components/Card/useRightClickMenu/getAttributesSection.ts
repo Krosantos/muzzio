@@ -11,7 +11,7 @@ type GetAttributeLine = (
   addAttribute: (addCard: Card, addAttr: string) => void,
   removeAttribute: (removeCard: Card, removeAttr: string) => void,
 ) => void;
-// eslint-disable-next-line max-params
+
 const getAttributeLine: GetAttributeLine = (
   card,
   menu,
@@ -42,7 +42,7 @@ type GetAttributesSection = (
   addAttribute: (addCard: Card, addAttr: string) => void,
   removeAttribute: (removeCard: Card, removeAttr: string) => void,
 ) => void;
-// eslint-disable-next-line max-params
+
 const getAttributesSection: GetAttributesSection = (
   card,
   menu,

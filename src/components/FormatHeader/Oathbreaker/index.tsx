@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
@@ -15,7 +14,7 @@ const convertIdentityToCost: ConvertIdentityToCost = (identity) => {
   if (identity.length === 0) return "{C}";
   return `{${identity.join("}{")}}`;
 };
-// eslint-disable-next-line max-statements, max-lines-per-function, complexity
+
 const Oathbreaker: React.FC = () => {
   const [isOathbreakerModalOpen, setOathbreakerModalOpen] = useState(false);
   const closeOathbreakerModal = useCallback(() => setOathbreakerModalOpen(false), []);

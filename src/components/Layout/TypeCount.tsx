@@ -19,11 +19,9 @@ const useTypeCounts = () => {
     creature: 0,
     instant: 0,
     sorcery: 0,
-    // eslint-disable-next-line sort-keys
     artifact: 0,
     enchantment: 0,
     planeswalker: 0,
-    // eslint-disable-next-line sort-keys
     land: 0,
   };
 
