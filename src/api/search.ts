@@ -12,7 +12,7 @@ type Search = (query: string) => Promise<Card[]>;
 const search: Search = async (query) => {
   let newQuery = query;
 
-  newQuery += " game:paper order:cmc lang:english";
+  newQuery += " game:paper prefer:usd-low order:cmc lang:english";
   const config = {
     params: {
       q: newQuery,

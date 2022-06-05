@@ -11,6 +11,7 @@ const ALL_CARDS = "All Cards";
 
 const ANY_PARTNER = "partner";
 const SPECIFIC_PARTNER = "specific";
+const FRIENDS_FOREVER = "friends";
 const BACKGROUND_PARTNER = "background";
 const NO_PARTNER = "none";
 
@@ -98,6 +99,7 @@ export {
   ANY_PARTNER,
   SPECIFIC_PARTNER,
   BACKGROUND_PARTNER,
+  FRIENDS_FOREVER,
   NO_PARTNER,
   AUTOSAVE,
   CURRENT_FILE_SETTING,

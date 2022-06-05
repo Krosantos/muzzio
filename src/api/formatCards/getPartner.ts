@@ -3,10 +3,12 @@ import {
   SPECIFIC_PARTNER,
   NO_PARTNER,
   BACKGROUND_PARTNER,
+  FRIENDS_FOREVER,
 } from "@constants";
 import extractOracleText from "./extractOracleText";
 
 type GetPartner = (card: RawCard) => Card["partnerQuery"];
+// eslint-disable-next-line complexity
 const getPartner: GetPartner = (card) => {
   const { all_parts: allParts, name } = card;
   const oracleText = extractOracleText(card);
@@ -18,6 +20,9 @@ const getPartner: GetPartner = (card) => {
 
     return { query: ` !"${partner.name}"`, type: SPECIFIC_PARTNER };
   }
+  if (oracleText.includes("Friends forever"))
+    return { query: ` -"${name}" o:"Friends forever"`, type: FRIENDS_FOREVER };
+
   if (oracleText.includes("Partner"))
     return { query: ` -"${name}" o:Partner -o:"Partner with"`, type: ANY_PARTNER };
 

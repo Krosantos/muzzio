@@ -12,7 +12,7 @@ type Format =
 declare type Card = {
   id?: string;
   partnerQuery?: {
-    type: "partner" | "specific" | "background" | "none";
+    type: "partner" | "specific" | "background" | "none" | "friends";
     query?: string;
   };
   count?: number;
