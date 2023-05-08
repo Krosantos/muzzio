@@ -1,8 +1,8 @@
-import { formats, oathbreakerBanlist } from "@constants";
+import { formats } from "@constants";
 
 type MapLegalities = (card: RawCard) => Card["legalFormats"];
 const mapLegalities: MapLegalities = (card) => {
-  const { legalities, name } = card;
+  const { legalities } = card;
   const result: Card["legalFormats"] = {
     BRAWL: false,
     COMMANDER: false,
@@ -21,12 +21,6 @@ const mapLegalities: MapLegalities = (card) => {
 
     result[f] = isLegal;
   });
-
-  // Oathbreaker isn't included in scryfall results, and must be calculated manually.
-  const isOathbreakerLegal =
-    legalities.vintage === "legal" && oathbreakerBanlist.indexOf(name) < 0;
-
-  result.OATHBREAKER = isOathbreakerLegal;
   return result;
 };
 

@@ -1,4 +1,3 @@
-import get from "lodash/get";
 import chunk from "lodash/chunk";
 import flatten from "lodash/flatten";
 import formatCards from "./formatCards";
@@ -24,7 +23,7 @@ const getList: GetList = async (identifiers) => {
   );
   const responses = await Promise.all(calls);
 
-  const rawCards = responses.map((response) => get(response, "data.data"), []);
+  const rawCards = responses.map((response) => response.data.data.data);
   const flat = flatten(rawCards) as RawCard[];
 
   return formatCards(flat);

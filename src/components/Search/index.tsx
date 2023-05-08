@@ -1,8 +1,6 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import search from "@api/search";
-import useFormat from "@hooks/useFormat";
-import { OATHBREAKER, oathbreakerBanlist } from "@constants";
 import useQueryConstraints from "./useQueryConstraints";
 
 type SearchProps = {
@@ -21,7 +19,6 @@ const Search: React.FC<SearchProps> = ({
   placeholder,
 }) => {
   const [value, setValue] = useState("");
-  const { format } = useFormat();
   const updateValue = useCallback((event) => {
     setValue(event.target.value);
   }, []);
@@ -31,14 +28,9 @@ const Search: React.FC<SearchProps> = ({
       if (key !== "Enter") return;
       let searchResults = await search(`${value} ${constraint} ${additionalConstraint}`);
 
-      if (format === OATHBREAKER) {
-        searchResults = searchResults.filter(
-          (card) => !oathbreakerBanlist.includes(card.name),
-        );
-      }
       setResults(searchResults);
     },
-    [additionalConstraint, constraint, format, setResults, value],
+    [additionalConstraint, constraint, setResults, value],
   );
 
   return (

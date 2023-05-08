@@ -104,9 +104,9 @@ const useRefreshCards: UseRefreshCards = () => {
 
   const refreshCards = useCallback(async () => {
     const identifiers = Object.keys(cards).map((name) => {
-      const { id } = cards[name];
+      const card = cards[name];
 
-      return { id };
+      return { name: card.name };
     });
     const newCards = await getList(identifiers);
 
