@@ -50,7 +50,7 @@ const PartnerSearch: React.FC<PartnerSearchProps> = ({ closeModal }) => {
   );
   const placeholder = useMemo(() => get(partner, "name", DEFAULT_PLACEHOLDER), [partner]);
 
-  if (!eligibleTypes.includes(partnerQuery.type)) return null;
+  if (!partnerQuery || !eligibleTypes.includes(partnerQuery.type)) return null;
   const constraint = getPartnerQuery(partnerQuery);
 
   return (
