@@ -53,12 +53,10 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+.yarn/
 
 # dotenv environment variables file
 .env
-
-# next.js build output
-.next
 
 # electron and build folders
 app/pack
