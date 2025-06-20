@@ -4,9 +4,7 @@ import formatCards from "./formatCards";
 import api from ".";
 
 type ApiResponse = {
-  data: {
     data: RawCard[];
-  };
 };
 
 type Identifier = {
@@ -23,7 +21,7 @@ const getList: GetList = async (identifiers) => {
   );
   const responses = await Promise.all(calls);
 
-  const rawCards = responses.map((response) => response.data.data.data);
+  const rawCards = responses.map((response) => response.data.data);
   const flat = flatten(rawCards) as RawCard[];
 
   return formatCards(flat);
