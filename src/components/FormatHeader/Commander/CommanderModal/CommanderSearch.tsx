@@ -19,7 +19,7 @@ const CommanderSearch: React.FC<CommanderSearchProps> = ({ closeModal }) => {
   const wrappedSetCommander = useCallback(
     (card) => {
       const partnerType = get(card, "partnerQuery.type", NO_PARTNER);
-      const toSet = { ...card, attributes: {}, disableMenu: true };
+      const toSet = { ...card };
 
       setCommander(toSet);
       if (partnerType === NO_PARTNER) closeModal();

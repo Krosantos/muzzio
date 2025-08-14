@@ -8,7 +8,7 @@ export interface Attribute {
 }
 
 interface AttributeContext {
-  attributes: Attribute[];
+  attributes: { [attributeName: string]: Attribute };
   addAttribute: (name: string) => void;
   removeAttribute: (name: string) => void;
   loadFromSave: (data: SaveableAttributeContext) => void;
@@ -22,20 +22,20 @@ export type SaveableAttributeContext = Pick<AttributeContext, "attributes">;
 
 export const useAttributes = create<AttributeContext>((set, get) => {
   return {
-    attributes: [],
+    attributes: {},
     addAttribute(name) {
-      let toSet = [...get().attributes];
-      toSet.push({ name, cards: {} });
+      let toSet = { ...get().attributes };
+      toSet[name] = { name, cards: {} };
       set({ attributes: toSet });
     },
     removeAttribute(name) {
-      let toSet = [...get().attributes];
-      toSet = toSet.filter((a) => a.name !== name);
+      let toSet = { ...get().attributes };
+      delete toSet[name];
       set({ attributes: toSet });
     },
     loadFromSave(data) {
       if (!data) {
-        set({ attributes: [] });
+        set({ attributes: {} });
       } else {
         set({ attributes: data.attributes });
       }
@@ -45,8 +45,10 @@ export const useAttributes = create<AttributeContext>((set, get) => {
       const prev = get().attributes;
       const toSet = produce(prev, (draft) => {
         if (!draft[attributeName]) return;
-        draft[attributeName][cardName] = true;
+        draft[attributeName].cards[cardName] = true;
+        console.log("Setting", attributeName, cardName);
       });
+      console.log({ toSet });
       set({ attributes: toSet });
     },
 
@@ -54,7 +56,7 @@ export const useAttributes = create<AttributeContext>((set, get) => {
       const prev = get().attributes;
       const toSet = produce(prev, (draft) => {
         if (!draft[attributeName]) return;
-        delete draft[attributeName][cardName];
+        delete draft[attributeName].cards[cardName];
       });
       set({ attributes: toSet });
     },
@@ -64,7 +66,7 @@ export const useAttributes = create<AttributeContext>((set, get) => {
       const toSet = produce(prev, (draft) => {
         let attributes = Object.keys(draft);
         for (let att of attributes) {
-          delete draft[att][cardName];
+          delete draft[att].cards[cardName];
         }
       });
       set({ attributes: toSet });

@@ -43,7 +43,7 @@ const getSideboardLine: GetSideboardLine = (
 ) => {
   const { isUnlimited = false } = card;
 
-  if (isSingleton && !isUnlimited) return;
+  if (isSingleton) return;
 
   if (isUnlimited) {
     menu.append(generateUnlimitedMenu(openSideboardCountModal));

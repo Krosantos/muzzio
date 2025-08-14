@@ -18,6 +18,7 @@ const Attribute: React.FC<AttributeProps> = ({ attribute }) => {
     const cardNames = Object.keys(attribute.cards);
     return cardNames.map((name) => cardData[name]).filter((c) => !!c);
   }, [attribute.cards, cardData]);
+
   const inDeckString = useInDeckString(attribute);
   const { openMenu, sortedCards } = useSorting(cardsToShow);
 

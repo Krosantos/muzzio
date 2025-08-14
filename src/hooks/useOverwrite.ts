@@ -17,6 +17,7 @@ const useOverwrite: UseOverwrite = () => {
 
   const overwrite = useCallback(
     (saveData: SaveData) => {
+      console.log({ saveData });
       loadCardData(saveData.cards);
       loadCommanderData(saveData.commanderData);
       loadOathbreakerData(saveData.oathbreakerData);

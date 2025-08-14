@@ -17,6 +17,7 @@ import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useCommander } from "@contexts/Commander";
 import { useFormat } from "@contexts/Format";
 import { useCards } from "@contexts/Card";
+import { sum, values } from "lodash";
 
 const DEFAULT_COUNT = 60;
 const formatCounts = {
@@ -62,7 +63,7 @@ const SingletonCount: React.FC = () => {
   const commandZoneCount = useCommandZoneCards(format);
 
   const OUT_OF_X = useMemo(() => `/${formatCounts[format] || DEFAULT_COUNT}`, [format]);
-  const count = Object.keys(cardsInDeck).length + commandZoneCount;
+  const count = commandZoneCount + sum(values(cardsInDeck));
 
   const cmc = getAverageCmc(Object.keys(cardsInDeck), cardData).toPrecision(3);
 

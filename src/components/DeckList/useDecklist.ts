@@ -1,7 +1,5 @@
 import { useMemo } from "react";
-import isEmpty from "lodash/isEmpty";
 import sortBy from "lodash/sortBy";
-import { OATHBREAKER, COMMANDER } from "@constants";
 import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useCommander } from "@contexts/Commander";
 import { useFormat } from "@contexts/Format";
@@ -20,30 +18,16 @@ const sortCards: SortCards = (cards) => {
   return byNotBasicLand;
 };
 
-type AppendCards = (sortedCards: Card[], format: string) => Card[];
-
-const appendCards: AppendCards = (sortedCards, format) => {
-  const cards = [...sortedCards];
-
-  if (format === COMMANDER) {
-    const { commander, partner } = useCommander.getState();
-    if (!isEmpty(commander)) cards.push(commander);
-    if (!isEmpty(partner)) cards.push(partner);
-  }
-  if (format === OATHBREAKER) {
-    const { oathbreaker, signatureSpell } = useOathbreaker.getState();
-    if (!isEmpty(oathbreaker)) cards.push(oathbreaker);
-    if (!isEmpty(signatureSpell)) cards.push(signatureSpell);
-  }
-
-  return cards;
-};
-
 type UseBoard = () => Card[];
 const useMaindeck: UseBoard = () => {
   const cardsInDeck = useCards((s) => s.cardsInDeck);
   const cardData = useCards((s) => s.cardData);
   const format = useFormat((s) => s.format);
+
+  const commander = useCommander((s) => s.commander);
+  const partner = useCommander((s) => s.partner);
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
 
   const unsortedCards = useMemo(() => {
     return Object.keys(cardsInDeck)
@@ -51,8 +35,22 @@ const useMaindeck: UseBoard = () => {
       .filter((c) => !!c);
   }, [cardData, cardsInDeck]);
 
-  const sortedCards = useMemo(() => sortCards(unsortedCards), [unsortedCards]);
-  return useMemo(() => appendCards(sortedCards, format), [format, sortedCards]);
+  return useMemo(() => {
+    const sorted = sortCards(unsortedCards);
+
+    switch (format) {
+      case "COMMANDER":
+      case "BRAWL":
+        !!commander && sorted.push(commander);
+        !!partner && sorted.push(partner);
+        break;
+      case "OATHBREAKER":
+        !!oathbreaker && sorted.push(oathbreaker);
+        !!signatureSpell && sorted.push(signatureSpell);
+        break;
+    }
+    return sorted;
+  }, [commander, format, oathbreaker, partner, signatureSpell, unsortedCards]);
 };
 
 const useSideboard: UseBoard = () => {

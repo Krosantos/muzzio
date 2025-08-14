@@ -7,34 +7,54 @@ import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useAttributes } from "@contexts/Attributes";
 import { useCards } from "@contexts/Card";
 
-type UseAllContexts = () => SaveData;
-const useAllContexts: UseAllContexts = () =>
-  useMemo(() => {
+const useSaveData = () => {
+  const attributes = useAttributes((s) => s.attributes);
+  const cardData = useCards((s) => s.cardData);
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const cardsInSideboard = useCards((s) => s.cardsInSideboard);
+  const format = useFormat((s) => s.format);
+  const commander = useCommander((s) => s.commander);
+  const partner = useCommander((s) => s.partner);
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
+
+  return useMemo<SaveData>(() => {
     return {
       attributes: {
-        attributes: useAttributes.getState().attributes,
+        attributes,
       },
       cards: {
-        cardData: useCards.getState().cardData,
-        cardsInDeck: useCards.getState().cardsInDeck,
-        cardsInSideboard: useCards.getState().cardsInSideboard,
+        cardData,
+        cardsInDeck,
+        cardsInSideboard,
       },
-      format: useFormat.getState().format,
+      format,
       commanderData: {
-        commander: useCommander.getState().commander,
-        partner: useCommander.getState().partner,
+        commander,
+        partner,
       },
       oathbreakerData: {
-        oathbreaker: useOathbreaker.getState().oathbreaker,
-        signatureSpell: useOathbreaker.getState().signatureSpell,
+        oathbreaker,
+        signatureSpell,
       },
     };
-  }, []);
+  }, [
+    attributes,
+    cardData,
+    cardsInDeck,
+    cardsInSideboard,
+    commander,
+    format,
+    oathbreaker,
+    partner,
+    signatureSpell,
+  ]);
+};
 
 type UseSave = () => (filePath: string) => void;
 
 const useSave: UseSave = () => {
-  const allData = useAllContexts();
+  const allData = useSaveData();
 
   const save = useCallback(
     (filePath) => {

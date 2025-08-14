@@ -32,8 +32,6 @@ export const useCards = create<CardsContext>((set, get) => {
       const prev = get();
       const toSet = produce(prev, (draft) => {
         draft.cardData[card.name] = card;
-        draft.cardsInDeck[card.name] = 0;
-        draft.cardsInSideboard[card.name] = 0;
       });
       set(toSet);
     },
@@ -50,14 +48,22 @@ export const useCards = create<CardsContext>((set, get) => {
     setCount(name, count) {
       const prev = get();
       const toSet = produce(prev, (draft) => {
-        draft.cardsInDeck[name] = count;
+        if (count === 0) {
+          delete draft.cardsInDeck[name];
+        } else {
+          draft.cardsInDeck[name] = count;
+        }
       });
       set(toSet);
     },
     setSideboardCount(name, count) {
       const prev = get();
       const toSet = produce(prev, (draft) => {
-        draft.cardsInSideboard[name] = count;
+        if (count === 0) {
+          delete draft.cardsInSideboard[name];
+        } else {
+          draft.cardsInSideboard[name] = count;
+        }
       });
       set(toSet);
     },

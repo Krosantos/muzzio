@@ -10,6 +10,7 @@ import { useCommander } from "@contexts/Commander";
 import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useFormat } from "@contexts/Format";
 import { useAttributes } from "@contexts/Attributes";
+import { useCards } from "@contexts/Card";
 
 const { app } = require("electron").remote;
 
@@ -36,11 +37,13 @@ const useAutoLoad: UseAutoLoad = () => {
   const loadOathbreaker = useOathbreaker((s) => s.loadFromSave);
   const loadFormat = useFormat((s) => s.loadFromSave);
   const loadAttributes = useAttributes((s) => s.loadFromSave);
+  const loadCards = useCards((s) => s.loadFromSave);
 
   loadCommander(loadedData.commanderData);
   loadOathbreaker(loadedData.oathbreakerData);
   loadFormat(loadedData.format);
   loadAttributes(loadedData.attributes);
+  loadCards(loadedData.cards);
 
   return loadedData;
 };

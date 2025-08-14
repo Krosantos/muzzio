@@ -11,7 +11,7 @@ const AddButton: React.FC = () => {
   }, []);
   const onEnter = useCallback(
     async ({ key }) => {
-      if (key !== "Enter" || attributes.some((a) => a.name === toAdd) || !toAdd) return;
+      if (key !== "Enter" || !!attributes[toAdd] || !toAdd) return;
       addAttribute(toAdd);
       setToAdd("");
     },

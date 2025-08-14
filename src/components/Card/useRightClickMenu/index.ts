@@ -13,9 +13,10 @@ const { Menu } = require("electron").remote;
 type MenuArgs = {
   addCardToAttribute: (cardName: string, attributeName: string) => void;
   removeCardFromAttribute: (cardName: string, attributeName: string) => void;
-  attributes: Attribute[];
+  attributes: { [attributeName: string]: Attribute };
   card: Card;
   cardExists: boolean;
+  currentCount: number;
   isSingleton: boolean;
   openCardCountModal: () => void;
   openSideboardCountModal: () => void;
@@ -30,6 +31,7 @@ const generateMenu: GenerateMenu = ({
   attributes,
   card,
   cardExists,
+  currentCount,
   isSingleton,
   openCardCountModal,
   openSideboardCountModal,
@@ -39,13 +41,14 @@ const generateMenu: GenerateMenu = ({
 }) => {
   const menu = new Menu();
 
-  getDeckLine(isSingleton, card, menu, setCount);
+  getDeckLine(isSingleton, currentCount > 0, card, menu, setCount);
   getCountLine(isSingleton, card, menu, setCount, openCardCountModal);
   getSideboardLine(isSingleton, card, menu, setSideboardCount, openSideboardCountModal);
   getAttributesSection(
     card,
     menu,
     attributes,
+    cardExists,
     addCardToAttribute,
     removeCardFromAttribute,
   );
@@ -70,6 +73,7 @@ const useRightClickMenu: UseRightClickMenu = (
   const setCount = useCards((s) => s.setCount);
   const setSideboardCount = useCards((s) => s.setSideboardCount);
   const cardExists = useCards((s) => !!s.cardData[card.name]);
+  const currentCount = useCards((s) => s.cardsInDeck[card.name]) ?? 0;
 
   const isSingleton = useFormat((s) => s.isSingleton);
   const openMenu = useCallback(
@@ -80,6 +84,7 @@ const useRightClickMenu: UseRightClickMenu = (
         attributes,
         card,
         cardExists,
+        currentCount,
         isSingleton,
         openCardCountModal,
         openSideboardCountModal,
@@ -92,6 +97,7 @@ const useRightClickMenu: UseRightClickMenu = (
       attributes,
       card,
       cardExists,
+      currentCount,
       isSingleton,
       openCardCountModal,
       openSideboardCountModal,

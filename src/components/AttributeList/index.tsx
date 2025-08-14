@@ -3,13 +3,14 @@ import styled from "styled-components";
 import Attribute from "./Attribute";
 import AddButton from "./AddButton";
 import { useAttributes } from "@contexts/Attributes";
+import { values } from "lodash";
 
 const AttributeList: React.FC = () => {
   const attributes = useAttributes((s) => s.attributes);
   console.log({ attributes });
   return (
     <Wrapper>
-      {attributes?.map((attribute) => (
+      {values(attributes)?.map((attribute) => (
         <Attribute attribute={attribute} key={attribute.name} />
       ))}
       <AddButton />

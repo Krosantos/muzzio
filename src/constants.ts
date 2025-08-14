@@ -23,6 +23,7 @@ const BRAWL = "BRAWL";
 
 const singletonFormats = {
   [COMMANDER]: true,
+  [BRAWL]: true,
   [OATHBREAKER]: true,
 };
 
