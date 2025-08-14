@@ -2,6 +2,7 @@ import { Reducer, useCallback, useMemo, useReducer } from "react";
 import shuffle from "lodash/shuffle";
 import { HAND_SIZE } from "@constants";
 import { useCards } from "@contexts/Card";
+import { times } from "lodash";
 
 const ADD_CARD = "addcard";
 const NEW_HAND = "newhand";
@@ -28,9 +29,8 @@ const spreadCardsInDeck: SpreadCardsInHand = (cardsInDeck, cardData) => {
     const count = cardsInDeck[name];
     const card = cardData[name];
     if (!card) continue;
-    for (let x = 0; x++; x < count) deck.push({ imageUrl: card.imageUrl, name });
+    times(count, () => deck.push({ imageUrl: card.imageUrl, name }));
   }
-
   const shuffled = shuffle(deck);
 
   for (let x = 0; x < HAND_SIZE; x += 1) {

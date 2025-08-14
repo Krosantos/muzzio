@@ -17,7 +17,6 @@ const formatCard: FormatCard = (card) => {
       cmc,
       colors,
       cost,
-      count: 0,
       id,
       identity,
       imageUrl,
@@ -26,7 +25,6 @@ const formatCard: FormatCard = (card) => {
       name,
       partnerQuery,
       reverseUrl,
-      sideboardCount: 0,
       type,
     };
   } catch (e) {
