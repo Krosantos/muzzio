@@ -71,7 +71,7 @@ const useLoadDeck: UseLoadDeck = () => {
 type UseNewDeck = () => () => void;
 const useNewDeck: UseNewDeck = () => {
   const overwrite = useOverwrite();
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const { setSettings } = useContext(SettingsContext);
   const newDeck = useCallback(() => {
     setWindowTitle();

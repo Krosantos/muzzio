@@ -9,7 +9,9 @@ type RemoveButtonProps = {
 };
 
 const RemoveButton: React.FC<RemoveButtonProps> = ({ attribute }) => {
-  const { removeAttribute } = useAttributes();
+  const { removeAttribute } = useAttributes(({ removeAttribute }) => ({
+    removeAttribute,
+  }));
   const handleClick = useCallback(
     (event) => {
       event.stopPropagation();

@@ -29,7 +29,7 @@ const getIdentityFromCards: GetIdentityFromCards = (cardsInDeck = []) => {
 };
 
 const DefaultFormat: React.FC = () => {
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const formattedFormat = useMemo(() => capitalize(format), [format]);
   const { cardsInDeck } = useCards();
   const deckIdentity = useMemo(() => getIdentityFromCards(cardsInDeck()), [cardsInDeck]);

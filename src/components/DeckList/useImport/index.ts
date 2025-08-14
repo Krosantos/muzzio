@@ -8,7 +8,7 @@ const { clipboard } = require("electron").remote;
 type UseImport = () => () => Promise<void>;
 const useImport: UseImport = () => {
   const { addCard, clearDeck } = useCards();
-  const { isSingleton } = useFormat();
+  const isSingleton = useFormat((s) => s.isSingleton);
   const importFile = useCallback(async () => {
     const raw = clipboard.readText();
 

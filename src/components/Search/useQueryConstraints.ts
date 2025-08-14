@@ -41,7 +41,7 @@ const hasIdentity: HasIdentity = (format, commander, oathbreaker) => {
 
 type UseQueryConstraints = (bypassIdentity: boolean) => string;
 const useQueryConstraints: UseQueryConstraints = (bypassIdentity) => {
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const { commander, colorIdentity: commanderIdentity } = useCommander();
   const { oathbreaker, colorIdentity: oathbreakerIdentity } = useOathbreaker();
   const query = useMemo(() => {

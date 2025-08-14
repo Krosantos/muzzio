@@ -28,7 +28,7 @@ const componentMap = {
 };
 
 const FormatHeader: React.FC = () => {
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const Component = componentMap[format] || Default;
 
   return <Component />;

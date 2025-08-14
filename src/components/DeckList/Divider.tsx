@@ -7,7 +7,7 @@ type DividerProps = {
   label: string;
 };
 const Divider: React.FC<DividerProps> = ({ label }) => {
-  const { isSingleton } = useFormat();
+  const isSingleton = useFormat((s) => s.isSingleton);
   const { cardsInSideboard } = useCards();
   const shouldHideDivider = useMemo(() => {
     if (isSingleton) return true;

@@ -52,7 +52,7 @@ const appendCards: AppendCards = (sortedCards, format) => {
 type UseBoard = () => Card[];
 const useMaindeck: UseBoard = () => {
   const { cardsInDeck } = useCards();
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const sortedCards = useMemo(() => sortCards(cardsInDeck()), [cardsInDeck]);
   const mainCounted = getMaindeckCount(sortedCards);
 

@@ -30,7 +30,7 @@ const Card: React.FC<CardProps> = ({
   useSideboardCount,
 }) => {
   const card = useCard(cardName, rawCard);
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const { id, cost, imageUrl, reverseUrl } = card;
 
   const nameAndCount = useNameAndCount(card, useMaindeckCount, useSideboardCount);

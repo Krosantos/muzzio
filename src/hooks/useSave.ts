@@ -1,32 +1,30 @@
 import fs from "fs";
-import { useContext, useCallback } from "react";
+import { useContext, useCallback, useMemo } from "react";
 import { CardContext } from "@contexts/Card";
 import type SaveData from "./SaveData";
 import { useFormat } from "@contexts/Format";
-import { SaveableCommanderContext, useCommander } from "@contexts/Commander";
-import { SaveableOathbreakerContext, useOathbreaker } from "@contexts/Oathbreaker";
+import { useCommander } from "@contexts/Commander";
+import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useAttributes } from "@contexts/Attributes";
 
 type UseAllContexts = () => SaveData;
 const useAllContexts: UseAllContexts = () => {
   const { cards } = useContext(CardContext);
-
-  const attributes: string[] = useAttributes(({ attributes }) => attributes);
-  const format: Format = useFormat(({ format }) => format);
-  const commanderData: SaveableCommanderContext = useCommander(
-    ({ commander, partner }) => ({ commander, partner }),
-  );
-  const oathbreakerData: SaveableOathbreakerContext = useOathbreaker(
-    ({ oathbreaker, signatureSpell }) => ({ oathbreaker, signatureSpell }),
-  );
-
-  return {
-    attributes,
-    cards,
-    format,
-    commanderData,
-    oathbreakerData,
-  };
+  return useMemo(() => {
+    return {
+      attributes: useAttributes.getState().attributes,
+      cards,
+      format: useFormat.getState().format,
+      commanderData: {
+        commander: useCommander.getState().commander,
+        partner: useCommander.getState().partner,
+      },
+      oathbreakerData: {
+        oathbreaker: useOathbreaker.getState().oathbreaker,
+        signatureSpell: useOathbreaker.getState().signatureSpell,
+      },
+    };
+  }, [cards]);
 };
 
 type UseSave = () => (filePath: string) => void;

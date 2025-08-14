@@ -57,7 +57,7 @@ const useRightClickMenu: UseRightClickMenu = (
   openCardCountModal,
   openSideboardCountModal,
 ) => {
-  const { attributes } = useAttributes();
+  const { attributes } = useAttributes(({ attributes }) => ({ attributes }));
   const {
     addAttribute,
     cardExists,
@@ -66,7 +66,7 @@ const useRightClickMenu: UseRightClickMenu = (
     setCount,
     setSideboardCount,
   } = useCards();
-  const { isSingleton } = useFormat();
+  const isSingleton = useFormat((s) => s.isSingleton);
   const openMenu = useCallback(
     () =>
       generateMenu({

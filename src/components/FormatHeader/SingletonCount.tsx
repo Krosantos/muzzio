@@ -69,7 +69,7 @@ const calculateCardCount: CalculateCardCount = (
 
 const SingletonCount: React.FC = () => {
   const { cardsInDeck } = useCards();
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const commandZoneCount = useCommandZoneCards(format);
   const OUT_OF_X = useMemo(() => `/${formatCounts[format] || DEFAULT_COUNT}`, [format]);
   const count = useMemo(

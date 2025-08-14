@@ -13,13 +13,13 @@ const Layout: React.FC = () => {
   return (
     <>
       <Header />
-      <Slider label="Deck" left>
+      {/* <Slider label="Deck" left>
         <DeckList />
-      </Slider>
-      <MainPanel />
-      <Slider label="Search">
+      </Slider> */}
+      {/* <MainPanel /> */}
+      {/* <Slider label="Search">
         <AddCards />
-      </Slider>
+      </Slider> */}
     </>
   );
 };

@@ -38,7 +38,7 @@ const getNonSingletonString: GetNonSingletonString = (cards) => {
 
 type UseInDeckString = (attribute: string) => string;
 const useInDeckString: UseInDeckString = (attribute) => {
-  const { isSingleton } = useFormat();
+  const isSingleton = useFormat((s) => s.isSingleton);
   const { cards, cardsByAttribute } = useCards();
   const inDeckString = useMemo(() => {
     if (attribute === ALL_CARDS) return getAllCardsString(isSingleton, cards);
