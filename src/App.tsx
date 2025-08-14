@@ -9,6 +9,7 @@ import "./index.css";
 
 const App: React.FC = () => {
   const { cards } = useAutoLoad();
+
   return (
     <CardProvider initialValue={cards}>
       <SettingsProvider>

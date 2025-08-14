@@ -5,8 +5,7 @@ import AddButton from "./AddButton";
 import { useAttributes } from "@contexts/Attributes";
 
 const AttributeList: React.FC = () => {
-  const { attributes } = useAttributes(({ attributes }) => ({ attributes }));
-
+  const attributes = useAttributes((s) => s.attributes);
   return (
     <Wrapper>
       {attributes.map((attribute) => (

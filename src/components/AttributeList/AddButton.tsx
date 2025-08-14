@@ -3,10 +3,8 @@ import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 
 const AddButton: React.FC = () => {
-  const { attributes, addAttribute } = useAttributes(({ attributes, addAttribute }) => ({
-    attributes,
-    addAttribute,
-  }));
+  const attributes = useAttributes((s) => s.attributes);
+  const addAttribute = useAttributes((s) => s.addAttribute);
   const [toAdd, setToAdd] = useState("");
   const updateValue = useCallback((event) => {
     setToAdd(event.target.value);
