@@ -28,7 +28,10 @@ const LEGACY = "LEGACY";
 const PAUPER = "PAUPER";
 const BRAWL = "BRAWL";
 
-const singletonFormats = [COMMANDER, OATHBREAKER];
+const singletonFormats = {
+  [COMMANDER]: true,
+  [OATHBREAKER]: true,
+};
 
 const formats = {
   BRAWL,
