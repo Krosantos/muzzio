@@ -1,13 +1,14 @@
 import { useCallback } from "react";
-import useCards from "@hooks/useCards";
 import lookUpCards from "./lookUpCards";
 import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
 
 const { clipboard } = require("electron").remote;
 
 type UseImport = () => () => Promise<void>;
 const useImport: UseImport = () => {
-  const { addCard, clearDeck } = useCards();
+  const addCard = useCards((s) => s.addCard);
+  const clearDeck = useCards((s) => s.clearDeck);
   const isSingleton = useFormat((s) => s.isSingleton);
   const importFile = useCallback(async () => {
     const raw = clipboard.readText();

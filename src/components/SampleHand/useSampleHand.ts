@@ -1,7 +1,7 @@
 import { Reducer, useCallback, useMemo, useReducer } from "react";
 import shuffle from "lodash/shuffle";
-import useCards from "@hooks/useCards";
 import { HAND_SIZE } from "@constants";
+import { useCards } from "@contexts/Card";
 
 const ADD_CARD = "addcard";
 const NEW_HAND = "newhand";
@@ -16,16 +16,21 @@ type ShuffleState = {
   cardsInHand: DisplayCard[];
 };
 
-type SpreadCardsInHand = (cardsInDeck: Card[]) => ShuffleState;
-const spreadCardsInDeck: SpreadCardsInHand = (cardsInDeck) => {
+type SpreadCardsInHand = (
+  cardsInDeck: { [cardName: string]: number },
+  cardData: { [cardName: string]: Card },
+) => ShuffleState;
+const spreadCardsInDeck: SpreadCardsInHand = (cardsInDeck, cardData) => {
   const deck: DisplayCard[] = [];
   const hand: DisplayCard[] = [];
+  const cardNames = Object.keys(cardsInDeck);
+  for (let name of cardNames) {
+    const count = cardsInDeck[name];
+    const card = cardData[name];
+    if (!card) continue;
+    for (let x = 0; x++; x < count) deck.push({ imageUrl: card.imageUrl, name });
+  }
 
-  cardsInDeck.forEach(({ count, imageUrl, name }) => {
-    const countInDeck = count || 1;
-
-    for (let x = 0; x < countInDeck; x += 1) deck.push({ imageUrl, name });
-  });
   const shuffled = shuffle(deck);
 
   for (let x = 0; x < HAND_SIZE; x += 1) {
@@ -42,8 +47,12 @@ const spreadCardsInDeck: SpreadCardsInHand = (cardsInDeck) => {
 
 type UseShuffledDeck = () => ShuffleState;
 const useShuffledDeck: UseShuffledDeck = () => {
-  const { cardsInDeck } = useCards();
-  const shuffledCards = useMemo(() => spreadCardsInDeck(cardsInDeck()), [cardsInDeck]);
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const cardData = useCards((s) => s.cardData);
+  const shuffledCards = useMemo(
+    () => spreadCardsInDeck(cardsInDeck, cardData),
+    [cardData, cardsInDeck],
+  );
 
   return shuffledCards;
 };

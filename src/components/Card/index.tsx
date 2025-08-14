@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
 import ManaCost from "@components/ManaCost";
-import useCards from "@hooks/useCards";
 import { useFormat, type Format } from "@contexts/Format";
 import useHoverArt from "./useHoverArt";
 import CardCountModal from "./CardCountModal";
@@ -11,6 +10,7 @@ import useCard from "./useCard";
 import HoverArt from "./HoverArt";
 import getCardColor from "./getCardColor";
 import useNameAndCount from "./useNameAndCount";
+import { useCards } from "@contexts/Card";
 
 type CardProps = {
   callback?: Function;
@@ -34,7 +34,8 @@ const Card: React.FC<CardProps> = ({
   const { id, cost, imageUrl, reverseUrl } = card;
 
   const nameAndCount = useNameAndCount(card, useMaindeckCount, useSideboardCount);
-  const { setCount, setSideboardCount } = useCards();
+  const setCount = useCards((s) => s.setCount);
+  const setSideboardCount = useCards((s) => s.setSideboardCount);
 
   const [isCardCountModalOpen, setCardCountModalOpen] = useState(false);
   const closeCardCountModal = useCallback(() => setCardCountModalOpen(false), []);

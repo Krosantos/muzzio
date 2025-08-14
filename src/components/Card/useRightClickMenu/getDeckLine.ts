@@ -1,3 +1,4 @@
+import { useCards } from "@contexts/Card";
 import { Menu } from "electron";
 
 const { MenuItem } = require("electron").remote;
@@ -10,7 +11,7 @@ type GetDeckline = (
 ) => void;
 const getDeckLine: GetDeckline = (isSingleton, card, menu, setCount) => {
   if (!isSingleton) return;
-  const isInDeck = card.count >= 1;
+  const isInDeck = !!useCards.getState().cardsInDeck[card.name];
 
   if (isInDeck) {
     menu.append(

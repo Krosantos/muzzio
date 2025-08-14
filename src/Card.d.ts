@@ -15,10 +15,8 @@ declare type Card = {
     type: "partner" | "specific" | "background" | "none" | "friends";
     query?: string;
   };
-  count?: number;
   isUnlimited?: boolean;
   legalFormats?: { [key in Format]: boolean };
-  sideboardCount?: number;
   attributes?: { [attribute: string]: boolean };
   cmc?: number;
   colors?: string[];

@@ -40,7 +40,7 @@ const useAutoLoad: UseAutoLoad = () => {
   loadCommander(loadedData.commanderData);
   loadOathbreaker(loadedData.oathbreakerData);
   loadFormat(loadedData.format);
-  loadAttributes({ attributes: loadedData.attributes });
+  loadAttributes(loadedData.attributes);
 
   return loadedData;
 };

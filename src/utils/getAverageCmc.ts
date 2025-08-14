@@ -1,8 +1,11 @@
-import values from "lodash/values";
 import get from "lodash/get";
 
-const getAverageCmc = (cardObject:Card[]):number => {
-  const cards = values(cardObject);
+const getAverageCmc = (
+  cardNames: string[],
+  cardData: { [cardName: string]: Card },
+): number => {
+  const cards = cardNames.map((name) => cardData[name]).filter((c) => !!c);
+
   const nonLand = cards.filter((card) => {
     const type = get(card, "type");
 

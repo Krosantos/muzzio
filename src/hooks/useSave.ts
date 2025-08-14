@@ -1,19 +1,24 @@
 import fs from "fs";
-import { useContext, useCallback, useMemo } from "react";
-import { CardContext } from "@contexts/Card";
+import { useCallback, useMemo } from "react";
 import type SaveData from "./SaveData";
 import { useFormat } from "@contexts/Format";
 import { useCommander } from "@contexts/Commander";
 import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useAttributes } from "@contexts/Attributes";
+import { useCards } from "@contexts/Card";
 
 type UseAllContexts = () => SaveData;
-const useAllContexts: UseAllContexts = () => {
-  const { cards } = useContext(CardContext);
-  return useMemo(() => {
+const useAllContexts: UseAllContexts = () =>
+  useMemo(() => {
     return {
-      attributes: useAttributes.getState().attributes,
-      cards,
+      attributes: {
+        attributes: useAttributes.getState().attributes,
+      },
+      cards: {
+        cardData: useCards.getState().cardData,
+        cardsInDeck: useCards.getState().cardsInDeck,
+        cardsInSideboard: useCards.getState().cardsInSideboard,
+      },
       format: useFormat.getState().format,
       commanderData: {
         commander: useCommander.getState().commander,
@@ -24,8 +29,7 @@ const useAllContexts: UseAllContexts = () => {
         signatureSpell: useOathbreaker.getState().signatureSpell,
       },
     };
-  }, [cards]);
-};
+  }, []);
 
 type UseSave = () => (filePath: string) => void;
 

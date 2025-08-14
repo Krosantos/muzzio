@@ -1,3 +1,4 @@
+import { useCards } from "@contexts/Card";
 import { useFormat } from "@contexts/Format";
 import { useMemo } from "react";
 
@@ -25,8 +26,10 @@ type UseNameAndCount = (
 ) => string;
 
 const useNameAndCount: UseNameAndCount = (card, useMaindeckCount, useSideboardCount) => {
-  const { count, name, sideboardCount } = card;
+  const { name } = card;
   const isSingleton = useFormat((s) => s.isSingleton);
+  const count = useCards((s) => s.cardsInDeck[name]) ?? 0;
+  const sideboardCount = useCards((s) => s.cardsInSideboard[name]) ?? 0;
 
   const nameAndCount = useMemo(() => {
     if (isSingleton) return getSingletonCount(count, name);

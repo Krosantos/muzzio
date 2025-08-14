@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import isEmpty from "lodash/isEmpty";
 import sortBy from "lodash/sortBy";
-import useCards from "@hooks/useCards";
 import { OATHBREAKER, COMMANDER } from "@constants";
 import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useCommander } from "@contexts/Commander";
 import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
 
 type SortCards = (cards: Card[]) => Card[];
 const sortCards: SortCards = (cards) => {
@@ -19,16 +19,6 @@ const sortCards: SortCards = (cards) => {
 
   return byNotBasicLand;
 };
-
-type GetCardCount = (cards: Card[]) => Card[];
-const getMaindeckCount: GetCardCount = (cards) =>
-  cards.map((card) => ({ ...card, sideboardCount: 0 }));
-const getSideboardCount: GetCardCount = (cards) =>
-  cards.map((card) => {
-    const { sideboardCount = 0 } = card;
-
-    return { ...card, count: sideboardCount, sideboardCount: 0 };
-  });
 
 type AppendCards = (sortedCards: Card[], format: string) => Card[];
 
@@ -51,23 +41,32 @@ const appendCards: AppendCards = (sortedCards, format) => {
 
 type UseBoard = () => Card[];
 const useMaindeck: UseBoard = () => {
-  const { cardsInDeck } = useCards();
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const cardData = useCards((s) => s.cardData);
   const format = useFormat((s) => s.format);
-  const sortedCards = useMemo(() => sortCards(cardsInDeck()), [cardsInDeck]);
-  const mainCounted = getMaindeckCount(sortedCards);
 
-  return useMemo(() => appendCards(mainCounted, format), [format, mainCounted]);
+  const unsortedCards = useMemo(() => {
+    return Object.keys(cardsInDeck)
+      .map((name) => cardData[name])
+      .filter((c) => !!c);
+  }, [cardData, cardsInDeck]);
+
+  const sortedCards = useMemo(() => sortCards(unsortedCards), [unsortedCards]);
+  return useMemo(() => appendCards(sortedCards, format), [format, sortedCards]);
 };
 
 const useSideboard: UseBoard = () => {
-  const { cardsInSideboard } = useCards();
-  const countedAndSorted = useMemo(() => {
-    const sorted = sortCards(cardsInSideboard());
+  const cardsInSideboard = useCards((s) => s.cardsInSideboard);
+  const cardData = useCards((s) => s.cardData);
 
-    return getSideboardCount(sorted);
-  }, [cardsInSideboard]);
+  const unsortedCards = useMemo(() => {
+    return Object.keys(cardsInSideboard)
+      .map((name) => cardData[name])
+      .filter((c) => !!c);
+  }, [cardData, cardsInSideboard]);
 
-  return countedAndSorted;
+  const sortedCards = sortCards(unsortedCards);
+  return sortedCards;
 };
 
 type UseDecklist = () => {

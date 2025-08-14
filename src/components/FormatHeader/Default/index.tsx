@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
-import useCards from "@hooks/useCards";
 import ManaCost from "@components/ManaCost";
 import CardCount from "./CardCount";
 import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
 
 type ConvertIdentityToCost = (identity: string[]) => string;
 const convertIdentityToCost: ConvertIdentityToCost = (identity) => {
@@ -12,17 +12,29 @@ const convertIdentityToCost: ConvertIdentityToCost = (identity) => {
   return `{${identity.join("}{")}}`;
 };
 
-type GetIdentityFromCards = (cardsInDeck: Card[]) => string;
-const getIdentityFromCards: GetIdentityFromCards = (cardsInDeck = []) => {
+type GetIdentityFromCards = (
+  cardsInDeck: {
+    [cardName: string]: number;
+  },
+  cardsInSideboard: { [cardName: string]: number },
+  cardData: { [cardName: string]: Card },
+) => string;
+const getIdentityFromCards: GetIdentityFromCards = (
+  cardsInDeck,
+  cardsInSideboard,
+  cardData,
+) => {
   const identityMap: { [color: string]: boolean } = {};
 
-  cardsInDeck.forEach((card) => {
-    const { identity = [] } = card;
+  const deckNames = Object.keys(cardsInDeck);
+  const boardNames = Object.keys(cardsInSideboard);
+  for (let name of [...deckNames, ...boardNames]) {
+    const card = cardData[name];
+    if (!card) continue;
 
-    identity.forEach((color) => {
-      identityMap[color] = true;
-    });
-  });
+    for (let c of card.identity) identityMap[c] = true;
+  }
+
   const identity = Object.keys(identityMap);
 
   return convertIdentityToCost(identity);
@@ -31,8 +43,13 @@ const getIdentityFromCards: GetIdentityFromCards = (cardsInDeck = []) => {
 const DefaultFormat: React.FC = () => {
   const format = useFormat((s) => s.format);
   const formattedFormat = useMemo(() => capitalize(format), [format]);
-  const { cardsInDeck } = useCards();
-  const deckIdentity = useMemo(() => getIdentityFromCards(cardsInDeck()), [cardsInDeck]);
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const cardsInSideboard = useCards((s) => s.cardsInSideboard);
+  const cardData = useCards((s) => s.cardData);
+  const deckIdentity = useMemo(
+    () => getIdentityFromCards(cardsInDeck, cardsInSideboard, cardData),
+    [],
+  );
 
   return (
     <Container>

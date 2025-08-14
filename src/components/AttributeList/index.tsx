@@ -9,7 +9,7 @@ const AttributeList: React.FC = () => {
   return (
     <Wrapper>
       {attributes.map((attribute) => (
-        <Attribute attribute={attribute} key={attribute} />
+        <Attribute attribute={attribute} key={attribute.name} />
       ))}
       <AddButton />
     </Wrapper>

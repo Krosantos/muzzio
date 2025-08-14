@@ -12,6 +12,7 @@ interface CardsContext {
   setCount: (name: string, count: number) => void;
   setSideboardCount: (name: string, count: number) => void;
 
+  loadFromSave: (data: SaveableCardContext) => void;
   clearDeck: () => void;
 }
 
@@ -59,6 +60,14 @@ export const useCards = create<CardsContext>((set, get) => {
         draft.cardsInSideboard[name] = count;
       });
       set(toSet);
+    },
+
+    loadFromSave(data) {
+      set({
+        cardData: data.cardData,
+        cardsInDeck: data.cardsInDeck,
+        cardsInSideboard: data.cardsInSideboard,
+      });
     },
 
     clearDeck() {

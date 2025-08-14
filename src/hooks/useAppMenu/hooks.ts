@@ -119,14 +119,7 @@ const useRefreshCards: UseRefreshCards = () => {
 
 type UseRemoveCards = () => () => void;
 const useRemoveCards: UseRemoveCards = () => {
-  const { cardsInSideboard, cardsInDeck, setCount, setSideboardCount } = useCards();
-  const removeCards = useCallback(() => {
-    cardsInSideboard().forEach((card) => {
-      setSideboardCount(card, 0);
-    });
-    cardsInDeck().forEach((card) => setCount(card, 0));
-  }, [cardsInDeck, cardsInSideboard, setCount, setSideboardCount]);
-
+  const removeCards = useCards((s) => s.clearDeck);
   return removeCards;
 };
 
