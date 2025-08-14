@@ -27,8 +27,8 @@ const Search: React.FC<SearchProps> = ({
     async ({ key }) => {
       if (key !== "Enter") return;
       let searchResults = await search(`${value} ${constraint} ${additionalConstraint}`);
-
       setResults(searchResults);
+      console.log("Search over");
     },
     [additionalConstraint, constraint, setResults, value],
   );
