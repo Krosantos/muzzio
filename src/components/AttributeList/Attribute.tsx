@@ -1,43 +1,37 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
-import values from "lodash/values";
 import CardList from "@components/CardList";
-import useCards from "@hooks/useCards";
-import { ALL_CARDS } from "@constants";
 import useSorting from "./useSorting";
 import useInDeckString from "./useInDeckString";
 import RemoveButton from "./RemoveButton";
+import { Attribute as AttributeType } from "@contexts/Attributes";
+import { useCards } from "@contexts/Card";
 
 type AttributeProps = {
-  attribute: string;
+  attribute: AttributeType;
 };
 
 const Attribute: React.FC<AttributeProps> = ({ attribute }) => {
-  const { cards, addAttribute, cardsByAttribute } = useCards();
-  const cardsToShow = useMemo(
-    () => (attribute === ALL_CARDS ? values(cards) : cardsByAttribute(attribute)),
-    [attribute, cards, cardsByAttribute],
-  );
-  const inDeckString = useInDeckString(attribute);
-  const callback = useCallback(
-    (card) => {
-      addAttribute(card, attribute);
-    },
-    [addAttribute, attribute],
-  );
+  const cardData = useCards((s) => s.cardData);
+
+  const cardsToShow = useMemo(() => {
+    const cardNames = Object.keys(attribute.cards);
+    return cardNames.map((name) => cardData[name]).filter((c) => !!c);
+  }, [attribute.cards, cardData]);
+  const inDeckString = useInDeckString(attribute.name);
   const { openMenu, sortedCards } = useSorting(cardsToShow);
 
   return (
     <Container>
       <Title>
         <span onContextMenu={openMenu}>
-          {attribute}
+          {attribute.name}
           {inDeckString}
         </span>
-        {attribute !== ALL_CARDS && <RemoveButton attribute={attribute} />}
+        <RemoveButton attribute={attribute.name} />
       </Title>
       <ListWrapper>
-        <CardList callback={callback} cards={sortedCards} />
+        <CardList cards={sortedCards} />
       </ListWrapper>
     </Container>
   );

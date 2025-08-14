@@ -1,6 +1,6 @@
 import get from "lodash/get";
-import { ALL_CARDS } from "@constants";
 import { Menu } from "electron";
+import { Attribute } from "@contexts/Attributes";
 
 const { MenuItem } = require("electron").remote;
 
@@ -8,8 +8,8 @@ type GetAttributeLine = (
   card: Card,
   menu: Menu,
   attribute: string,
-  addAttribute: (addCard: Card, addAttr: string) => void,
-  removeAttribute: (removeCard: Card, removeAttr: string) => void,
+  addAttribute: (cardName: string, attributeName: string) => void,
+  removeAttribute: (cardName: string, attributeName: string) => void,
 ) => void;
 
 const getAttributeLine: GetAttributeLine = (
@@ -19,11 +19,10 @@ const getAttributeLine: GetAttributeLine = (
   addAttribute,
   removeAttribute,
 ) => {
-  if (attribute === ALL_CARDS) return;
   const hasAttribute = get(card, ["attributes", attribute], false);
   const click = hasAttribute
-    ? () => removeAttribute(card, attribute)
-    : () => addAttribute(card, attribute);
+    ? () => removeAttribute(card.name, attribute)
+    : () => addAttribute(card.name, attribute);
 
   menu.append(
     new MenuItem({
@@ -38,9 +37,9 @@ const getAttributeLine: GetAttributeLine = (
 type GetAttributesSection = (
   card: Card,
   menu: Menu,
-  attributes: string[],
-  addAttribute: (addCard: Card, addAttr: string) => void,
-  removeAttribute: (removeCard: Card, removeAttr: string) => void,
+  attributes: Attribute[],
+  addAttribute: (cardName: string, attributeName: string) => void,
+  removeAttribute: (cardName: string, attributeName: string) => void,
 ) => void;
 
 const getAttributesSection: GetAttributesSection = (
@@ -53,7 +52,7 @@ const getAttributesSection: GetAttributesSection = (
   if (attributes.length <= 1) return;
   menu.append(new MenuItem({ type: "separator" }));
   attributes.forEach((attribute) =>
-    getAttributeLine(card, menu, attribute, addAttribute, removeAttribute),
+    getAttributeLine(card, menu, attribute.name, addAttribute, removeAttribute),
   );
 };
 

@@ -5,11 +5,11 @@ import { SettingsContext } from "@contexts/Settings";
 import useSave from "@hooks/useSave";
 import useLoad from "@hooks/useLoad";
 import useOverwrite from "@hooks/useOverwrite";
-import useCards from "@hooks/useCards";
 import setWindowTitle from "@utils/setWindowTitle";
 import { CURRENT_FILE_SETTING, OPEN_FOLDER_SETTING } from "@constants";
 import SaveData from "@hooks/SaveData";
 import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
 
 const { app, dialog } = require("electron").remote;
 
@@ -100,7 +100,8 @@ const useChangeFormat: UseChangeFormat = () => {
 
 type UseRefreshCards = () => () => Promise<void>;
 const useRefreshCards: UseRefreshCards = () => {
-  const { cards, addCard } = useCards();
+  const cards = useCards((s) => s.cardData);
+  const addCard = useCards((s) => s.addCard);
 
   const refreshCards = useCallback(async () => {
     const identifiers = Object.keys(cards).map((name) => {

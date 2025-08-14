@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Search from "@components/Search";
 import CardList from "@components/CardList";
-import useCards from "@hooks/useCards";
 
 const AddCards: React.FC = () => {
   const [results, setResults] = useState([]);
-  const { addCard } = useCards();
 
   return (
     <SearchSelection>
       <Search placeholder="Search for cards" setResults={setResults} />
       <ListWrapper>
-        <CardList alwaysColorful callback={addCard} cards={results} />
+        <CardList alwaysColorful cards={results} />
       </ListWrapper>
     </SearchSelection>
   );

@@ -9,7 +9,7 @@ interface CardsContext {
 
   addCard: (card: Card) => void;
   removeCard: (name: string) => void;
-  setDeckCount: (name: string, count: number) => void;
+  setCount: (name: string, count: number) => void;
   setSideboardCount: (name: string, count: number) => void;
 
   clearDeck: () => void;
@@ -46,7 +46,7 @@ export const useCards = create<CardsContext>((set, get) => {
       set(toSet);
       useAttributes.getState().handleCardDeletion(name);
     },
-    setDeckCount(name, count) {
+    setCount(name, count) {
       const prev = get();
       const toSet = produce(prev, (draft) => {
         draft.cardsInDeck[name] = count;
