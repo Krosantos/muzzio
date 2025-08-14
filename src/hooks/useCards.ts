@@ -7,7 +7,7 @@ import set from "lodash/set";
 import unset from "lodash/unset";
 import clamp from "lodash/clamp";
 import { CardContext } from "@contexts/Card";
-import { CARD_MAX, ADD_ACTION, REMOVE_ACTION, UPDATE_ACTION } from "@constants";
+import { CARD_MAX } from "@constants";
 
 type UseCards = () => {
   addAttribute: (card: Card, attribute: string) => void;
