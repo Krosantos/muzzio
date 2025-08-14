@@ -34,9 +34,10 @@ const CMC = "CMC: ";
 
 type UseCommandZoneCards = (format: string) => number;
 const useCommandZoneCards: UseCommandZoneCards = (format) => {
-  const { commander, partner } = useCommander();
-  const { oathbreaker, signatureSpell } = useOathbreaker();
-
+  const commander = useCommander((s) => s.commander);
+  const partner = useCommander((s) => s.partner);
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
   const commandZoneCount = useMemo(() => {
     let result = 0;
 

@@ -19,7 +19,10 @@ const Oathbreaker: React.FC = () => {
   const [isOathbreakerModalOpen, setOathbreakerModalOpen] = useState(false);
   const closeOathbreakerModal = useCallback(() => setOathbreakerModalOpen(false), []);
   const openOathbreakerModal = useCallback(() => setOathbreakerModalOpen(true), []);
-  const { colorIdentity, oathbreaker, signatureSpell } = useOathbreaker();
+
+  const colorIdentity = useOathbreaker((s) => s.colorIdentity);
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
 
   const identityAsCost = useMemo(
     () => convertIdentityToCost(colorIdentity),

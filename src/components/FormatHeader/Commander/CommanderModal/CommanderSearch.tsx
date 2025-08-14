@@ -14,7 +14,8 @@ type CommanderSearchProps = {
 };
 const CommanderSearch: React.FC<CommanderSearchProps> = ({ closeModal }) => {
   const [results, setResults] = useState([]);
-  const { commander, setCommander } = useCommander();
+  const commander = useCommander((s) => s.commander);
+  const setCommander = useCommander((s) => s.setCommander);
   const wrappedSetCommander = useCallback(
     (card) => {
       const partnerType = get(card, "partnerQuery.type", NO_PARTNER);

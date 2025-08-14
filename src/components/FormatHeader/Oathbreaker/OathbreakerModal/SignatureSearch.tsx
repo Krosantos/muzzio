@@ -13,7 +13,9 @@ type SignatureSearchProps = {
 };
 const SignatureSearch: React.FC<SignatureSearchProps> = ({ closeModal }) => {
   const [results, setResults] = useState([]);
-  const { colorIdentity, signatureSpell, setSignatureSpell } = useOathbreaker();
+  const colorIdentity = useOathbreaker((s) => s.colorIdentity);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
+  const setSignatureSpell = useOathbreaker((s) => s.setSignatureSpell);
   const wrappedSetPartner = useCallback(
     (card) => {
       setSignatureSpell(card);

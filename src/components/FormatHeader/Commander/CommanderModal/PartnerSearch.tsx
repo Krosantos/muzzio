@@ -40,7 +40,9 @@ type PartnerSearchProps = {
 };
 const PartnerSearch: React.FC<PartnerSearchProps> = ({ closeModal }) => {
   const [results, setResults] = useState([]);
-  const { partner, setPartner, partnerQuery } = useCommander();
+  const partner = useCommander((s) => s.partner);
+  const setPartner = useCommander((s) => s.setPartner);
+  const partnerQuery = useCommander((s) => s.partnerQuery);
   const wrappedSetPartner = useCallback(
     (card) => {
       setPartner(card);

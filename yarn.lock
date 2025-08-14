@@ -5999,6 +5999,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immer@npm:^10.1.1":
+  version: 10.1.1
+  resolution: "immer@npm:10.1.1"
+  checksum: 07c67970b7d22aded73607193d84861bf786f07d47f7d7c98bb10016c7a88f6654ad78ae1e220b3c623695b133aabbf24f5eb8d9e8060cff11e89ccd81c9c10b
+  languageName: node
+  linkType: hard
+
 "import-fresh@npm:^3.0.0, import-fresh@npm:^3.2.1":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
@@ -7238,6 +7245,7 @@ __metadata:
     eslint-plugin-react: ^7.30.0
     express: ^4.16.3
     file-loader: ^6.1.1
+    immer: ^10.1.1
     lodash: ^4.17.21
     mini-css-extract-plugin: ^1.2.0
     prettier: ^2.1.2

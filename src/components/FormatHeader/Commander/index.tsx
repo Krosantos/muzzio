@@ -18,18 +18,17 @@ const Commander: React.FC = () => {
   const [isCommanderModalOpen, setCommanderModalOpen] = useState(false);
   const closeCommanderModal = useCallback(() => setCommanderModalOpen(false), []);
   const openCommanderModal = useCallback(() => setCommanderModalOpen(true), []);
-  const { colorIdentity, commander, partner } = useCommander();
-
+  const commanderData = useCommander();
   const identityAsCost = useMemo(
-    () => convertIdentityToCost(colorIdentity),
-    [colorIdentity],
+    () => convertIdentityToCost(commanderData.colorIdentity),
+    [commanderData.colorIdentity],
   );
 
   return (
     <Container>
       <Title onClick={openCommanderModal}>
-        <span>{commander?.name || SELECT_COMMANDER_TEXT}</span>
-        <span>{partner?.name}</span>
+        <span>{commanderData.commander?.name || SELECT_COMMANDER_TEXT}</span>
+        <span>{commanderData.partner?.name}</span>
       </Title>
       <SingletonCount />
       <Cost>

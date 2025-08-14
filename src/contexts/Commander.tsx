@@ -1,5 +1,6 @@
 import { NO_PARTNER } from "@constants";
 import { getCombinedCI } from "@utils/getCombinedCI";
+import { produce } from "immer";
 import { create } from "zustand";
 
 interface CommanderContext {
@@ -19,25 +20,32 @@ export const useCommander = create<CommanderContext>((set, get) => {
     colorIdentity: ["c"],
     partnerQuery: {
       type: NO_PARTNER,
-    },
+    } as Card["partnerQuery"],
     setCommander(card) {
-      set({
-        commander: card,
-        partner: undefined,
-        colorIdentity: card.identity,
-        partnerQuery: card.partnerQuery,
+      const toSet = produce(get(), (draft) => {
+        draft.commander = card;
+        draft.partner = undefined;
+        draft.colorIdentity = card.identity;
+        draft.partnerQuery = card.partnerQuery;
       });
+
+      set(toSet);
     },
     setPartner(card) {
-      set({ partner: card, colorIdentity: getCombinedCI([card, get().commander]) });
+      const toSet = produce(get(), (draft) => {
+        draft.partner = card;
+        draft.colorIdentity = getCombinedCI([card, get().commander]);
+      });
+      set(toSet);
     },
     loadFromSave({ commander, partner }) {
-      set({
-        commander,
-        partner,
-        partnerQuery: commander.partnerQuery,
-        colorIdentity: getCombinedCI([commander, partner]),
+      const toSet = produce(get(), (draft) => {
+        draft.commander = commander;
+        draft.partner = partner;
+        draft.partnerQuery = commander.partnerQuery;
+        draft.colorIdentity = getCombinedCI([commander, partner]);
       });
+      set(toSet);
     },
   };
 });

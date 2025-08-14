@@ -10,7 +10,8 @@ const DEFAULT_PLACEHOLDER = "Search for Oathbreaker";
 
 const OathbreakerSearch: React.FC = () => {
   const [results, setResults] = useState([]);
-  const { oathbreaker, setOathbreaker } = useOathbreaker();
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const setOathbreaker = useOathbreaker((s) => s.setOathbreaker);
   const wrappedSetOathbreaker = useCallback(
     (card) => {
       const toSet = { ...card, attributes: {}, disableMenu: true };
