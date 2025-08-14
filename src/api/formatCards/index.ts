@@ -14,7 +14,6 @@ const formatCard: FormatCard = (card) => {
     const isUnlimited = getIsUnlimited(card);
     const legalFormats = mapLegalities(card);
     return {
-      attributes: {},
       cmc,
       colors,
       cost,

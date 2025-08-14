@@ -58,7 +58,7 @@ const useSave: UseSave = () => {
 
   const save = useCallback(
     (filePath) => {
-      const fileContents = JSON.stringify(allData);
+      const fileContents = JSON.stringify(allData, null, 2);
 
       fs.writeFileSync(filePath, fileContents);
     },

@@ -7,7 +7,6 @@ import { values } from "lodash";
 
 const AttributeList: React.FC = () => {
   const attributes = useAttributes((s) => s.attributes);
-  console.log({ attributes });
   return (
     <Wrapper>
       {values(attributes)?.map((attribute) => (
