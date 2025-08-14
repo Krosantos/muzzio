@@ -35,15 +35,9 @@ type AppendCards = (
   sortedCards: Card[],
   format: string,
   commanderData: CommanderData,
-  oathbreakerData: {oathbreaker?:Card; signatureSpell?:Card}
 ) => Card[];
 
-const appendCards: AppendCards = (
-  sortedCards,
-  format,
-  commanderData,
-  oathbreakerData
-) => {
+const appendCards: AppendCards = (sortedCards, format, commanderData) => {
   const cards = [...sortedCards];
   const { commander, partner } = commanderData;
 
@@ -51,8 +45,8 @@ const appendCards: AppendCards = (
     if (!isEmpty(commander)) cards.push(commander);
     if (!isEmpty(partner)) cards.push(partner);
   }
-  if(format === OATHBREAKER){
-    const {oathbreaker, signatureSpell} = oathbreakerData
+  if (format === OATHBREAKER) {
+    const { oathbreaker, signatureSpell } = useOathbreaker.getState();
     if (!isEmpty(oathbreaker)) cards.push(oathbreaker);
     if (!isEmpty(signatureSpell)) cards.push(signatureSpell);
   }
@@ -64,12 +58,14 @@ type UseBoard = () => Card[];
 const useMaindeck: UseBoard = () => {
   const { cardsInDeck } = useCards();
   const commanderData = useCommander();
-  const oathbreakerData = useOathbreaker(({oathbreaker, signatureSpell})=>({oathbreaker, signatureSpell}));
   const { format } = useFormat();
   const sortedCards = useMemo(() => sortCards(cardsInDeck()), [cardsInDeck]);
   const mainCounted = getMaindeckCount(sortedCards);
 
-  return appendCards(mainCounted, format, commanderData,oathbreakerData);
+  return useMemo(
+    () => appendCards(mainCounted, format, commanderData),
+    [commanderData, format, mainCounted],
+  );
 };
 
 const useSideboard: UseBoard = () => {
