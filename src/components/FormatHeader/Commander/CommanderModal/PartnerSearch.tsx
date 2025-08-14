@@ -2,7 +2,6 @@ import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import get from "lodash/get";
 import Search from "@components/Search";
-import useCommander from "@hooks/useCommander";
 import CardList from "@components/CardList";
 import {
   ANY_PARTNER,
@@ -10,6 +9,7 @@ import {
   FRIENDS_FOREVER,
   SPECIFIC_PARTNER,
 } from "@constants";
+import { useCommander } from "@contexts/Commander";
 
 const BASE_PARTNER_QUERY = " is:commander o:Partner";
 const BACKGROUND_QUERY = " t:background";

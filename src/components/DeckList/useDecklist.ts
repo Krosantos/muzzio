@@ -2,11 +2,10 @@ import { useMemo } from "react";
 import isEmpty from "lodash/isEmpty";
 import sortBy from "lodash/sortBy";
 import useCards from "@hooks/useCards";
-import useCommander from "@hooks/useCommander";
 import useFormat from "@hooks/useFormat";
 import { OATHBREAKER, COMMANDER } from "@constants";
-import { CommanderData } from "@contexts/Commander";
 import { useOathbreaker } from "@contexts/Oathbreaker";
+import { useCommander } from "@contexts/Commander";
 
 type SortCards = (cards: Card[]) => Card[];
 const sortCards: SortCards = (cards) => {
@@ -31,17 +30,13 @@ const getSideboardCount: GetCardCount = (cards) =>
     return { ...card, count: sideboardCount, sideboardCount: 0 };
   });
 
-type AppendCards = (
-  sortedCards: Card[],
-  format: string,
-  commanderData: CommanderData,
-) => Card[];
+type AppendCards = (sortedCards: Card[], format: string) => Card[];
 
-const appendCards: AppendCards = (sortedCards, format, commanderData) => {
+const appendCards: AppendCards = (sortedCards, format) => {
   const cards = [...sortedCards];
-  const { commander, partner } = commanderData;
 
   if (format === COMMANDER) {
+    const { commander, partner } = useCommander.getState();
     if (!isEmpty(commander)) cards.push(commander);
     if (!isEmpty(partner)) cards.push(partner);
   }
@@ -57,15 +52,11 @@ const appendCards: AppendCards = (sortedCards, format, commanderData) => {
 type UseBoard = () => Card[];
 const useMaindeck: UseBoard = () => {
   const { cardsInDeck } = useCards();
-  const commanderData = useCommander();
   const { format } = useFormat();
   const sortedCards = useMemo(() => sortCards(cardsInDeck()), [cardsInDeck]);
   const mainCounted = getMaindeckCount(sortedCards);
 
-  return useMemo(
-    () => appendCards(mainCounted, format, commanderData),
-    [commanderData, format, mainCounted],
-  );
+  return useMemo(() => appendCards(mainCounted, format), [format, mainCounted]);
 };
 
 const useSideboard: UseBoard = () => {

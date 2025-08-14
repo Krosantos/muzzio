@@ -26,9 +26,9 @@ const CardContext = React.createContext<CardContextValue>(DEFAULT_VALUE);
 
 const cardReducer: Reducer<CardState, Action> = (
   state,
-  { type, card = {}, overriddenState },
+  { type, card, overriddenState },
 ) => {
-  const { name } = card;
+  const name = card?.name ?? "";
   const newState = { ...state };
 
   switch (type) {

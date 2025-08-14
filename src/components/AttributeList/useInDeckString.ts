@@ -40,7 +40,6 @@ type UseInDeckString = (attribute: string) => string;
 const useInDeckString: UseInDeckString = (attribute) => {
   const { isSingleton } = useFormat();
   const { cards, cardsByAttribute } = useCards();
-
   const inDeckString = useMemo(() => {
     if (attribute === ALL_CARDS) return getAllCardsString(isSingleton, cards);
     const cardsWithAttribute = cardsByAttribute(attribute);

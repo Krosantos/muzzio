@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
-import useCommander from "@hooks/useCommander";
 import ManaCost from "@components/ManaCost";
 import SingletonCount from "../SingletonCount";
 import CommanderModal from "./CommanderModal";
+import { useCommander } from "@contexts/Commander";
 
 const SELECT_COMMANDER_TEXT = "Select Commander";
 
@@ -20,15 +20,16 @@ const Commander: React.FC = () => {
   const openCommanderModal = useCallback(() => setCommanderModalOpen(true), []);
   const { colorIdentity, commander, partner } = useCommander();
 
-  const identityAsCost = useMemo(() => convertIdentityToCost(colorIdentity), [
-    colorIdentity,
-  ]);
+  const identityAsCost = useMemo(
+    () => convertIdentityToCost(colorIdentity),
+    [colorIdentity],
+  );
 
   return (
     <Container>
       <Title onClick={openCommanderModal}>
-        <span>{commander.name || SELECT_COMMANDER_TEXT}</span>
-        <span>{partner.name}</span>
+        <span>{commander?.name || SELECT_COMMANDER_TEXT}</span>
+        <span>{partner?.name}</span>
       </Title>
       <SingletonCount />
       <Cost>

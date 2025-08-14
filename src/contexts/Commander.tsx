@@ -1,45 +1,43 @@
 import { NO_PARTNER } from "@constants";
-import React, { useState, useMemo, ReactNode } from "react";
+import { getCombinedCI } from "@utils/getCombinedCI";
+import { create } from "zustand";
 
-type CommanderData = {
+interface CommanderContext {
   commander?: Card;
   partner?: Card;
-  partnerQuery?: Card["partnerQuery"];
+  partnerQuery: Card["partnerQuery"];
   colorIdentity: string[];
-};
+  setCommander: (card: Card) => void;
+  setPartner: (card: Card) => void;
+  loadFromSave: (data: SaveableCommanderContext) => void;
+}
 
-type CommanderContextValue = {
-  commanderData: CommanderData;
-  setCommanderData: React.Dispatch<React.SetStateAction<CommanderData>>;
-};
+export type SaveableCommanderContext = Pick<CommanderContext, "commander" | "partner">;
 
-const DEFAULT_VALUE: CommanderContextValue = {
-  commanderData: {
+export const useCommander = create<CommanderContext>((set, get) => {
+  return {
     colorIdentity: ["c"],
     partnerQuery: {
       type: NO_PARTNER,
     },
-  },
-  setCommanderData: () => {},
-};
-const CommanderContext = React.createContext<CommanderContextValue>(DEFAULT_VALUE);
-
-type CommanderProviderProps = {
-  initialValue?: CommanderData;
-  children: ReactNode;
-};
-const CommanderProvider: React.FC<CommanderProviderProps> = ({
-  children,
-  initialValue = DEFAULT_VALUE.commanderData,
-}) => {
-  const [commanderData, setCommanderData] = useState<CommanderData>(initialValue);
-
-  const value = useMemo<CommanderContextValue>(
-    () => ({ commanderData, setCommanderData }),
-    [commanderData],
-  );
-
-  return <CommanderContext.Provider value={value}>{children}</CommanderContext.Provider>;
-};
-
-export { CommanderContext, CommanderProvider, CommanderData };
+    setCommander(card) {
+      set({
+        commander: card,
+        partner: undefined,
+        colorIdentity: card.identity,
+        partnerQuery: card.partnerQuery,
+      });
+    },
+    setPartner(card) {
+      set({ partner: card, colorIdentity: getCombinedCI([card, get().commander]) });
+    },
+    loadFromSave({ commander, partner }) {
+      set({
+        commander,
+        partner,
+        partnerQuery: commander.partnerQuery,
+        colorIdentity: getCombinedCI([commander, partner]),
+      });
+    },
+  };
+});

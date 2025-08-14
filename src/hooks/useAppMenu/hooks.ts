@@ -58,6 +58,7 @@ const useLoadDeck: UseLoadDeck = () => {
 
     if (!filepath) return;
     const saveData = load(filepath);
+    console.log({ saveData, filepath });
 
     overwrite(saveData);
     setWindowTitle(filepath);

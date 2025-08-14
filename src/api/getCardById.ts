@@ -9,9 +9,7 @@ const getCardById: GetCardById = async (id) => {
     const card = get(response, "data");
 
     return formatCards([card])[0];
-  } catch {
-    return {};
-  }
+  } catch {}
 };
 
 export default getCardById;

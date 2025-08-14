@@ -5,6 +5,7 @@ import setWindowTitle from "@utils/setWindowTitle";
 import { AUTOSAVE, CURRENT_FILE_SETTING } from "@constants";
 import useLoad from "./useLoad";
 import SaveData from "./SaveData";
+import { useMemo } from "react";
 
 const { app } = require("electron").remote;
 
@@ -25,7 +26,7 @@ const useAutoLoad: UseAutoLoad = () => {
 
   const load = useLoad();
 
-  return load(readPath);
+  return useMemo(() => load(readPath), [load, readPath]);
 };
 
 export default useAutoLoad;
