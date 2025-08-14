@@ -1,12 +1,12 @@
 import { useCallback } from "react";
-import useFormat from "@hooks/useFormat";
-import useAttributes from "@hooks/useAttributes";
 import useCards from "@hooks/useCards";
 import getAttributesSection from "./getAttributesSection";
 import getDeckLine from "./getDeckLine";
 import getCountLine from "./getCountLine";
 import getSideboardLine from "./getSideboardLine";
 import getRemoveLine from "./getRemoveLine";
+import { useAttributes } from "@contexts/Attributes";
+import { useFormat } from "@contexts/Format";
 
 const { Menu } = require("electron").remote;
 

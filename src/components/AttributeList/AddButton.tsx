@@ -1,6 +1,6 @@
+import { useAttributes } from "@contexts/Attributes";
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
-import useAttributes from "@hooks/useAttributes";
 
 const AddButton: React.FC = () => {
   const { attributes, addAttribute } = useAttributes();

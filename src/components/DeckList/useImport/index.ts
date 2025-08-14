@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import useCards from "@hooks/useCards";
-import useFormat from "@hooks/useFormat";
 import lookUpCards from "./lookUpCards";
+import { useFormat } from "@contexts/Format";
 
 const { clipboard } = require("electron").remote;
 

@@ -4,12 +4,12 @@ import getList from "@api/getList";
 import { SettingsContext } from "@contexts/Settings";
 import useSave from "@hooks/useSave";
 import useLoad from "@hooks/useLoad";
-import useFormat from "@hooks/useFormat";
 import useOverwrite from "@hooks/useOverwrite";
 import useCards from "@hooks/useCards";
 import setWindowTitle from "@utils/setWindowTitle";
 import { CURRENT_FILE_SETTING, OPEN_FOLDER_SETTING } from "@constants";
 import SaveData from "@hooks/SaveData";
+import { useFormat } from "@contexts/Format";
 
 const { app, dialog } = require("electron").remote;
 
@@ -58,7 +58,6 @@ const useLoadDeck: UseLoadDeck = () => {
 
     if (!filepath) return;
     const saveData = load(filepath);
-    console.log({ saveData, filepath });
 
     overwrite(saveData);
     setWindowTitle(filepath);

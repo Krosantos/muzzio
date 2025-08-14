@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import isEmpty from "lodash/isEmpty";
 import useCards from "@hooks/useCards";
-import useFormat from "@hooks/useFormat";
 import getAverageCmc from "@utils/getAverageCmc";
 import {
   BRAWL,
@@ -17,6 +16,7 @@ import {
 } from "@constants";
 import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useCommander } from "@contexts/Commander";
+import { useFormat } from "@contexts/Format";
 
 const DEFAULT_COUNT = 60;
 const formatCounts = {

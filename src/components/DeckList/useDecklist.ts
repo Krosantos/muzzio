@@ -2,10 +2,10 @@ import { useMemo } from "react";
 import isEmpty from "lodash/isEmpty";
 import sortBy from "lodash/sortBy";
 import useCards from "@hooks/useCards";
-import useFormat from "@hooks/useFormat";
 import { OATHBREAKER, COMMANDER } from "@constants";
 import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useCommander } from "@contexts/Commander";
+import { useFormat } from "@contexts/Format";
 
 type SortCards = (cards: Card[]) => Card[];
 const sortCards: SortCards = (cards) => {

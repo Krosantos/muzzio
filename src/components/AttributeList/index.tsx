@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import useAttributes from "@hooks/useAttributes";
 import Attribute from "./Attribute";
 import AddButton from "./AddButton";
+import { useAttributes } from "@contexts/Attributes";
 
 const AttributeList: React.FC = () => {
   const { attributes } = useAttributes();

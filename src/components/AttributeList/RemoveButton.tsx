@@ -1,6 +1,6 @@
+import { useAttributes } from "@contexts/Attributes";
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import useAttributes from "@hooks/useAttributes";
 
 const X = "X";
 

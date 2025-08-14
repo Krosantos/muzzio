@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import useFormat from "@hooks/useFormat";
 import useCards from "@hooks/useCards";
+import { useFormat } from "@contexts/Format";
 
 type DividerProps = {
   label: string;

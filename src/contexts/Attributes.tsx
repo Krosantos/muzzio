@@ -1,36 +1,30 @@
-import React, { useState, useMemo, ReactNode } from "react";
 import { ALL_CARDS } from "@constants";
+import { create } from "zustand";
 
-type AttributesProviderValue = {
+interface AttributeContext {
   attributes: string[];
-  setAttributes: React.Dispatch<React.SetStateAction<string[]>>;
-};
+  addAttribute: (name: string) => void;
+  removeAttribute: (name: string) => void;
+  loadFromSave: (data: SaveableAttributeContext) => void;
+}
 
-const DEFAULT_VALUE: AttributesProviderValue = {
-  attributes: [ALL_CARDS],
-  setAttributes: () => {},
-};
+export type SaveableAttributeContext = Pick<AttributeContext, "attributes">;
 
-const AttributesContext = React.createContext<AttributesProviderValue>(DEFAULT_VALUE);
-
-type AttributesProviderProps = {
-  initialValue?: string[];
-  children: ReactNode;
-};
-const AttributesProvider: React.FC<AttributesProviderProps> = ({
-  children,
-  initialValue,
-}) => {
-  const [attributes, setAttributes] = useState<string[]>(initialValue || [ALL_CARDS]);
-
-  const value = useMemo<AttributesProviderValue>(
-    () => ({ attributes, setAttributes }),
-    [attributes],
-  );
-
-  return (
-    <AttributesContext.Provider value={value}>{children}</AttributesContext.Provider>
-  );
-};
-
-export { AttributesContext, AttributesProvider };
+export const useAttributes = create<AttributeContext>((set, get) => {
+  return {
+    attributes: [ALL_CARDS],
+    addAttribute(name) {
+      let toSet = [...get().attributes];
+      toSet.push(name);
+      set({ attributes: toSet });
+    },
+    removeAttribute(name) {
+      let toSet = [...get().attributes];
+      toSet = toSet.filter((a) => a !== name);
+      set({ attributes: toSet });
+    },
+    loadFromSave({ attributes }) {
+      set({ attributes });
+    },
+  };
+});

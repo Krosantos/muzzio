@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import filter from "lodash/filter";
-import useFormat from "@hooks/useFormat";
 import useCards from "@hooks/useCards";
 import { ALL_CARDS } from "@constants";
+import { useFormat } from "@contexts/Format";
 
 type GetAllCardsString = (isSingleton: boolean, cards: { [id: string]: Card }) => string;
 const getAllCardsString: GetAllCardsString = (isSingleton, cards) => {
