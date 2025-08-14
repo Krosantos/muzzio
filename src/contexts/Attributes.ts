@@ -33,8 +33,12 @@ export const useAttributes = create<AttributeContext>((set, get) => {
       toSet = toSet.filter((a) => a.name !== name);
       set({ attributes: toSet });
     },
-    loadFromSave({ attributes }) {
-      set({ attributes });
+    loadFromSave(data) {
+      if (!data) {
+        set({ attributes: [] });
+      } else {
+        set({ attributes: data.attributes });
+      }
     },
 
     addCardToAttribute(cardName, attributeName) {

@@ -6,9 +6,10 @@ import { useAttributes } from "@contexts/Attributes";
 
 const AttributeList: React.FC = () => {
   const attributes = useAttributes((s) => s.attributes);
+  console.log({ attributes });
   return (
     <Wrapper>
-      {attributes.map((attribute) => (
+      {attributes?.map((attribute) => (
         <Attribute attribute={attribute} key={attribute.name} />
       ))}
       <AddButton />

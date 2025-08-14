@@ -63,11 +63,19 @@ export const useCards = create<CardsContext>((set, get) => {
     },
 
     loadFromSave(data) {
-      set({
-        cardData: data.cardData,
-        cardsInDeck: data.cardsInDeck,
-        cardsInSideboard: data.cardsInSideboard,
-      });
+      if (!data) {
+        set({
+          cardData: {},
+          cardsInDeck: {},
+          cardsInSideboard: {},
+        });
+      } else {
+        set({
+          cardData: data.cardData,
+          cardsInDeck: data.cardsInDeck,
+          cardsInSideboard: data.cardsInSideboard,
+        });
+      }
     },
 
     clearDeck() {

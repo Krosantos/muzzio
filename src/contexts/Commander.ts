@@ -17,7 +17,7 @@ export type SaveableCommanderContext = Pick<CommanderContext, "commander" | "par
 
 export const useCommander = create<CommanderContext>((set, get) => {
   return {
-    colorIdentity: ["c"],
+    colorIdentity: ["C"],
     partnerQuery: {
       type: NO_PARTNER,
     } as Card["partnerQuery"],
@@ -38,14 +38,24 @@ export const useCommander = create<CommanderContext>((set, get) => {
       });
       set(toSet);
     },
-    loadFromSave({ commander, partner }) {
-      const toSet = produce(get(), (draft) => {
-        draft.commander = commander;
-        draft.partner = partner;
-        draft.partnerQuery = commander.partnerQuery;
-        draft.colorIdentity = getCombinedCI([commander, partner]);
-      });
-      set(toSet);
+    loadFromSave(data) {
+      if (!data) {
+        set({
+          commander: undefined,
+          partner: undefined,
+          partnerQuery: undefined,
+          colorIdentity: ["C"],
+        });
+      } else {
+        const { commander, partner } = data;
+        const toSet = produce(get(), (draft) => {
+          draft.commander = commander;
+          draft.partner = partner;
+          draft.partnerQuery = commander.partnerQuery;
+          draft.colorIdentity = getCombinedCI([commander, partner]);
+        });
+        set(toSet);
+      }
     },
   };
 });

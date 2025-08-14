@@ -23,12 +23,17 @@ export const useOathbreaker = create<OathbreakerContext>((set, get) => {
     setSignatureSpell(card) {
       set({ signatureSpell: card });
     },
-    loadFromSave({ oathbreaker, signatureSpell }) {
-      set({
-        oathbreaker,
-        signatureSpell,
-        colorIdentity: oathbreaker?.identity ?? ["c"],
-      });
+    loadFromSave(data) {
+      if (!data) {
+        set({ colorIdentity: ["c"], oathbreaker: undefined, signatureSpell: undefined });
+      } else {
+        const { oathbreaker, signatureSpell } = data;
+        set({
+          oathbreaker,
+          signatureSpell,
+          colorIdentity: oathbreaker?.identity ?? ["c"],
+        });
+      }
     },
   };
 });
