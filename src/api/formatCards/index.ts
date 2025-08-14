@@ -7,7 +7,7 @@ type FormatCard = (card: RawCard) => Card;
 const formatCard: FormatCard = (card) => {
   try {
     const { id, cmc, color_identity: identity } = card;
-    const { imageUrl, reverseUrl, face } = processCardFaces(card);
+    const { imageUrl, reverseUrl, face, colorIdentity } = processCardFaces(card);
     const { colors, name, mana_cost: cost, type_line: type } = face;
     const partnerQuery = getPartner(card);
 
@@ -18,6 +18,7 @@ const formatCard: FormatCard = (card) => {
       attributes: {},
       cmc,
       colors,
+      colorIdentity,
       cost,
       count: 0,
       id,
