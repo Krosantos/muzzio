@@ -22,6 +22,7 @@ declare type Card = {
   attributes?: { [attribute: string]: boolean };
   cmc?: number;
   colors?: string[];
+  colorIdentity?:string[];
   cost?: string;
   identity?: string[];
   imageUrl?: string;

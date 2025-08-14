@@ -1,7 +1,6 @@
 import fs from "fs";
 import { useContext, useCallback } from "react";
 import { CommanderContext } from "@contexts/Commander";
-import { OathbreakerContext } from "@contexts/Oathbreaker";
 import { CardContext } from "@contexts/Card";
 import { AttributesContext } from "@contexts/Attributes";
 import { FormatContext } from "@contexts/Format";
@@ -12,7 +11,6 @@ const useAllContexts: UseAllContexts = () => {
   const { attributes } = useContext(AttributesContext);
   const { cards } = useContext(CardContext);
   const { commanderData } = useContext(CommanderContext);
-  const { oathbreakerData } = useContext(OathbreakerContext);
   const { format } = useContext(FormatContext);
 
   return {
@@ -20,7 +18,6 @@ const useAllContexts: UseAllContexts = () => {
     cards,
     commanderData,
     format,
-    oathbreakerData,
   };
 };
 

@@ -4,7 +4,6 @@ import isEmpty from "lodash/isEmpty";
 import useCards from "@hooks/useCards";
 import useFormat from "@hooks/useFormat";
 import useCommander from "@hooks/useCommander";
-import useOathbreaker from "@hooks/useOathbreaker";
 import getAverageCmc from "@utils/getAverageCmc";
 import {
   BRAWL,
@@ -17,6 +16,7 @@ import {
   STANDARD,
   VINTAGE,
 } from "@constants";
+import { useOathbreaker } from "@contexts/Oathbreaker";
 
 const DEFAULT_COUNT = 60;
 const formatCounts = {
@@ -36,7 +36,7 @@ type UseCommandZoneCards = (format: string) => number;
 const useCommandZoneCards: UseCommandZoneCards = (format) => {
   const { commander, partner } = useCommander();
   const { oathbreaker, signatureSpell } = useOathbreaker();
-  
+
   const commandZoneCount = useMemo(() => {
     let result = 0;
 
@@ -72,10 +72,10 @@ const SingletonCount: React.FC = () => {
   const { format } = useFormat();
   const commandZoneCount = useCommandZoneCards(format);
   const OUT_OF_X = useMemo(() => `/${formatCounts[format] || DEFAULT_COUNT}`, [format]);
-  const count = useMemo(() => calculateCardCount(cardsInDeck(), commandZoneCount), [
-    cardsInDeck,
-    commandZoneCount,
-  ]);
+  const count = useMemo(
+    () => calculateCardCount(cardsInDeck(), commandZoneCount),
+    [cardsInDeck, commandZoneCount],
+  );
   const cmc = getAverageCmc(cardsInDeck()).toPrecision(3);
 
   return (

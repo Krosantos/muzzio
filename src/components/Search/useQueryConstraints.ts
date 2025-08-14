@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import isEmpty from "lodash/isEmpty";
 import useFormat from "@hooks/useFormat";
 import useCommander from "@hooks/useCommander";
-import useOathbreaker from "@hooks/useOathbreaker";
-import { OATHBREAKER, COMMANDER, VINTAGE } from "@constants";
+import { OATHBREAKER, COMMANDER } from "@constants";
+import { useOathbreaker } from "@contexts/Oathbreaker";
 
 type ConvertIdentityToQuery = (identity: string[]) => string;
 const convertIdentityToQuery: ConvertIdentityToQuery = (identity) => {

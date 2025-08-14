@@ -1,4 +1,4 @@
-import React, { Reducer, useReducer, useMemo, useCallback } from "react";
+import React, { Reducer, useReducer, useMemo, useCallback, ReactNode } from "react";
 import set from "lodash/set";
 import electronSettings from "electron-settings";
 
@@ -27,8 +27,8 @@ const DEFAULT_VALUE: SettingsContextValue = {
 };
 const SettingsContext = React.createContext<SettingsContextValue>(DEFAULT_VALUE);
 
-const SettingsProvider: React.FC = ({ children }) => {
-  const [settings, dispatch] = useReducer<Reducer<Settings, Action>>(
+const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [settings, dispatch] = useReducer(
     settingReducer,
     electronSettings.getSync() as Settings,
   );
@@ -38,10 +38,10 @@ const SettingsProvider: React.FC = ({ children }) => {
     },
     [dispatch],
   );
-  const value = useMemo<SettingsContextValue>(() => ({ setSettings, settings }), [
-    setSettings,
-    settings,
-  ]);
+  const value = useMemo<SettingsContextValue>(
+    () => ({ setSettings, settings }),
+    [setSettings, settings],
+  );
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
 };

@@ -1,4 +1,4 @@
-import React, { Reducer, useReducer, useMemo } from "react";
+import React, { Reducer, useReducer, useMemo, ReactNode } from "react";
 import merge from "lodash/merge";
 import { ADD_ACTION, REMOVE_ACTION, UPDATE_ACTION, OVERWRITE } from "@constants";
 
@@ -55,12 +55,10 @@ const cardReducer: Reducer<CardState, Action> = (
 
 type CardProviderProps = {
   initialValue: CardState;
+  children: ReactNode;
 };
 const CardProvider: React.FC<CardProviderProps> = ({ children, initialValue = {} }) => {
-  const [cards, dispatch] = useReducer<Reducer<CardState, Action>>(
-    cardReducer,
-    initialValue,
-  );
+  const [cards, dispatch] = useReducer(cardReducer, initialValue);
   const value = useMemo(() => ({ cards, dispatch }), [cards]);
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

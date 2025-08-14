@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import get from "lodash/get";
 import Search from "@components/Search";
-import useOathbreaker from "@hooks/useOathbreaker";
 import CardList from "@components/CardList";
+import { useOathbreaker } from "@contexts/Oathbreaker";
 
 const OATHBREAKER_QUERY = "-t:creature t:planeswalker";
 const DEFAULT_PLACEHOLDER = "Search for Oathbreaker";
@@ -19,9 +19,10 @@ const OathbreakerSearch: React.FC = () => {
     },
     [setOathbreaker],
   );
-  const placeholder = useMemo(() => get(oathbreaker, "name", DEFAULT_PLACEHOLDER), [
-    oathbreaker,
-  ]);
+  const placeholder = useMemo(
+    () => get(oathbreaker, "name", DEFAULT_PLACEHOLDER),
+    [oathbreaker],
+  );
 
   return (
     <Section>

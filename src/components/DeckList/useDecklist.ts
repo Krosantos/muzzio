@@ -4,10 +4,9 @@ import sortBy from "lodash/sortBy";
 import useCards from "@hooks/useCards";
 import useCommander from "@hooks/useCommander";
 import useFormat from "@hooks/useFormat";
-import useOathbreaker from "@hooks/useOathbreaker";
 import { OATHBREAKER, COMMANDER } from "@constants";
 import { CommanderData } from "@contexts/Commander";
-import { OathbreakerData } from "@contexts/Oathbreaker";
+import { useOathbreaker } from "@contexts/Oathbreaker";
 
 type SortCards = (cards: Card[]) => Card[];
 const sortCards: SortCards = (cards) => {
@@ -36,24 +35,24 @@ type AppendCards = (
   sortedCards: Card[],
   format: string,
   commanderData: CommanderData,
-  oathbreakerData: OathbreakerData,
+  oathbreakerData: {oathbreaker?:Card; signatureSpell?:Card}
 ) => Card[];
 
 const appendCards: AppendCards = (
   sortedCards,
   format,
   commanderData,
-  oathbreakerData,
+  oathbreakerData
 ) => {
   const cards = [...sortedCards];
   const { commander, partner } = commanderData;
-  const { oathbreaker, signatureSpell } = oathbreakerData;
 
   if (format === COMMANDER) {
     if (!isEmpty(commander)) cards.push(commander);
     if (!isEmpty(partner)) cards.push(partner);
   }
-  if (format === OATHBREAKER) {
+  if(format === OATHBREAKER){
+    const {oathbreaker, signatureSpell} = oathbreakerData
     if (!isEmpty(oathbreaker)) cards.push(oathbreaker);
     if (!isEmpty(signatureSpell)) cards.push(signatureSpell);
   }
@@ -65,12 +64,12 @@ type UseBoard = () => Card[];
 const useMaindeck: UseBoard = () => {
   const { cardsInDeck } = useCards();
   const commanderData = useCommander();
-  const oathbreakerData = useOathbreaker();
+  const oathbreakerData = useOathbreaker(({oathbreaker, signatureSpell})=>({oathbreaker, signatureSpell}));
   const { format } = useFormat();
   const sortedCards = useMemo(() => sortCards(cardsInDeck()), [cardsInDeck]);
   const mainCounted = getMaindeckCount(sortedCards);
 
-  return appendCards(mainCounted, format, commanderData, oathbreakerData);
+  return appendCards(mainCounted, format, commanderData,oathbreakerData);
 };
 
 const useSideboard: UseBoard = () => {

@@ -1,5 +1,5 @@
 import { NO_PARTNER } from "@constants";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, ReactNode } from "react";
 
 type CommanderData = {
   commander?: Card;
@@ -26,6 +26,7 @@ const CommanderContext = React.createContext<CommanderContextValue>(DEFAULT_VALU
 
 type CommanderProviderProps = {
   initialValue?: CommanderData;
+  children: ReactNode;
 };
 const CommanderProvider: React.FC<CommanderProviderProps> = ({
   children,

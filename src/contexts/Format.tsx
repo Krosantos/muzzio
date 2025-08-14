@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, ReactNode } from "react";
 import { COMMANDER, formats } from "@constants";
 
 type Format = keyof typeof formats;
@@ -15,6 +15,7 @@ const FormatContext = React.createContext<FormatContextValue>(DEFAULT_VALUE);
 
 type FormatProviderProps = {
   initialValue?: Format;
+  children: ReactNode;
 };
 const FormatProvider: React.FC<FormatProviderProps> = ({ children, initialValue }) => {
   const [format, setFormat] = useState<Format>(initialValue || COMMANDER);

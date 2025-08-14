@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
-import useOathbreaker from "@hooks/useOathbreaker";
 import ManaCost from "@components/ManaCost";
 import SingletonCount from "../SingletonCount";
 import OathbreakerModal from "./OathbreakerModal";
+import { useOathbreaker } from "@contexts/Oathbreaker";
 
 const SELECT_OATHBREAKER_TEXT = "Select Oathbreaker";
 const SELECT_SIGNATURE_TEXT = "Select Signature Spell";
@@ -21,9 +21,10 @@ const Oathbreaker: React.FC = () => {
   const openOathbreakerModal = useCallback(() => setOathbreakerModalOpen(true), []);
   const { colorIdentity, oathbreaker, signatureSpell } = useOathbreaker();
 
-  const identityAsCost = useMemo(() => convertIdentityToCost(colorIdentity), [
-    colorIdentity,
-  ]);
+  const identityAsCost = useMemo(
+    () => convertIdentityToCost(colorIdentity),
+    [colorIdentity],
+  );
 
   return (
     <Container>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, ReactNode } from "react";
 import { ALL_CARDS } from "@constants";
 
 type AttributesProviderValue = {
@@ -15,6 +15,7 @@ const AttributesContext = React.createContext<AttributesProviderValue>(DEFAULT_V
 
 type AttributesProviderProps = {
   initialValue?: string[];
+  children: ReactNode;
 };
 const AttributesProvider: React.FC<AttributesProviderProps> = ({
   children,
@@ -22,9 +23,10 @@ const AttributesProvider: React.FC<AttributesProviderProps> = ({
 }) => {
   const [attributes, setAttributes] = useState<string[]>(initialValue || [ALL_CARDS]);
 
-  const value = useMemo<AttributesProviderValue>(() => ({ attributes, setAttributes }), [
-    attributes,
-  ]);
+  const value = useMemo<AttributesProviderValue>(
+    () => ({ attributes, setAttributes }),
+    [attributes],
+  );
 
   return (
     <AttributesContext.Provider value={value}>{children}</AttributesContext.Provider>
