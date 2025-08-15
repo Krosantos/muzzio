@@ -1,6 +1,6 @@
 {
   "name": "muzzio",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "A nerdy tool to help build EDH decks",
   "main": "app/index.js",
   "repository": "https://github.com/Krosantos/muzzio.git",
