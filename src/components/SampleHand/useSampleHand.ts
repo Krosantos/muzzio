@@ -9,6 +9,7 @@ const NEW_HAND = "newhand";
 
 type DisplayCard = {
   imageUrl: string;
+  backImageUrl?: string;
   name: string;
 };
 
@@ -29,7 +30,9 @@ const spreadCardsInDeck: SpreadCardsInHand = (cardsInDeck, cardData) => {
     const count = cardsInDeck[name];
     const card = cardData[name];
     if (!card) continue;
-    times(count, () => deck.push({ imageUrl: card.imageUrl, name }));
+    times(count, () =>
+      deck.push({ imageUrl: card.imageUrl, backImageUrl: card.reverseUrl, name }),
+    );
   }
   const shuffled = shuffle(deck);
 

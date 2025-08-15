@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import ModalContainer from "@components/ModalContainer";
 import useSampleHand, { DisplayCard } from "./useSampleHand";
 
@@ -11,13 +11,69 @@ type CardSectionProps = {
 };
 const CardSection: React.FC<CardSectionProps> = ({ cardsInHand }) => (
   <CardContainer>
-    {cardsInHand.map(({ imageUrl, name }, index) => {
+    {cardsInHand.map(({ imageUrl, backImageUrl, name }, index) => {
       const key = `${index}_${name}`;
 
-      return <Img alt={name} key={key} src={imageUrl} />;
+      if (!backImageUrl) {
+        return (
+          <FlipCard key={key}>
+            <Img alt={name} src={imageUrl} />
+          </FlipCard>
+        );
+      }
+
+      return (
+        <FlipCard key={key} $hasReverse>
+          <Inner>
+            <Face $isBack={false}>
+              <Img alt={name} src={imageUrl} />
+            </Face>
+            <Face $isBack={true}>
+              <Img alt={name} src={backImageUrl} />
+            </Face>
+          </Inner>
+        </FlipCard>
+      );
     })}
   </CardContainer>
 );
+
+const FlipCard = styled.div<{ $hasReverse?: boolean }>`
+  perspective: 20000px;
+  height: 255px;
+  width: 183px;
+  margin: 4px;
+`;
+
+const Face = styled.div<{ $isBack: boolean }>`
+  backface-visibility: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 50%;
+  ${({ $isBack }) =>
+    $isBack
+      ? css`
+          transform: translateX(-50%) rotateY(180deg);
+        `
+      : css`
+          transform: translateX(-50%);
+        `}
+`;
+
+const Inner = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transition: transform 0.5s ease-in-out;
+  transform: rotateY(0deg);
+  &:hover {
+    transform: rotateY(-180deg);
+  }
+`;
 
 const CardContainer = styled.div`
   display: flex;
