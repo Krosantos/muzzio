@@ -11,6 +11,7 @@ import HoverArt from "./HoverArt";
 import getCardColor from "./getCardColor";
 import useNameAndCount from "./useNameAndCount";
 import { useCards } from "@contexts/Card";
+import { isEmpty } from "lodash";
 
 type CardProps = {
   callback?: Function;
@@ -55,7 +56,9 @@ const Card: React.FC<CardProps> = ({
     openSideboardCountModal,
   );
   const { shouldShowArt, showArt, hideArt } = useHoverArt();
-
+  if (isEmpty(card)) {
+    return null;
+  }
   return (
     <>
       <CardRow

@@ -31,10 +31,13 @@ const useTypeCounts = () => {
 
   for (let name of cardNames) {
     const card = cardData[name];
-    const count = cardsInDeck[name] || 1;
+    const count = cardsInDeck[name] || 0;
     if (!card) continue;
     for (let cardType of types) {
-      if (card.type.toLocaleLowerCase().includes(cardType)) result[cardType] += count;
+      if (card.type.toLocaleLowerCase().includes(cardType)) {
+        console.log(`${name}: ${count}`);
+        result[cardType] += count;
+      }
     }
   }
 
