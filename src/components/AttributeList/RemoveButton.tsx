@@ -1,6 +1,6 @@
+import { useAttributes } from "@contexts/Attributes";
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import useAttributes from "@hooks/useAttributes";
 
 const X = "X";
 
@@ -9,7 +9,7 @@ type RemoveButtonProps = {
 };
 
 const RemoveButton: React.FC<RemoveButtonProps> = ({ attribute }) => {
-  const { removeAttribute } = useAttributes();
+  const removeAttribute = useAttributes((s) => s.removeAttribute);
   const handleClick = useCallback(
     (event) => {
       event.stopPropagation();

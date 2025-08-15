@@ -4,7 +4,7 @@ import ModalContainer from "@components/ModalContainer";
 
 type CardCountModalProps = {
   card: Card;
-  setCountCallback: (otherCard: Card, count: number) => void;
+  setCountCallback: (cardName: string, count: number) => void;
   closeModal: () => void;
 };
 const CardCountModal: React.FC<CardCountModalProps> = ({
@@ -24,7 +24,7 @@ const CardCountModal: React.FC<CardCountModalProps> = ({
       event.preventDefault();
       const count = parseInt(internalCount, 10);
 
-      setCountCallback(card, count);
+      setCountCallback(card.name, count);
       closeModal();
     },
     [card, closeModal, internalCount, setCountCallback],
@@ -48,7 +48,7 @@ const CardCountModal: React.FC<CardCountModalProps> = ({
 const Form = styled.form`
   padding: 8px;
   & input {
-    background-color: $ ${({ theme }) => theme.white};
+    background-color: ${({ theme }) => theme.white};
     border: none;
     padding: 0 4px;
     margin-right: 4px;

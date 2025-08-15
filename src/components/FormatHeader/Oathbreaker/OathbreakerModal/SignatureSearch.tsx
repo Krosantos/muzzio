@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import get from "lodash/get";
 import Search from "@components/Search";
-import useOathbreaker from "@hooks/useOathbreaker";
 import CardList from "@components/CardList";
+import { useOathbreaker } from "@contexts/Oathbreaker";
 
 const SIGNATURE_SPELL_QUERY = " (t:instant OR t:sorcery)";
 const DEFAULT_PLACEHOLDER = "Search for Signature Spell";
@@ -13,7 +13,9 @@ type SignatureSearchProps = {
 };
 const SignatureSearch: React.FC<SignatureSearchProps> = ({ closeModal }) => {
   const [results, setResults] = useState([]);
-  const { colorIdentity, signatureSpell, setSignatureSpell } = useOathbreaker();
+  const colorIdentity = useOathbreaker((s) => s.colorIdentity);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
+  const setSignatureSpell = useOathbreaker((s) => s.setSignatureSpell);
   const wrappedSetPartner = useCallback(
     (card) => {
       setSignatureSpell(card);
@@ -22,9 +24,10 @@ const SignatureSearch: React.FC<SignatureSearchProps> = ({ closeModal }) => {
     [closeModal, setSignatureSpell],
   );
   const identity = useMemo(() => `identity:${colorIdentity.join("")}`, [colorIdentity]);
-  const placeholder = useMemo(() => get(signatureSpell, "name", DEFAULT_PLACEHOLDER), [
-    signatureSpell,
-  ]);
+  const placeholder = useMemo(
+    () => get(signatureSpell, "name", DEFAULT_PLACEHOLDER),
+    [signatureSpell],
+  );
   const finalQuery = `${SIGNATURE_SPELL_QUERY} ${identity}`;
 
   return (

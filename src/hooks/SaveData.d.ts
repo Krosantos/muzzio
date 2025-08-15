@@ -1,14 +1,15 @@
-import type { CommanderData } from "@contexts/Commander";
-import type { OathbreakerData } from "@contexts/Oathbreaker";
-import type { CardState } from "@contexts/Card";
+import type { SaveableCommanderContext } from "@contexts/Commander";
+import type { SaveableOathbreakerContext } from "@contexts/Oathbreaker";
 import type { Format } from "@contexts/Format";
+import { SaveableAttributeContext } from "@contexts/Attributes";
+import { SaveableCardContext } from "@contexts/Card";
 
 type SaveData = {
-  attributes?: string[];
-  cards?: CardState;
-  commanderData?: CommanderData;
+  attributes?: SaveableAttributeContext;
+  cards?: SaveableCardContext;
+  commanderData?: SaveableCommanderContext;
   format?: Format;
-  oathbreakerData?: OathbreakerData;
+  oathbreakerData?: SaveableOathbreakerContext;
 };
 
 export default SaveData;

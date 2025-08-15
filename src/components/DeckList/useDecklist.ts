@@ -1,13 +1,9 @@
 import { useMemo } from "react";
-import isEmpty from "lodash/isEmpty";
 import sortBy from "lodash/sortBy";
-import useCards from "@hooks/useCards";
-import useCommander from "@hooks/useCommander";
-import useFormat from "@hooks/useFormat";
-import useOathbreaker from "@hooks/useOathbreaker";
-import { OATHBREAKER, COMMANDER } from "@constants";
-import { CommanderData } from "@contexts/Commander";
-import { OathbreakerData } from "@contexts/Oathbreaker";
+import { useOathbreaker } from "@contexts/Oathbreaker";
+import { useCommander } from "@contexts/Commander";
+import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
 
 type SortCards = (cards: Card[]) => Card[];
 const sortCards: SortCards = (cards) => {
@@ -22,66 +18,53 @@ const sortCards: SortCards = (cards) => {
   return byNotBasicLand;
 };
 
-type GetCardCount = (cards: Card[]) => Card[];
-const getMaindeckCount: GetCardCount = (cards) =>
-  cards.map((card) => ({ ...card, sideboardCount: 0 }));
-const getSideboardCount: GetCardCount = (cards) =>
-  cards.map((card) => {
-    const { sideboardCount = 0 } = card;
-
-    return { ...card, count: sideboardCount, sideboardCount: 0 };
-  });
-
-type AppendCards = (
-  sortedCards: Card[],
-  format: string,
-  commanderData: CommanderData,
-  oathbreakerData: OathbreakerData,
-) => Card[];
-
-const appendCards: AppendCards = (
-  sortedCards,
-  format,
-  commanderData,
-  oathbreakerData,
-) => {
-  const cards = [...sortedCards];
-  const { commander, partner } = commanderData;
-  const { oathbreaker, signatureSpell } = oathbreakerData;
-
-  if (format === COMMANDER) {
-    if (!isEmpty(commander)) cards.push(commander);
-    if (!isEmpty(partner)) cards.push(partner);
-  }
-  if (format === OATHBREAKER) {
-    if (!isEmpty(oathbreaker)) cards.push(oathbreaker);
-    if (!isEmpty(signatureSpell)) cards.push(signatureSpell);
-  }
-
-  return cards;
-};
-
 type UseBoard = () => Card[];
 const useMaindeck: UseBoard = () => {
-  const { cardsInDeck } = useCards();
-  const commanderData = useCommander();
-  const oathbreakerData = useOathbreaker();
-  const { format } = useFormat();
-  const sortedCards = useMemo(() => sortCards(cardsInDeck()), [cardsInDeck]);
-  const mainCounted = getMaindeckCount(sortedCards);
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const cardData = useCards((s) => s.cardData);
+  const format = useFormat((s) => s.format);
 
-  return appendCards(mainCounted, format, commanderData, oathbreakerData);
+  const commander = useCommander((s) => s.commander);
+  const partner = useCommander((s) => s.partner);
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
+
+  const unsortedCards = useMemo(() => {
+    return Object.keys(cardsInDeck)
+      .map((name) => cardData[name])
+      .filter((c) => !!c);
+  }, [cardData, cardsInDeck]);
+
+  return useMemo(() => {
+    const sorted = sortCards(unsortedCards);
+
+    switch (format) {
+      case "COMMANDER":
+      case "BRAWL":
+        !!commander && sorted.push(commander);
+        !!partner && sorted.push(partner);
+        break;
+      case "OATHBREAKER":
+        !!oathbreaker && sorted.push(oathbreaker);
+        !!signatureSpell && sorted.push(signatureSpell);
+        break;
+    }
+    return sorted;
+  }, [commander, format, oathbreaker, partner, signatureSpell, unsortedCards]);
 };
 
 const useSideboard: UseBoard = () => {
-  const { cardsInSideboard } = useCards();
-  const countedAndSorted = useMemo(() => {
-    const sorted = sortCards(cardsInSideboard());
+  const cardsInSideboard = useCards((s) => s.cardsInSideboard);
+  const cardData = useCards((s) => s.cardData);
 
-    return getSideboardCount(sorted);
-  }, [cardsInSideboard]);
+  const unsortedCards = useMemo(() => {
+    return Object.keys(cardsInSideboard)
+      .map((name) => cardData[name])
+      .filter((c) => !!c);
+  }, [cardData, cardsInSideboard]);
 
-  return countedAndSorted;
+  const sortedCards = sortCards(unsortedCards);
+  return sortedCards;
 };
 
 type UseDecklist = () => {

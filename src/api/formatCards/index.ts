@@ -13,13 +13,10 @@ const formatCard: FormatCard = (card) => {
 
     const isUnlimited = getIsUnlimited(card);
     const legalFormats = mapLegalities(card);
-
     return {
-      attributes: {},
       cmc,
       colors,
       cost,
-      count: 0,
       id,
       identity,
       imageUrl,
@@ -28,7 +25,6 @@ const formatCard: FormatCard = (card) => {
       name,
       partnerQuery,
       reverseUrl,
-      sideboardCount: 0,
       type,
     };
   } catch (e) {

@@ -1,10 +1,6 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import isEmpty from "lodash/isEmpty";
-import useCards from "@hooks/useCards";
-import useFormat from "@hooks/useFormat";
-import useCommander from "@hooks/useCommander";
-import useOathbreaker from "@hooks/useOathbreaker";
 import getAverageCmc from "@utils/getAverageCmc";
 import {
   BRAWL,
@@ -17,6 +13,11 @@ import {
   STANDARD,
   VINTAGE,
 } from "@constants";
+import { useOathbreaker } from "@contexts/Oathbreaker";
+import { useCommander } from "@contexts/Commander";
+import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
+import { sum, values } from "lodash";
 
 const DEFAULT_COUNT = 60;
 const formatCounts = {
@@ -34,9 +35,10 @@ const CMC = "CMC: ";
 
 type UseCommandZoneCards = (format: string) => number;
 const useCommandZoneCards: UseCommandZoneCards = (format) => {
-  const { commander, partner } = useCommander();
-  const { oathbreaker, signatureSpell } = useOathbreaker();
-  
+  const commander = useCommander((s) => s.commander);
+  const partner = useCommander((s) => s.partner);
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
   const commandZoneCount = useMemo(() => {
     let result = 0;
 
@@ -54,29 +56,16 @@ const useCommandZoneCards: UseCommandZoneCards = (format) => {
   return commandZoneCount;
 };
 
-type CalculateCardCount = (cardsInDeck: Card[], commandZoneCount: number) => number;
-const calculateCardCount: CalculateCardCount = (
-  cardsInDeck = [],
-  commandZoneCount = 0,
-) => {
-  let result = commandZoneCount;
-
-  cardsInDeck.forEach((card) => {
-    result += card.count || 1;
-  });
-  return result;
-};
-
 const SingletonCount: React.FC = () => {
-  const { cardsInDeck } = useCards();
-  const { format } = useFormat();
+  const cardData = useCards((s) => s.cardData);
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const format = useFormat((s) => s.format);
   const commandZoneCount = useCommandZoneCards(format);
+
   const OUT_OF_X = useMemo(() => `/${formatCounts[format] || DEFAULT_COUNT}`, [format]);
-  const count = useMemo(() => calculateCardCount(cardsInDeck(), commandZoneCount), [
-    cardsInDeck,
-    commandZoneCount,
-  ]);
-  const cmc = getAverageCmc(cardsInDeck()).toPrecision(3);
+  const count = commandZoneCount + sum(values(cardsInDeck));
+
+  const cmc = getAverageCmc(Object.keys(cardsInDeck), cardData).toPrecision(3);
 
   return (
     <Count>

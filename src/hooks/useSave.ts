@@ -1,37 +1,64 @@
 import fs from "fs";
-import { useContext, useCallback } from "react";
-import { CommanderContext } from "@contexts/Commander";
-import { OathbreakerContext } from "@contexts/Oathbreaker";
-import { CardContext } from "@contexts/Card";
-import { AttributesContext } from "@contexts/Attributes";
-import { FormatContext } from "@contexts/Format";
+import { useCallback, useMemo } from "react";
 import type SaveData from "./SaveData";
+import { useFormat } from "@contexts/Format";
+import { useCommander } from "@contexts/Commander";
+import { useOathbreaker } from "@contexts/Oathbreaker";
+import { useAttributes } from "@contexts/Attributes";
+import { useCards } from "@contexts/Card";
 
-type UseAllContexts = () => SaveData;
-const useAllContexts: UseAllContexts = () => {
-  const { attributes } = useContext(AttributesContext);
-  const { cards } = useContext(CardContext);
-  const { commanderData } = useContext(CommanderContext);
-  const { oathbreakerData } = useContext(OathbreakerContext);
-  const { format } = useContext(FormatContext);
+const useSaveData = () => {
+  const attributes = useAttributes((s) => s.attributes);
+  const cardData = useCards((s) => s.cardData);
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const cardsInSideboard = useCards((s) => s.cardsInSideboard);
+  const format = useFormat((s) => s.format);
+  const commander = useCommander((s) => s.commander);
+  const partner = useCommander((s) => s.partner);
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const signatureSpell = useOathbreaker((s) => s.signatureSpell);
 
-  return {
+  return useMemo<SaveData>(() => {
+    return {
+      attributes: {
+        attributes,
+      },
+      cards: {
+        cardData,
+        cardsInDeck,
+        cardsInSideboard,
+      },
+      format,
+      commanderData: {
+        commander,
+        partner,
+      },
+      oathbreakerData: {
+        oathbreaker,
+        signatureSpell,
+      },
+    };
+  }, [
     attributes,
-    cards,
-    commanderData,
+    cardData,
+    cardsInDeck,
+    cardsInSideboard,
+    commander,
     format,
-    oathbreakerData,
-  };
+    oathbreaker,
+    partner,
+    signatureSpell,
+  ]);
 };
 
 type UseSave = () => (filePath: string) => void;
 
 const useSave: UseSave = () => {
-  const allData = useAllContexts();
+  const allData = useSaveData();
 
   const save = useCallback(
     (filePath) => {
-      const fileContents = JSON.stringify(allData);
+      const fileContents = JSON.stringify(allData, null, 2);
 
       fs.writeFileSync(filePath, fileContents);
     },

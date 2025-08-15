@@ -6,9 +6,6 @@ const { Menu, MenuItem } = require("electron").remote;
 
 const alphaSort = (card: Card) => card.name;
 const cmcSort = (card: Card) => card.cmc;
-const countSort = (card: Card) => card.count || 1;
-const deckSort = (card: Card) => card.count + card.sideboardCount;
-
 type SortType = {
   name: string;
   sort: (card: Card) => string | number;
@@ -17,13 +14,9 @@ type SortType = {
 const sortTypes: { [key: string]: SortType } = {
   ALPHA: { name: "Alphabetical", sort: alphaSort },
   CMC: { name: "CMC", sort: cmcSort },
-  COUNT: { name: "Count", sort: countSort },
-  DECK: { name: "In/Out of Deck", sort: deckSort },
 };
 
-type UseSorting = (
-  cards: Card[],
-) => {
+type UseSorting = (cards: Card[]) => {
   openMenu: () => void;
   sortedCards: Card[];
 };

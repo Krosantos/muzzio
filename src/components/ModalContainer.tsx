@@ -1,8 +1,9 @@
-import React, { useCallback } from "react";
+import React, { ReactNode, useCallback } from "react";
 import styled from "styled-components";
 
 type ModalContainerProps = React.PropsWithChildren<{
   closeModal: () => void;
+  children: ReactNode;
 }>;
 
 const ModalContainer: React.FC<ModalContainerProps> = ({ closeModal, children }) => {

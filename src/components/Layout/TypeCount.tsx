@@ -1,7 +1,7 @@
 import React from "react";
 import iconMap from "@components/TypeIcons";
-import useCards from "@hooks/useCards";
 import styled from "styled-components";
+import { useCards } from "@contexts/Card";
 
 interface Count {
   creature: number;
@@ -14,7 +14,8 @@ interface Count {
 }
 
 const useTypeCounts = () => {
-  const { cardsInDeck } = useCards();
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const cardData = useCards((s) => s.cardData);
   const result: Count = {
     creature: 0,
     instant: 0,
@@ -25,11 +26,20 @@ const useTypeCounts = () => {
     land: 0,
   };
 
-  cardsInDeck().forEach((card) => {
-    Object.keys(result).forEach((cardType: keyof Count) => {
-      if (card.type.toLowerCase().includes(cardType)) result[cardType] += card.count || 1;
-    });
-  });
+  const types = Object.keys(result);
+  const cardNames = Object.keys(cardsInDeck);
+
+  for (let name of cardNames) {
+    const card = cardData[name];
+    const count = cardsInDeck[name] || 0;
+    if (!card) continue;
+    for (let cardType of types) {
+      if (card.type.toLocaleLowerCase().includes(cardType)) {
+        console.log(`${name}: ${count}`);
+        result[cardType] += count;
+      }
+    }
+  }
 
   return result;
 };

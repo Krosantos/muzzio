@@ -1,16 +1,17 @@
+import { useAttributes } from "@contexts/Attributes";
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
-import useAttributes from "@hooks/useAttributes";
 
 const AddButton: React.FC = () => {
-  const { attributes, addAttribute } = useAttributes();
+  const attributes = useAttributes((s) => s.attributes);
+  const addAttribute = useAttributes((s) => s.addAttribute);
   const [toAdd, setToAdd] = useState("");
   const updateValue = useCallback((event) => {
     setToAdd(event.target.value);
   }, []);
   const onEnter = useCallback(
     async ({ key }) => {
-      if (key !== "Enter" || attributes.includes(toAdd) || !toAdd) return;
+      if (key !== "Enter" || !!attributes[toAdd] || !toAdd) return;
       addAttribute(toAdd);
       setToAdd("");
     },

@@ -4,12 +4,12 @@ import getList from "@api/getList";
 import { SettingsContext } from "@contexts/Settings";
 import useSave from "@hooks/useSave";
 import useLoad from "@hooks/useLoad";
-import useFormat from "@hooks/useFormat";
 import useOverwrite from "@hooks/useOverwrite";
-import useCards from "@hooks/useCards";
 import setWindowTitle from "@utils/setWindowTitle";
 import { CURRENT_FILE_SETTING, OPEN_FOLDER_SETTING } from "@constants";
 import SaveData from "@hooks/SaveData";
+import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
 
 const { app, dialog } = require("electron").remote;
 
@@ -71,7 +71,7 @@ const useLoadDeck: UseLoadDeck = () => {
 type UseNewDeck = () => () => void;
 const useNewDeck: UseNewDeck = () => {
   const overwrite = useOverwrite();
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const { setSettings } = useContext(SettingsContext);
   const newDeck = useCallback(() => {
     setWindowTitle();
@@ -100,7 +100,8 @@ const useChangeFormat: UseChangeFormat = () => {
 
 type UseRefreshCards = () => () => Promise<void>;
 const useRefreshCards: UseRefreshCards = () => {
-  const { cards, addCard } = useCards();
+  const cards = useCards((s) => s.cardData);
+  const addCard = useCards((s) => s.addCard);
 
   const refreshCards = useCallback(async () => {
     const identifiers = Object.keys(cards).map((name) => {
@@ -118,14 +119,7 @@ const useRefreshCards: UseRefreshCards = () => {
 
 type UseRemoveCards = () => () => void;
 const useRemoveCards: UseRemoveCards = () => {
-  const { cardsInSideboard, cardsInDeck, setCount, setSideboardCount } = useCards();
-  const removeCards = useCallback(() => {
-    cardsInSideboard().forEach((card) => {
-      setSideboardCount(card, 0);
-    });
-    cardsInDeck().forEach((card) => setCount(card, 0));
-  }, [cardsInDeck, cardsInSideboard, setCount, setSideboardCount]);
-
+  const removeCards = useCards((s) => s.clearDeck);
   return removeCards;
 };
 

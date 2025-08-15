@@ -4,19 +4,19 @@ const { MenuItem } = require("electron").remote;
 
 type GetDeckline = (
   isSingleton: boolean,
+  isInDeck: boolean,
   card: Card,
   menu: Menu,
-  setCount: (otherCard: Card, count: number) => void,
+  setCount: (cardName: string, count: number) => void,
 ) => void;
-const getDeckLine: GetDeckline = (isSingleton, card, menu, setCount) => {
+const getDeckLine: GetDeckline = (isSingleton, isInDeck, card, menu, setCount) => {
   if (!isSingleton) return;
-  const isInDeck = card.count >= 1;
 
   if (isInDeck) {
     menu.append(
       new MenuItem({
         click() {
-          setCount(card, 0);
+          setCount(card.name, 0);
         },
         label: "Remove From Deck",
       }),
@@ -25,7 +25,7 @@ const getDeckLine: GetDeckline = (isSingleton, card, menu, setCount) => {
     menu.append(
       new MenuItem({
         click() {
-          setCount(card, 1);
+          setCount(card.name, 1);
         },
         label: "Add to Deck",
       }),

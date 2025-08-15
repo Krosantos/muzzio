@@ -1,49 +1,58 @@
 import { useCallback } from "react";
-import useFormat from "@hooks/useFormat";
-import useAttributes from "@hooks/useAttributes";
-import useCards from "@hooks/useCards";
 import getAttributesSection from "./getAttributesSection";
 import getDeckLine from "./getDeckLine";
 import getCountLine from "./getCountLine";
 import getSideboardLine from "./getSideboardLine";
 import getRemoveLine from "./getRemoveLine";
+import { Attribute, useAttributes } from "@contexts/Attributes";
+import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
 
 const { Menu } = require("electron").remote;
 
 type MenuArgs = {
-  addAttribute: (card: Card, attribute: string) => void;
-  attributes: string[];
+  addCardToAttribute: (cardName: string, attributeName: string) => void;
+  removeCardFromAttribute: (cardName: string, attributeName: string) => void;
+  attributes: { [attributeName: string]: Attribute };
   card: Card;
-  cardExists: (card: Card) => boolean;
+  cardExists: boolean;
+  currentCount: number;
   isSingleton: boolean;
   openCardCountModal: () => void;
   openSideboardCountModal: () => void;
-  removeAttribute: (card: Card, attribute: string) => void;
-  removeCard: (card: Card) => void;
-  setCount: (card: Card, count: number) => void;
-  setSideboardCount: (card: Card, sideboardCount: number) => void;
+  removeCard: (cardName: string) => void;
+  setCount: (cardName: string, count: number) => void;
+  setSideboardCount: (cardName: string, sideboardCount: number) => void;
 };
 type GenerateMenu = (args: MenuArgs) => void;
 const generateMenu: GenerateMenu = ({
-  addAttribute,
+  addCardToAttribute,
+  removeCardFromAttribute,
   attributes,
   card,
   cardExists,
+  currentCount,
   isSingleton,
   openCardCountModal,
   openSideboardCountModal,
-  removeAttribute,
   removeCard,
   setCount,
   setSideboardCount,
 }) => {
   const menu = new Menu();
 
-  getDeckLine(isSingleton, card, menu, setCount);
+  getDeckLine(isSingleton, currentCount > 0, card, menu, setCount);
   getCountLine(isSingleton, card, menu, setCount, openCardCountModal);
   getSideboardLine(isSingleton, card, menu, setSideboardCount, openSideboardCountModal);
-  getAttributesSection(card, menu, attributes, addAttribute, removeAttribute);
-  if (cardExists(card)) getRemoveLine(card, menu, removeCard);
+  getAttributesSection(
+    card,
+    menu,
+    attributes,
+    cardExists,
+    addCardToAttribute,
+    removeCardFromAttribute,
+  );
+  if (cardExists) getRemoveLine(card, menu, removeCard);
   menu.popup();
 };
 
@@ -57,41 +66,43 @@ const useRightClickMenu: UseRightClickMenu = (
   openCardCountModal,
   openSideboardCountModal,
 ) => {
-  const { attributes } = useAttributes();
-  const {
-    addAttribute,
-    cardExists,
-    removeAttribute,
-    removeCard,
-    setCount,
-    setSideboardCount,
-  } = useCards();
-  const { isSingleton } = useFormat();
+  const attributes = useAttributes((s) => s.attributes);
+  const addCardToAttribute = useAttributes((s) => s.addCardToAttribute);
+  const removeCardFromAttribute = useAttributes((s) => s.removeCardFromAttribute);
+  const removeCard = useCards((s) => s.removeCard);
+  const setCount = useCards((s) => s.setCount);
+  const setSideboardCount = useCards((s) => s.setSideboardCount);
+  const cardExists = useCards((s) => !!s.cardData[card.name]);
+  const currentCount = useCards((s) => s.cardsInDeck[card.name]) ?? 0;
+
+  const isSingleton = useFormat((s) => s.isSingleton);
   const openMenu = useCallback(
     () =>
       generateMenu({
-        addAttribute,
+        addCardToAttribute,
+        removeCardFromAttribute,
         attributes,
         card,
         cardExists,
+        currentCount,
         isSingleton,
         openCardCountModal,
         openSideboardCountModal,
-        removeAttribute,
         removeCard,
         setCount,
         setSideboardCount,
       }),
     [
-      addAttribute,
+      addCardToAttribute,
       attributes,
       card,
       cardExists,
+      currentCount,
       isSingleton,
       openCardCountModal,
       openSideboardCountModal,
-      removeAttribute,
       removeCard,
+      removeCardFromAttribute,
       setCount,
       setSideboardCount,
     ],

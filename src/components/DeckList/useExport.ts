@@ -1,10 +1,16 @@
+import { useCards } from "@contexts/Card";
 import { useCallback, useMemo } from "react";
 
 const { clipboard } = require("electron").remote;
 
-type FormatCards = (cards: Card[]) => string;
-const formatCards: FormatCards = (cards) => {
-  const names = cards.map(({ name, count }) => `${count || 1} ${name}`);
+type FormatCards = (cards: Card[], isMain: boolean) => string;
+const formatCards: FormatCards = (cards, isMain) => {
+  const names = cards.map(({ name }) => {
+    const mainCount = useCards.getState().cardsInDeck[name];
+    const sideCount = useCards.getState().cardsInSideboard[name];
+    const count = isMain ? mainCount : sideCount;
+    return `${count || 1} ${name}`;
+  });
 
   return names.join("\r\n");
 };
@@ -12,10 +18,10 @@ const formatCards: FormatCards = (cards) => {
 type UseExport = (maindeck: Card[], sideboard: Card[]) => () => Promise<void>;
 const useExport: UseExport = (maindeck = [], sideboard = []) => {
   const toWrite = useMemo(() => {
-    const formattedMain = formatCards(maindeck);
+    const formattedMain = formatCards(maindeck, true);
 
     if (!sideboard.length) return formattedMain;
-    const formattedSide = formatCards(sideboard);
+    const formattedSide = formatCards(sideboard, false);
 
     return `${formattedMain}\r\n\r\n${formattedSide}`;
   }, [maindeck, sideboard]);

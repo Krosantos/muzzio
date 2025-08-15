@@ -1,5 +1,4 @@
 import React from "react";
-import useFormat from "@hooks/useFormat";
 import {
   COMMANDER,
   OATHBREAKER,
@@ -14,6 +13,7 @@ import {
 import Commander from "./Commander";
 import Oathbreaker from "./Oathbreaker";
 import Default from "./Default";
+import { useFormat } from "@contexts/Format";
 
 const componentMap = {
   [BRAWL]: Commander,
@@ -28,7 +28,7 @@ const componentMap = {
 };
 
 const FormatHeader: React.FC = () => {
-  const { format } = useFormat();
+  const format = useFormat((s) => s.format);
   const Component = componentMap[format] || Default;
 
   return <Component />;

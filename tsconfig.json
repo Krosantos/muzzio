@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./app/dist/",
-    "noImplicitAny": true,
+    // "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "module": "es6",
     "sourceMap": true,

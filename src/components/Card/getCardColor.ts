@@ -1,3 +1,4 @@
+import { useCards } from "@contexts/Card";
 import type { Format } from "@contexts/Format";
 import { DefaultTheme } from "styled-components";
 
@@ -14,14 +15,10 @@ type ColorResult = {
 type GetCardColor = (props: CardProps) => ColorResult;
 
 const getCardColor: GetCardColor = ({ card, alwaysColorful, theme, format }) => {
-  const {
-    count,
-    sideboardCount,
-    colors,
-    legalFormats = {} as Card["legalFormats"],
-  } = card;
-  const inDeck = count > 0;
-  const inSideboard = sideboardCount > 0;
+  const { colors, legalFormats = {} as Card["legalFormats"] } = card;
+
+  const inDeck = !!useCards.getState().cardsInDeck[card.name];
+  const inSideboard = !!useCards.getState().cardsInSideboard[card.name];
   const notInDeck = !inDeck && !inSideboard && !alwaysColorful;
 
   const result: ColorResult = {

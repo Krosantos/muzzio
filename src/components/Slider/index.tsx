@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { ReactNode, useCallback, useState } from "react";
 import styled from "styled-components";
 import SliderButton from "./SliderButton";
 
 type SliderProps = {
   label: string;
   left?: boolean;
+  children: ReactNode;
 };
 const Slider: React.FC<SliderProps> = ({ children, label, left }) => {
   const [isOpen, setOpen] = useState(false);

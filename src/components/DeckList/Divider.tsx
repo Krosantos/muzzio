@@ -1,17 +1,17 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import useFormat from "@hooks/useFormat";
-import useCards from "@hooks/useCards";
+import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
 
 type DividerProps = {
   label: string;
 };
 const Divider: React.FC<DividerProps> = ({ label }) => {
-  const { isSingleton } = useFormat();
-  const { cardsInSideboard } = useCards();
+  const isSingleton = useFormat((s) => s.isSingleton);
+  const cardsInSideboard = useCards((s) => s.cardsInSideboard);
   const shouldHideDivider = useMemo(() => {
     if (isSingleton) return true;
-    const sideboardCards = cardsInSideboard();
+    const sideboardCards = Object.keys(cardsInSideboard);
 
     return sideboardCards.length <= 0;
   }, [cardsInSideboard, isSingleton]);

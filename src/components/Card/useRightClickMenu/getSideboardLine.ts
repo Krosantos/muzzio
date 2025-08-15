@@ -12,14 +12,14 @@ const generateUnlimitedMenu: GenerateUnlimitedMenu = (openSideboardCountModal) =
 
 type GenerateSubmenu = (
   card: Card,
-  setSideboardCount: (otherCard: Card, count: number) => void,
+  setSideboardCount: (cardName: string, count: number) => void,
 ) => { click: () => void; label: string }[];
 const generateSubmenu: GenerateSubmenu = (card, setSideboardCount) => {
   const submenu = [];
 
   for (let x = 0; x <= CARD_MAX; x += 1) {
     submenu.push({
-      click: () => setSideboardCount(card, x),
+      click: () => setSideboardCount(card.name, x),
       label: `Set sideboard count to ${x}`,
     });
   }
@@ -30,7 +30,7 @@ type GetSideboardLine = (
   isSingleton: boolean,
   card: Card,
   menu: Menu,
-  setSideboardCount: (otherCard: Card, sideboardCount: number) => void,
+  setSideboardCount: (cardName: string, sideboardCount: number) => void,
   openSideboardCountModal: () => void,
 ) => void;
 
@@ -43,7 +43,7 @@ const getSideboardLine: GetSideboardLine = (
 ) => {
   const { isUnlimited = false } = card;
 
-  if (isSingleton && !isUnlimited) return;
+  if (isSingleton) return;
 
   if (isUnlimited) {
     menu.append(generateUnlimitedMenu(openSideboardCountModal));

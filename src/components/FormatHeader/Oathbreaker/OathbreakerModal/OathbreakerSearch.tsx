@@ -2,15 +2,16 @@ import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import get from "lodash/get";
 import Search from "@components/Search";
-import useOathbreaker from "@hooks/useOathbreaker";
 import CardList from "@components/CardList";
+import { useOathbreaker } from "@contexts/Oathbreaker";
 
 const OATHBREAKER_QUERY = "-t:creature t:planeswalker";
 const DEFAULT_PLACEHOLDER = "Search for Oathbreaker";
 
 const OathbreakerSearch: React.FC = () => {
   const [results, setResults] = useState([]);
-  const { oathbreaker, setOathbreaker } = useOathbreaker();
+  const oathbreaker = useOathbreaker((s) => s.oathbreaker);
+  const setOathbreaker = useOathbreaker((s) => s.setOathbreaker);
   const wrappedSetOathbreaker = useCallback(
     (card) => {
       const toSet = { ...card, attributes: {}, disableMenu: true };
@@ -19,9 +20,10 @@ const OathbreakerSearch: React.FC = () => {
     },
     [setOathbreaker],
   );
-  const placeholder = useMemo(() => get(oathbreaker, "name", DEFAULT_PLACEHOLDER), [
-    oathbreaker,
-  ]);
+  const placeholder = useMemo(
+    () => get(oathbreaker, "name", DEFAULT_PLACEHOLDER),
+    [oathbreaker],
+  );
 
   return (
     <Section>

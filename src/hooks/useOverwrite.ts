@@ -1,38 +1,36 @@
-import { useContext, useCallback } from "react";
-import { CommanderContext } from "@contexts/Commander";
-import { CardContext } from "@contexts/Card";
-import { AttributesContext } from "@contexts/Attributes";
-import { OathbreakerContext } from "@contexts/Oathbreaker";
-import { FormatContext } from "@contexts/Format";
-import { ALL_CARDS, OVERWRITE, COMMANDER } from "@constants";
+import { useCallback } from "react";
 import type SaveData from "./SaveData";
+import { useCommander } from "@contexts/Commander";
+import { useOathbreaker } from "@contexts/Oathbreaker";
+import { useFormat } from "@contexts/Format";
+import { useAttributes } from "@contexts/Attributes";
+import { useCards } from "@contexts/Card";
 
 type UseOverwrite = () => (saveData: SaveData) => void;
 
 const useOverwrite: UseOverwrite = () => {
-  const { setAttributes } = useContext(AttributesContext);
-  const { dispatch: cardsDispatch } = useContext(CardContext);
-  const { setCommanderData } = useContext(CommanderContext);
-  const { setOathbreakerData } = useContext(OathbreakerContext);
-  const { setFormat } = useContext(FormatContext);
+  const loadCardData = useCards((s) => s.loadFromSave);
+  const loadCommanderData = useCommander((s) => s.loadFromSave);
+  const loadOathbreakerData = useOathbreaker((s) => s.loadFromSave);
+  const loadFormatData = useFormat((s) => s.loadFromSave);
+  const loadAttributesData = useAttributes((s) => s.loadFromSave);
 
   const overwrite = useCallback(
-    (saveData = {}) => {
-      const {
-        attributes = [ALL_CARDS],
-        cards = {},
-        commanderData = {},
-        format = COMMANDER,
-        oathbreakerData = {},
-      } = saveData;
-
-      setFormat(format);
-      setOathbreakerData(oathbreakerData);
-      setAttributes(attributes);
-      cardsDispatch({ overriddenState: cards, type: OVERWRITE });
-      setCommanderData(commanderData);
+    (saveData: SaveData) => {
+      console.log({ saveData });
+      loadCardData(saveData.cards);
+      loadCommanderData(saveData.commanderData);
+      loadOathbreakerData(saveData.oathbreakerData);
+      loadFormatData(saveData.format);
+      loadAttributesData(saveData.attributes);
     },
-    [cardsDispatch, setAttributes, setCommanderData, setFormat, setOathbreakerData],
+    [
+      loadAttributesData,
+      loadCardData,
+      loadCommanderData,
+      loadFormatData,
+      loadOathbreakerData,
+    ],
   );
 
   return overwrite;

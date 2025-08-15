@@ -1,53 +1,52 @@
 import { useMemo } from "react";
 import filter from "lodash/filter";
-import useFormat from "@hooks/useFormat";
-import useCards from "@hooks/useCards";
-import { ALL_CARDS } from "@constants";
+import { useFormat } from "@contexts/Format";
+import { useCards } from "@contexts/Card";
+import { Attribute } from "@contexts/Attributes";
 
-type GetAllCardsString = (isSingleton: boolean, cards: { [id: string]: Card }) => string;
-const getAllCardsString: GetAllCardsString = (isSingleton, cards) => {
-  if (!isSingleton) return "";
-  return ` - ${Object.keys(cards).length}`;
-};
-
-type GetSingletonString = (cards: Card[]) => string;
-const getSingletonString: GetSingletonString = (cards = []) => {
-  const inDeck = filter(cards, (card) => card.count >= 1).length;
-  const inTotal = cards.length;
+type GetSingletonString = (
+  cardNames: string[],
+  cardsInDeck: { [cardName: string]: number },
+) => string;
+const getSingletonString: GetSingletonString = (cardNames, cardsInDeck) => {
+  const inDeck = filter(cardNames, (name) => !!cardsInDeck[name]).length;
+  const inTotal = cardNames.length;
 
   return ` - ${inDeck} of ${inTotal}`;
 };
 
-type GetNonSingletonString = (cards: Card[]) => string;
-const getNonSingletonString: GetNonSingletonString = (cards) => {
-  const inDeck = filter(cards, (card) => card.count >= 1);
-  const inSideboard = filter(cards, (card) => card.sideboardCount >= 1);
+type GetNonSingletonString = (
+  cardNames: string[],
+  cardsInDeck: { [cardName: string]: number },
+  cardsInSideboard: { [cardName: string]: number },
+) => string;
+const getNonSingletonString: GetNonSingletonString = (
+  cardNames,
+  cardsInDeck,
+  cardsInSideboard,
+) => {
+  const inDeck = filter(cardNames, (name) => !!cardsInDeck[name]).length;
+  const inSideboard = filter(cardNames, (name) => !!cardsInSideboard[name]).length;
 
-  const inDeckCount = inDeck.reduce((prev, curr) => prev + (curr.count || 0), 0);
-  const inSideboardCount = inSideboard.reduce(
-    (prev, curr) => prev + (curr.sideboardCount || 0),
-    0,
-  );
+  let result = ` - ${inDeck}`;
 
-  let result = ` - ${inDeckCount}`;
-
-  if (inSideboard.length < 1) return result;
-  result += `/(${inSideboardCount})`;
+  if (inSideboard < 1) return result;
+  result += `/(${inSideboard})`;
   return result;
 };
 
-type UseInDeckString = (attribute: string) => string;
+type UseInDeckString = (attribute: Attribute) => string;
 const useInDeckString: UseInDeckString = (attribute) => {
-  const { isSingleton } = useFormat();
-  const { cards, cardsByAttribute } = useCards();
+  const isSingleton = useFormat((s) => s.isSingleton);
+  const cardsInDeck = useCards((s) => s.cardsInDeck);
+  const cardsInSideboard = useCards((s) => s.cardsInSideboard);
+
+  const cardNames = Object.keys(attribute.cards);
 
   const inDeckString = useMemo(() => {
-    if (attribute === ALL_CARDS) return getAllCardsString(isSingleton, cards);
-    const cardsWithAttribute = cardsByAttribute(attribute);
-
-    if (isSingleton) return getSingletonString(cardsWithAttribute);
-    return getNonSingletonString(cardsWithAttribute);
-  }, [attribute, isSingleton, cards, cardsByAttribute]);
+    if (isSingleton) return getSingletonString(cardNames, cardsInDeck);
+    return getNonSingletonString(cardNames, cardsInDeck, cardsInSideboard);
+  }, [cardNames, cardsInDeck, cardsInSideboard, isSingleton]);
 
   return inDeckString;
 };

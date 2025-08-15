@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import useAttributes from "@hooks/useAttributes";
 import Attribute from "./Attribute";
 import AddButton from "./AddButton";
+import { useAttributes } from "@contexts/Attributes";
+import { values } from "lodash";
 
 const AttributeList: React.FC = () => {
-  const { attributes } = useAttributes();
-
+  const attributes = useAttributes((s) => s.attributes);
   return (
     <Wrapper>
-      {attributes.map((attribute) => (
-        <Attribute attribute={attribute} key={attribute} />
+      {values(attributes)?.map((attribute) => (
+        <Attribute attribute={attribute} key={attribute.name} />
       ))}
       <AddButton />
     </Wrapper>
