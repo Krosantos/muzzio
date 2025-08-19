@@ -12,6 +12,7 @@ import getCardColor from "./getCardColor";
 import useNameAndCount from "./useNameAndCount";
 import { useCards } from "@contexts/Card";
 import { isEmpty } from "lodash";
+import CardVariantModal from "./CardVariantModal";
 
 type CardProps = {
   callback?: Function;
@@ -49,11 +50,16 @@ const Card: React.FC<CardProps> = ({
   );
   const openSideboardCountModal = useCallback(() => setSideboardCountModalOpen(true), []);
 
+  const [isVariantModalOpen, setVariantModalOpen] = useState(false);
+  const closeVariantModal = useCallback(() => setVariantModalOpen(false), []);
+  const openVariantModal = useCallback(() => setVariantModalOpen(true), []);
+
   const fireCallback = useCallback(() => callback(card), [card, callback]);
   const handleContextClick = useRightClickMenu(
     card,
     openCardCountModal,
     openSideboardCountModal,
+    openVariantModal,
   );
   const { shouldShowArt, showArt, hideArt } = useHoverArt();
   if (isEmpty(card)) {
@@ -90,6 +96,11 @@ const Card: React.FC<CardProps> = ({
             closeModal={closeSideboardCountModal}
             setCountCallback={setSideboardCount}
           />,
+          document.querySelector("body"),
+        )}
+      {isVariantModalOpen &&
+        ReactDOM.createPortal(
+          <CardVariantModal card={card} closeModal={closeVariantModal} />,
           document.querySelector("body"),
         )}
     </>

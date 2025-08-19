@@ -37,7 +37,6 @@ const useMaindeck: UseBoard = () => {
   }, [cardData, cardsInDeck]);
 
   return useMemo(() => {
-    console.log({ unsortedCards });
     const sorted = sortCards(unsortedCards);
     switch (format) {
       case "COMMANDER":
@@ -75,7 +74,6 @@ type UseDecklist = () => {
 const useDecklist: UseDecklist = () => {
   const maindeck = useMaindeck();
   const sideboard = useSideboard();
-  console.log({ maindeck, sideboard });
   return {
     maindeck,
     sideboard,
