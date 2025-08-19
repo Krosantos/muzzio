@@ -76,6 +76,7 @@ const Img = styled.img`
   height: 510px;
   width: 366px;
   z-index: 10;
+  border-radius: 12px;
 `;
 
 export default HoverArt;

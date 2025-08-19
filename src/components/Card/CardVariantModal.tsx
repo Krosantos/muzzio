@@ -1,6 +1,7 @@
 import getCardByName from "@api/getCardByName";
 import ModalContainer from "@components/ModalContainer";
-import React from "react";
+import { useCards } from "@contexts/Card";
+import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
@@ -12,6 +13,15 @@ type CardVariantModalProps = {
 const CardVariantModal: React.FC<CardVariantModalProps> = ({ card, closeModal }) => {
   const [otherVersions, setOtherVersions] = useState<Card[]>([]);
   const [isLoading, setLoading] = useState<boolean>(false);
+
+  const updateCard = useCards((s) => s.addCard);
+  const setVersion = useCallback(
+    (clickedVersion: Card) => {
+      updateCard(clickedVersion);
+      closeModal();
+    },
+    [closeModal, updateCard],
+  );
 
   useEffect(() => {
     const fetchVersions = async () => {
@@ -28,29 +38,33 @@ const CardVariantModal: React.FC<CardVariantModalProps> = ({ card, closeModal })
       {isLoading && <h1>Loading...</h1>}
 
       <CardContainer>
-        {otherVersions.map(({ imageUrl, name }, index) => {
+        {otherVersions.map((version, index) => {
+          const { imageUrl, reverseUrl, name } = version;
           const key = `${index}_${name}`;
+          const handleClick = () => {
+            setVersion(version);
+          };
 
-          //   if (!backImageUrl) {
+          if (!reverseUrl) {
+            return (
+              <FlipCard key={key} onClick={handleClick}>
+                <Img alt={name} src={imageUrl} />
+              </FlipCard>
+            );
+          }
+
           return (
-            <FlipCard key={key}>
-              <Img alt={name} src={imageUrl} />
+            <FlipCard key={key} $hasReverse onClick={handleClick}>
+              <Inner>
+                <Face $isBack={false}>
+                  <Img alt={name} src={imageUrl} />
+                </Face>
+                <Face $isBack={true}>
+                  <Img alt={name} src={reverseUrl} />
+                </Face>
+              </Inner>
             </FlipCard>
           );
-          //   }
-
-          //   return (
-          //     <FlipCard key={key} $hasReverse>
-          //       <Inner>
-          //         <Face $isBack={false}>
-          //           <Img alt={name} src={imageUrl} />
-          //         </Face>
-          //         <Face $isBack={true}>
-          //           <Img alt={name} src={backImageUrl} />
-          //         </Face>
-          //       </Inner>
-          //     </FlipCard>
-          //   );
         })}
       </CardContainer>
     </ModalContainer>
@@ -73,10 +87,11 @@ const CardContainer = styled.div`
 
 const FlipCard = styled.div<{ $hasReverse?: boolean }>`
   perspective: 20000px;
-  height: calc(2 * 255px);
-  width: calc(2 * 183px);
+  height: 510px;
+  width: 366px;
   overflow: hidden;
   border-radius: 12px;
+  cursor: pointer;
 `;
 
 const Face = styled.div<{ $isBack: boolean }>`
@@ -111,8 +126,8 @@ const Inner = styled.div`
 
 const Img = styled.img`
   display: block;
-  height: calc(2 * 255px);
-  width: calc(2 * 183px);
+  height: 510px;
+  width: 366px;
 `;
 
 export default CardVariantModal;
