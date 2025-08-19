@@ -7,6 +7,7 @@ import getRemoveLine from "./getRemoveLine";
 import { Attribute, useAttributes } from "@contexts/Attributes";
 import { useFormat } from "@contexts/Format";
 import { useCards } from "@contexts/Card";
+import getOtherVersions from "./getOtherVersions";
 
 const { Menu } = require("electron").remote;
 
@@ -20,6 +21,7 @@ type MenuArgs = {
   isSingleton: boolean;
   openCardCountModal: () => void;
   openSideboardCountModal: () => void;
+  openVariantModal: () => void;
   removeCard: (cardName: string) => void;
   setCount: (cardName: string, count: number) => void;
   setSideboardCount: (cardName: string, sideboardCount: number) => void;
@@ -35,6 +37,7 @@ const generateMenu: GenerateMenu = ({
   isSingleton,
   openCardCountModal,
   openSideboardCountModal,
+  openVariantModal,
   removeCard,
   setCount,
   setSideboardCount,
@@ -53,6 +56,7 @@ const generateMenu: GenerateMenu = ({
     removeCardFromAttribute,
   );
   if (cardExists) getRemoveLine(card, menu, removeCard);
+  if (cardExists) getOtherVersions(menu, openVariantModal);
   menu.popup();
 };
 
@@ -60,11 +64,13 @@ type UseRightClickMenu = (
   card: Card,
   openCardCountModal: () => void,
   openSideboardCountModal: () => void,
+  openVariantModal: () => void,
 ) => () => void;
 const useRightClickMenu: UseRightClickMenu = (
   card,
   openCardCountModal,
   openSideboardCountModal,
+  openVariantModal,
 ) => {
   const attributes = useAttributes((s) => s.attributes);
   const addCardToAttribute = useAttributes((s) => s.addCardToAttribute);
@@ -88,6 +94,7 @@ const useRightClickMenu: UseRightClickMenu = (
         isSingleton,
         openCardCountModal,
         openSideboardCountModal,
+        openVariantModal,
         removeCard,
         setCount,
         setSideboardCount,
@@ -101,6 +108,7 @@ const useRightClickMenu: UseRightClickMenu = (
       isSingleton,
       openCardCountModal,
       openSideboardCountModal,
+      openVariantModal,
       removeCard,
       removeCardFromAttribute,
       setCount,
