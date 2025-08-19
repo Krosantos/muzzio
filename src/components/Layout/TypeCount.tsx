@@ -35,7 +35,6 @@ const useTypeCounts = () => {
     if (!card) continue;
     for (let cardType of types) {
       if (card.type.toLocaleLowerCase().includes(cardType)) {
-        console.log(`${name}: ${count}`);
         result[cardType] += count;
       }
     }

@@ -4,6 +4,7 @@ import { useOathbreaker } from "@contexts/Oathbreaker";
 import { useCommander } from "@contexts/Commander";
 import { useFormat } from "@contexts/Format";
 import { useCards } from "@contexts/Card";
+import { isEmpty } from "lodash";
 
 type SortCards = (cards: Card[]) => Card[];
 const sortCards: SortCards = (cards) => {
@@ -32,21 +33,21 @@ const useMaindeck: UseBoard = () => {
   const unsortedCards = useMemo(() => {
     return Object.keys(cardsInDeck)
       .map((name) => cardData[name])
-      .filter((c) => !!c);
+      .filter((c) => !isEmpty(c));
   }, [cardData, cardsInDeck]);
 
   return useMemo(() => {
+    console.log({ unsortedCards });
     const sorted = sortCards(unsortedCards);
-
     switch (format) {
       case "COMMANDER":
       case "BRAWL":
-        !!commander && sorted.push(commander);
-        !!partner && sorted.push(partner);
+        !isEmpty(commander) && sorted.push(commander);
+        !isEmpty(partner) && sorted.push(partner);
         break;
       case "OATHBREAKER":
-        !!oathbreaker && sorted.push(oathbreaker);
-        !!signatureSpell && sorted.push(signatureSpell);
+        !isEmpty(oathbreaker) && sorted.push(oathbreaker);
+        !isEmpty(signatureSpell) && sorted.push(signatureSpell);
         break;
     }
     return sorted;
@@ -74,7 +75,7 @@ type UseDecklist = () => {
 const useDecklist: UseDecklist = () => {
   const maindeck = useMaindeck();
   const sideboard = useSideboard();
-
+  console.log({ maindeck, sideboard });
   return {
     maindeck,
     sideboard,
