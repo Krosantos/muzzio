@@ -86,14 +86,9 @@ export const useCards = create<CardsContext>((set, get) => {
 
     clearDeck() {
       const prev = get();
-      const cardNames = Object.keys(prev.cardData);
-      const emptyCount: { [name: string]: number } = {};
-      for (let name of cardNames) {
-        emptyCount[name] = 0;
-      }
       const toSet = produce(prev, (draft) => {
-        draft.cardsInDeck = emptyCount;
-        draft.cardsInSideboard = emptyCount;
+        draft.cardsInDeck = {};
+        draft.cardsInSideboard = {};
       });
       set(toSet);
     },
